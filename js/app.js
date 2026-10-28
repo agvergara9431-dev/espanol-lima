@@ -108,10 +108,21 @@ async function loadUser(uid) {
 }
 
 function status(msg) { const el = $("toast"); el.textContent = msg; el.hidden = !msg; clearTimeout(status.t); if (msg) status.t = setTimeout(() => (el.hidden = true), 5000); }
+// Every write is tracked so the end of a lesson can wait for all of them before letting her leave.
+const pending = new Set();
 async function save(fn) {
-  if (S.readonly) return;
-  try { await fn(); } catch (e) { console.error(e); status("Je voortgang kon niet worden opgeslagen. Probeer het zo nog eens."); }
+  if (S.readonly) return true;
+  const p = (async () => {
+    for (let attempt = 0; attempt < 3; attempt++) {
+      try { await fn(); return true; } catch (e) { console.warn("save failed, retrying", e); await new Promise((r) => setTimeout(r, 800 * (attempt + 1))); }
+    }
+    status("Je voortgang kon niet worden opgeslagen. Controleer je internet en probeer het opnieuw.");
+    return false;
+  })();
+  pending.add(p); p.finally(() => pending.delete(p));
+  return p;
 }
+const allSaved = async () => { while (pending.size) await Promise.all([...pending]); };
 async function updateToday(change) {
   const t = todayStr();
   const next = { ...(S.days[t] || blankDay(t)) };
@@ -407,7 +418,7 @@ async function finishLesson() {
       ${missed.length ? `<div class="review"><h3 class="mono">NOG EENS OEFENEN</h3><ul>${missed.map((es) => { const it = Object.values(S.items).find((x) => x.es === es); return `<li><b lang="es">${esc(es)}</b><span>${esc(it?.nl || "")}</span></li>`; }).join("")}</ul></div>` : '<p class="muted">Alles goed. Geen woorden om te herhalen.</p>'}
     </div>`;
   $("lfoot").className = "lfoot"; $("verdict").hidden = true;
-  $("checkBtn").textContent = "Terug naar paspoort"; $("checkBtn").disabled = false;
+  $("checkBtn").textContent = "Opslaan..."; $("checkBtn").disabled = true;
   const wasDone = L.week ? weekDone(L.week) : false;
   if (L.mode === "stop") {
     const prev = S.stops[L.stop.id];
@@ -418,6 +429,8 @@ async function finishLesson() {
   if (L.week && !wasDone && weekDone(L.week)) L.stampWeek = L.week;
   await updateToday((d) => { d.lessons += 1; d.minutes += sec / 60; d.xp += xp; });
   save(() => S.store.addSession("lesson", { mode: L.mode, lesson: L.stop?.id || null, title: $("lessonTitle").textContent, score: L.ok + "/" + n, stars, xp, dur: sec, missed }));
+  await allSaved();
+  $("checkBtn").textContent = "Terug naar paspoort"; $("checkBtn").disabled = false;
 }
 
 // ---------- stamp animation ----------
@@ -487,10 +500,13 @@ async function endDialog() {
     $("feedback").hidden = false; $("feedback").innerHTML = '<button class="btn wide" id="chatDone">Terug</button>';
     $("chatDone").onclick = () => { S.chat = null; show("home"); };
   }
+  $("chatDone").disabled = true;
   const sec = Math.round((Date.now() - c.started) / 1000), xp = 20 + mine.length * 5, sc = S.scen[c.key];
   await updateToday((d) => { d.dialog = true; d.minutes += sec / 60; d.xp += xp; });
   save(() => S.store.addDialog({ scenario: sc.title, turns: c.turns, feedback: fb }));
   save(() => S.store.addSession("dialog", { scenario: sc.title, score: fb ? fb.score + "/5" : "", dur: sec, turns: mine.length, xp }));
+  await allSaved();
+  $("chatDone").disabled = false;
 }
 
 // ---------- words ----------
@@ -576,12 +592,34 @@ function renderLogin(msg) {
     <h1 class="display">Español para Lima</h1>
     <p>Log in met je e-mailadres. Je krijgt een link in je mailbox.</p>
     <form id="loginForm"><label for="email" class="mono">E-MAIL</label><input id="email" type="email" required autocomplete="email" inputmode="email"><button class="btn wide" id="loginBtn">Stuur me een inloglink</button></form>
+    <form id="pasteForm" hidden>
+      <p id="pasteHelp"></p>
+      <label for="paste" class="mono">LINK UIT DE MAIL</label>
+      <input id="paste" required autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="https://...">
+      <button class="btn wide" id="pasteBtn">Inloggen</button>
+    </form>
     <p class="status" id="loginStatus">${esc(msg || "")}</p></div>`;
+  // Installed on the home screen, a tapped mail link opens Safari instead of the app, so ask for the link itself.
+  const installed = matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
+  let email = "";
   $("loginForm").onsubmit = async (e) => {
     e.preventDefault();
+    email = $("email").value.trim().toLowerCase();
     $("loginBtn").disabled = true; $("loginStatus").textContent = "Even geduld...";
-    try { await S.store.signIn($("email").value.trim().toLowerCase()); $("loginStatus").textContent = "Check je mail en tik op de link. Open hem op dit toestel."; }
-    catch (err) { $("loginStatus").textContent = "Dat lukte niet. Gebruik het e-mailadres dat Augusto heeft ingesteld."; $("loginBtn").disabled = false; }
+    try {
+      await S.store.signIn(email);
+      $("loginStatus").textContent = "";
+      $("pasteForm").hidden = false;
+      $("pasteHelp").textContent = installed
+        ? "Check je mail. Tik niet op de link, maar houd hem ingedrukt en kies 'Kopieer link'. Plak hem hieronder."
+        : "Check je mail en tik op de link. Lukt dat niet? Kopieer de link en plak hem hieronder.";
+    } catch (err) { $("loginStatus").textContent = "Dat lukte niet. Gebruik het e-mailadres dat Augusto heeft ingesteld, of probeer het over een minuut opnieuw."; $("loginBtn").disabled = false; }
+  };
+  $("pasteForm").onsubmit = async (e) => {
+    e.preventDefault();
+    $("pasteBtn").disabled = true; $("loginStatus").textContent = "Even geduld...";
+    try { await S.store.verify(email, $("paste").value); location.reload(); }
+    catch (err) { $("loginStatus").textContent = "Deze link werkt niet (meer). Vraag een nieuwe aan en plak de nieuwste link."; $("pasteBtn").disabled = false; }
   };
 }
 

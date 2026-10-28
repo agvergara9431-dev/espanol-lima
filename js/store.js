@@ -17,7 +17,9 @@ export async function createStore() {
 async function supabaseStore() {
   const { createClient } = await import("https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/+esm");
   const sb = createClient(CONFIG.SUPABASE_URL, CONFIG.SUPABASE_ANON_KEY, {
-    auth: { persistSession: true, detectSessionInUrl: true, flowType: "pkce" },
+    // Implicit flow: the link in the mail carries a token hash that works in any browser. That matters on iPhone,
+    // where the installed app does not share storage with Safari, so Claire can paste the link into the app.
+    auth: { persistSession: true, detectSessionInUrl: true, flowType: "implicit" },
   });
   const must = ({ data, error }) => { if (error) throw error; return clone(data); };
   const s = {
@@ -36,6 +38,20 @@ async function supabaseStore() {
       const redirect = location.origin + location.pathname;
       const { error } = await sb.auth.signInWithOtp({ email, options: { emailRedirectTo: redirect, shouldCreateUser: false } });
       if (error) throw error;
+    },
+    // Accepts the pasted mail link (token hash) or, with a custom mail template, the numeric code.
+    async verify(email, input) {
+      const text = input.trim();
+      const code = text.replace(/\s/g, "");
+      let res;
+      if (/^\d{6,10}$/.test(code)) res = await sb.auth.verifyOtp({ email, token: code, type: "email" });
+      else {
+        const url = new URL(text);
+        const tokenHash = url.searchParams.get("token") || url.searchParams.get("token_hash");
+        if (!tokenHash) throw Object.assign(new Error("no token"), { code: "bad_link" });
+        res = await sb.auth.verifyOtp({ token_hash: tokenHash, type: url.searchParams.get("type") || "magiclink" });
+      }
+      if (res.error) throw res.error;
     },
     async signOut() { await sb.auth.signOut(); },
     async load(uid) {
@@ -108,7 +124,7 @@ function mockStore(who) {
     mode: "mock",
     me: { id: ids[role], email: role + "@mock.local" }, role, learnerId: ids.learner,
     async init() { return true; },
-    async signIn() {}, async signOut() {},
+    async signIn() {}, async verify() {}, async signOut() {},
     async load(uid) {
       const d = db();
       return { days: clone(d.progress_days.filter((r) => r.user_id === uid)), cards: clone(d.cards.filter((r) => r.user_id === uid)), stops: clone(d.stops.filter((r) => r.user_id === uid)), note: clone(d.notes) };
