@@ -1,0 +1,25 @@
+# dependencies and test output
+node_modules/
+test-results/
+playwright-report/
+blob-report/
+
+# secrets: never commit
+.env
+.env.*
+.dev.vars
+*.pem
+worker/.dev.vars
+worker/.wrangler/
+supabase/.temp/
+supabase/.branches/
+supabase/seed.local.sql
+
+# private brief and old reference app (contain personal details)
+PROMPT.md
+referencia/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
