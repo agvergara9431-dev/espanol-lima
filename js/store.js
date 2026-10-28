@@ -1,0 +1,138 @@
+// Data layer. Two backends with the same interface:
+// - Supabase (production): auth by magic link, tables protected by RLS, Realtime for the panel.
+// - Mock (localhost only, ?mock=learner|owner): data in localStorage, used by the Playwright tests.
+// Every row handed to the app is a fresh copy, so the app can mutate it without touching cached state.
+import { CONFIG } from "./config.js";
+
+const clone = (x) => (x == null ? x : structuredClone(x));
+
+export async function createStore() {
+  const params = new URLSearchParams(location.search);
+  const local = ["localhost", "127.0.0.1"].includes(location.hostname);
+  if (local && params.get("mock")) return mockStore(params.get("mock"));
+  return supabaseStore();
+}
+
+// ---------- Supabase ----------
+async function supabaseStore() {
+  const { createClient } = await import("https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/+esm");
+  const sb = createClient(CONFIG.SUPABASE_URL, CONFIG.SUPABASE_ANON_KEY, {
+    auth: { persistSession: true, detectSessionInUrl: true, flowType: "pkce" },
+  });
+  const must = ({ data, error }) => { if (error) throw error; return clone(data); };
+  const s = {
+    mode: "supabase",
+    me: null, role: null, learnerId: null,
+    async init() {
+      const { data } = await sb.auth.getSession();
+      if (!data.session) return false;
+      s.me = { id: data.session.user.id, email: data.session.user.email };
+      const info = must(await sb.rpc("my_access"));
+      if (!info || !info.role) { await sb.auth.signOut(); throw Object.assign(new Error("not allowed"), { code: "not_allowed" }); }
+      s.role = info.role; s.learnerId = info.learner_id;
+      return true;
+    },
+    async signIn(email) {
+      const redirect = location.origin + location.pathname;
+      const { error } = await sb.auth.signInWithOtp({ email, options: { emailRedirectTo: redirect, shouldCreateUser: false } });
+      if (error) throw error;
+    },
+    async signOut() { await sb.auth.signOut(); },
+    async load(uid) {
+      const [days, cards, stops, note] = await Promise.all([
+        sb.from("progress_days").select("*").eq("user_id", uid),
+        sb.from("cards").select("*").eq("user_id", uid),
+        sb.from("stops").select("*").eq("user_id", uid),
+        sb.from("notes").select("text, updated_at").eq("id", 1).maybeSingle(),
+      ]);
+      return { days: must(days), cards: must(cards), stops: must(stops), note: must(note) };
+    },
+    async saveDay(row) { must(await sb.from("progress_days").upsert({ ...row, user_id: s.me.id }, { onConflict: "user_id,day" })); },
+    async saveCard(row) { must(await sb.from("cards").upsert({ ...row, user_id: s.me.id }, { onConflict: "user_id,item_id" })); },
+    async saveStop(row) { must(await sb.from("stops").upsert({ ...row, user_id: s.me.id }, { onConflict: "user_id,lesson_id" })); },
+    async addSession(kind, detail) { must(await sb.from("sessions").insert({ user_id: s.me.id, kind, detail })); },
+    async addDialog(row) { must(await sb.from("dialogs").insert({ ...row, user_id: s.me.id })); },
+    async setNote(text) { must(await sb.from("notes").upsert({ id: 1, text, updated_at: new Date().toISOString() })); },
+    async panel(uid) {
+      const [days, cards, sessions, dialogs] = await Promise.all([
+        sb.from("progress_days").select("*").eq("user_id", uid),
+        sb.from("cards").select("*").eq("user_id", uid),
+        sb.from("sessions").select("*").eq("user_id", uid).order("ts", { ascending: false }).limit(20),
+        sb.from("dialogs").select("*").eq("user_id", uid).order("ts", { ascending: false }).limit(8),
+      ]);
+      return { days: must(days), cards: must(cards), sessions: must(sessions), dialogs: must(dialogs) };
+    },
+    subscribe(uid, onChange) {
+      const ch = sb.channel("panel-" + uid);
+      for (const table of ["progress_days", "cards", "sessions", "dialogs", "stops"]) {
+        ch.on("postgres_changes", { event: "*", schema: "public", table, filter: "user_id=eq." + uid }, onChange);
+      }
+      ch.subscribe();
+      return () => sb.removeChannel(ch);
+    },
+    onNote(cb) {
+      const ch = sb.channel("note").on("postgres_changes", { event: "*", schema: "public", table: "notes" }, (p) => cb(clone(p.new))).subscribe();
+      return () => sb.removeChannel(ch);
+    },
+    async ai(path, body) {
+      const { data } = await sb.auth.getSession();
+      const res = await fetch(CONFIG.WORKER_URL + path, {
+        method: "POST",
+        headers: { "content-type": "application/json", authorization: "Bearer " + data.session.access_token },
+        body: JSON.stringify(body),
+      });
+      const json = await res.json().catch(() => ({}));
+      if (!res.ok) throw Object.assign(new Error(json.error || "ai_failed"), { code: json.error || res.status });
+      return json;
+    },
+  };
+  return s;
+}
+
+// ---------- Mock (localhost only) ----------
+function mockStore(who) {
+  const KEY = "mockdb-v1";
+  const ids = { learner: "00000000-0000-0000-0000-00000000000c", owner: "00000000-0000-0000-0000-00000000000a" };
+  const read = () => { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch { return {}; } };
+  const db = () => { const d = read(); for (const t of ["progress_days", "cards", "stops", "sessions", "dialogs"]) d[t] = d[t] || []; d.notes = d.notes || null; return d; };
+  const write = (d) => { localStorage.setItem(KEY, JSON.stringify(d)); listeners.forEach((f) => f()); };
+  const listeners = new Set();
+  addEventListener("storage", (e) => { if (e.key === KEY) listeners.forEach((f) => f()); });
+  const upsert = (table, row, keys) => {
+    const d = db(); const i = d[table].findIndex((r) => keys.every((k) => r[k] === row[k]));
+    if (i >= 0) d[table][i] = { ...d[table][i], ...row }; else d[table].push(row);
+    write(d);
+  };
+  const role = who === "owner" ? "owner" : "learner";
+  const s = {
+    mode: "mock",
+    me: { id: ids[role], email: role + "@mock.local" }, role, learnerId: ids.learner,
+    async init() { return true; },
+    async signIn() {}, async signOut() {},
+    async load(uid) {
+      const d = db();
+      return { days: clone(d.progress_days.filter((r) => r.user_id === uid)), cards: clone(d.cards.filter((r) => r.user_id === uid)), stops: clone(d.stops.filter((r) => r.user_id === uid)), note: clone(d.notes) };
+    },
+    async saveDay(row) { upsert("progress_days", { ...row, user_id: s.me.id }, ["user_id", "day"]); },
+    async saveCard(row) { upsert("cards", { ...row, user_id: s.me.id }, ["user_id", "item_id"]); },
+    async saveStop(row) { upsert("stops", { ...row, user_id: s.me.id }, ["user_id", "lesson_id"]); },
+    async addSession(kind, detail) { const d = db(); d.sessions.push({ id: Date.now(), user_id: s.me.id, ts: new Date().toISOString(), kind, detail }); write(d); },
+    async addDialog(row) { const d = db(); d.dialogs.push({ id: Date.now(), user_id: s.me.id, ts: new Date().toISOString(), ...row }); write(d); },
+    async setNote(text) { const d = db(); d.notes = { text, updated_at: new Date().toISOString() }; write(d); },
+    async panel(uid) {
+      const d = db(); const desc = (a, b) => (a.ts < b.ts ? 1 : -1);
+      return {
+        days: clone(d.progress_days.filter((r) => r.user_id === uid)), cards: clone(d.cards.filter((r) => r.user_id === uid)),
+        sessions: clone(d.sessions.filter((r) => r.user_id === uid).sort(desc).slice(0, 20)), dialogs: clone(d.dialogs.filter((r) => r.user_id === uid).sort(desc).slice(0, 8)),
+      };
+    },
+    subscribe(uid, onChange) { listeners.add(onChange); return () => listeners.delete(onChange); },
+    onNote(cb) { const f = () => cb(clone(db().notes)); listeners.add(f); return () => listeners.delete(f); },
+    async ai(path, body) {
+      await new Promise((r) => setTimeout(r, 150));
+      if (path === "/dialog") return { text: "¡Qué bien! ¿Y de dónde eres?" };
+      return { score: 4, praise: "Goed gedaan, je schreef hele zinnen.", errors: [{ said: body.turns.find((t) => t.role === "user")?.content || "", better: "Hola, me llamo Claire.", why: "Gebruik 'me llamo' om je naam te zeggen." }] };
+    },
+  };
+  return s;
+}
