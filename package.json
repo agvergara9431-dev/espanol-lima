@@ -1,0 +1,13 @@
+{
+  "name": "espanol-lima",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "serve": "node tests/serve.mjs",
+    "test": "playwright test",
+    "icons": "node tests/make-icons.mjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.64.1"
+  }
+}
