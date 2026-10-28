@@ -23,3 +23,7 @@ referencia/
 .DS_Store
 Thumbs.db
 .vscode/
+
+# Supabase CLI local config (project settings pulled from the dashboard)
+supabase/config.toml
+
