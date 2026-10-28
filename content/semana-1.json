@@ -1,0 +1,90 @@
+{
+  "week": 1,
+  "title": "Begroeten, jezelf voorstellen en de basis",
+  "stamp": "¡Hola!",
+  "start": "2026-10-27",
+  "items": [
+    { "id": "w1-01", "es": "Hola, ¿qué tal?", "en": "Hi, how's it going?", "nl": "Hoi, hoe gaat het?" },
+    { "id": "w1-02", "es": "Buenos días", "en": "Good morning", "nl": "Goedemorgen" },
+    { "id": "w1-03", "es": "Buenas tardes", "en": "Good afternoon", "nl": "Goedemiddag" },
+    { "id": "w1-04", "es": "Mucho gusto", "en": "Nice to meet you", "nl": "Aangenaam" },
+    { "id": "w1-05", "es": "Me llamo Claire", "en": "My name is Claire", "nl": "Ik heet Claire" },
+    { "id": "w1-06", "es": "Soy de Holanda", "en": "I'm from the Netherlands", "nl": "Ik kom uit Nederland" },
+    { "id": "w1-07", "es": "Vivo en Róterdam", "en": "I live in Rotterdam", "nl": "Ik woon in Rotterdam" },
+    { "id": "w1-08", "es": "Hablo un poquito de español", "en": "I speak a little Spanish", "nl": "Ik spreek een beetje Spaans" },
+    { "id": "w1-09", "es": "No entiendo", "en": "I don't understand", "nl": "Ik begrijp het niet" },
+    { "id": "w1-10", "es": "Más despacio, por favor", "en": "Slower, please", "nl": "Langzamer, alsjeblieft" },
+    { "id": "w1-11", "es": "¿Puede repetir, por favor?", "en": "Can you repeat, please? (formal)", "nl": "Kunt u het herhalen, alstublieft?" },
+    { "id": "w1-12", "es": "¿Cómo se dice esto?", "en": "How do you say this?", "nl": "Hoe zeg je dit?" },
+    { "id": "w1-13", "es": "Sí, por favor", "en": "Yes, please", "nl": "Ja, graag" },
+    { "id": "w1-14", "es": "No, gracias", "en": "No, thanks", "nl": "Nee, dank je" },
+    { "id": "w1-15", "es": "Perdón", "en": "Sorry / excuse me", "nl": "Sorry / pardon" },
+    { "id": "w1-16", "es": "Disculpe, señor", "en": "Excuse me, sir (to get attention)", "nl": "Pardon, meneer" },
+    { "id": "w1-17", "es": "¿Cuánto cuesta?", "en": "How much does it cost?", "nl": "Hoeveel kost het?" },
+    { "id": "w1-18", "es": "¿Dónde está el baño?", "en": "Where is the bathroom?", "nl": "Waar is het toilet?" },
+    { "id": "w1-19", "es": "Agua sin gas, por favor", "en": "Still water, please", "nl": "Water zonder koolzuur, alsjeblieft" },
+    { "id": "w1-20", "es": "Tengo hambre", "en": "I'm hungry", "nl": "Ik heb honger" },
+    { "id": "w1-21", "es": "Tengo sed", "en": "I'm thirsty", "nl": "Ik heb dorst" },
+    { "id": "w1-22", "es": "Estoy cansada", "en": "I'm tired (said by a woman)", "nl": "Ik ben moe" },
+    { "id": "w1-23", "es": "Estoy muy feliz", "en": "I'm very happy", "nl": "Ik ben heel blij" },
+    { "id": "w1-24", "es": "Uno, dos, tres, cuatro, cinco", "en": "One, two, three, four, five", "nl": "Een, twee, drie, vier, vijf" },
+    { "id": "w1-25", "es": "Seis, siete, ocho, nueve, diez", "en": "Six, seven, eight, nine, ten", "nl": "Zes, zeven, acht, negen, tien" },
+    { "id": "w1-26", "es": "La mamá y el papá de Augusto", "en": "Augusto's mom and dad", "nl": "De moeder en vader van Augusto" },
+    { "id": "w1-27", "es": "Soy la enamorada de Augusto", "en": "I'm Augusto's girlfriend (in Peru: enamorada)", "nl": "Ik ben de vriendin van Augusto" },
+    { "id": "w1-28", "es": "¡Qué rico!", "en": "How tasty!", "nl": "Wat lekker!" },
+    { "id": "w1-29", "es": "Chau, nos vemos", "en": "Bye, see you (in Peru people say chau)", "nl": "Doei, tot ziens" },
+    { "id": "w1-30", "es": "Muchas gracias, muy amable", "en": "Thanks a lot, very kind of you", "nl": "Heel erg bedankt, erg vriendelijk" }
+  ],
+  "lessons": [
+    { "id": "w1-l1", "title": "Begroeten", "items": ["w1-01", "w1-02", "w1-03", "w1-04", "w1-29", "w1-30"] },
+    { "id": "w1-l2", "title": "Wie ben jij?", "items": ["w1-05", "w1-06", "w1-07", "w1-08", "w1-26", "w1-27"] },
+    { "id": "w1-l3", "title": "Ik begrijp het niet", "items": ["w1-09", "w1-10", "w1-11", "w1-12", "w1-15", "w1-16"] },
+    { "id": "w1-l4", "title": "Ja graag, nee dank je", "items": ["w1-13", "w1-14", "w1-17", "w1-18", "w1-19", "w1-28"] },
+    { "id": "w1-l5", "title": "Hoe voel je je?", "items": ["w1-20", "w1-21", "w1-22", "w1-23"] },
+    { "id": "w1-l6", "title": "Tellen tot tien", "items": ["w1-24", "w1-25"] },
+    { "id": "w1-l7", "title": "Herhaling van de week", "items": [] }
+  ],
+  "scenarios": {
+    "taxi": {
+      "icon": "taxi",
+      "title": "Taxi in Lima",
+      "who": "de taxichauffeur",
+      "desc": "Je komt van het vliegveld en neemt een taxi naar Miraflores. De chauffeur spreekt geen Engels.",
+      "persona": "un taxista limeño amable y conversador que no habla nada de inglés. Pregunta a dónde va, de dónde es, y comenta el tráfico de Lima.",
+      "opener": "Buenas, señorita. ¿A dónde la llevo?"
+    },
+    "mozo": {
+      "icon": "plate",
+      "title": "In het restaurant",
+      "who": "de ober",
+      "desc": "Een ober bedient je in een cevichería. Hij wil weten wat je bestelt.",
+      "persona": "un mozo (camarero) de una cevichería en Lima, rápido y amable, que no habla inglés. Ofrece ceviche, lomo saltado, chicha morada, y pregunta qué desea tomar.",
+      "opener": "Buenas tardes, bienvenida. ¿Qué va a tomar?"
+    },
+    "mercado": {
+      "icon": "basket",
+      "title": "Op de markt",
+      "who": "de marktvrouw",
+      "desc": "Een marktvrouw verkoopt je fruit. Je moet naar prijzen vragen.",
+      "persona": "una vendedora del mercado de Surquillo, muy cariñosa, que te llama 'caserita' y 'mamita', ofrece mango, lúcuma y chirimoya, y dice los precios en soles.",
+      "opener": "¡Caserita! ¿Qué va a llevar hoy? Tengo mango bien dulce."
+    },
+    "mama": {
+      "icon": "heart",
+      "title": "Augusto's moeder",
+      "who": "Augusto's moeder",
+      "desc": "Zij spreekt Engels, maar wil per se Spaans met je oefenen.",
+      "persona": "la mamá de Augusto, una señora limeña cariñosa. Sabe inglés pero insiste con cariño en hablar en español para que Claire practique. Pregunta cómo está, si tiene hambre, y cuenta algo de la familia.",
+      "opener": "¡Hola, hijita! Bienvenida. Aquí hablamos en español, ¿ya? ¿Cómo estás?"
+    }
+  },
+  "missions": [
+    { "dialog": "taxi", "phrase": "Hola amor, ¿qué tal?" },
+    { "dialog": "mama", "phrase": "Hoy aprendí: me llamo Claire y soy de Holanda." },
+    { "dialog": "taxi", "phrase": "Tengo hambre, ¿qué comemos?" },
+    { "dialog": "mozo", "phrase": "Agua sin gas, por favor." },
+    { "dialog": "mercado", "phrase": "¿Cuánto cuesta un mango en Lima?" },
+    { "dialog": "taxi", "phrase": "Estoy cansada pero muy feliz." },
+    { "dialog": "mozo", "phrase": "Nos vemos en Lima. ¡Qué rico!" }
+  ]
+}
