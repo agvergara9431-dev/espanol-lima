@@ -8,8 +8,8 @@ ALLOWED_ORIGINS = "https://agvergara9431-dev.github.io"
 CONTENT_BASE = "https://agvergara9431-dev.github.io/espanol-lima"
 DAILY_LIMIT = "80"
 # Set after the Supabase project exists (public values):
-SUPABASE_URL = ""
-SUPABASE_ANON_KEY = ""
+SUPABASE_URL = "https://zesmxymaxnpcyrswaksf.supabase.co"
+SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inplc214eW1heG5wY3lyc3dha3NmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTMxNjQzMDQsImV4cCI6MjEwODc0MDMwNH0.MXdZCFTG0U22ijBUT7TktXqz4sa-hEUHu90zsmSbEb8"
 
 # Secrets (never in this file): npx wrangler secret put ANTHROPIC_API_KEY
 #                               npx wrangler secret put ALLOWED_EMAILS   (comma-separated)
