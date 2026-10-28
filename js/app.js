@@ -66,12 +66,20 @@ async function loadContent() {
 }
 const ready = (w) => (w.lessons || []).length > 0;
 const weekItems = (w) => (w.items || []).map((it) => S.items[it.id]);
-function activeWeek() {
+// Progress, not the calendar, decides where she is: day 1 is her first day, and a day counts once its lesson is done.
+// Today's mission is the one after the completed days before today, so it stays put after she finishes it.
+function schedule(days = S.days) {
   const t = todayStr();
-  const open = S.weeks.filter((w) => ready(w) && w.start <= t);
+  const done = Object.values(days).filter((d) => d.lessons > 0 && d.day < t).length;
+  const idx = Math.min(done, CONFIG.WEEKS * 7 - 1);
+  return { idx, week: Math.floor(idx / 7) + 1, day: idx % 7 };
+}
+const weekOpen = (w) => !!w && ready(w) && w.week <= schedule().week;
+function activeWeek() {
+  const open = S.weeks.filter(weekOpen);
   return open[open.length - 1] || S.weeks.find(ready) || null;
 }
-const knownItems = () => S.weeks.filter((w) => ready(w) && w.start <= todayStr()).flatMap(weekItems);
+const knownItems = () => S.weeks.filter(weekOpen).flatMap(weekItems);
 const stopDone = (id) => !!S.stops[id];
 const weekDone = (w) => ready(w) && w.lessons.every((l) => stopDone(l.id));
 const nextStop = (w) => w && w.lessons.find((l) => !stopDone(l.id));
@@ -139,8 +147,10 @@ function renderHome() {
   const t = todayStr(), w = activeWeek(), today = S.days[t] || blankDay(t);
   const left = Math.max(0, between(t, CONFIG.TRIP));
   const xp = totalXp(S.days), st = streak(S.days);
-  const dayN = w ? Math.min(between(w.start, t), (w.missions || []).length - 1) : 0;
-  const m = w?.missions?.[Math.max(0, dayN)] || {};
+  const sch = schedule();
+  const waiting = !w || w.week < sch.week; // she is ahead of the content Augusto has added
+  const missions = w?.missions || [];
+  const m = missions.length ? missions[sch.day % missions.length] : {};
   const sc = S.scen[m.dialog];
   const ns = nextStop(w);
   const lessonTitle = ns ? ns.title : "Herhaling";
@@ -166,8 +176,9 @@ function renderHome() {
       ${note ? `<div class="note" id="augNote"><small class="mono">BERICHTJE VAN AUGUSTO</small>${esc(note)}</div>` : ""}
       <section class="ticket" aria-label="Missie van vandaag">
         <div class="ticket-main">
-          <div class="mono ticket-meta"><span>INSTAPKAART · DAG ${Math.max(0, dayN) + 1}</span><span>GATE W${w ? w.week : 1}</span></div>
+          <div class="mono ticket-meta"><span id="ticketDay">INSTAPKAART · DAG ${sch.day + 1}</span><span id="ticketGate">GATE W${sch.week}</span></div>
           <div class="route"><span class="display">AMS</span><svg width="60" height="14" viewBox="0 0 60 14" aria-hidden="true"><path d="M2 7h50" stroke="var(--sand)" stroke-width="2" stroke-dasharray="3 4"/><path d="M50 2l8 5-8 5z" fill="var(--wine)"/></svg><span class="display">LIM</span></div>
+          ${waiting ? `<p class="muted small" id="waiting">Week ${sch.week} komt eraan. Vandaag: herhaling van wat je al kent.</p>` : ""}
           <ul class="tasks" id="tasks">
             ${tasks.map((x) => `<li><button class="task ${x.done ? "done" : ""} ${x === first ? "next" : ""}" data-task="${x.key}" ${x.done ? 'aria-disabled="true"' : ""}>
               <span class="dot">${x.done ? icon("check", 12) : ""}</span><span class="tl">${esc(x.label)}</span>${x.done ? '<span class="klaar">Klaar</span>' : ""}</button></li>`).join("")}
@@ -184,8 +195,8 @@ function renderHome() {
             const last = wk.lessons.map((l) => S.stops[l.id].done_at).sort().pop();
             return `<button class="stamp done" data-week="${wk.week}" aria-label="Week ${wk.week} klaar"><span class="mono">SEMANA ${wk.week}</span><b class="display">${esc(wk.stamp)}</b><span class="mono">${stampDate(last)}</span></button>`;
           }
-          const open = ready(wk) && wk.start <= todayStr();
-          return `<button class="stamp ${open ? "open" : ""}" data-week="${wk.week}" ${open ? "" : 'aria-disabled="true"'}><span class="mono">SEMANA ${wk.week}</span>${esc(wk.stamp)}${open ? "" : `<small>${esc(startLabel(wk.start))}</small>`}</button>`;
+          const open = weekOpen(wk);
+          return `<button class="stamp ${open ? "open" : ""}" data-week="${wk.week}" ${open ? "" : 'aria-disabled="true"'}><span class="mono">SEMANA ${wk.week}</span>${esc(wk.stamp)}${open ? "" : `<small>na week ${wk.week - 1}</small>`}</button>`;
         }).join("")}
       </div>
     </div>`;
@@ -194,11 +205,11 @@ function renderHome() {
   $("board").onclick = () => first && runTask(first.key, m);
   $("stamps").querySelectorAll("[data-week]").forEach((b) => (b.onclick = () => {
     const wk = S.weeks.find((x) => x.week === +b.dataset.week);
-    if (wk && ready(wk) && wk.start <= todayStr()) openWeek(wk);
-    else status("Deze week komt nog. Hij gaat open op " + startLabel(wk?.start || "") + ".");
+    if (weekOpen(wk)) openWeek(wk);
+    else if (wk && ready(wk)) status("Week " + wk.week + " gaat open als je week " + (wk.week - 1) + " af hebt.");
+    else status("Week " + (+b.dataset.week) + " komt eraan.");
   }));
 }
-const startLabel = (s) => { if (!s) return ""; const d = parse(s); return d.getDate() + " " + MONTHS[d.getMonth()].toLowerCase(); };
 
 function runTask(key, m) {
   const t = todayStr(), today = S.days[t] || blankDay(t);
@@ -423,7 +434,7 @@ function showStamp(w) {
 // ---------- dialog (Gesprek) ----------
 function renderChatTab() {
   if (S.chat) return;
-  const list = Object.values(S.scen).filter((s) => { const w = S.weeks.find((x) => x.week === s.week); return w && w.start <= todayStr(); });
+  const list = Object.values(S.scen).filter((s) => weekOpen(S.weeks.find((x) => x.week === s.week)));
   $("tab-chat").innerHTML = `<div class="page">
     <h2 class="display">Gesprek</h2>
     <p class="muted">Schrijf in het Spaans, ook met fouten. Aan het eind krijg je correcties, en Augusto kan het gesprek lezen.</p>
@@ -484,7 +495,7 @@ async function endDialog() {
 
 // ---------- words ----------
 function renderWords() {
-  const weeks = S.weeks.filter((w) => ready(w) && w.start <= todayStr());
+  const weeks = S.weeks.filter(weekOpen);
   $("tab-words").innerHTML = `<div class="page">
     <h2 class="display">Woorden</h2>
     <div class="stack"><button class="btn wide" id="extraLesson">Snelle les (12 oefeningen)</button><button class="btn ghost wide" id="weakLesson">Alleen mijn zwakke woorden</button></div>
@@ -536,9 +547,10 @@ async function fillPanel() {
   const days = byKey(p.days, "day"), t = todayStr(), today = days[t];
   const st = streak(days);
   $("pStats").innerHTML = `<div class="stat"><b class="display">${st}</b><span>${st === 1 ? "día seguido" : "días seguidos"}</span></div><div class="stat"><b class="display">${totalXp(days)}</b><span>XP</span></div><div class="stat"><b class="display">${Math.round(totalMin(days))}</b><span>minutos</span></div>`;
-  $("pToday").innerHTML = today ? [["Lección", today.lessons >= 1, today.lessons > 1 ? today.lessons + " lecciones" : ""], ["Diálogo", today.dialog, ""], ["Frase por WhatsApp", today.phrase, ""]].map(([l, ok, x]) => `<div class="${ok ? "on" : ""}"><span class="dot">${ok ? icon("check", 12) : ""}</span>${l}${x ? ` <small>(${x})</small>` : ""}</div>`).join("") : '<div class="muted">Todavía nada hoy.</div>';
+  const sch = schedule(days);
+  $("pToday").innerHTML = `<div class="muted" id="pWhere">Va en el día ${sch.day + 1} de la semana ${sch.week} (${sch.idx} días completados)</div>` + (today ?[["Lección", today.lessons >= 1, today.lessons > 1 ? today.lessons + " lecciones" : ""], ["Diálogo", today.dialog, ""], ["Frase por WhatsApp", today.phrase, ""]].map(([l, ok, x]) => `<div class="${ok ? "on" : ""}"><span class="dot">${ok ? icon("check", 12) : ""}</span>${l}${x ? ` <small>(${x})</small>` : ""}</div>`).join("") : '<div class="muted">Todavía nada hoy.</div>');
   const maxM = Math.max(10, ...Array.from({ length: 14 }, (_, i) => Number(days[addDays(t, -i)]?.minutes || 0)));
-  $("pDays").innerHTML = Array.from({ length: 14 }, (_, i) => { const k = addDays(t, i - 13), m = Number(days[k]?.minutes || 0); return `<div class="day ${m > 0 ? "on" : ""}" title="${k}: ${m > 0 ? Math.max(1, Math.round(m)) : 0} min"><i style="height:${Math.max(m > 0 ? 8 : 3, (m / maxM) * 100)}%"></i><span>${parse(k).getDate()}</span></div>`; }).join("");
+  $("pDays").innerHTML = Array.from({ length: 14 }, (_, i) => { const k = addDays(t, i - 13), d = days[k], m = Number(d?.minutes || 0), on = !!d && (m > 0 || d.lessons > 0 || d.dialog); return `<div class="day ${on ? "on" : ""}" title="${k}: ${on ? Math.max(1, Math.round(m)) : 0} min"><i style="height:${Math.max(on ? 8 : 3, (m / maxM) * 100)}%"></i><span>${parse(k).getDate()}</span></div>`; }).join("");
   $("pSessions").innerHTML = p.sessions.length ? p.sessions.map((s) => {
     const x = s.detail || {};
     const label = s.kind === "lesson" ? `Lección · ${esc(x.title || "")} · ${esc(x.score)} · ${x.stars ?? 0}★ · +${x.xp} XP${x.missed?.length ? ` · falló: ${esc(x.missed.join(", "))}` : ""}` : s.kind === "dialog" ? `Diálogo · ${esc(x.scenario)} · ${esc(x.score || "sin nota")} · ${x.turns} mensajes` : `Frase por WhatsApp: "${esc(x.text)}"`;

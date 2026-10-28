@@ -34,6 +34,9 @@ test("Claire does a lesson and Augusto sees it", async ({ browser }) => {
   await expect(claire.locator("#tasks .task")).toHaveCount(3);
   await expect(claire.locator("#stamps .stamp")).toHaveCount(7);
   await expect(claire.locator("#board")).toHaveText("INSTAPPEN");
+  await expect(claire.locator("#ticketDay")).toHaveText("INSTAPKAART · DAG 1");
+  await expect(claire.locator("#ticketGate")).toHaveText("GATE W1");
+  await expect(claire.locator('[data-task="dialog"]')).toContainText("taxichauffeur");
   await claire.screenshot({ path: shots + "1-home.png", fullPage: true });
 
   // Week route
@@ -129,4 +132,25 @@ test("Claire does a lesson and Augusto sees it", async ({ browser }) => {
 
   expect(errors).toEqual([]);
   await ctx.close();
+});
+
+test("weeks follow completed days, not the calendar", async ({ page }) => {
+  const errors = [];
+  page.on("pageerror", (e) => errors.push(e.message));
+  await page.goto("/index.html?mock=learner");
+  // Seed: lessons done on 7 earlier days with gaps (calendar says nothing; progress says week 2).
+  await page.evaluate(() => {
+    const id = "00000000-0000-0000-0000-00000000000c", pad = (n) => String(n).padStart(2, "0");
+    const day = (n) => { const d = new Date(); d.setDate(d.getDate() - n); return d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate()); };
+    const rows = [3, 5, 6, 9, 12, 13, 20].map((n) => ({ user_id: id, day: day(n), lessons: 1, dialog: false, phrase: false, minutes: 5, xp: 50 }));
+    rows.push({ user_id: id, day: day(30), lessons: 0, dialog: false, phrase: true, minutes: 0, xp: 0 }); // not a completed day
+    localStorage.setItem("mockdb-v1", JSON.stringify({ progress_days: rows }));
+  });
+  await page.reload();
+  await expect(page.locator("#ticketGate")).toHaveText("GATE W2");
+  await expect(page.locator("#ticketDay")).toHaveText("INSTAPKAART · DAG 1");
+  await expect(page.locator("#waiting")).toContainText("Week 2 komt eraan");
+  await expect(page.locator("#homeStats")).toContainText("350 XP");
+  await expect(page.locator("#daysLeft")).toHaveText(String(Math.round((new Date(2026, 11, 15) - new Date(new Date().toDateString())) / 86400000)));
+  expect(errors).toEqual([]);
 });
