@@ -1,0 +1,15 @@
+name = "espanol-lima"
+main = "src/index.js"
+compatibility_date = "2026-10-01"
+compatibility_flags = ["nodejs_compat"]
+
+[vars]
+ALLOWED_ORIGINS = "https://agvergara9431-dev.github.io"
+CONTENT_BASE = "https://agvergara9431-dev.github.io/espanol-lima"
+DAILY_LIMIT = "80"
+# Set after the Supabase project exists (public values):
+SUPABASE_URL = ""
+SUPABASE_ANON_KEY = ""
+
+# Secrets (never in this file): npx wrangler secret put ANTHROPIC_API_KEY
+#                               npx wrangler secret put ALLOWED_EMAILS   (comma-separated)

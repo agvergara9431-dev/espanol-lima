@@ -1,0 +1,16 @@
+{
+  "name": "espanol-lima-worker",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "deploy": "wrangler deploy",
+    "check": "wrangler deploy --dry-run --outdir dist"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "1.3.0",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "wrangler": "4.154.0"
+  }
+}
