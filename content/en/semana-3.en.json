@@ -1,0 +1,115 @@
+{
+  "title_en": "Taxis, directions and money",
+  "scenarios": {
+    "taxista": { "title_en": "Taxi to Barranco", "who_en": "the taxi driver", "desc_en": "You're in Miraflores and want to take a taxi to Barranco. In Lima you agree on the price before you get in." },
+    "taxinuevo": { "title_en": "A new taxi driver", "who_en": "the taxi driver", "desc_en": "You're in a taxi in Miraflores. The driver is new and doesn't know the area well." },
+    "combi": { "title_en": "Bus on Avenida Arequipa", "who_en": "the cobrador and Augusto", "desc_en": "You take a bus to Barranco. The cobrador (conductor) shouts the stops. Then Augusto texts you." },
+    "cambio": { "title_en": "Exchange office in Miraflores", "who_en": "the clerk", "desc_en": "You change euros at an exchange office (casa de cambio) in Miraflores." }
+  },
+  "sessions": {
+    "8": {
+      "title_en": "Taking a taxi",
+      "ex": {
+        "w3-01": "Good afternoon, sir. How much do you charge to Barranco?", "w3-02": "I'm going to Barranco to see the sea.", "w3-03": "Twenty-five soles? That's very expensive.", "w3-04": "It's very close. Will you do it for fifteen?", "w3-05": "Love, I'm in Miraflores, in Kennedy Park.",
+        "w3-06": "Good evening. To Kennedy Park, please.", "w3-07": "I don't have my card here, I'll pay you in cash.", "w3-08": "Is the seafront far from here?", "w3-09": "From Miraflores to Barranco is ten minutes.", "w3-10": "Fifteen soles? OK, let's go.",
+        "w3-11": "It's too expensive, I'd rather order a taxi through an app.", "w3-12": "How much is it from the airport to Rosario's house?"
+      },
+      "grammar": {
+        "title": "Ir a, en and de: to, in and from",
+        "explain": [
+          "Where you're going: ir a. Voy a Barranco (I'm going to Barranco). Ir is irregular: voy, vas, va, vamos, van.",
+          "Where you are: en. Estoy en Miraflores. Where you're from or leave from: de. Soy de Holanda, de Miraflores a Barranco.",
+          "A + el becomes al, de + el becomes del: voy al parque, vengo del aeropuerto. With la it stays separate: voy a la playa."
+        ],
+        "compare": "English: to, in, from. Spanish: a (to), en (in, at), de (from, of). Careful: 'I'm in Lima' is estoy en Lima, but 'I'm going to Lima' is voy a Lima, never 'voy en Lima'. And 'to the park' melts into one little word: al parque.",
+        "examples": [{ "es": "Voy a Barranco.", "en": "I'm going to Barranco." }, { "es": "Estoy en Miraflores.", "en": "I'm in Miraflores." }, { "es": "Del aeropuerto al parque Kennedy.", "en": "From the airport to Kennedy Park." }],
+        "exercises": [
+          { "type": "fill", "q": "Complete the sentence", "prompt": "Voy ___ Barranco.", "opts": ["a", "en", "de"], "answer": "a", "why": "Going to a place: a." },
+          { "type": "fill", "q": "Complete the sentence", "prompt": "Estoy ___ Miraflores.", "opts": ["en", "a", "de"], "answer": "en", "why": "Where you are: en." },
+          { "type": "fill", "q": "Complete the sentence", "prompt": "Vamos ___ parque Kennedy.", "opts": ["al", "a el", "en el"], "answer": "al", "why": "A + el becomes al." },
+          { "type": "mc", "q": "How do you say this?", "prompt": "We're going to Barranco.", "opts": ["Vamos a Barranco.", "Vamos en Barranco.", "Voy a Barranco."], "answer": "Vamos a Barranco.", "why": "We = vamos, to = a." },
+          { "type": "type", "q": "Write it in Spanish", "prompt": "I'm going to the park.", "answer": "Voy al parque", "alt": ["Yo voy al parque"], "why": "A + el parque = al parque." }
+        ]
+      },
+      "goal_en": "Take a taxi from Miraflores to Barranco and agree on a price of at most 15 soles beforehand."
+    },
+    "9": {
+      "title_en": "Is there…, and how do I get there?",
+      "ex": {
+        "w3-13": "Excuse me, is there an ATM around here?", "w3-14": "Sorry, madam, where is the bank?", "w3-15": "Yes, there's a pharmacy on the corner.", "w3-16": "Go straight on for two blocks.", "w3-17": "At the traffic light, turn right.",
+        "w3-18": "After the park, turn left.", "w3-19": "The supermarket is two blocks away.", "w3-20": "The ATM is next to the supermarket.", "w3-21": "The church is opposite the park.", "w3-22": "We're here. Stop at the corner, please.",
+        "w3-23": "It's here, thank you! How much is it?", "w3-24": "Excuse me, can you tell me how to get to the seafront?"
+      },
+      "grammar": {
+        "title": "Hay or está, and understanding directions",
+        "explain": [
+          "Hay means 'there is' or 'there are': you ask whether something exists. ¿Hay un cajero por aquí? There are two banks: hay dos bancos. Hay never changes.",
+          "Está is for something specific whose location you want: ¿dónde está el banco? El cajero está en la esquina. For several: están.",
+          "When someone gives you directions you'll hear commands in the usted form: siga (keep going), voltee (turn), pare (stop), cruce (cross). You can say them to the taxi driver too."
+        ],
+        "compare": "English works the same way: 'there is an ATM' (any) versus 'the ATM is on the corner' (that one). Spanish: hay un cajero, el cajero está en la esquina. With 'a/an' you usually need hay, with 'the' you need está. 'Voltear' is Peruvian; in Spain they say 'girar'.",
+        "examples": [{ "es": "¿Hay un cajero por aquí?", "en": "Is there an ATM around here?" }, { "es": "El cajero está a dos cuadras.", "en": "The ATM is two blocks away." }, { "es": "Siga derecho y voltee a la izquierda.", "en": "Go straight on and turn left." }],
+        "exercises": [
+          { "type": "fill", "q": "Complete the sentence", "prompt": "¿___ un cajero por aquí?", "opts": ["Hay", "Está", "Es"], "answer": "Hay", "why": "Whether something exists (un cajero): hay." },
+          { "type": "fill", "q": "Complete the sentence", "prompt": "El banco ___ a dos cuadras.", "opts": ["está", "hay", "es"], "answer": "está", "why": "The location of something specific (el banco): está." },
+          { "type": "mc", "q": "How do you say this?", "prompt": "Turn right.", "opts": ["Voltee a la derecha.", "Voltee a la izquierda.", "Siga derecho."], "answer": "Voltee a la derecha.", "why": "Derecha = right, izquierda = left." },
+          { "type": "mc", "q": "How do you say this?", "prompt": "There are two pharmacies.", "opts": ["Hay dos farmacias.", "Están dos farmacias.", "Hayn dos farmacias."], "answer": "Hay dos farmacias.", "why": "Hay stays hay, also in the plural." },
+          { "type": "type", "q": "Write it in Spanish", "prompt": "Where is the bank?", "answer": "¿Dónde está el banco?", "alt": ["Dónde está el banco"], "why": "A specific place: está." }
+        ]
+      },
+      "goal_en": "Ask the driver if there's an ATM nearby, then guide him to the door: straight on, left or right, and 'pare aquí'."
+    },
+    "10": {
+      "title_en": "Bus, combi and times",
+      "ex": {
+        "w3-25": "Excuse me, does this bus go to Barranco?", "w3-26": "I'm going to the municipal park. Where do I get off?", "w3-27": "Sir, I'm getting off at the next stop, please!", "w3-28": "How much is the fare to Barranco?", "w3-29": "Every day I get on here, on Avenida Arequipa.",
+        "w3-30": "Sorry, what time is it?", "w3-31": "It's one o'clock, let's go and have lunch.", "w3-32": "It's already half past three, how late!", "w3-33": "See you at seven at the Puente de los Suspiros.", "w3-34": "In Lima we live near the seafront.",
+        "w3-35": "Today I'm eating at Rosario's house.", "w3-36": "Love, what time do you leave work?"
+      },
+      "grammar": {
+        "title": "Verbs in -er and -ir, and telling the time",
+        "explain": [
+          "Verbs in -er and -ir work almost the same. Comer (to eat): como, comes, come, comemos, comen. Vivir (to live): vivo, vives, vive, vivimos, viven. Only 'we' differs: comemos, vivimos.",
+          "Careful: bajar (to get off) is an -ar verb (bajo, bajas, baja), subir (to get on) an -ir verb (subo, subes, sube).",
+          "What time? Es la una (one o'clock, singular). From two on: son las dos, son las tres. Halves and quarters: y media, y cuarto, menos cuarto. At seven: a las siete."
+        ],
+        "compare": "Good news: Spanish counts the time like English. 'Half past three' is son las tres y media (three and a half), 'quarter to four' is las cuatro menos cuarto. Just remember 'es la una' (singular) but 'son las dos' (plural), and 'at seven' is 'a las siete'.",
+        "examples": [{ "es": "Como en casa de Rosario.", "en": "I'm eating at Rosario's house." }, { "es": "Vivimos cerca del malecón.", "en": "We live near the seafront." }, { "es": "Son las tres y media. Nos vemos a las siete.", "en": "It's half past three. See you at seven." }],
+        "exercises": [
+          { "type": "fill", "q": "Complete the sentence", "prompt": "Nosotros ___ cerca del malecón.", "opts": ["vivimos", "vivemos", "viven"], "answer": "vivimos", "why": "Vivir is an -ir verb: vivimos." },
+          { "type": "fill", "q": "Complete the sentence", "prompt": "¿Tú ___ en casa hoy?", "opts": ["comes", "come", "comemos"], "answer": "comes", "why": "Tú + comer = comes." },
+          { "type": "mc", "q": "How do you say this?", "prompt": "It's half past three.", "opts": ["Son las tres y media.", "Son las cuatro y media.", "Es la media cuatro."], "answer": "Son las tres y media.", "why": "Half past three = 3:30 = las tres y media." },
+          { "type": "fill", "q": "Complete the sentence", "prompt": "___ la una.", "opts": ["Es", "Son", "Están"], "answer": "Es", "why": "One o'clock is singular: es la una." },
+          { "type": "type", "q": "Write it in Spanish", "prompt": "See you at seven.", "answer": "Nos vemos a las siete", "alt": ["Nos vemos a las 7"], "why": "At seven = a las siete." }
+        ]
+      },
+      "goal_en": "Ask the cobrador if the bus goes to Barranco and where to get off. Then agree on a fixed time with Augusto."
+    },
+    "11": {
+      "title_en": "Money",
+      "ex": {
+        "w3-37": "Excuse me, can I pay by card?", "w3-38": "Good morning, what's the euro rate today?", "w3-39": "I want to change a hundred euros into soles.", "w3-40": "Could you give me twenty-sol notes, please?", "w3-41": "Sorry, cash only here.",
+        "w3-42": "Excuse me, the ATM isn't working.", "w3-43": "I don't understand the number. Could you write it down for me?", "w3-44": "Today the euro is at four soles ten.", "w3-45": "Sorry, where can I change money around here?", "w3-46": "Love, I can't get money from the ATM.",
+        "w3-47": "Do you charge a commission for changing euros?", "w3-48": "For the bus I need a five-sol coin."
+      },
+      "grammar": {
+        "title": "Poder: can, followed straight by the verb",
+        "explain": [
+          "Poder means can or may. The o becomes ue, except for 'we': puedo, puedes, puede, podemos, pueden.",
+          "After poder comes the whole verb (the infinitive) right away: ¿puedo pagar con tarjeta? No puedo sacar plata. Nothing goes in between.",
+          "In Peru people often say 'plata' for money (dinero). Sacar plata = to withdraw money."
+        ],
+        "compare": "This one is easy from English: 'can I pay' = ¿puedo pagar?, with the verb straight after, just like in English. The difference is that the infinitive keeps its ending (pagar, cambiar, sacar) and 'poder' changes for each person: puedo, puedes, puede. And '¿me puede ayudar?' is as polite as 'could you help me?'.",
+        "examples": [{ "es": "¿Puedo pagar con tarjeta?", "en": "Can I pay by card?" }, { "es": "No puedo sacar plata.", "en": "I can't withdraw money." }, { "es": "¿Dónde podemos cambiar dinero?", "en": "Where can we change money?" }],
+        "exercises": [
+          { "type": "fill", "q": "Complete the sentence (I)", "prompt": "¿___ pagar con tarjeta?", "opts": ["Puedo", "Puede", "Podo"], "answer": "Puedo", "why": "I = puedo (o becomes ue)." },
+          { "type": "fill", "q": "Complete the sentence", "prompt": "¿Usted me ___ dar billetes de veinte?", "opts": ["puede", "puedes", "podemos"], "answer": "puede", "why": "Usted = puede." },
+          { "type": "mc", "q": "How do you say this?", "prompt": "Can I change money here?", "opts": ["¿Puedo cambiar dinero aquí?", "¿Puedo cambio dinero aquí?", "¿Puedo a cambiar dinero aquí?"], "answer": "¿Puedo cambiar dinero aquí?", "why": "After poder comes the infinitive: cambiar." },
+          { "type": "mc", "q": "How do you say this?", "prompt": "We can't withdraw money.", "opts": ["No podemos sacar plata.", "No puedemos sacar plata.", "No podemos sacamos plata."], "answer": "No podemos sacar plata.", "why": "We = podemos, without ue." },
+          { "type": "type", "q": "Write it in Spanish", "prompt": "Where can I change money?", "answer": "¿Dónde puedo cambiar dinero?", "alt": ["¿Dónde puedo cambiar plata?", "Dónde puedo cambiar dinero"], "why": "Poder + infinitive: puedo cambiar." }
+        ]
+      },
+      "goal_en": "Change 100 euros, repeat the exchange rate the clerk gives and ask whether you can pay by card."
+    }
+  }
+}

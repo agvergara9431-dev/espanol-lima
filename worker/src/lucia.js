@@ -73,8 +73,14 @@ async function context(env, results, cards, today) {
   return { next, rest, pending: !rest && next <= 24, grammar, sessionTitle, weak, due };
 }
 // Lucía talks to whoever owns the account: Claire (learner) or Augusto (owner), by name.
-const who = (lucia, role) => ({ role: role === "owner" ? "owner" : "learner", name: lucia.names?.[role === "owner" ? "owner" : "learner"] || "Claire" });
-const fill = (text, w) => String(text).split("{name}").join(w.name);
+// ...and explains in the account's language (user_prefs.lang; default Dutch for Claire, English for Augusto).
+const who = (lucia, role, lang) => {
+  const r = role === "owner" ? "owner" : "learner";
+  const l = lang === "en" || lang === "nl" ? lang : r === "owner" ? "en" : "nl";
+  return { role: r, name: lucia.names?.[r] || "Claire", lang: l, langName: lucia.lang_names?.[l] || (l === "en" ? "inglés" : "neerlandés") };
+};
+const fill = (text, w) => String(text).split("{name}").join(w.name).split("{lang}").join(w.langName);
+const reminder = (o, w) => (typeof o === "string" ? fill(o, w) : `${fill(o.es, w)} (${o[w.lang] || o.nl})`);
 function system(lucia, ctx, memory, w) {
   return [lucia.persona, lucia.about?.[w.role] || "", "Reglas:\n- " + lucia.rules.map((r) => fill(r, w)).join("\n- "),
     w.role === "learner" ? `Contexto de hoy: va por la sesión ${Math.min(ctx.next, 24)} de 24 (${ctx.sessionTitle || "inicio"}); gramática actual: ${ctx.grammar || "ser y presentarse"}. Palabras flojas: ${ctx.weak.join(", ") || "ninguna todavía"}.` : "",
@@ -91,15 +97,16 @@ export async function handleChat(env, token, userId, body) {
   const text = typeof body.text === "string" ? body.text.trim() : "";
   if (!text || text.length > 400) return { status: 400, body: { error: "bad_request" } };
   const db = userDb(env, token), { day } = nlNow();
-  const [lucia, recent, memRows, results, cards] = await Promise.all([
+  const [lucia, recent, memRows, results, cards, prefs] = await Promise.all([
     loadJson(env, "lucia.json"),
     rest(env, db, `chat_messages?select=role,text&user_id=eq.${userId}&order=ts.desc&limit=12`),
     rest(env, db, `chat_memory?select=summary,claire_msgs&user_id=eq.${userId}`),
     rest(env, db, `session_results?select=n,done_on&user_id=eq.${userId}`),
     rest(env, db, `cards?select=es,box,ok,ko,due&user_id=eq.${userId}`),
+    rest(env, db, `user_prefs?select=lang&user_id=eq.${userId}`),
   ]);
   const ctx = await context(env, results, cards, day);
-  const w = who(lucia, await roleFor(env, db));
+  const w = who(lucia, await roleFor(env, db), prefs?.[0]?.lang);
   const memory = memRows?.[0];
   const history = (recent || []).reverse().map((m) => ({ role: m.role === "claire" ? "user" : "assistant", content: m.text }));
   while (history.length && history[0].role !== "user") history.shift(); // the API needs a user turn first
@@ -156,8 +163,8 @@ function plan(settings, ctx, now) {
   return slots.sort((a, b) => a.at - b.at);
 }
 async function compose(env, lucia, ctx, memory, recent, kind, w) {
-  if (kind === "reminder_m") return fill(pick(lucia.reminders.morning), w);
-  if (kind === "reminder_e") return fill(pick(lucia.reminders.evening), w);
+  if (kind === "reminder_m") return reminder(pick(lucia.reminders.morning), w);
+  if (kind === "reminder_e") return reminder(pick(lucia.reminders.evening), w);
   const style = fill(kind === "review" ? `${lucia.review_style} Palabras para repasar: ${ctx.due.join("; ") || ctx.weak.join("; ") || "saludos básicos"}.` : lucia.proactive_style, w);
   const client = new Anthropic({ apiKey: env.ANTHROPIC_API_KEY, maxRetries: 2 });
   // The DB role 'claire' just means "the account owner's message".
@@ -196,7 +203,8 @@ export async function runCron(env) {
     try {
       const [results, cards] = await Promise.all([sdb.read(`session_results?select=n,done_on&user_id=eq.${s.user_id}`), sdb.read(`cards?select=es,box,ok,ko,due&user_id=eq.${s.user_id}`)]);
       const ctx = await context(env, results, cards, day);
-      const role = roleOf[await sdb.email(s.user_id)], w = who(lucia, role);
+      const prefs = await sdb.read(`user_prefs?select=lang&user_id=eq.${s.user_id}`);
+      const role = roleOf[await sdb.email(s.user_id)], w = who(lucia, role, prefs?.[0]?.lang);
       if (s.test_requested) {
         await sdb.write("lucia_settings", `?user_id=eq.${s.user_id}`, { method: "PATCH", body: { test_requested: false } });
         await deliver(env, sdb, lucia, s, ctx, "test", w);

@@ -45,7 +45,7 @@ test("normalizes the email and sends email + password to Supabase", async ({ pag
   expect(sent.password).toBe("mango playa sol 27");
 });
 
-test("change password from Lucía's settings (Dutch) and from the panel (Spanish)", async ({ page, context }) => {
+test("change password from Lucía's settings (Dutch) and from the panel (English)", async ({ page, context }) => {
   await page.goto("/index.html?mock=learner");
   await page.evaluate(() => localStorage.clear());
   await page.reload();
@@ -65,5 +65,5 @@ test("change password from Lucía's settings (Dutch) and from the panel (Spanish
   const aug = await context.newPage();
   await aug.goto("/index.html?mock=owner");
   await aug.locator('#nav [data-tab="panel"]').click();
-  await expect(aug.locator("#pwForm")).toContainText("Cambiar mi contraseña");
+  await expect(aug.locator("#pwForm")).toContainText("Change password");
 });

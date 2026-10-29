@@ -1,0 +1,117 @@
+{
+  "title_en": "Greetings and the basics",
+  "scenarios": {
+    "taxi": { "title_en": "Taxi in Lima", "who_en": "the taxi driver", "desc_en": "You get into a taxi in Miraflores. The driver doesn't speak English." },
+    "mozo": { "title_en": "At the restaurant", "who_en": "the waiter", "desc_en": "A waiter serves you in a cevichería in Miraflores." },
+    "mama": { "title_en": "Augusto's mother", "who_en": "Augusto's mother", "desc_en": "She speaks English, but insists on practising Spanish with you." },
+    "familia": { "title_en": "Uncle Diego and cousin Silvia", "who_en": "uncle Diego and cousin Silvia", "desc_en": "At Augusto's home you meet uncle Diego and cousin Silvia." },
+    "prima": { "title_en": "Cousin Silvia", "who_en": "cousin Silvia", "desc_en": "At a birthday party, Silvia wants to get to know you better." }
+  },
+  "sessions": {
+    "1": {
+      "title_en": "Greeting, introducing yourself and asking for help",
+      "ex": {
+        "w1-01": "Hi, how's it going? I'm Claire.", "w1-02": "Good morning, madam. How are you?", "w1-03": "Good afternoon, a table for two, please.", "w1-04": "Nice to meet you, my name is Claire.", "w1-05": "Hi, my name is Claire. And you?",
+        "w1-06": "I'm not from Lima, I'm from the Netherlands.", "w1-07": "I live in Rotterdam with Augusto.", "w1-08": "Sorry, I speak a little Spanish.", "w1-09": "Excuse me, I don't understand.", "w1-10": "I don't understand. Slower, please.",
+        "w1-11": "Sorry, can you repeat that, please?", "w1-12": "How do you say this in Spanish?", "w1-13": "More coffee? Yes, please.", "w1-14": "Would you like sugar? No, thank you.", "w1-15": "Oops, sorry!",
+        "w1-16": "Excuse me, sir, where is the bathroom?", "w1-17": "Excuse me, how much is the mango?", "w1-18": "Sorry, where is the bathroom?", "w1-19": "Still water for me, please.", "w1-20": "I'm hungry, shall we go and eat?",
+        "w1-21": "It's hot and I'm thirsty.", "w1-22": "I'm tired after the flight.", "w1-23": "I'm very happy to be in Lima.", "w1-24": "I have two brothers and five cousins.", "w1-25": "The taxi costs ten soles.",
+        "w1-26": "Today I'm meeting Augusto's mom and dad.", "w1-27": "Nice to meet you, I'm Augusto's girlfriend.", "w1-28": "The ceviche is delicious!", "w1-29": "Bye, see you tomorrow.", "w1-30": "Thank you so much, madam, very kind of you."
+      },
+      "grammar": {
+        "title": "Ser: who you are, and 'I' can go",
+        "explain": [
+          "With the verb ser you say who or what you are, and where you're from: soy Claire, soy de Holanda, Augusto es de Lima.",
+          "In Spanish you usually leave out 'yo' (I). The verb ending already tells you who does it: soy = I am, hablo = I speak, vivo = I live."
+        ],
+        "compare": "English: I am, you are, he is. Spanish: (yo) soy, (tú) eres, (él/ella) es. Where English always needs 'I', Spanish just says 'soy'. 'Yo soy' isn't wrong, but it sounds like you're stressing it: 'I am (not him)'.",
+        "examples": [{ "es": "Soy de Holanda.", "en": "I'm from the Netherlands." }, { "es": "Augusto es de Lima.", "en": "Augusto is from Lima." }, { "es": "¿Eres peruana? No, soy holandesa.", "en": "Are you Peruvian? No, I'm Dutch." }],
+        "exercises": [
+          { "type": "mc", "q": "How do you say this?", "prompt": "I'm from the Netherlands.", "opts": ["Soy de Holanda.", "Estoy de Holanda.", "Tengo de Holanda."], "answer": "Soy de Holanda.", "why": "Where you're from goes with ser: soy de…" },
+          { "type": "fill", "q": "Complete the sentence", "prompt": "Augusto ___ de Lima.", "opts": ["es", "soy", "eres"], "answer": "es", "why": "Augusto = he, so es." },
+          { "type": "fill", "q": "Complete the sentence", "prompt": "¿Tú ___ peruana?", "opts": ["eres", "es", "soy"], "answer": "eres", "why": "Tú (you) goes with eres." },
+          { "type": "mc", "q": "How do you say this?", "prompt": "I speak a little Spanish.", "opts": ["Hablo un poquito de español.", "Habla un poquito de español.", "Hablar un poquito de español."], "answer": "Hablo un poquito de español.", "why": "Hablo = I speak. No need for 'yo'." },
+          { "type": "type", "q": "Write it in Spanish", "prompt": "I live in Rotterdam.", "answer": "Vivo en Róterdam", "alt": ["Vivo en Rotterdam", "Yo vivo en Róterdam", "Yo vivo en Rotterdam"], "why": "Vivo = I live." }
+        ]
+      },
+      "goal_en": "Tell the driver your name, which country you're from and which city you live in."
+    },
+    "2": {
+      "title_en": "What you need: el or la?",
+      "ex": {
+        "w1-31": "I'm cold, shall I close the window?", "w1-32": "In Lima in December I'm hot.", "w1-33": "It's eleven o'clock and I'm sleepy.", "w1-34": "I'm not going out today, I'm sick.", "w1-35": "How are you? Fine, thanks.",
+        "w1-36": "Good evening, do you have a table for two?", "w1-37": "Excuse me, the menu, please.", "w1-38": "A bottle of still water, please.", "w1-39": "Lovely, the water is cold!", "w1-40": "A glass and a napkin, please.",
+        "w1-41": "The bathroom is at the back, on the right.", "w1-42": "A coffee with milk for me, please."
+      },
+      "grammar": {
+        "title": "Tener or estar, and el or la",
+        "explain": [
+          "Hungry, thirsty, cold or hot: in Spanish you 'have' them, with tener. Tengo hambre (I have hunger), tengo sed, tengo frío.",
+          "How you feel (tired, sick, happy) goes with estar: estoy cansada, estoy enferma. As a woman you end in -a: cansada, enferma. Augusto says cansado.",
+          "Every Spanish noun is masculine or feminine. Masculine: el / un (el vaso, un café). Feminine: la / una (la carta, una mesa). Words ending in -o are usually masculine, in -a usually feminine."
+        ],
+        "compare": "English says 'I am hungry, I am cold'. Spanish says 'I have hunger, I have cold': tengo hambre, tengo frío. And where English has just 'the' and 'a', Spanish has el/la and un/una. Watch out: agua is feminine, but you say 'el agua' because it sounds better. So: el agua está fría.",
+        "examples": [{ "es": "Tengo frío.", "en": "I'm cold." }, { "es": "Estoy cansada.", "en": "I'm tired." }, { "es": "La mesa, el vaso, una servilleta, un café.", "en": "The table, the glass, a napkin, a coffee." }],
+        "exercises": [
+          { "type": "mc", "q": "How do you say this?", "prompt": "I'm cold.", "opts": ["Tengo frío.", "Estoy frío.", "Tengo fría."], "answer": "Tengo frío.", "why": "Being cold = tener frío (having cold)." },
+          { "type": "fill", "q": "Complete the sentence", "prompt": "___ cansada.", "opts": ["Estoy", "Tengo", "Soy"], "answer": "Estoy", "why": "How you feel: estar." },
+          { "type": "fill", "q": "Complete the sentence", "prompt": "¿Tiene ___ mesa para dos?", "opts": ["una", "un", "el"], "answer": "una", "why": "Mesa is feminine: una mesa." },
+          { "type": "mc", "q": "How do you say this?", "prompt": "The water is cold.", "opts": ["El agua está fría.", "La agua está fría.", "El agua está frío."], "answer": "El agua está fría.", "why": "Agua is feminine (fría), but you say 'el agua'." },
+          { "type": "type", "q": "Write it in Spanish", "prompt": "I'm thirsty.", "answer": "Tengo sed", "alt": ["Yo tengo sed"], "why": "Being thirsty = tener sed." }
+        ]
+      },
+      "goal_en": "Order still water and ask where the bathroom is."
+    },
+    "3": {
+      "title_en": "Tú and usted with the family",
+      "ex": {
+        "w1-43": "Hi Silvia! How are you?", "w1-44": "Good afternoon, sir. How are you?", "w1-45": "I'm from the Netherlands, and you? Where are you from?", "w1-46": "Sorry, are you Augusto's uncle?", "w1-47": "Delighted, madam. I'm Claire.",
+        "w1-48": "Good afternoon, please come in.", "w1-49": "Silvia, can you speak more slowly?", "w1-50": "Excuse me, madam, can you help me, please?", "w1-51": "He's my boyfriend, Augusto.", "w1-52": "She's Augusto's cousin, her name is Silvia.",
+        "w1-53": "Silvia, this is my sister Merle.", "w1-54": "Hi Silvia! So nice to see you!"
+      },
+      "grammar": {
+        "title": "Tú or usted?",
+        "explain": [
+          "Tú and usted both mean 'you'. Tú is informal, usted is polite. In Peru you say usted a lot: to older people, strangers, taxi drivers and waiters, and often to your partner's parents and uncles.",
+          "With tú the verb usually ends in -s: ¿cómo estás?, ¿de dónde eres?, ¿puedes…? With usted you use the same form as for he or she, without -s: ¿cómo está?, ¿de dónde es?, ¿puede…?"
+        ],
+        "compare": "English has only one 'you' and shows politeness with words like 'sir' or 'could you'. Spanish shows it in the verb: ¿puedes? (friendly) or ¿puede? (polite). If in doubt in Peru, choose usted: it's always polite. To Silvia you say tú; to uncle Diego you say usted, until he says 'tutéame' (call me tú).",
+        "examples": [{ "es": "¿Cómo estás, Silvia?", "en": "How are you, Silvia?" }, { "es": "¿Cómo está usted, señor Diego?", "en": "How are you, Mr Diego?" }, { "es": "¿Puede repetir? / ¿Puedes repetir?", "en": "Could you repeat that? (polite / friendly)" }],
+        "exercises": [
+          { "type": "mc", "q": "How do you say this (politely)?", "prompt": "Can you help me?", "opts": ["¿Me puede ayudar?", "¿Me puedes ayudar?", "¿Me puedo ayudar?"], "answer": "¿Me puede ayudar?", "why": "Polite = usted, so puede without -s." },
+          { "type": "fill", "q": "To cousin Silvia", "prompt": "¿De dónde ___?", "opts": ["eres", "es", "soy"], "answer": "eres", "why": "Silvia is young and family: tú, so eres." },
+          { "type": "fill", "q": "To uncle Diego", "prompt": "¿Cómo ___ usted?", "opts": ["está", "estás", "estoy"], "answer": "está", "why": "Usted goes with está, without -s." },
+          { "type": "mc", "q": "Who do you call 'usted'?", "prompt": "Pick the best one.", "opts": ["The taxi driver", "Augusto", "A five-year-old child"], "answer": "The taxi driver", "why": "Strangers and people serving you get usted." },
+          { "type": "type", "q": "Write it in Spanish (polite)", "prompt": "Where are you from?", "answer": "¿De dónde es usted?", "alt": ["¿De dónde es?", "¿Usted de dónde es?"], "why": "Usted takes the form es." }
+        ]
+      },
+      "goal_en": "Speak to uncle Diego with usted and to cousin Silvia with tú, at least 3 sentences to each."
+    },
+    "4": {
+      "title_en": "Numbers and age",
+      "ex": {
+        "w1-55": "The combi costs twelve soles to there.", "w1-56": "My cousin is twenty-two.", "w1-57": "Lunch costs forty soles.", "w1-58": "Augusto's grandmother is ninety.", "w1-59": "That's thirty-five soles, please.",
+        "w1-60": "Silvia, how old are you?", "w1-61": "Sorry, sir, how old are you?", "w1-62": "I'm twenty-five and I live in Rotterdam.", "w1-63": "Can I have your number? I'll text you on WhatsApp.", "w1-64": "My number is 987 654 321.",
+        "w1-65": "A table, please. There are four of us.", "w1-66": "My birthday is on the second of November! I'm turning twenty-five."
+      },
+      "grammar": {
+        "title": "Numbers, and 'tener' for your age",
+        "explain": [
+          "In Spanish you 'have' your age, with tener: tengo veinticinco años = I have twenty-five years. So never 'soy veinticinco'.",
+          "16 to 29 are written as one word: dieciséis, veintidós, veinticinco. From 31 on with 'y' (and): treinta y uno, cuarenta y cinco. A hundred is cien.",
+          "Peruvian mobile numbers have 9 digits and start with a 9. You say them digit by digit or in groups of three."
+        ],
+        "compare": "English: I'm twenty-five. Spanish: tengo veinticinco años (I have twenty-five years). The good news: the order is the same as in English, tens first: forty-five = cuarenta y cinco (forty and five).",
+        "examples": [{ "es": "Tengo veinticinco años.", "en": "I'm twenty-five." }, { "es": "¿Cuántos años tienes?", "en": "How old are you?" }, { "es": "Cuarenta y cinco soles.", "en": "Forty-five soles." }],
+        "exercises": [
+          { "type": "mc", "q": "How do you say this?", "prompt": "I'm twenty-five years old.", "opts": ["Tengo veinticinco años.", "Soy veinticinco años.", "Estoy veinticinco años."], "answer": "Tengo veinticinco años.", "why": "Age = tener … años." },
+          { "type": "mc", "q": "Which number is this?", "prompt": "45", "opts": ["cuarenta y cinco", "cincuenta y cuatro", "cuatro y cuarenta"], "answer": "cuarenta y cinco", "why": "Tens first, then 'y', then the units." },
+          { "type": "fill", "q": "Complete the sentence", "prompt": "¿Cuántos años ___ tú?", "opts": ["tienes", "tiene", "eres"], "answer": "tienes", "why": "Tú + tener = tienes." },
+          { "type": "type", "q": "Write the number in words", "prompt": "22", "answer": "veintidós", "alt": ["veintidos"], "why": "16 to 29 is one word." },
+          { "type": "order", "q": "Put the words in the right order", "prompt": "How old are you? (polite)", "answer": "¿Cuántos años tiene usted?", "why": "Usted takes tiene." }
+        ]
+      },
+      "goal_en": "Say how old you are, ask Silvia how old she is and give her your 9-digit mobile number."
+    }
+  }
+}

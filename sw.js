@@ -1,6 +1,6 @@
 // Network first, cache as fallback: new content and fixes arrive right away, the app still opens offline.
-const CACHE = "espanol-lima-v3";
-const SHELL = ["./", "index.html", "css/app.css", "js/app.js", "js/core.js", "js/session.js", "js/home.js", "js/panel.js", "js/login.js", "js/lucia.js", "js/store.js", "js/config.js", "js/icons.js", "manifest.webmanifest", "icons/icon.svg"];
+const CACHE = "espanol-lima-v4";
+const SHELL = ["./", "index.html", "css/app.css", "js/app.js", "js/core.js", "js/i18n.js", "js/session.js", "js/home.js", "js/panel.js", "js/login.js", "js/lucia.js", "js/store.js", "js/config.js", "js/icons.js", "manifest.webmanifest", "icons/icon.svg"];
 
 // Lucía's messages arrive as Web Push; tapping the notification opens the chat.
 self.addEventListener("push", (e) => {

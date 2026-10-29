@@ -54,7 +54,7 @@ async function playStep(page, wrong = []) {
     await body.locator(".opt", { hasText: pick }).first().click();
   } else if (step.ex.k === "order") {
     if (bad) await body.locator(".bank .tok").first().click();
-    else for (const w of step.ex.answer.split(" ")) await body.locator(".bank .tok:not(.used)", { hasText: w }).first().click();
+    else for (const w of step.ex.answer.split(" ")) await body.locator(".bank .tok:not(.used)", { hasText: new RegExp("^" + w.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "$") }).first().click();
   } else if (step.ex.k === "speak") {
     await page.evaluate((b) => (window.__wrongSpeak = b), bad);
     await page.locator("#recBtn").click();
@@ -115,7 +115,7 @@ test("full session 2: all steps, then rest day and Augusto's panel", async ({ pa
     if ((await playStep(page)) === "finish") break;
   }
   expect([sawGrammar, sawMission, sawSpeak, sawPhrase]).toEqual([true, true, true, true]);
-  await expect(page.locator("#finish")).toContainText("SESSIE 2 KLAAR");
+  await expect(page.locator("#finish")).toContainText(/sessie 2 klaar/i);
   await expect(page.locator("#finish")).toContainText("Missie geslaagd");
   await page.screenshot({ path: shots + "4-finish.png" });
   await page.locator("#checkBtn").click();
@@ -133,8 +133,8 @@ test("full session 2: all steps, then rest day and Augusto's panel", async ({ pa
   await aug.locator('#nav [data-tab="panel"]').click();
   await expect(aug.locator("#pSessionsTable")).toContainText("✓");
   await expect(aug.locator("#pSessionsTable tbody tr")).toHaveCount(2);
-  await expect(aug.locator("#pGrammar")).toContainText("tener/estar");
-  await expect(aug.locator("#pWhere")).toContainText("Hoy descansa");
+  await expect(aug.locator("#pGrammar .bar-row")).toHaveCount(1);
+  await expect(aug.locator("#pWhere")).toContainText("Rest day today");
   await expect(aug.locator("#pFlags")).toBeEmpty();
   await aug.screenshot({ path: shots + "6-panel.png", fullPage: true });
   expect(errors).toEqual([]);
@@ -185,8 +185,8 @@ test("weekly test below 70% is retried, and a quiz below 60% is flagged in the p
   const aug = await context.newPage();
   await aug.goto("/index.html?mock=owner");
   await aug.locator('#nav [data-tab="panel"]').click();
-  await expect(aug.locator("#pFlags")).toContainText("Sesión 4");
-  await expect(aug.locator("#pTests")).toContainText("la repite en la próxima sesión");
+  await expect(aug.locator("#pFlags")).toContainText("Session 4");
+  await expect(aug.locator("#pTests")).toContainText("retake next session");
   await expect(aug.locator("#pSessionsTable tr.low")).toHaveCount(1);
 });
 

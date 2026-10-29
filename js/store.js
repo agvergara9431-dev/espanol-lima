@@ -89,6 +89,8 @@ async function supabaseStore() {
     async settings() { return must(await sb.from("lucia_settings").select("*").eq("user_id", s.me.id).maybeSingle()); },
     async saveSettings(patch) { must(await sb.from("lucia_settings").upsert({ user_id: s.me.id, ...patch, updated_at: new Date().toISOString() }, { onConflict: "user_id" })); },
     async chatDaily(uid) { return must(await sb.from("chat_daily").select("*").eq("user_id", uid).order("day", { ascending: false }).limit(14)); },
+    async prefs() { return must(await sb.from("user_prefs").select("lang").eq("user_id", s.me.id).maybeSingle()); },
+    async savePrefs(patch) { must(await sb.from("user_prefs").upsert({ user_id: s.me.id, ...patch, updated_at: new Date().toISOString() }, { onConflict: "user_id" })); },
     onNote(cb) {
       const ch = sb.channel("note").on("postgres_changes", { event: "*", schema: "public", table: "notes" }, (p) => cb(clone(p.new))).subscribe();
       return () => sb.removeChannel(ch);
@@ -154,6 +156,8 @@ function mockStore(who) {
     async settings() { return clone(db().lucia_settings.find((r) => r.user_id === s.me.id) || null); },
     async saveSettings(patch) { upsert("lucia_settings", { enabled: true, window_start: 9, window_end: 21, per_day: 2, ...(db().lucia_settings.find((r) => r.user_id === s.me.id) || {}), ...patch, user_id: s.me.id }, ["user_id"]); },
     async chatDaily(uid) { return clone(db().chat_daily.filter((r) => r.user_id === uid).sort((a, b) => (a.day < b.day ? 1 : -1))); },
+    async prefs() { return clone((db().user_prefs || []).find((r) => r.user_id === s.me.id) || null); },
+    async savePrefs(patch) { const d = db(); d.user_prefs = (d.user_prefs || []).filter((r) => r.user_id !== s.me.id).concat([{ user_id: s.me.id, ...patch }]); write(d); },
     async ai(path, body) {
       await new Promise((r) => setTimeout(r, 150));
       if (path === "/dialog") return { text: "¡Qué bien! ¿Y de dónde eres?" };

@@ -91,10 +91,10 @@ test("panel shows the daily Lucía summary but never the chat text", async ({ pa
   const aug = await context.newPage();
   await aug.goto("/index.html?mock=owner");
   await aug.locator('#nav [data-tab="panel"]').click();
-  await expect(aug.locator("#pLucia")).toContainText("2 mensajes");
+  await expect(aug.locator("#pLucia")).toContainText("2 messages");
   await expect(aug.locator("#pLucia")).toContainText("su doctorado");
   await expect(aug.locator("#pLucia")).toContainText("pronombre sobrante (1)");
   await expect(aug.locator("#tab-panel")).not.toContainText("mi secreto es azul");
   await aug.locator("#luciaTest").click();
-  await expect(aug.locator("#luciaTestStatus")).toContainText("15 minutos");
+  await expect(aug.locator("#luciaTestStatus")).toContainText("15 minutes");
 });

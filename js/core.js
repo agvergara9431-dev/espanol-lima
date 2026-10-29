@@ -1,6 +1,7 @@
 // Shared helpers, state, content and the session calendar.
 // Rule from a past bug: never mutate rows that came from the store; copy, change, then save the copy.
 import { CONFIG } from "./config.js";
+import { t } from "./i18n.js";
 
 // ---------- helpers ----------
 export const $ = (id) => document.getElementById(id);
@@ -146,7 +147,7 @@ export async function save(fn) {
     for (let attempt = 0; attempt < 3; attempt++) {
       try { await fn(); return true; } catch (e) { console.warn("save failed, retrying", e); await new Promise((r) => setTimeout(r, 800 * (attempt + 1))); }
     }
-    status("Je voortgang kon niet worden opgeslagen. Controleer je internet en probeer het opnieuw.");
+    status(t("save.fail"));
     return false;
   })();
   pending.add(p); p.finally(() => pending.delete(p));

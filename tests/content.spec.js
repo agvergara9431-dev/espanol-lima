@@ -38,6 +38,14 @@ for (const w of weeks) {
       }
       expect(w.scenarios[s.mission.scenario], `mission scenario ${s.mission.scenario}`).toBeTruthy();
       expect(s.mission.goal && s.mission.check).toBeTruthy();
+      // English layer (Augusto's account): titles, example translations, grammar compared with English, goal.
+      expect(w.title_en && s.title_en && s.mission.goal_en, `week ${w.week} session ${s.n} English titles/goal`).toBeTruthy();
+      for (const it of s.items) expect(it.ex.en, `${it.id} English example`).toBeTruthy();
+      const ge = g.en;
+      expect(ge?.title && ge.explain?.length && ge.compare && ge.examples?.every((x) => x.es && x.en), `${g.id} English grammar`).toBeTruthy();
+      expect(ge.exercises.length).toBe(5);
+      for (const ex of ge.exercises) if (ex.type === "mc" || ex.type === "fill") expect(ex.opts, `${g.id} en: ${ex.prompt}`).toContain(ex.answer);
+      for (const sc of Object.values(w.scenarios)) expect(sc.title_en && sc.desc_en && sc.who_en, `scenario English ${sc.title}`).toBeTruthy();
     });
   }
 }

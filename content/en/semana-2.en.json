@@ -1,0 +1,88 @@
+{
+  "title_en": "Restaurants and Peruvian food",
+  "scenarios": {
+    "cevicheria": { "title_en": "Cevichería in Miraflores", "who_en": "the waiter", "desc_en": "You have lunch in a cevichería in Miraflores. The waiter doesn't speak English." },
+    "cocina": { "title_en": "In the kitchen with Rosario", "who_en": "Rosario", "desc_en": "Rosario, Augusto's mother, is cooking ají de gallina and wants to know what you cook." },
+    "criollo": { "title_en": "Criollo restaurant in Barranco", "who_en": "the waiter", "desc_en": "You eat at a restaurant with Peruvian home cooking in Barranco." }
+  },
+  "sessions": {
+    "5": {
+      "title_en": "Peruvian dishes and ordering",
+      "ex": {
+        "w2-01": "I like ceviche with sweet potato.", "w2-02": "I like the anticuchos from the corner.", "w2-03": "Sorry, I don't like spicy food.", "w2-04": "It's my first time here. What do you recommend?", "w2-05": "I'd like a ceviche, please, not too spicy.",
+        "w2-06": "As a starter, a causa limeña to share.", "w2-07": "And as a main course, a lomo saltado, please.", "w2-08": "To drink, an ice-cold chicha morada.", "w2-09": "Excuse me, what is ají de gallina?", "w2-10": "Is the stuffed rocoto very spicy?",
+        "w2-11": "Good afternoon, do you have a set lunch menu?", "w2-37": "Good afternoon. Could you bring me the menu, please?"
+      },
+      "grammar": {
+        "title": "Gustar: what you like, and ordering politely",
+        "explain": [
+          "'Me gusta' literally means 'it pleases me'. The thing you like is the subject. One thing: me gusta el ceviche. Several things: me gustan los anticuchos.",
+          "So you never say 'yo gusto'. Don't like: no me gusta. 'No' goes first, before 'me'.",
+          "You order politely with 'quisiera' (I would like). 'Quiero' (I want) isn't wrong, but sounds a bit blunt to a waiter."
+        ],
+        "compare": "English 'I like ceviche' has you as the subject. Spanish turns it around, like 'ceviche pleases me': me gusta el ceviche. That's why the verb follows the thing: me gusta (one thing), me gustan (several). And 'quisiera' is exactly 'I'd like' instead of 'I want'.",
+        "examples": [{ "es": "Me gusta el ceviche.", "en": "I like ceviche." }, { "es": "Me gustan los anticuchos.", "en": "I like anticuchos." }, { "es": "No me gusta el picante. Quisiera un ceviche sin ají.", "en": "I don't like spicy food. I'd like a ceviche without chili." }],
+        "exercises": [
+          { "type": "fill", "q": "Complete the sentence", "prompt": "Me ___ los anticuchos.", "opts": ["gustan", "gusta", "gusto"], "answer": "gustan", "why": "Anticuchos is plural, so gustan." },
+          { "type": "fill", "q": "Complete the sentence", "prompt": "Me ___ el ceviche.", "opts": ["gusta", "gustan", "gusto"], "answer": "gusta", "why": "One thing (el ceviche), so gusta." },
+          { "type": "mc", "q": "How do you say this?", "prompt": "I don't like spicy food.", "opts": ["No me gusta el picante.", "No gusto el picante.", "Me no gusta el picante."], "answer": "No me gusta el picante.", "why": "'No' comes before 'me'." },
+          { "type": "mc", "q": "Order politely", "prompt": "I'd like a chicha morada.", "opts": ["Quisiera una chicha morada.", "Gusto una chicha morada.", "Me gusta una chicha morada."], "answer": "Quisiera una chicha morada.", "why": "Quisiera = I would like, polite ordering." },
+          { "type": "type", "q": "Write it in Spanish", "prompt": "I like ceviche.", "answer": "Me gusta el ceviche", "alt": ["Me gusta ceviche"], "why": "One thing: me gusta." }
+        ]
+      },
+      "goal_en": "Order a starter, a main course and a drink, and say one dish you don't like."
+    },
+    "6": {
+      "title_en": "What I cook and what I eat",
+      "ex": {
+        "w2-13": "In Rotterdam I make poke bowls very often.", "w2-14": "On Sundays we cook together at home.", "w2-15": "At home, Augusto makes chicken with rice.", "w2-16": "Silvia, do you cook?", "w2-17": "On Saturdays I buy vegetables at the market.",
+        "w2-18": "In the Netherlands I have bread with cheese for breakfast.", "w2-19": "In Lima we have lunch at one or two.", "w2-20": "Here we have dinner late, at nine.", "w2-21": "Thanks, I drink coffee without sugar.", "w2-22": "There are lots of potatoes in Peru, and Peruvian potatoes are delicious.",
+        "w2-23": "Good morning, two bread rolls and three empanadas, please.", "w2-24": "In Lima I like trying new dishes."
+      },
+      "grammar": {
+        "title": "Verbs in -ar, and plurals",
+        "explain": [
+          "Many Spanish verbs end in -ar: cocinar (to cook), preparar (to make), comprar (to buy), tomar (to drink). Drop -ar and add an ending: cocino (I), cocinas (you), cocina (he, she, you polite), cocinamos (we), cocinan (they, you all).",
+          "In Peru, for 'you all' you always say ustedes, with the same form as 'they': ustedes cocinan.",
+          "Plural: after a vowel add -s (papa → papas), after a consonant -es (pan → panes). Adjectives join in: las papas peruanas, los platos ricos."
+        ],
+        "compare": "In English the verb hardly changes: I cook, you cook, we cook (only 'he cooks' gets an -s). In Spanish the ending tells you who: cocino, cocinas, cocinamos. That's why 'yo' can go. And while English adjectives never change ('Peruvian potatoes'), Spanish ones agree: papas peruanas.",
+        "examples": [{ "es": "Cocino poke bowls. ¿Tú qué cocinas?", "en": "I make poke bowls. What do you cook?" }, { "es": "En casa cocinamos juntos.", "en": "At home we cook together." }, { "es": "Un pan, dos panes. Una papa peruana, dos papas peruanas.", "en": "One roll, two rolls. One Peruvian potato, two Peruvian potatoes." }],
+        "exercises": [
+          { "type": "fill", "q": "Complete the sentence", "prompt": "Nosotros ___ juntos.", "opts": ["cocinamos", "cocinan", "cocino"], "answer": "cocinamos", "why": "Nosotros (we) takes -amos." },
+          { "type": "fill", "q": "Complete the sentence", "prompt": "Augusto ___ pollo con arroz.", "opts": ["prepara", "preparo", "preparas"], "answer": "prepara", "why": "Augusto = he, so -a." },
+          { "type": "mc", "q": "How do you say this?", "prompt": "two bread rolls", "opts": ["dos panes", "dos pans", "dos panos"], "answer": "dos panes", "why": "Pan ends in a consonant: panes." },
+          { "type": "mc", "q": "How do you say this?", "prompt": "the Peruvian potatoes", "opts": ["las papas peruanas", "las papas peruana", "la papas peruanas"], "answer": "las papas peruanas", "why": "Article, noun and adjective all become plural." },
+          { "type": "type", "q": "Write it in Spanish", "prompt": "I buy vegetables at the market.", "answer": "Compro verduras en el mercado", "alt": ["Yo compro verduras en el mercado"], "why": "Comprar → compro (I)." }
+        ]
+      },
+      "goal_en": "Tell Rosario what you cook and eat in Rotterdam, using at least 3 different -ar verbs (cocinar, preparar, comprar, desayunar…)."
+    },
+    "7": {
+      "title_en": "Spicy food, complaints and the bill",
+      "ex": {
+        "w2-25": "A lomo saltado without chili, please.", "w2-26": "Excuse me, the soup is cold.", "w2-27": "Mmm, the ají de gallina is delicious.", "w2-28": "Ceviche is a typical Peruvian dish.", "w2-29": "Excuse me, this isn't what I ordered.",
+        "w2-30": "Thank you, everything was delicious. Could you bring me the bill, please?", "w2-31": "The hotel costs five hundred soles.", "w2-32": "In total it's a hundred and twenty soles.", "w2-33": "Sorry, is service included?", "w2-34": "Thank you very much, I'll leave you a ten percent tip.",
+        "w2-38": "Excuse me, can I have my change, please?", "w2-39": "I only have a hundred-sol note. Do you have small change?"
+      },
+      "grammar": {
+        "title": "Ser or estar with food, and numbers up to 1000",
+        "explain": [
+          "Both mean 'to be'. With ser you say what something is: el ceviche es un plato típico. With estar you say how it is right now or how it tastes: la sopa está fría, ¡está riquísimo!",
+          "Tasting something you like? Say '¡Está rico!' or '¡Está riquísimo!'. Complaining that it's cold: 'Está frío'.",
+          "A hundred is cien, but with something after it it becomes ciento: ciento veinte (120). Then: doscientos (200), trescientos (300), quinientos (500, careful!), setecientos (700), novecientos (900), mil (1000)."
+        ],
+        "compare": "English has one verb: the soup is cold, ceviche is typical. Spanish chooses: what something is (ser) or how it is now (estar). And where English says 'a hundred AND twenty', Spanish has no 'y': ciento veinte. Peruvians sometimes say 'lucas' for soles: diez lucas = ten soles.",
+        "examples": [{ "es": "El ceviche es un plato típico.", "en": "Ceviche is a typical dish." }, { "es": "El ceviche está riquísimo.", "en": "The ceviche is delicious (this one, now)." }, { "es": "Son ciento veinte soles.", "en": "That's a hundred and twenty soles." }],
+        "exercises": [
+          { "type": "fill", "q": "Complaining to the waiter", "prompt": "La sopa ___ fría.", "opts": ["está", "es", "son"], "answer": "está", "why": "How it is now: estar." },
+          { "type": "fill", "q": "Complete the sentence", "prompt": "El ceviche ___ un plato típico del Perú.", "opts": ["es", "está", "estoy"], "answer": "es", "why": "What something is: ser." },
+          { "type": "mc", "q": "How do you say this?", "prompt": "120 soles", "opts": ["ciento veinte soles", "cien veinte soles", "ciento y veinte soles"], "answer": "ciento veinte soles", "why": "Cien becomes ciento when something follows, without 'y'." },
+          { "type": "mc", "q": "Which number is this?", "prompt": "500", "opts": ["quinientos", "cincocientos", "cinco cientos"], "answer": "quinientos", "why": "500 is irregular: quinientos." },
+          { "type": "type", "q": "Write it in Spanish", "prompt": "Could you bring me the bill?", "answer": "¿Me trae la cuenta, por favor?", "alt": ["¿Me trae la cuenta?", "La cuenta, por favor"], "why": "Ask politely with 'me trae'." }
+        ]
+      },
+      "goal_en": "Order a dish without chili, say it arrived cold, ask for the bill and leave a 10% tip."
+    }
+  }
+}
