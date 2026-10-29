@@ -24,7 +24,8 @@ async function rest(env, headers, path, { method = "GET", body, prefer } = {}) {
 }
 // Service-role access, restricted: writes only to Lucía's tables.
 function serviceDb(env) {
-  const headers = { apikey: env.SUPABASE_SERVICE_KEY, authorization: "Bearer " + env.SUPABASE_SERVICE_KEY };
+  const key = (env.SUPABASE_SERVICE_KEY || "").trim(); // the secret was piped in from PowerShell, which appends a newline
+  const headers = { apikey: key, authorization: "Bearer " + key };
   return {
     read: (path) => rest(env, headers, path),
     write: (table, query, opts) => {
