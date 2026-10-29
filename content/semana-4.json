@@ -1,6 +1,23 @@
 {
   "week": 4,
   "title": "Markt, winkels en afdingen",
+  "title_es": "Mercado, tiendas y regateo",
   "stamp": "Markt",
-  "start": "2026-11-17"
+  "sessions": [
+    {
+      "n": 12,
+      "title": "Fruit en hoeveelheden",
+      "title_es": "Frutas y cantidades"
+    },
+    {
+      "n": 13,
+      "title": "Afdingen en kleding",
+      "title_es": "Regatear y ropa"
+    },
+    {
+      "n": 14,
+      "title": "Kiezen en cadeaus",
+      "title_es": "Elegir y regalos"
+    }
+  ]
 }

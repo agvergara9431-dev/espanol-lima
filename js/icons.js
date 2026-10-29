@@ -20,6 +20,9 @@ const P = {
   back: '<path d="M15 5l-7 7 7 7"/>',
   plane: '<path d="M2 13l8-1 4-8h2l-2 8 6 .5 2-2.5h1l-1 4 1 4h-1l-2-2.5-6 .5 2 8h-2l-4-8-8-1z"/>',
   eye: '<path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
+  mic: '<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3M8 21h8"/>',
+  route: '<circle cx="5" cy="18" r="2"/><circle cx="19" cy="6" r="2"/><path d="M7 18h6a3 3 0 0 0 0-6h-2a3 3 0 0 1 0-6h6"/>',
+  alert: '<path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18v.5"/>',
   logout: '<path d="M15 4h4v16h-4M10 8l-4 4 4 4M6 12h10"/>',
 };
 export const icon = (name, size = 24, extra = "") =>

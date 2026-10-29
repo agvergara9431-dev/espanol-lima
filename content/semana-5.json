@@ -1,6 +1,28 @@
 {
   "week": 5,
   "title": "Apotheek, gezondheid en noodgevallen",
+  "title_es": "Farmacia, salud y emergencias",
   "stamp": "Apotheek",
-  "start": "2026-11-24"
+  "sessions": [
+    {
+      "n": 15,
+      "title": "Het lichaam en de apotheek",
+      "title_es": "El cuerpo y la farmacia"
+    },
+    {
+      "n": 16,
+      "title": "Sinds wanneer doet het pijn?",
+      "title_es": "Desde cuándo me duele"
+    },
+    {
+      "n": 17,
+      "title": "Zon en je dag",
+      "title_es": "Sol y rutina"
+    },
+    {
+      "n": 18,
+      "title": "Noodgevallen",
+      "title_es": "Emergencias"
+    }
+  ]
 }

@@ -1,6 +1,28 @@
 {
   "week": 3,
   "title": "Taxi, de weg vragen en geld",
+  "title_es": "Taxi, direcciones y dinero",
   "stamp": "Taxi en geld",
-  "start": "2026-11-10"
+  "sessions": [
+    {
+      "n": 8,
+      "title": "Een taxi nemen",
+      "title_es": "Tomar un taxi"
+    },
+    {
+      "n": 9,
+      "title": "Waar is er…, en hoe kom ik er?",
+      "title_es": "Dónde hay… y cómo llego"
+    },
+    {
+      "n": 10,
+      "title": "Bus, busje en tijden",
+      "title_es": "Bus, combi y horas"
+    },
+    {
+      "n": 11,
+      "title": "Geld",
+      "title_es": "Dinero"
+    }
+  ]
 }

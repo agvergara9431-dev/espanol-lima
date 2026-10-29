@@ -1,90 +1,257 @@
 {
   "week": 1,
-  "title": "Begroeten, jezelf voorstellen en de basis",
+  "title": "Begroeten en de basis",
+  "title_es": "Saludos y lo básico",
   "stamp": "¡Hola!",
-  "start": "2026-10-27",
-  "items": [
-    { "id": "w1-01", "es": "Hola, ¿qué tal?", "en": "Hi, how's it going?", "nl": "Hoi, hoe gaat het?" },
-    { "id": "w1-02", "es": "Buenos días", "en": "Good morning", "nl": "Goedemorgen" },
-    { "id": "w1-03", "es": "Buenas tardes", "en": "Good afternoon", "nl": "Goedemiddag" },
-    { "id": "w1-04", "es": "Mucho gusto", "en": "Nice to meet you", "nl": "Aangenaam" },
-    { "id": "w1-05", "es": "Me llamo Claire", "en": "My name is Claire", "nl": "Ik heet Claire" },
-    { "id": "w1-06", "es": "Soy de Holanda", "en": "I'm from the Netherlands", "nl": "Ik kom uit Nederland" },
-    { "id": "w1-07", "es": "Vivo en Róterdam", "en": "I live in Rotterdam", "nl": "Ik woon in Rotterdam" },
-    { "id": "w1-08", "es": "Hablo un poquito de español", "en": "I speak a little Spanish", "nl": "Ik spreek een beetje Spaans" },
-    { "id": "w1-09", "es": "No entiendo", "en": "I don't understand", "nl": "Ik begrijp het niet" },
-    { "id": "w1-10", "es": "Más despacio, por favor", "en": "Slower, please", "nl": "Langzamer, alsjeblieft" },
-    { "id": "w1-11", "es": "¿Puede repetir, por favor?", "en": "Can you repeat, please? (formal)", "nl": "Kunt u het herhalen, alstublieft?" },
-    { "id": "w1-12", "es": "¿Cómo se dice esto?", "en": "How do you say this?", "nl": "Hoe zeg je dit?" },
-    { "id": "w1-13", "es": "Sí, por favor", "en": "Yes, please", "nl": "Ja, graag" },
-    { "id": "w1-14", "es": "No, gracias", "en": "No, thanks", "nl": "Nee, dank je" },
-    { "id": "w1-15", "es": "Perdón", "en": "Sorry / excuse me", "nl": "Sorry / pardon" },
-    { "id": "w1-16", "es": "Disculpe, señor", "en": "Excuse me, sir (to get attention)", "nl": "Pardon, meneer" },
-    { "id": "w1-17", "es": "¿Cuánto cuesta?", "en": "How much does it cost?", "nl": "Hoeveel kost het?" },
-    { "id": "w1-18", "es": "¿Dónde está el baño?", "en": "Where is the bathroom?", "nl": "Waar is het toilet?" },
-    { "id": "w1-19", "es": "Agua sin gas, por favor", "en": "Still water, please", "nl": "Water zonder koolzuur, alsjeblieft" },
-    { "id": "w1-20", "es": "Tengo hambre", "en": "I'm hungry", "nl": "Ik heb honger" },
-    { "id": "w1-21", "es": "Tengo sed", "en": "I'm thirsty", "nl": "Ik heb dorst" },
-    { "id": "w1-22", "es": "Estoy cansada", "en": "I'm tired (said by a woman)", "nl": "Ik ben moe" },
-    { "id": "w1-23", "es": "Estoy muy feliz", "en": "I'm very happy", "nl": "Ik ben heel blij" },
-    { "id": "w1-24", "es": "Uno, dos, tres, cuatro, cinco", "en": "One, two, three, four, five", "nl": "Een, twee, drie, vier, vijf" },
-    { "id": "w1-25", "es": "Seis, siete, ocho, nueve, diez", "en": "Six, seven, eight, nine, ten", "nl": "Zes, zeven, acht, negen, tien" },
-    { "id": "w1-26", "es": "La mamá y el papá de Augusto", "en": "Augusto's mom and dad", "nl": "De moeder en vader van Augusto" },
-    { "id": "w1-27", "es": "Soy la enamorada de Augusto", "en": "I'm Augusto's girlfriend (in Peru: enamorada)", "nl": "Ik ben de vriendin van Augusto" },
-    { "id": "w1-28", "es": "¡Qué rico!", "en": "How tasty!", "nl": "Wat lekker!" },
-    { "id": "w1-29", "es": "Chau, nos vemos", "en": "Bye, see you (in Peru people say chau)", "nl": "Doei, tot ziens" },
-    { "id": "w1-30", "es": "Muchas gracias, muy amable", "en": "Thanks a lot, very kind of you", "nl": "Heel erg bedankt, erg vriendelijk" }
-  ],
-  "lessons": [
-    { "id": "w1-l1", "title": "Begroeten", "items": ["w1-01", "w1-02", "w1-03", "w1-04", "w1-29", "w1-30"] },
-    { "id": "w1-l2", "title": "Wie ben jij?", "items": ["w1-05", "w1-06", "w1-07", "w1-08", "w1-26", "w1-27"] },
-    { "id": "w1-l3", "title": "Ik begrijp het niet", "items": ["w1-09", "w1-10", "w1-11", "w1-12", "w1-15", "w1-16"] },
-    { "id": "w1-l4", "title": "Ja graag, nee dank je", "items": ["w1-13", "w1-14", "w1-17", "w1-18", "w1-19", "w1-28"] },
-    { "id": "w1-l5", "title": "Hoe voel je je?", "items": ["w1-20", "w1-21", "w1-22", "w1-23"] },
-    { "id": "w1-l6", "title": "Tellen tot tien", "items": ["w1-24", "w1-25"] },
-    { "id": "w1-l7", "title": "Herhaling van de week", "items": [] }
-  ],
   "scenarios": {
     "taxi": {
       "icon": "taxi",
       "title": "Taxi in Lima",
       "who": "de taxichauffeur",
-      "desc": "Je komt van het vliegveld en neemt een taxi naar Miraflores. De chauffeur spreekt geen Engels.",
-      "persona": "un taxista limeño amable y conversador que no habla nada de inglés. Pregunta a dónde va, de dónde es, y comenta el tráfico de Lima.",
+      "desc": "Je stapt in een taxi in Miraflores. De chauffeur spreekt geen Engels.",
+      "persona": "un taxista limeño de unos 50 años, amable y conversador, que no habla nada de inglés. Comenta el tráfico de Lima y le gusta preguntar a los turistas de dónde son.",
       "opener": "Buenas, señorita. ¿A dónde la llevo?"
     },
     "mozo": {
       "icon": "plate",
       "title": "In het restaurant",
       "who": "de ober",
-      "desc": "Een ober bedient je in een cevichería. Hij wil weten wat je bestelt.",
-      "persona": "un mozo (camarero) de una cevichería en Lima, rápido y amable, que no habla inglés. Ofrece ceviche, lomo saltado, chicha morada, y pregunta qué desea tomar.",
-      "opener": "Buenas tardes, bienvenida. ¿Qué va a tomar?"
-    },
-    "mercado": {
-      "icon": "basket",
-      "title": "Op de markt",
-      "who": "de marktvrouw",
-      "desc": "Een marktvrouw verkoopt je fruit. Je moet naar prijzen vragen.",
-      "persona": "una vendedora del mercado de Surquillo, muy cariñosa, que te llama 'caserita' y 'mamita', ofrece mango, lúcuma y chirimoya, y dice los precios en soles.",
-      "opener": "¡Caserita! ¿Qué va a llevar hoy? Tengo mango bien dulce."
+      "desc": "Een ober bedient je in een cevichería in Miraflores.",
+      "persona": "un mozo (camarero) joven de una cevichería en Miraflores, rápido y amable, que no habla inglés. Ofrece ceviche, leche de tigre, chicha morada e Inca Kola.",
+      "opener": "Buenas tardes, bienvenida. ¿Qué le traigo para tomar?"
     },
     "mama": {
       "icon": "heart",
       "title": "Augusto's moeder",
       "who": "Augusto's moeder",
       "desc": "Zij spreekt Engels, maar wil per se Spaans met je oefenen.",
-      "persona": "la mamá de Augusto, una señora limeña cariñosa. Sabe inglés pero insiste con cariño en hablar en español para que Claire practique. Pregunta cómo está, si tiene hambre, y cuenta algo de la familia.",
+      "persona": "la mamá de Augusto, una señora limeña cariñosa de unos 60 años. Sabe inglés pero insiste con cariño en hablar en español para que Claire practique. Le dice 'hijita'.",
       "opener": "¡Hola, hijita! Bienvenida. Aquí hablamos en español, ¿ya? ¿Cómo estás?"
+    },
+    "familia": {
+      "icon": "heart",
+      "title": "Oom Jorge en nicht Valeria",
+      "who": "oom Jorge en nicht Valeria",
+      "desc": "Bij Augusto thuis ontmoet je oom Jorge (65) en nicht Valeria (24).",
+      "persona": "dos familiares de Augusto en una reunión en su casa: el tío Jorge, de 65 años, formal y bromista, que trata a Claire de usted; y la prima Valeria, de 24 años, alegre, que habla informal. Escribe cada intervención empezando con 'Tío Jorge:' o 'Valeria:'. Alterna entre los dos para que Claire hable con ambos.",
+      "opener": "Tío Jorge: ¡Buenas tardes, señorita! Usted debe ser Claire, ¿no? Mucho gusto."
+    },
+    "prima": {
+      "icon": "phone",
+      "title": "Nicht Valeria",
+      "who": "nicht Valeria",
+      "desc": "Op een verjaardag wil Valeria je beter leren kennen.",
+      "persona": "Valeria, la prima de Augusto, de 24 años, alegre y curiosa. Habla de tú, en frases cortas. Le encanta preguntar cosas personales con buena onda.",
+      "opener": "¡Hola, Claire! Qué bueno que viniste. Oye, ¿cuántos años tienes?"
     }
   },
-  "missions": [
-    { "dialog": "taxi", "phrase": "Hola amor, ¿qué tal?" },
-    { "dialog": "mama", "phrase": "Hoy aprendí: me llamo Claire y soy de Holanda." },
-    { "dialog": "taxi", "phrase": "Tengo hambre, ¿qué comemos?" },
-    { "dialog": "mozo", "phrase": "Agua sin gas, por favor." },
-    { "dialog": "mercado", "phrase": "¿Cuánto cuesta un mango en Lima?" },
-    { "dialog": "taxi", "phrase": "Estoy cansada pero muy feliz." },
-    { "dialog": "mozo", "phrase": "Nos vemos en Lima. ¡Qué rico!" }
+  "sessions": [
+    {
+      "n": 1,
+      "title": "Begroeten, jezelf voorstellen en hulp vragen",
+      "title_es": "Saludar, presentarse y pedir ayuda",
+      "items": [
+        { "id": "w1-01", "es": "Hola, ¿qué tal?", "en": "Hi, how's it going?", "nl": "Hoi, hoe gaat het?", "ex": { "es": "Hola, ¿qué tal? Soy Claire.", "nl": "Hoi, hoe gaat het? Ik ben Claire." } },
+        { "id": "w1-02", "es": "Buenos días", "en": "Good morning", "nl": "Goedemorgen", "ex": { "es": "Buenos días, señora. ¿Cómo está?", "nl": "Goedemorgen, mevrouw. Hoe gaat het met u?" } },
+        { "id": "w1-03", "es": "Buenas tardes", "en": "Good afternoon", "nl": "Goedemiddag", "ex": { "es": "Buenas tardes, una mesa para dos, por favor.", "nl": "Goedemiddag, een tafel voor twee, alstublieft." } },
+        { "id": "w1-04", "es": "Mucho gusto", "en": "Nice to meet you", "nl": "Aangenaam", "ex": { "es": "Mucho gusto, me llamo Claire.", "nl": "Aangenaam, ik heet Claire." } },
+        { "id": "w1-05", "es": "Me llamo Claire", "en": "My name is Claire", "nl": "Ik heet Claire", "ex": { "es": "Hola, me llamo Claire. ¿Y tú?", "nl": "Hoi, ik heet Claire. En jij?" } },
+        { "id": "w1-06", "es": "Soy de Holanda", "en": "I'm from the Netherlands", "nl": "Ik kom uit Nederland", "ex": { "es": "No soy de Lima, soy de Holanda.", "nl": "Ik kom niet uit Lima, ik kom uit Nederland." } },
+        { "id": "w1-07", "es": "Vivo en Róterdam", "en": "I live in Rotterdam", "nl": "Ik woon in Rotterdam", "ex": { "es": "Vivo en Róterdam con Augusto.", "nl": "Ik woon in Rotterdam met Augusto." } },
+        { "id": "w1-08", "es": "Hablo un poquito de español", "en": "I speak a little Spanish", "nl": "Ik spreek een beetje Spaans", "ex": { "es": "Perdón, hablo un poquito de español.", "nl": "Sorry, ik spreek een beetje Spaans." } },
+        { "id": "w1-09", "es": "No entiendo", "en": "I don't understand", "nl": "Ik begrijp het niet", "ex": { "es": "Disculpe, no entiendo.", "nl": "Pardon, ik begrijp het niet." } },
+        { "id": "w1-10", "es": "Más despacio, por favor", "en": "Slower, please", "nl": "Langzamer, alsjeblieft", "ex": { "es": "No entiendo. Más despacio, por favor.", "nl": "Ik begrijp het niet. Langzamer, alsjeblieft." } },
+        { "id": "w1-11", "es": "¿Puede repetir, por favor?", "en": "Can you repeat, please? (formal)", "nl": "Kunt u het herhalen, alstublieft?", "ex": { "es": "Perdón, ¿puede repetir, por favor?", "nl": "Sorry, kunt u het herhalen, alstublieft?" } },
+        { "id": "w1-12", "es": "¿Cómo se dice esto?", "en": "How do you say this?", "nl": "Hoe zeg je dit?", "ex": { "es": "¿Cómo se dice esto en español?", "nl": "Hoe zeg je dit in het Spaans?" } },
+        { "id": "w1-13", "es": "Sí, por favor", "en": "Yes, please", "nl": "Ja, graag", "ex": { "es": "¿Más café? Sí, por favor.", "nl": "Nog koffie? Ja, graag." } },
+        { "id": "w1-14", "es": "No, gracias", "en": "No, thanks", "nl": "Nee, dank je", "ex": { "es": "¿Quiere azúcar? No, gracias.", "nl": "Wilt u suiker? Nee, dank u." } },
+        { "id": "w1-15", "es": "Perdón", "en": "Sorry / excuse me", "nl": "Sorry / pardon", "ex": { "es": "¡Ay, perdón!", "nl": "Oei, sorry!" } },
+        { "id": "w1-16", "es": "Disculpe, señor", "en": "Excuse me, sir (to get attention)", "nl": "Pardon, meneer", "ex": { "es": "Disculpe, señor, ¿dónde está el baño?", "nl": "Pardon, meneer, waar is het toilet?" } },
+        { "id": "w1-17", "es": "¿Cuánto cuesta?", "en": "How much does it cost?", "nl": "Hoeveel kost het?", "ex": { "es": "Disculpe, ¿cuánto cuesta el mango?", "nl": "Pardon, hoeveel kost de mango?" } },
+        { "id": "w1-18", "es": "¿Dónde está el baño?", "en": "Where is the bathroom?", "nl": "Waar is het toilet?", "ex": { "es": "Perdón, ¿dónde está el baño?", "nl": "Sorry, waar is het toilet?" } },
+        { "id": "w1-19", "es": "Agua sin gas, por favor", "en": "Still water, please", "nl": "Water zonder koolzuur, alsjeblieft", "ex": { "es": "Para mí, agua sin gas, por favor.", "nl": "Voor mij water zonder koolzuur, alstublieft." } },
+        { "id": "w1-20", "es": "Tengo hambre", "en": "I'm hungry", "nl": "Ik heb honger", "ex": { "es": "Tengo hambre, ¿vamos a comer?", "nl": "Ik heb honger, gaan we eten?" } },
+        { "id": "w1-21", "es": "Tengo sed", "en": "I'm thirsty", "nl": "Ik heb dorst", "ex": { "es": "Hace calor y tengo sed.", "nl": "Het is warm en ik heb dorst." } },
+        { "id": "w1-22", "es": "Estoy cansada", "en": "I'm tired (said by a woman)", "nl": "Ik ben moe", "ex": { "es": "Estoy cansada después del vuelo.", "nl": "Ik ben moe na de vlucht." } },
+        { "id": "w1-23", "es": "Estoy muy feliz", "en": "I'm very happy", "nl": "Ik ben heel blij", "ex": { "es": "Estoy muy feliz de estar en Lima.", "nl": "Ik ben heel blij dat ik in Lima ben." } },
+        { "id": "w1-24", "es": "Uno, dos, tres, cuatro, cinco", "en": "One, two, three, four, five", "nl": "Een, twee, drie, vier, vijf", "ex": { "es": "Tengo dos hermanos y cinco primos.", "nl": "Ik heb twee broers en vijf neven." } },
+        { "id": "w1-25", "es": "Seis, siete, ocho, nueve, diez", "en": "Six, seven, eight, nine, ten", "nl": "Zes, zeven, acht, negen, tien", "ex": { "es": "El taxi cuesta diez soles.", "nl": "De taxi kost tien sol." } },
+        { "id": "w1-26", "es": "La mamá y el papá de Augusto", "en": "Augusto's mom and dad", "nl": "De moeder en vader van Augusto", "ex": { "es": "Hoy conozco a la mamá y el papá de Augusto.", "nl": "Vandaag ontmoet ik de moeder en vader van Augusto." } },
+        { "id": "w1-27", "es": "Soy la enamorada de Augusto", "en": "I'm Augusto's girlfriend (in Peru: enamorada)", "nl": "Ik ben de vriendin van Augusto", "ex": { "es": "Mucho gusto, soy la enamorada de Augusto.", "nl": "Aangenaam, ik ben de vriendin van Augusto." } },
+        { "id": "w1-28", "es": "¡Qué rico!", "en": "How tasty!", "nl": "Wat lekker!", "ex": { "es": "¡Qué rico el ceviche!", "nl": "Wat lekker, die ceviche!" } },
+        { "id": "w1-29", "es": "Chau, nos vemos", "en": "Bye, see you (in Peru people say chau)", "nl": "Doei, tot ziens", "ex": { "es": "Chau, nos vemos mañana.", "nl": "Doei, tot morgen." } },
+        { "id": "w1-30", "es": "Muchas gracias, muy amable", "en": "Thanks a lot, very kind of you", "nl": "Heel erg bedankt, erg vriendelijk", "ex": { "es": "Muchas gracias, señora, muy amable.", "nl": "Heel erg bedankt, mevrouw, erg vriendelijk." } }
+      ],
+      "grammar": {
+        "id": "g01",
+        "title": "Ser: wie je bent, en het 'ik' mag weg",
+        "title_es": "ser + omisión del yo",
+        "explain": [
+          "Met het werkwoord ser zeg je wie of wat je bent, en waar je vandaan komt: soy Claire, soy de Holanda, Augusto es de Lima.",
+          "In het Spaans laat je het woordje 'yo' (ik) meestal weg. Aan de werkwoordsvorm hoor je al wie het doet: soy = ik ben, hablo = ik spreek, vivo = ik woon."
+        ],
+        "compare": "Nederlands: ik ben, jij bent, hij is. Spaans: (yo) soy, (tú) eres, (él/ella) es. Waar het Nederlands altijd 'ik' zegt, zegt het Spaans gewoon 'soy'. 'Yo soy' is niet fout, maar klinkt alsof je het extra benadrukt.",
+        "examples": [
+          { "es": "Soy de Holanda.", "nl": "Ik kom uit Nederland." },
+          { "es": "Augusto es de Lima.", "nl": "Augusto komt uit Lima." },
+          { "es": "¿Eres peruana? No, soy holandesa.", "nl": "Ben jij Peruaans? Nee, ik ben Nederlands." }
+        ],
+        "exercises": [
+          { "type": "mc", "q": "Hoe zeg je dit?", "prompt": "Ik kom uit Nederland.", "opts": ["Soy de Holanda.", "Estoy de Holanda.", "Tengo de Holanda."], "answer": "Soy de Holanda.", "why": "Waar je vandaan komt zeg je met ser: soy de…" },
+          { "type": "fill", "q": "Maak de zin af", "prompt": "Augusto ___ de Lima.", "opts": ["es", "soy", "eres"], "answer": "es", "why": "Augusto = hij, dus es." },
+          { "type": "fill", "q": "Maak de zin af", "prompt": "¿Tú ___ peruana?", "opts": ["eres", "es", "soy"], "answer": "eres", "why": "Bij tú (jij) hoort eres." },
+          { "type": "mc", "q": "Hoe zeg je dit?", "prompt": "Ik spreek een beetje Spaans.", "opts": ["Hablo un poquito de español.", "Habla un poquito de español.", "Hablar un poquito de español."], "answer": "Hablo un poquito de español.", "why": "Hablo = ik spreek. 'Yo' is niet nodig." },
+          { "type": "type", "q": "Schrijf het in het Spaans", "prompt": "Ik woon in Rotterdam.", "answer": "Vivo en Róterdam", "alt": ["Vivo en Rotterdam", "Yo vivo en Róterdam", "Yo vivo en Rotterdam"], "why": "Vivo = ik woon." }
+        ]
+      },
+      "mission": {
+        "scenario": "taxi",
+        "goal": "Vertel de chauffeur hoe je heet, uit welk land je komt en in welke stad je woont.",
+        "check": "Claire dice su nombre, de qué país es y en qué ciudad vive.",
+        "setup": "Pregúntale de dónde es y cómo se llama si ella no lo dice."
+      }
+    },
+    {
+      "n": 2,
+      "title": "Wat je nodig hebt, en 'el' of 'la'",
+      "title_es": "Necesidades y cosas",
+      "items": [
+        { "id": "w1-31", "es": "Tengo frío", "en": "I'm cold", "nl": "Ik heb het koud", "ex": { "es": "Tengo frío, ¿cierro la ventana?", "nl": "Ik heb het koud, zal ik het raam dichtdoen?" } },
+        { "id": "w1-32", "es": "Tengo calor", "en": "I'm hot", "nl": "Ik heb het warm", "ex": { "es": "En Lima en diciembre tengo calor.", "nl": "In Lima heb ik het in december warm." } },
+        { "id": "w1-33", "es": "Tengo sueño", "en": "I'm sleepy", "nl": "Ik ben slaperig", "ex": { "es": "Son las once y tengo sueño.", "nl": "Het is elf uur en ik ben slaperig." } },
+        { "id": "w1-34", "es": "Estoy enferma", "en": "I'm sick (said by a woman)", "nl": "Ik ben ziek", "ex": { "es": "Hoy no salgo, estoy enferma.", "nl": "Vandaag ga ik niet weg, ik ben ziek." } },
+        { "id": "w1-35", "es": "Estoy bien, gracias", "en": "I'm fine, thanks", "nl": "Het gaat goed, dank je", "ex": { "es": "¿Cómo estás? Estoy bien, gracias.", "nl": "Hoe gaat het? Goed, dank je." } },
+        { "id": "w1-36", "es": "¿Tiene una mesa para dos?", "en": "Do you have a table for two?", "nl": "Heeft u een tafel voor twee?", "ex": { "es": "Buenas noches, ¿tiene una mesa para dos?", "nl": "Goedenavond, heeft u een tafel voor twee?" } },
+        { "id": "w1-37", "es": "La carta, por favor", "en": "The menu, please", "nl": "De menukaart, alstublieft", "ex": { "es": "Disculpe, la carta, por favor.", "nl": "Pardon, de menukaart, alstublieft." } },
+        { "id": "w1-38", "es": "Una botella de agua", "en": "A bottle of water", "nl": "Een fles water", "ex": { "es": "Una botella de agua sin gas, por favor.", "nl": "Een fles water zonder koolzuur, alstublieft." } },
+        { "id": "w1-39", "es": "El agua está fría", "en": "The water is cold", "nl": "Het water is koud", "ex": { "es": "¡Qué rico, el agua está fría!", "nl": "Heerlijk, het water is koud!" } },
+        { "id": "w1-40", "es": "Un vaso y una servilleta", "en": "A glass and a napkin", "nl": "Een glas en een servet", "ex": { "es": "Un vaso y una servilleta, por favor.", "nl": "Een glas en een servet, alstublieft." } },
+        { "id": "w1-41", "es": "El baño está al fondo", "en": "The bathroom is at the back", "nl": "Het toilet is achterin", "ex": { "es": "El baño está al fondo, a la derecha.", "nl": "Het toilet is achterin, rechts." } },
+        { "id": "w1-42", "es": "Un café con leche", "en": "A coffee with milk", "nl": "Een koffie met melk", "ex": { "es": "Para mí, un café con leche, por favor.", "nl": "Voor mij een koffie met melk, alstublieft." } }
+      ],
+      "grammar": {
+        "id": "g02",
+        "title": "Tener of estar, en el of la",
+        "title_es": "tener/estar + género y artículos",
+        "explain": [
+          "Honger, dorst, het koud of warm hebben: dat zeg je met tener (hebben), net als in het Nederlands. Tengo hambre, tengo sed, tengo frío.",
+          "Hoe je je voelt (moe, ziek, blij) zeg je met estar: estoy cansada, estoy enferma. Als vrouw eindig je op -a: cansada, enferma. Augusto zegt cansado.",
+          "Elk Spaans zelfstandig naamwoord is mannelijk of vrouwelijk. Mannelijk: el / un (el vaso, un café). Vrouwelijk: la / una (la carta, una mesa). Woorden op -o zijn meestal mannelijk, op -a meestal vrouwelijk."
+        ],
+        "compare": "Nederlands: ik heb het koud. Spaans: tengo frío, zonder 'het'. En waar het Nederlands 'de' en 'het' heeft, heeft het Spaans 'el' en 'la'. Ze komen niet overeen: het water = el agua, de tafel = la mesa. Let op: agua is vrouwelijk, maar je zegt 'el agua' omdat dat beter klinkt. Daarom: el agua está fría.",
+        "examples": [
+          { "es": "Tengo frío.", "nl": "Ik heb het koud." },
+          { "es": "Estoy cansada.", "nl": "Ik ben moe." },
+          { "es": "La mesa, el vaso, una servilleta, un café.", "nl": "De tafel, het glas, een servet, een koffie." }
+        ],
+        "exercises": [
+          { "type": "mc", "q": "Hoe zeg je dit?", "prompt": "Ik heb het koud.", "opts": ["Tengo frío.", "Estoy frío.", "Tengo fría."], "answer": "Tengo frío.", "why": "Het koud hebben = tener frío, zonder 'het'." },
+          { "type": "fill", "q": "Maak de zin af", "prompt": "___ cansada.", "opts": ["Estoy", "Tengo", "Soy"], "answer": "Estoy", "why": "Hoe je je voelt: estar." },
+          { "type": "fill", "q": "Maak de zin af", "prompt": "¿Tiene ___ mesa para dos?", "opts": ["una", "un", "el"], "answer": "una", "why": "Mesa is vrouwelijk: una mesa." },
+          { "type": "mc", "q": "Hoe zeg je dit?", "prompt": "Het water is koud.", "opts": ["El agua está fría.", "La agua está fría.", "El agua está frío."], "answer": "El agua está fría.", "why": "Agua is vrouwelijk (fría), maar je zegt 'el agua'." },
+          { "type": "type", "q": "Schrijf het in het Spaans", "prompt": "Ik heb dorst.", "answer": "Tengo sed", "alt": ["Yo tengo sed"], "why": "Dorst hebben = tener sed." }
+        ]
+      },
+      "mission": {
+        "scenario": "mozo",
+        "goal": "Bestel water zonder koolzuur en vraag waar het toilet is.",
+        "check": "Claire pide agua sin gas y pregunta dónde está el baño.",
+        "setup": "Si pide agua, pregunta si la quiere con gas o sin gas. Si pregunta por el baño, dile que está al fondo a la derecha."
+      }
+    },
+    {
+      "n": 3,
+      "title": "Tú en usted bij de familie",
+      "title_es": "Tú y usted con la familia",
+      "items": [
+        { "id": "w1-43", "es": "¿Cómo estás?", "en": "How are you? (informal)", "nl": "Hoe gaat het met je?", "ex": { "es": "¡Hola, Valeria! ¿Cómo estás?", "nl": "Hoi Valeria! Hoe gaat het met je?" } },
+        { "id": "w1-44", "es": "¿Cómo está usted?", "en": "How are you? (formal)", "nl": "Hoe gaat het met u?", "ex": { "es": "Buenas tardes, señor. ¿Cómo está usted?", "nl": "Goedemiddag, meneer. Hoe gaat het met u?" } },
+        { "id": "w1-45", "es": "¿De dónde eres?", "en": "Where are you from? (informal)", "nl": "Waar kom je vandaan?", "ex": { "es": "Yo soy de Holanda, ¿y tú? ¿De dónde eres?", "nl": "Ik kom uit Nederland, en jij? Waar kom je vandaan?" } },
+        { "id": "w1-46", "es": "¿Usted es el tío de Augusto?", "en": "Are you Augusto's uncle? (formal)", "nl": "Bent u de oom van Augusto?", "ex": { "es": "Perdón, ¿usted es el tío de Augusto?", "nl": "Sorry, bent u de oom van Augusto?" } },
+        { "id": "w1-47", "es": "Encantada", "en": "Delighted (said by a woman)", "nl": "Aangenaam (als vrouw)", "ex": { "es": "Encantada, señora. Soy Claire.", "nl": "Aangenaam, mevrouw. Ik ben Claire." } },
+        { "id": "w1-48", "es": "Pase, por favor", "en": "Come in, please (formal)", "nl": "Komt u binnen, alstublieft", "ex": { "es": "Buenas tardes, pase, por favor.", "nl": "Goedemiddag, komt u binnen, alstublieft." } },
+        { "id": "w1-49", "es": "¿Puedes hablar más lento?", "en": "Can you speak more slowly? (informal)", "nl": "Kun je langzamer praten?", "ex": { "es": "Valeria, ¿puedes hablar más lento?", "nl": "Valeria, kun je langzamer praten?" } },
+        { "id": "w1-50", "es": "¿Me puede ayudar, por favor?", "en": "Can you help me, please? (formal)", "nl": "Kunt u me helpen, alstublieft?", "ex": { "es": "Disculpe, señora, ¿me puede ayudar, por favor?", "nl": "Pardon, mevrouw, kunt u me helpen, alstublieft?" } },
+        { "id": "w1-51", "es": "Él es mi enamorado", "en": "He is my boyfriend", "nl": "Hij is mijn vriend", "ex": { "es": "Él es mi enamorado, Augusto.", "nl": "Hij is mijn vriend, Augusto." } },
+        { "id": "w1-52", "es": "Ella es la prima de Augusto", "en": "She is Augusto's cousin", "nl": "Zij is de nicht van Augusto", "ex": { "es": "Ella es la prima de Augusto, se llama Valeria.", "nl": "Zij is de nicht van Augusto, ze heet Valeria." } },
+        { "id": "w1-53", "es": "Te presento a mi hermana", "en": "Let me introduce my sister (informal)", "nl": "Dit is mijn zus", "ex": { "es": "Valeria, te presento a mi hermana Emma.", "nl": "Valeria, dit is mijn zus Emma." } },
+        { "id": "w1-54", "es": "¡Qué gusto verte!", "en": "So nice to see you! (informal)", "nl": "Wat fijn je te zien!", "ex": { "es": "¡Hola, Valeria! ¡Qué gusto verte!", "nl": "Hoi Valeria! Wat fijn je te zien!" } }
+      ],
+      "grammar": {
+        "id": "g03",
+        "title": "Tú of usted?",
+        "title_es": "tú y usted",
+        "explain": [
+          "Tú is jij, usted is u. In Peru zeg je usted veel vaker dan in Nederland: tegen oudere mensen, onbekenden, taxichauffeurs en obers, en vaak ook tegen de ouders en ooms van je partner.",
+          "Met tú eindigt het werkwoord meestal op -s: ¿cómo estás?, ¿de dónde eres?, ¿puedes…? Met usted gebruik je dezelfde vorm als bij hij of zij, zonder -s: ¿cómo está?, ¿de dónde es?, ¿puede…?"
+        ],
+        "compare": "Net als jij/u in het Nederlands. Maar twijfel je in Peru, kies dan usted: dat is altijd beleefd. Tegen Valeria (24) zeg je tú; tegen oom Jorge (65) zeg je usted, tot hij zegt: 'tutéame', zeg maar jij.",
+        "examples": [
+          { "es": "¿Cómo estás, Valeria?", "nl": "Hoe gaat het met je, Valeria?" },
+          { "es": "¿Cómo está usted, señor Jorge?", "nl": "Hoe gaat het met u, meneer Jorge?" },
+          { "es": "¿Puede repetir? / ¿Puedes repetir?", "nl": "Kunt u het herhalen? / Kun jij het herhalen?" }
+        ],
+        "exercises": [
+          { "type": "mc", "q": "Hoe zeg je dit?", "prompt": "Kunt u me helpen?", "opts": ["¿Me puede ayudar?", "¿Me puedes ayudar?", "¿Me puedo ayudar?"], "answer": "¿Me puede ayudar?", "why": "U = usted, dus puede zonder -s." },
+          { "type": "fill", "q": "Tegen nicht Valeria", "prompt": "¿De dónde ___?", "opts": ["eres", "es", "soy"], "answer": "eres", "why": "Valeria is jong en familie: tú, dus eres." },
+          { "type": "fill", "q": "Tegen oom Jorge", "prompt": "¿Cómo ___ usted?", "opts": ["está", "estás", "estoy"], "answer": "está", "why": "Bij usted hoort está, zonder -s." },
+          { "type": "mc", "q": "Tegen wie zeg je 'usted'?", "prompt": "Kies de beste.", "opts": ["De taxichauffeur", "Augusto", "Een kind van vijf"], "answer": "De taxichauffeur", "why": "Onbekenden en mensen die je bedienen spreek je aan met usted." },
+          { "type": "type", "q": "Schrijf het in het Spaans (u)", "prompt": "Waar komt u vandaan?", "answer": "¿De dónde es usted?", "alt": ["¿De dónde es?", "¿Usted de dónde es?"], "why": "Usted krijgt de vorm es." }
+        ]
+      },
+      "mission": {
+        "scenario": "familia",
+        "goal": "Spreek oom Jorge aan met usted en nicht Valeria met tú, minstens 3 zinnen tegen elk.",
+        "check": "Claire usa formas de usted (está, es, puede, usted) al hablar con el tío Jorge y formas de tú (estás, eres, puedes) con Valeria, al menos 3 frases con cada uno, sin mezclarlas.",
+        "setup": "Haz que los dos le hablen a Claire por turnos y le hagan preguntas fáciles (cómo está, de dónde es, qué le parece Lima)."
+      }
+    },
+    {
+      "n": 4,
+      "title": "Getallen en leeftijd",
+      "title_es": "Números y edad",
+      "items": [
+        { "id": "w1-55", "es": "Once, doce, trece, catorce, quince", "en": "Eleven to fifteen", "nl": "Elf, twaalf, dertien, veertien, vijftien", "ex": { "es": "La combi cuesta doce soles hasta allá.", "nl": "Het busje kost twaalf sol tot daar." } },
+        { "id": "w1-56", "es": "Dieciséis, veinte, veintidós", "en": "Sixteen, twenty, twenty-two", "nl": "Zestien, twintig, tweeëntwintig", "ex": { "es": "Mi prima tiene veintidós años.", "nl": "Mijn nicht is tweeëntwintig." } },
+        { "id": "w1-57", "es": "Treinta, cuarenta, cincuenta", "en": "Thirty, forty, fifty", "nl": "Dertig, veertig, vijftig", "ex": { "es": "El almuerzo cuesta cuarenta soles.", "nl": "De lunch kost veertig sol." } },
+        { "id": "w1-58", "es": "Sesenta, setenta, ochenta, noventa, cien", "en": "Sixty to one hundred", "nl": "Zestig, zeventig, tachtig, negentig, honderd", "ex": { "es": "La abuela de Augusto tiene noventa años.", "nl": "De oma van Augusto is negentig." } },
+        { "id": "w1-59", "es": "Treinta y cinco", "en": "Thirty-five", "nl": "Vijfendertig", "ex": { "es": "Son treinta y cinco soles, por favor.", "nl": "Dat is vijfendertig sol, alstublieft." } },
+        { "id": "w1-60", "es": "¿Cuántos años tienes?", "en": "How old are you? (informal)", "nl": "Hoe oud ben je?", "ex": { "es": "Valeria, ¿cuántos años tienes?", "nl": "Valeria, hoe oud ben je?" } },
+        { "id": "w1-61", "es": "¿Cuántos años tiene usted?", "en": "How old are you? (formal)", "nl": "Hoe oud bent u?", "ex": { "es": "Perdón, señor, ¿cuántos años tiene usted?", "nl": "Sorry, meneer, hoe oud bent u?" } },
+        { "id": "w1-62", "es": "Tengo treinta años", "en": "I'm thirty years old", "nl": "Ik ben dertig jaar", "ex": { "es": "Tengo treinta años y vivo en Róterdam.", "nl": "Ik ben dertig en ik woon in Rotterdam." } },
+        { "id": "w1-63", "es": "¿Me pasas tu número?", "en": "Can you give me your number? (informal)", "nl": "Geef je me je nummer?", "ex": { "es": "¿Me pasas tu número? Te escribo por WhatsApp.", "nl": "Geef je me je nummer? Ik app je." } },
+        { "id": "w1-64", "es": "Mi número es nueve, ocho, siete…", "en": "My number is nine, eight, seven…", "nl": "Mijn nummer is negen, acht, zeven…", "ex": { "es": "Mi número es nueve, ocho, siete, seis, cinco, cuatro, tres, dos, uno.", "nl": "Mijn nummer is 987 654 321." } },
+        { "id": "w1-65", "es": "Somos cuatro", "en": "There are four of us", "nl": "We zijn met z'n vieren", "ex": { "es": "Una mesa, por favor. Somos cuatro.", "nl": "Een tafel, alstublieft. We zijn met z'n vieren." } }
+      ],
+      "grammar": {
+        "id": "g04",
+        "title": "Getallen, en 'tener' voor je leeftijd",
+        "title_es": "números 1–100 y tener … años",
+        "explain": [
+          "Je leeftijd zeg je in het Spaans met tener (hebben): tengo treinta años = ik heb dertig jaren. Dus niet 'soy treinta'.",
+          "16 tot 29 schrijf je als één woord: dieciséis, veintidós. Vanaf 31 met 'y' (en): treinta y uno, cuarenta y cinco. Honderd is cien.",
+          "Peruaanse mobiele nummers hebben 9 cijfers en beginnen met een 9. Je zegt ze cijfer voor cijfer of in groepjes van drie."
+        ],
+        "compare": "Nederlands: ik ben dertig. Spaans: tengo treinta años (ik heb dertig jaar). En de volgorde is andersom: vijf-en-dertig wordt treinta y cinco (dertig en vijf).",
+        "examples": [
+          { "es": "Tengo treinta años.", "nl": "Ik ben dertig." },
+          { "es": "¿Cuántos años tienes?", "nl": "Hoe oud ben je?" },
+          { "es": "Cuarenta y cinco soles.", "nl": "Vijfenveertig sol." }
+        ],
+        "exercises": [
+          { "type": "mc", "q": "Hoe zeg je dit?", "prompt": "Ik ben dertig jaar.", "opts": ["Tengo treinta años.", "Soy treinta años.", "Estoy treinta años."], "answer": "Tengo treinta años.", "why": "Leeftijd = tener … años." },
+          { "type": "mc", "q": "Welk getal is dit?", "prompt": "45", "opts": ["cuarenta y cinco", "cincuenta y cuatro", "cuatro y cuarenta"], "answer": "cuarenta y cinco", "why": "Eerst de tientallen, dan 'y', dan de eenheden." },
+          { "type": "fill", "q": "Maak de zin af", "prompt": "¿Cuántos años ___ tú?", "opts": ["tienes", "tiene", "eres"], "answer": "tienes", "why": "Tú + tener = tienes." },
+          { "type": "type", "q": "Schrijf het getal in letters", "prompt": "22", "answer": "veintidós", "alt": ["veintidos"], "why": "16 tot 29 is één woord." },
+          { "type": "order", "q": "Zet de woorden in de goede volgorde", "prompt": "Hoe oud bent u?", "answer": "¿Cuántos años tiene usted?", "why": "Usted krijgt tiene." }
+        ]
+      },
+      "mission": {
+        "scenario": "prima",
+        "goal": "Zeg hoe oud je bent, vraag hoe oud Valeria is en geef haar je mobiele nummer van 9 cijfers.",
+        "check": "Claire dice su edad con 'tengo … años', le pregunta a Valeria su edad, y dicta un número de celular de 9 cifras (en palabras o dígitos).",
+        "setup": "Valeria tiene 24 años. Si Claire no lo hace sola, pídele su número para escribirle por WhatsApp."
+      }
+    }
   ]
 }

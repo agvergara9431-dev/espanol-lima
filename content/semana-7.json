@@ -1,6 +1,23 @@
 {
   "week": 7,
-  "title": "Generale repetitie: een week in Lima",
+  "title": "Generale repetitie: Lima",
+  "title_es": "Ensayo general: Lima",
   "stamp": "Lima",
-  "start": "2026-12-08"
+  "sessions": [
+    {
+      "n": 22,
+      "title": "Aankomst op het vliegveld",
+      "title_es": "Llegada al aeropuerto"
+    },
+    {
+      "n": 23,
+      "title": "Verdwaald in Miraflores",
+      "title_es": "Perdida en Miraflores"
+    },
+    {
+      "n": 24,
+      "title": "Een dag met de familie",
+      "title_es": "Un día con la familia"
+    }
+  ]
 }

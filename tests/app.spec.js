@@ -1,156 +1,204 @@
-// End-to-end check in iPhone size, mock backend (localStorage), no cloud involved.
-// Flow: home -> quitting mid-lesson warns -> full lesson -> task shows "Klaar" -> Augusto's panel sees it, also live.
+// End-to-end in iPhone size with the mock backend (localStorage, localhost only). No cloud involved.
+// Covers the full session, weekly test (pass and fail), rest day with optional review, a late session,
+// resuming a half-done session, and Augusto's panel (including the <60% quiz flag).
 import { test, expect } from "@playwright/test";
 
+const LEARNER = "00000000-0000-0000-0000-00000000000c";
 const shots = "test-results/screens/";
+const pad = (n) => String(n).padStart(2, "0");
+const dayAgo = (n) => { const d = new Date(); d.setDate(d.getDate() - n); return d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate()); };
 
-async function answerAll(page) {
-  for (let i = 0; i < 12; i++) {
-    const body = page.locator("#lbody");
-    if (await body.locator(".opt").count()) await body.locator(".opt").first().click();
-    else if (await body.locator(".bank .tok").count()) await body.locator(".bank .tok").first().click();
-    else await body.locator("#ans").fill("hola");
-    await page.locator("#checkBtn").click(); // Controleren
-    await expect(page.locator("#verdict")).toBeVisible();
-    await page.locator("#checkBtn").click(); // Verder / Afronden
-  }
+// Speech recognition stub: "hears" the expected answer (or nonsense when window.__wrongSpeak is set).
+const speechStub = () => {
+  const Fake = class {
+    start() { setTimeout(() => { const s = window.__step?.(); const said = window.__wrongSpeak ? "nada que ver" : s?.ex?.answer || ""; this.onresult?.({ results: [[{ transcript: said }]] }); this.onend?.(); }, 50); }
+    stop() {}
+  };
+  window.SpeechRecognition = Fake;
+  window.webkitSpeechRecognition = Fake;
+};
+
+async function seed(page, { results = [], cards = [], days = [] } = {}) {
+  await page.goto("/index.html?mock=learner");
+  await page.evaluate(({ results, cards, days, LEARNER }) => {
+    localStorage.clear();
+    localStorage.setItem("mockdb-v1", JSON.stringify({
+      session_results: results.map((r) => ({ user_id: LEARNER, week: 1, minutes: 20, xp: 100, quiz_ok: 5, quiz_total: 5, mission_met: true, detail: {}, ...r })),
+      cards: cards.map((c) => ({ user_id: LEARNER, box: 1, ok: 1, ko: 0, ...c })),
+      progress_days: days.map((d) => ({ user_id: LEARNER, lessons: 1, dialog: true, phrase: false, minutes: 20, xp: 100, ...d })),
+    }));
+  }, { results, cards, days, LEARNER });
+  await page.reload();
+  await expect(page.locator("#homeName")).toBeVisible();
 }
 
-test("Claire does a lesson and Augusto sees it", async ({ browser }) => {
-  const ctx = await browser.newContext({ ...test.info().project.use });
-  await ctx.route("https://wa.me/**", (r) => r.fulfill({ body: "ok" }));
-  const errors = [];
-  const watch = (p, who) => { p.on("pageerror", (e) => errors.push(who + ": " + e.message)); p.on("console", (m) => m.type() === "error" && errors.push(who + ": " + m.text())); };
+// Plays one step. wrong: answer exercises of these sections incorrectly.
+async function playStep(page, wrong = []) {
+  const step = await page.evaluate(() => { const s = window.__step(); return s && { t: s.t, ex: s.ex && { k: s.ex.k, answer: s.ex.answer, opts: s.ex.opts, section: s.ex.section } }; });
+  const btn = page.locator("#checkBtn");
+  if (step.t === "finish") return "finish";
+  if (step.t === "mission") {
+    await page.locator("#chatInput").fill("Hola, me llamo Claire y soy de Holanda");
+    await page.locator("#sendBtn").click();
+    await expect(page.locator("#chat .msg.them")).toHaveCount(2);
+    await btn.click();
+    await expect(page.locator("#feedback")).toBeVisible();
+    await btn.click();
+    return step.t;
+  }
+  if (step.t !== "ex") { await btn.click(); return step.t; }
+  const bad = wrong.includes(step.ex.section);
+  const body = page.locator("#lbody");
+  if (step.ex.k === "mc") {
+    const pick = bad ? step.ex.opts.find((o) => o !== step.ex.answer) : step.ex.answer;
+    await body.locator(".opt", { hasText: pick }).first().click();
+  } else if (step.ex.k === "order") {
+    if (bad) await body.locator(".bank .tok").first().click();
+    else for (const w of step.ex.answer.split(" ")) await body.locator(".bank .tok:not(.used)", { hasText: w }).first().click();
+  } else if (step.ex.k === "speak") {
+    await page.evaluate((b) => (window.__wrongSpeak = b), bad);
+    await page.locator("#recBtn").click();
+    await expect(page.locator("#verdict")).toBeVisible();
+    await btn.click();
+    return step.t;
+  } else {
+    await body.locator("#ans").fill(bad ? "xyz" : step.ex.answer);
+  }
+  await btn.click();
+  await expect(page.locator("#verdict")).toBeVisible();
+  await btn.click();
+  return step.t;
+}
+async function playSession(page, wrong = []) {
+  for (let i = 0; i < 120; i++) if ((await playStep(page, wrong)) === "finish") break;
+  await expect(page.locator(".finish")).toBeVisible();
+  await expect(page.locator("#checkBtn")).toHaveText("Terug naar paspoort");
+}
 
-  const claire = await ctx.newPage(); watch(claire, "claire");
-  await claire.goto("/index.html?mock=learner");
-  await claire.evaluate(() => localStorage.clear());
-  await claire.reload();
-
-  // Home
-  await expect(claire.getByText("PASAPORTE · ESPAÑOL")).toBeVisible();
-  await expect(claire.locator("#homeName")).toHaveText("Claire");
-  await expect(claire.locator("#homeStats")).toHaveText("0 dagen op rij · 0 XP");
-  await expect(claire.locator("#tasks .task")).toHaveCount(3);
-  await expect(claire.locator("#stamps .stamp")).toHaveCount(7);
-  await expect(claire.locator("#board")).toHaveText("INSTAPPEN");
-  await expect(claire.locator("#ticketDay")).toHaveText("INSTAPKAART · DAG 1");
-  await expect(claire.locator("#ticketGate")).toHaveText("GATE W1");
-  await expect(claire.locator('[data-task="dialog"]')).toContainText("taxichauffeur");
-  await claire.screenshot({ path: shots + "1-home.png", fullPage: true });
-
-  // Week route
-  await claire.locator('#stamps [data-week="1"]').click();
-  await expect(claire.locator("#week .stop")).toHaveCount(7);
-  await expect(claire.locator("#week .stop.next")).toHaveCount(1);
-  await claire.screenshot({ path: shots + "2-week.png" });
-  await claire.locator("#weekBack").click();
-
-  // Quit halfway: must warn first, and must not count
-  await claire.locator("#board").click();
-  await expect(claire.locator("#lesson")).toBeVisible();
-  const body = claire.locator("#lbody");
-  if (await body.locator(".opt").count()) await body.locator(".opt").first().click();
-  else if (await body.locator(".bank .tok").count()) await body.locator(".bank .tok").first().click();
-  else await body.locator("#ans").fill("hola");
-  await claire.locator("#checkBtn").click();
-  await claire.locator("#checkBtn").click();
-  await claire.locator("#quitBtn").click();
-  await expect(claire.locator("#verdict")).toContainText("telt alleen als je hem afmaakt");
-  await claire.screenshot({ path: shots + "3-quit-warning.png" });
-  await claire.locator("#quitBtn").click();
-  await expect(claire.locator("#lesson")).toBeHidden();
-  await expect(claire.locator('[data-task="lesson"]')).not.toHaveClass(/done/);
-
-  // Full lesson
-  await claire.locator("#board").click();
-  await answerAll(claire);
-  await expect(claire.locator("#finish")).toBeVisible();
-  await expect(claire.locator("#finish .big")).toContainText("XP");
-  await expect(claire.locator("#finish .stars svg")).toHaveCount(3);
-  await claire.screenshot({ path: shots + "4-result.png" });
-  await claire.locator("#checkBtn").click();
-  await expect(claire.locator("#lesson")).toBeHidden();
-
-  // Marked as done
-  const lessonTask = claire.locator('[data-task="lesson"]');
-  await expect(lessonTask).toHaveClass(/done/);
-  await expect(lessonTask.locator(".klaar")).toHaveText("Klaar");
-  await expect(claire.locator("#homeStats")).toContainText("1 dag op rij");
-  await claire.screenshot({ path: shots + "5-home-after.png", fullPage: true });
-
-  // Augusto's panel sees it
-  const aug = await ctx.newPage(); watch(aug, "augusto");
-  await aug.goto("/index.html?mock=owner");
-  await expect(aug.locator("#homeName")).toHaveText("Augusto");
-  await aug.locator('#nav [data-tab="panel"]').click();
-  await expect(aug.locator("#pSessions")).toContainText("Lección · Begroeten");
-  await expect(aug.locator("#pToday .on")).toContainText("Lección");
-  await expect(aug.locator("#pDays .day.on")).toHaveCount(1);
-
-  // Live: Claire sends the WhatsApp phrase, panel updates without reload
-  await claire.bringToFront();
-  await claire.locator('[data-task="phrase"]').click();
-  await expect(claire.locator('[data-task="phrase"]')).toHaveClass(/done/);
-  await expect(aug.locator("#pSessions")).toContainText("Frase por WhatsApp", { timeout: 5000 });
-  await aug.bringToFront();
-  await aug.screenshot({ path: shots + "6-panel.png", fullPage: true });
-
-  // Note from Augusto reaches Claire
-  await aug.locator("#noteInput").fill("¡Muy bien, amor! Sigue así.");
-  await aug.locator("#noteSave").click();
-  await expect(aug.locator("#noteStatus")).toHaveText("Guardada.");
-  await expect(claire.locator("#augNote")).toContainText("Sigue así", { timeout: 5000 });
-
-  // Ver como Claire
-  await aug.locator("#viewAs").click();
-  await expect(aug.locator("#homeName")).toHaveText("Claire");
-  await expect(aug.locator(".banner")).toContainText("solo lectura");
-  await expect(aug.locator('[data-task="lesson"]')).toHaveClass(/done/);
-  await expect(aug.locator('#nav [data-tab="panel"]')).toHaveCount(0);
-  await aug.locator("#backToMe").click();
-  await expect(aug.locator("#pStats")).toBeVisible();
-
-  // Dark mode renders
-  await claire.emulateMedia({ colorScheme: "dark" });
-  await claire.reload();
-  await expect(claire.locator("#homeName")).toBeVisible();
-  const bg = await claire.evaluate(() => getComputedStyle(document.body).backgroundColor);
-  expect(bg).toBe("rgb(20, 22, 29)");
-  await claire.screenshot({ path: shots + "7-home-dark.png", fullPage: true });
-
-  // Dialog with mock AI, then panel shows the full dialog with corrections
-  await claire.locator('#nav [data-tab="chat"]').click();
-  await claire.locator('[data-sc="taxi"]').click();
-  await claire.locator("#chatInput").fill("Hola, me llamo Claire");
-  await claire.locator("#sendBtn").click();
-  await expect(claire.locator("#chat .msg.them")).toHaveCount(2);
-  await claire.locator("#endBtn").click();
-  await expect(claire.locator("#feedback")).toContainText("Goed gedaan");
-  await claire.screenshot({ path: shots + "8-dialog.png", fullPage: true });
-  await expect(aug.locator("#pDialogs")).toContainText("Taxi in Lima", { timeout: 5000 });
-
-  expect(errors).toEqual([]);
-  await ctx.close();
+test.beforeEach(async ({ page }) => {
+  await page.addInitScript(speechStub);
+  await page.route("https://wa.me/**", (r) => r.fulfill({ body: "ok" }));
 });
 
-test("weeks follow completed days, not the calendar", async ({ page }) => {
+test("full session 2: all steps, then rest day and Augusto's panel", async ({ page, context }) => {
   const errors = [];
   page.on("pageerror", (e) => errors.push(e.message));
-  await page.goto("/index.html?mock=learner");
-  // Seed: lessons done on 7 earlier days with gaps (calendar says nothing; progress says week 2).
-  await page.evaluate(() => {
-    const id = "00000000-0000-0000-0000-00000000000c", pad = (n) => String(n).padStart(2, "0");
-    const day = (n) => { const d = new Date(); d.setDate(d.getDate() - n); return d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate()); };
-    const rows = [3, 5, 6, 9, 12, 13, 20].map((n) => ({ user_id: id, day: day(n), lessons: 1, dialog: false, phrase: false, minutes: 5, xp: 50 }));
-    rows.push({ user_id: id, day: day(30), lessons: 0, dialog: false, phrase: true, minutes: 0, xp: 0 }); // not a completed day
-    localStorage.setItem("mockdb-v1", JSON.stringify({ progress_days: rows }));
+  page.on("console", (m) => m.type() === "error" && errors.push(m.text()));
+  // Claire's real state: session 1 done 2 days ago, 30 cards, two of them missed and due today.
+  await seed(page, {
+    results: [{ n: 1, done_on: dayAgo(2), on_time: true, detail: { legacy: true } }],
+    cards: Array.from({ length: 30 }, (_, i) => ({ item_id: "w1-" + pad(i + 1), es: "x", due: i < 2 ? dayAgo(0) : dayAgo(-3), ko: i < 2 ? 2 : 0, box: i < 2 ? 0 : 2 })),
+    days: [{ day: dayAgo(2), xp: 1435, minutes: 21.3, lessons: 7 }],
   });
-  await page.reload();
-  await expect(page.locator("#ticketGate")).toHaveText("GATE W2");
-  await expect(page.locator("#ticketDay")).toHaveText("INSTAPKAART · DAG 1");
-  await expect(page.locator("#waiting")).toContainText("Week 2 komt eraan");
-  await expect(page.locator("#homeStats")).toContainText("350 XP");
-  await expect(page.locator("#daysLeft")).toHaveText(String(Math.round((new Date(2026, 11, 15) - new Date(new Date().toDateString())) / 86400000)));
+  await expect(page.locator("#ticketDay")).toHaveText("INSTAPKAART · SESSIE 2");
+  await expect(page.locator("#homeStats")).toHaveText("1 sessie op tijd · 1435 XP");
+  await expect(page.locator("#route .dot")).toHaveCount(24);
+  await expect(page.locator("#route .stamp-mini")).toHaveCount(7);
+  await page.screenshot({ path: shots + "1-home-session.png", fullPage: true });
+
+  await page.locator("#board").click();
+  // Review comes first, and the missed cards are in it.
+  const first = await page.evaluate(() => window.__step());
+  expect(first.section).toBe("review");
+  await playStep(page);
+  const firstEx = await page.evaluate(() => window.__step().ex);
+  expect(["w1-01", "w1-02"]).toContain(firstEx.itemId);
+  let sawGrammar = false, sawMission = false, sawSpeak = false, sawPhrase = false;
+  for (let i = 0; i < 120; i++) {
+    const s = await page.evaluate(() => window.__step());
+    if (s.t === "grammar") { sawGrammar = true; await expect(page.locator(".compare")).toContainText("Nederlands"); await page.screenshot({ path: shots + "2-grammar.png" }); }
+    if (s.t === "phrase" && !sawPhrase) { sawPhrase = true; await expect(page.locator(".example")).toBeVisible(); await page.screenshot({ path: shots + "3-phrase.png" }); }
+    if (s.t === "mission") { sawMission = true; await expect(page.locator(".mission-card")).toContainText("water zonder koolzuur"); }
+    if (s.t === "ex" && s.ex.k === "speak") sawSpeak = true;
+    if ((await playStep(page)) === "finish") break;
+  }
+  expect([sawGrammar, sawMission, sawSpeak, sawPhrase]).toEqual([true, true, true, true]);
+  await expect(page.locator("#finish")).toContainText("SESSIE 2 KLAAR");
+  await expect(page.locator("#finish")).toContainText("Missie geslaagd");
+  await page.screenshot({ path: shots + "4-finish.png" });
+  await page.locator("#checkBtn").click();
+
+  // Rest day now: nothing asked, next session in 2 days, optional review offered.
+  await expect(page.locator("#ticketDay")).toHaveText("RUSTDAG");
+  await expect(page.locator("#nextSession")).toBeVisible();
+  await expect(page.locator("#board")).toHaveCount(0);
+  await expect(page.locator("#homeStats")).toContainText("2 sessies op tijd");
+  await page.screenshot({ path: shots + "5-rest.png", fullPage: true });
+
+  // Augusto's panel
+  const aug = await context.newPage();
+  await aug.goto("/index.html?mock=owner");
+  await aug.locator('#nav [data-tab="panel"]').click();
+  await expect(aug.locator("#pSessionsTable")).toContainText("✓");
+  await expect(aug.locator("#pSessionsTable tbody tr")).toHaveCount(2);
+  await expect(aug.locator("#pGrammar")).toContainText("tener/estar");
+  await expect(aug.locator("#pWhere")).toContainText("Hoy descansa");
+  await expect(aug.locator("#pFlags")).toBeEmpty();
+  await aug.screenshot({ path: shots + "6-panel.png", fullPage: true });
   expect(errors).toEqual([]);
+});
+
+test("no second new session on the same day; optional review works", async ({ page }) => {
+  await seed(page, { results: [{ n: 1, done_on: dayAgo(0), on_time: true }], cards: [{ item_id: "w1-05", es: "Me llamo Claire", due: dayAgo(0) }] });
+  await expect(page.locator("#ticketDay")).toHaveText("RUSTDAG");
+  await expect(page.locator("#board")).toHaveCount(0);
+  await page.locator("#reviewBtn").click();
+  for (let i = 0; i < 30; i++) if ((await playStep(page)) === "finish") break;
+  await expect(page.locator(".finish")).toContainText("XP");
+  await page.locator("#checkBtn").click();
+  await expect(page.locator("#ticketDay")).toHaveText("RUSTDAG");
+});
+
+test("late session: allowed the day after, plan shifts and the streak restarts", async ({ page }) => {
+  await seed(page, { results: [{ n: 1, done_on: dayAgo(3), on_time: true }] });
+  await expect(page.locator("#late")).toBeVisible();
+  await page.locator("#board").click();
+  await playSession(page);
+  await page.locator("#checkBtn").click();
+  await expect(page.locator("#homeStats")).toContainText("0 sessies op tijd");
+  await expect(page.locator("#ticketDay")).toHaveText("RUSTDAG");
+});
+
+test("weekly test passed gives the stamp", async ({ page }) => {
+  await seed(page, { results: [1, 2, 3].map((n) => ({ n, done_on: dayAgo(8 - 2 * n), on_time: true })) });
+  await expect(page.locator("#ticketDay")).toHaveText("INSTAPKAART · SESSIE 4");
+  await expect(page.locator(".steps")).toContainText("Weektoets week 1");
+  await page.locator("#board").click();
+  await playSession(page);
+  await expect(page.locator(".test-result.ok")).toContainText('Stempel "¡Hola!"');
+  await page.locator("#checkBtn").click();
+  await expect(page.locator(".big-stamp")).toBeVisible();
+  await page.screenshot({ path: shots + "7-stamp.png" });
+  await page.locator("#stampOk").click();
+  await expect(page.locator('#route [data-week="1"] .stamp-mini.done')).toBeVisible();
+});
+
+test("weekly test below 70% is retried, and a quiz below 60% is flagged in the panel", async ({ page, context }) => {
+  await seed(page, { results: [1, 2, 3].map((n) => ({ n, done_on: dayAgo(8 - 2 * n), on_time: true })) });
+  await page.locator("#board").click();
+  await playSession(page, ["quiz", "test"]);
+  await expect(page.locator(".test-result.no")).toContainText("volgende sessie opnieuw");
+  await page.locator("#checkBtn").click();
+  await expect(page.locator('#route [data-week="1"] .stamp-mini.done')).toHaveCount(0);
+  const aug = await context.newPage();
+  await aug.goto("/index.html?mock=owner");
+  await aug.locator('#nav [data-tab="panel"]').click();
+  await expect(aug.locator("#pFlags")).toContainText("Sesión 4");
+  await expect(aug.locator("#pTests")).toContainText("la repite en la próxima sesión");
+  await expect(aug.locator("#pSessionsTable tr.low")).toHaveCount(1);
+});
+
+test("a half-done session resumes where she left it", async ({ page }) => {
+  await seed(page, { results: [{ n: 1, done_on: dayAgo(2), on_time: true }] });
+  await page.locator("#board").click();
+  for (let i = 0; i < 6; i++) await playStep(page);
+  const at = await page.evaluate(() => window.__step());
+  await page.locator("#quitBtn").click();
+  await expect(page.locator("#verdict")).toContainText("telt pas als je hem afmaakt");
+  await page.locator("#quitBtn").click();
+  await expect(page.locator("#board")).toHaveText("VERDER");
+  await page.reload();
+  await page.locator("#board").click();
+  const again = await page.evaluate(() => window.__step());
+  expect(again).toEqual(at);
 });

@@ -55,14 +55,15 @@ async function supabaseStore() {
     },
     async signOut() { await sb.auth.signOut(); },
     async load(uid) {
-      const [days, cards, stops, note] = await Promise.all([
+      const [days, cards, results, note] = await Promise.all([
         sb.from("progress_days").select("*").eq("user_id", uid),
         sb.from("cards").select("*").eq("user_id", uid),
-        sb.from("stops").select("*").eq("user_id", uid),
+        sb.from("session_results").select("*").eq("user_id", uid),
         sb.from("notes").select("text, updated_at").eq("id", 1).maybeSingle(),
       ]);
-      return { days: must(days), cards: must(cards), stops: must(stops), note: must(note) };
+      return { days: must(days), cards: must(cards), results: must(results), note: must(note) };
     },
+    async saveResult(row) { must(await sb.from("session_results").upsert({ ...row, user_id: s.me.id }, { onConflict: "user_id,n" })); },
     async saveDay(row) { must(await sb.from("progress_days").upsert({ ...row, user_id: s.me.id }, { onConflict: "user_id,day" })); },
     async saveCard(row) { must(await sb.from("cards").upsert({ ...row, user_id: s.me.id }, { onConflict: "user_id,item_id" })); },
     async saveStop(row) { must(await sb.from("stops").upsert({ ...row, user_id: s.me.id }, { onConflict: "user_id,lesson_id" })); },
@@ -70,17 +71,18 @@ async function supabaseStore() {
     async addDialog(row) { must(await sb.from("dialogs").insert({ ...row, user_id: s.me.id })); },
     async setNote(text) { must(await sb.from("notes").upsert({ id: 1, text, updated_at: new Date().toISOString() })); },
     async panel(uid) {
-      const [days, cards, sessions, dialogs] = await Promise.all([
+      const [days, cards, sessions, dialogs, results] = await Promise.all([
         sb.from("progress_days").select("*").eq("user_id", uid),
         sb.from("cards").select("*").eq("user_id", uid),
         sb.from("sessions").select("*").eq("user_id", uid).order("ts", { ascending: false }).limit(20),
         sb.from("dialogs").select("*").eq("user_id", uid).order("ts", { ascending: false }).limit(8),
+        sb.from("session_results").select("*").eq("user_id", uid),
       ]);
-      return { days: must(days), cards: must(cards), sessions: must(sessions), dialogs: must(dialogs) };
+      return { days: must(days), cards: must(cards), sessions: must(sessions), dialogs: must(dialogs), results: must(results) };
     },
     subscribe(uid, onChange) {
       const ch = sb.channel("panel-" + uid);
-      for (const table of ["progress_days", "cards", "sessions", "dialogs", "stops"]) {
+      for (const table of ["progress_days", "cards", "sessions", "dialogs", "session_results"]) {
         ch.on("postgres_changes", { event: "*", schema: "public", table, filter: "user_id=eq." + uid }, onChange);
       }
       ch.subscribe();
@@ -110,7 +112,7 @@ function mockStore(who) {
   const KEY = "mockdb-v1";
   const ids = { learner: "00000000-0000-0000-0000-00000000000c", owner: "00000000-0000-0000-0000-00000000000a" };
   const read = () => { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch { return {}; } };
-  const db = () => { const d = read(); for (const t of ["progress_days", "cards", "stops", "sessions", "dialogs"]) d[t] = d[t] || []; d.notes = d.notes || null; return d; };
+  const db = () => { const d = read(); for (const t of ["progress_days", "cards", "session_results", "sessions", "dialogs"]) d[t] = d[t] || []; d.notes = d.notes || null; return d; };
   const write = (d) => { localStorage.setItem(KEY, JSON.stringify(d)); listeners.forEach((f) => f()); };
   const listeners = new Set();
   addEventListener("storage", (e) => { if (e.key === KEY) listeners.forEach((f) => f()); });
@@ -127,11 +129,11 @@ function mockStore(who) {
     async signIn() {}, async verify() {}, async signOut() {},
     async load(uid) {
       const d = db();
-      return { days: clone(d.progress_days.filter((r) => r.user_id === uid)), cards: clone(d.cards.filter((r) => r.user_id === uid)), stops: clone(d.stops.filter((r) => r.user_id === uid)), note: clone(d.notes) };
+      return { days: clone(d.progress_days.filter((r) => r.user_id === uid)), cards: clone(d.cards.filter((r) => r.user_id === uid)), results: clone(d.session_results.filter((r) => r.user_id === uid)), note: clone(d.notes) };
     },
     async saveDay(row) { upsert("progress_days", { ...row, user_id: s.me.id }, ["user_id", "day"]); },
     async saveCard(row) { upsert("cards", { ...row, user_id: s.me.id }, ["user_id", "item_id"]); },
-    async saveStop(row) { upsert("stops", { ...row, user_id: s.me.id }, ["user_id", "lesson_id"]); },
+    async saveResult(row) { upsert("session_results", { ...row, user_id: s.me.id }, ["user_id", "n"]); },
     async addSession(kind, detail) { const d = db(); d.sessions.push({ id: Date.now(), user_id: s.me.id, ts: new Date().toISOString(), kind, detail }); write(d); },
     async addDialog(row) { const d = db(); d.dialogs.push({ id: Date.now(), user_id: s.me.id, ts: new Date().toISOString(), ...row }); write(d); },
     async setNote(text) { const d = db(); d.notes = { text, updated_at: new Date().toISOString() }; write(d); },
@@ -140,6 +142,7 @@ function mockStore(who) {
       return {
         days: clone(d.progress_days.filter((r) => r.user_id === uid)), cards: clone(d.cards.filter((r) => r.user_id === uid)),
         sessions: clone(d.sessions.filter((r) => r.user_id === uid).sort(desc).slice(0, 20)), dialogs: clone(d.dialogs.filter((r) => r.user_id === uid).sort(desc).slice(0, 8)),
+        results: clone(d.session_results.filter((r) => r.user_id === uid)),
       };
     },
     subscribe(uid, onChange) { listeners.add(onChange); return () => listeners.delete(onChange); },
@@ -147,7 +150,9 @@ function mockStore(who) {
     async ai(path, body) {
       await new Promise((r) => setTimeout(r, 150));
       if (path === "/dialog") return { text: "¡Qué bien! ¿Y de dónde eres?" };
-      return { score: 4, praise: "Goed gedaan, je schreef hele zinnen.", errors: [{ said: body.turns.find((t) => t.role === "user")?.content || "", better: "Hola, me llamo Claire.", why: "Gebruik 'me llamo' om je naam te zeggen." }] };
+      if (path === "/extra") return { exercises: body.words.slice(0, 4).map((w, i) => i % 2 ? { type: "type", q: "Schrijf het in het Spaans", prompt: w.nl, answer: w.es, word: w.es } : { type: "mc", q: "Wat betekent dit?", prompt: w.es, opts: [w.nl, "Goedemorgen", "Ik ben moe", "Tot ziens"].filter((x, j, a) => a.indexOf(x) === j).slice(0, 4), answer: w.nl, word: w.es }) };
+      const goal = body.session ? { goal_met: true, goal_note: "Je hebt alles gevraagd wat nodig was." } : {};
+      return { ...goal, score: 4, praise: "Goed gedaan, je schreef hele zinnen.", errors: [{ said: body.turns.find((t) => t.role === "user")?.content || "", better: "Hola, me llamo Claire.", why: "Gebruik 'me llamo' om je naam te zeggen." }] };
     },
   };
   return s;

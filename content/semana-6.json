@@ -1,6 +1,23 @@
 {
   "week": 6,
-  "title": "Praten met de familie en Lima-slang",
+  "title": "Familie en Lima-slang",
+  "title_es": "Familia y jerga limeña",
   "stamp": "Familie",
-  "start": "2026-12-01"
+  "sessions": [
+    {
+      "n": 19,
+      "title": "De familie en Lima-slang",
+      "title_es": "La familia y la jerga"
+    },
+    {
+      "n": 20,
+      "title": "Je promotie en je plannen",
+      "title_es": "Tu doctorado y tus planes"
+    },
+    {
+      "n": 21,
+      "title": "Etentje met de familie",
+      "title_es": "Cena familiar"
+    }
+  ]
 }

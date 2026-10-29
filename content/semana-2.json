@@ -1,6 +1,23 @@
 {
   "week": 2,
   "title": "Restaurant en Peruaans eten",
+  "title_es": "Restaurante y comida peruana",
   "stamp": "Restaurant",
-  "start": "2026-11-03"
+  "sessions": [
+    {
+      "n": 5,
+      "title": "Peruaanse gerechten en bestellen",
+      "title_es": "Platos peruanos y pedir"
+    },
+    {
+      "n": 6,
+      "title": "Wat ik kook en wat ik eet",
+      "title_es": "Lo que cocino y lo que como"
+    },
+    {
+      "n": 7,
+      "title": "Pittig, klagen en de rekening",
+      "title_es": "Ají, quejas y la cuenta"
+    }
+  ]
 }
