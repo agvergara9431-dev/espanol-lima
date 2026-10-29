@@ -25,23 +25,23 @@
       "title": "Augusto's moeder",
       "who": "Augusto's moeder",
       "desc": "Zij spreekt Engels, maar wil per se Spaans met je oefenen.",
-      "persona": "la mamá de Augusto, una señora limeña cariñosa de unos 60 años. Sabe inglés pero insiste con cariño en hablar en español para que Claire practique. Le dice 'hijita'.",
+      "persona": "Rosario, la mamá de Augusto, una señora limeña cariñosa de unos 60 años. Sabe inglés pero insiste con cariño en hablar en español para que Claire practique. Le dice 'hijita'.",
       "opener": "¡Hola, hijita! Bienvenida. Aquí hablamos en español, ¿ya? ¿Cómo estás?"
     },
     "familia": {
       "icon": "heart",
-      "title": "Oom Jorge en nicht Valeria",
-      "who": "oom Jorge en nicht Valeria",
-      "desc": "Bij Augusto thuis ontmoet je oom Jorge (65) en nicht Valeria (24).",
-      "persona": "dos familiares de Augusto en una reunión en su casa: el tío Jorge, de 65 años, formal y bromista, que trata a Claire de usted; y la prima Valeria, de 24 años, alegre, que habla informal. Escribe cada intervención empezando con 'Tío Jorge:' o 'Valeria:'. Alterna entre los dos para que Claire hable con ambos.",
-      "opener": "Tío Jorge: ¡Buenas tardes, señorita! Usted debe ser Claire, ¿no? Mucho gusto."
+      "title": "Oom Diego en nicht Silvia",
+      "who": "oom Diego en nicht Silvia",
+      "desc": "Bij Augusto thuis ontmoet je oom Diego en nicht Silvia.",
+      "persona": "dos familiares de Augusto en una reunión en su casa: el tío Diego, un señor mayor, formal y bromista, que trata a Claire de usted; y la prima Silvia, joven y alegre, que habla informal. Escribe cada intervención empezando con 'Tío Diego:' o 'Silvia:'. Alterna entre los dos para que Claire hable con ambos.",
+      "opener": "Tío Diego: ¡Buenas tardes, señorita! Usted debe ser Claire, ¿no? Mucho gusto."
     },
     "prima": {
       "icon": "phone",
-      "title": "Nicht Valeria",
-      "who": "nicht Valeria",
-      "desc": "Op een verjaardag wil Valeria je beter leren kennen.",
-      "persona": "Valeria, la prima de Augusto, de 24 años, alegre y curiosa. Habla de tú, en frases cortas. Le encanta preguntar cosas personales con buena onda.",
+      "title": "Nicht Silvia",
+      "who": "nicht Silvia",
+      "desc": "Op een verjaardag wil Silvia je beter leren kennen.",
+      "persona": "Silvia, la prima de Augusto, joven, alegre y curiosa. Habla de tú, en frases cortas. Le encanta preguntar cosas personales con buena onda.",
       "opener": "¡Hola, Claire! Qué bueno que viniste. Oye, ¿cuántos años tienes?"
     }
   },
@@ -113,7 +113,7 @@
     },
     {
       "n": 2,
-      "title": "Wat je nodig hebt, en 'el' of 'la'",
+      "title": "Wat je nodig hebt: el of la?",
       "title_es": "Necesidades y cosas",
       "items": [
         { "id": "w1-31", "es": "Tengo frío", "en": "I'm cold", "nl": "Ik heb het koud", "ex": { "es": "Tengo frío, ¿cierro la ventana?", "nl": "Ik heb het koud, zal ik het raam dichtdoen?" } },
@@ -164,18 +164,18 @@
       "title": "Tú en usted bij de familie",
       "title_es": "Tú y usted con la familia",
       "items": [
-        { "id": "w1-43", "es": "¿Cómo estás?", "en": "How are you? (informal)", "nl": "Hoe gaat het met je?", "ex": { "es": "¡Hola, Valeria! ¿Cómo estás?", "nl": "Hoi Valeria! Hoe gaat het met je?" } },
+        { "id": "w1-43", "es": "¿Cómo estás?", "en": "How are you? (informal)", "nl": "Hoe gaat het met je?", "ex": { "es": "¡Hola, Silvia! ¿Cómo estás?", "nl": "Hoi Silvia! Hoe gaat het met je?" } },
         { "id": "w1-44", "es": "¿Cómo está usted?", "en": "How are you? (formal)", "nl": "Hoe gaat het met u?", "ex": { "es": "Buenas tardes, señor. ¿Cómo está usted?", "nl": "Goedemiddag, meneer. Hoe gaat het met u?" } },
         { "id": "w1-45", "es": "¿De dónde eres?", "en": "Where are you from? (informal)", "nl": "Waar kom je vandaan?", "ex": { "es": "Yo soy de Holanda, ¿y tú? ¿De dónde eres?", "nl": "Ik kom uit Nederland, en jij? Waar kom je vandaan?" } },
         { "id": "w1-46", "es": "¿Usted es el tío de Augusto?", "en": "Are you Augusto's uncle? (formal)", "nl": "Bent u de oom van Augusto?", "ex": { "es": "Perdón, ¿usted es el tío de Augusto?", "nl": "Sorry, bent u de oom van Augusto?" } },
         { "id": "w1-47", "es": "Encantada", "en": "Delighted (said by a woman)", "nl": "Aangenaam (als vrouw)", "ex": { "es": "Encantada, señora. Soy Claire.", "nl": "Aangenaam, mevrouw. Ik ben Claire." } },
         { "id": "w1-48", "es": "Pase, por favor", "en": "Come in, please (formal)", "nl": "Komt u binnen, alstublieft", "ex": { "es": "Buenas tardes, pase, por favor.", "nl": "Goedemiddag, komt u binnen, alstublieft." } },
-        { "id": "w1-49", "es": "¿Puedes hablar más lento?", "en": "Can you speak more slowly? (informal)", "nl": "Kun je langzamer praten?", "ex": { "es": "Valeria, ¿puedes hablar más lento?", "nl": "Valeria, kun je langzamer praten?" } },
+        { "id": "w1-49", "es": "¿Puedes hablar más lento?", "en": "Can you speak more slowly? (informal)", "nl": "Kun je langzamer praten?", "ex": { "es": "Silvia, ¿puedes hablar más lento?", "nl": "Silvia, kun je langzamer praten?" } },
         { "id": "w1-50", "es": "¿Me puede ayudar, por favor?", "en": "Can you help me, please? (formal)", "nl": "Kunt u me helpen, alstublieft?", "ex": { "es": "Disculpe, señora, ¿me puede ayudar, por favor?", "nl": "Pardon, mevrouw, kunt u me helpen, alstublieft?" } },
         { "id": "w1-51", "es": "Él es mi enamorado", "en": "He is my boyfriend", "nl": "Hij is mijn vriend", "ex": { "es": "Él es mi enamorado, Augusto.", "nl": "Hij is mijn vriend, Augusto." } },
-        { "id": "w1-52", "es": "Ella es la prima de Augusto", "en": "She is Augusto's cousin", "nl": "Zij is de nicht van Augusto", "ex": { "es": "Ella es la prima de Augusto, se llama Valeria.", "nl": "Zij is de nicht van Augusto, ze heet Valeria." } },
-        { "id": "w1-53", "es": "Te presento a mi hermana", "en": "Let me introduce my sister (informal)", "nl": "Dit is mijn zus", "ex": { "es": "Valeria, te presento a mi hermana Emma.", "nl": "Valeria, dit is mijn zus Emma." } },
-        { "id": "w1-54", "es": "¡Qué gusto verte!", "en": "So nice to see you! (informal)", "nl": "Wat fijn je te zien!", "ex": { "es": "¡Hola, Valeria! ¡Qué gusto verte!", "nl": "Hoi Valeria! Wat fijn je te zien!" } }
+        { "id": "w1-52", "es": "Ella es la prima de Augusto", "en": "She is Augusto's cousin", "nl": "Zij is de nicht van Augusto", "ex": { "es": "Ella es la prima de Augusto, se llama Silvia.", "nl": "Zij is de nicht van Augusto, ze heet Silvia." } },
+        { "id": "w1-53", "es": "Te presento a mi hermana", "en": "Let me introduce my sister (informal)", "nl": "Dit is mijn zus", "ex": { "es": "Silvia, te presento a mi hermana Merle.", "nl": "Silvia, dit is mijn zus Merle." } },
+        { "id": "w1-54", "es": "¡Qué gusto verte!", "en": "So nice to see you! (informal)", "nl": "Wat fijn je te zien!", "ex": { "es": "¡Hola, Silvia! ¡Qué gusto verte!", "nl": "Hoi Silvia! Wat fijn je te zien!" } }
       ],
       "grammar": {
         "id": "g03",
@@ -185,24 +185,24 @@
           "Tú is jij, usted is u. In Peru zeg je usted veel vaker dan in Nederland: tegen oudere mensen, onbekenden, taxichauffeurs en obers, en vaak ook tegen de ouders en ooms van je partner.",
           "Met tú eindigt het werkwoord meestal op -s: ¿cómo estás?, ¿de dónde eres?, ¿puedes…? Met usted gebruik je dezelfde vorm als bij hij of zij, zonder -s: ¿cómo está?, ¿de dónde es?, ¿puede…?"
         ],
-        "compare": "Net als jij/u in het Nederlands. Maar twijfel je in Peru, kies dan usted: dat is altijd beleefd. Tegen Valeria (24) zeg je tú; tegen oom Jorge (65) zeg je usted, tot hij zegt: 'tutéame', zeg maar jij.",
+        "compare": "Net als jij/u in het Nederlands. Maar twijfel je in Peru, kies dan usted: dat is altijd beleefd. Tegen Silvia zeg je tú; tegen oom Diego zeg je usted, tot hij zegt: 'tutéame', zeg maar jij.",
         "examples": [
-          { "es": "¿Cómo estás, Valeria?", "nl": "Hoe gaat het met je, Valeria?" },
-          { "es": "¿Cómo está usted, señor Jorge?", "nl": "Hoe gaat het met u, meneer Jorge?" },
+          { "es": "¿Cómo estás, Silvia?", "nl": "Hoe gaat het met je, Silvia?" },
+          { "es": "¿Cómo está usted, señor Diego?", "nl": "Hoe gaat het met u, meneer Diego?" },
           { "es": "¿Puede repetir? / ¿Puedes repetir?", "nl": "Kunt u het herhalen? / Kun jij het herhalen?" }
         ],
         "exercises": [
           { "type": "mc", "q": "Hoe zeg je dit?", "prompt": "Kunt u me helpen?", "opts": ["¿Me puede ayudar?", "¿Me puedes ayudar?", "¿Me puedo ayudar?"], "answer": "¿Me puede ayudar?", "why": "U = usted, dus puede zonder -s." },
-          { "type": "fill", "q": "Tegen nicht Valeria", "prompt": "¿De dónde ___?", "opts": ["eres", "es", "soy"], "answer": "eres", "why": "Valeria is jong en familie: tú, dus eres." },
-          { "type": "fill", "q": "Tegen oom Jorge", "prompt": "¿Cómo ___ usted?", "opts": ["está", "estás", "estoy"], "answer": "está", "why": "Bij usted hoort está, zonder -s." },
+          { "type": "fill", "q": "Tegen nicht Silvia", "prompt": "¿De dónde ___?", "opts": ["eres", "es", "soy"], "answer": "eres", "why": "Silvia is jong en familie: tú, dus eres." },
+          { "type": "fill", "q": "Tegen oom Diego", "prompt": "¿Cómo ___ usted?", "opts": ["está", "estás", "estoy"], "answer": "está", "why": "Bij usted hoort está, zonder -s." },
           { "type": "mc", "q": "Tegen wie zeg je 'usted'?", "prompt": "Kies de beste.", "opts": ["De taxichauffeur", "Augusto", "Een kind van vijf"], "answer": "De taxichauffeur", "why": "Onbekenden en mensen die je bedienen spreek je aan met usted." },
           { "type": "type", "q": "Schrijf het in het Spaans (u)", "prompt": "Waar komt u vandaan?", "answer": "¿De dónde es usted?", "alt": ["¿De dónde es?", "¿Usted de dónde es?"], "why": "Usted krijgt de vorm es." }
         ]
       },
       "mission": {
         "scenario": "familia",
-        "goal": "Spreek oom Jorge aan met usted en nicht Valeria met tú, minstens 3 zinnen tegen elk.",
-        "check": "Claire usa formas de usted (está, es, puede, usted) al hablar con el tío Jorge y formas de tú (estás, eres, puedes) con Valeria, al menos 3 frases con cada uno, sin mezclarlas.",
+        "goal": "Spreek oom Diego aan met usted en nicht Silvia met tú, minstens 3 zinnen tegen elk.",
+        "check": "Claire usa formas de usted (está, es, puede, usted) al hablar con el tío Diego y formas de tú (estás, eres, puedes) con Silvia, al menos 3 frases con cada uno, sin mezclarlas.",
         "setup": "Haz que los dos le hablen a Claire por turnos y le hagan preguntas fáciles (cómo está, de dónde es, qué le parece Lima)."
       }
     },
@@ -216,10 +216,10 @@
         { "id": "w1-57", "es": "Treinta, cuarenta, cincuenta", "en": "Thirty, forty, fifty", "nl": "Dertig, veertig, vijftig", "ex": { "es": "El almuerzo cuesta cuarenta soles.", "nl": "De lunch kost veertig sol." } },
         { "id": "w1-58", "es": "Sesenta, setenta, ochenta, noventa, cien", "en": "Sixty to one hundred", "nl": "Zestig, zeventig, tachtig, negentig, honderd", "ex": { "es": "La abuela de Augusto tiene noventa años.", "nl": "De oma van Augusto is negentig." } },
         { "id": "w1-59", "es": "Treinta y cinco", "en": "Thirty-five", "nl": "Vijfendertig", "ex": { "es": "Son treinta y cinco soles, por favor.", "nl": "Dat is vijfendertig sol, alstublieft." } },
-        { "id": "w1-60", "es": "¿Cuántos años tienes?", "en": "How old are you? (informal)", "nl": "Hoe oud ben je?", "ex": { "es": "Valeria, ¿cuántos años tienes?", "nl": "Valeria, hoe oud ben je?" } },
+        { "id": "w1-60", "es": "¿Cuántos años tienes?", "en": "How old are you? (informal)", "nl": "Hoe oud ben je?", "ex": { "es": "Silvia, ¿cuántos años tienes?", "nl": "Silvia, hoe oud ben je?" } },
         { "id": "w1-61", "es": "¿Cuántos años tiene usted?", "en": "How old are you? (formal)", "nl": "Hoe oud bent u?", "ex": { "es": "Perdón, señor, ¿cuántos años tiene usted?", "nl": "Sorry, meneer, hoe oud bent u?" } },
         { "id": "w1-62", "es": "Tengo treinta años", "en": "I'm thirty years old", "nl": "Ik ben dertig jaar", "ex": { "es": "Tengo treinta años y vivo en Róterdam.", "nl": "Ik ben dertig en ik woon in Rotterdam." } },
-        { "id": "w1-63", "es": "¿Me pasas tu número?", "en": "Can you give me your number? (informal)", "nl": "Geef je me je nummer?", "ex": { "es": "¿Me pasas tu número? Te escribo por WhatsApp.", "nl": "Geef je me je nummer? Ik app je." } },
+        { "id": "w1-63", "es": "¿Me pasas tu número?", "en": "Can you give me your number? (informal)", "nl": "Mag ik je nummer?", "ex": { "es": "¿Me pasas tu número? Te escribo por WhatsApp.", "nl": "Mag ik je nummer? Dan app ik je." } },
         { "id": "w1-64", "es": "Mi número es nueve, ocho, siete…", "en": "My number is nine, eight, seven…", "nl": "Mijn nummer is negen, acht, zeven…", "ex": { "es": "Mi número es nueve, ocho, siete, seis, cinco, cuatro, tres, dos, uno.", "nl": "Mijn nummer is 987 654 321." } },
         { "id": "w1-65", "es": "Somos cuatro", "en": "There are four of us", "nl": "We zijn met z'n vieren", "ex": { "es": "Una mesa, por favor. Somos cuatro.", "nl": "Een tafel, alstublieft. We zijn met z'n vieren." } }
       ],
@@ -248,9 +248,9 @@
       },
       "mission": {
         "scenario": "prima",
-        "goal": "Zeg hoe oud je bent, vraag hoe oud Valeria is en geef haar je mobiele nummer van 9 cijfers.",
-        "check": "Claire dice su edad con 'tengo … años', le pregunta a Valeria su edad, y dicta un número de celular de 9 cifras (en palabras o dígitos).",
-        "setup": "Valeria tiene 24 años. Si Claire no lo hace sola, pídele su número para escribirle por WhatsApp."
+        "goal": "Zeg hoe oud je bent, vraag hoe oud Silvia is en geef haar je mobiele nummer van 9 cijfers.",
+        "check": "Claire dice su edad con 'tengo … años', le pregunta a Silvia su edad, y dicta un número de celular de 9 cifras (en palabras o dígitos).",
+        "setup": "Si Claire le pregunta su edad, Silvia responde con una edad entre 22 y 32 años. Si Claire no lo hace sola, pídele su número para escribirle por WhatsApp."
       }
     }
   ]

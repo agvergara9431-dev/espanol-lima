@@ -1,98 +1,99 @@
-// Same flow against the real Supabase project (only runs with REAL_TEST=1 and SB_SERVICE_KEY in the environment).
-// Logs in by pasting a magic link generated with the admin API (no mail is sent), then deletes all test data.
+// Same session flow against the real Supabase project, using ONLY the owner account (Augusto).
+// Claire's real progress is never written: her state is only checked read-only through "Ver como Claire".
+// Only runs with REAL_TEST=1, SB_SERVICE_KEY and OWNER_EMAIL; afterwards deletes the owner's rows only.
+// AI calls are intercepted here (the Worker only allows the GitHub Pages origin); the Worker is tested separately.
 import { test, expect } from "@playwright/test";
 
 const REF = "zesmxymaxnpcyrswaksf";
 const BASE = `https://${REF}.supabase.co`;
-const KEY = process.env.SB_SERVICE_KEY;
-const LEARNER = process.env.LEARNER_EMAIL, OWNER = process.env.OWNER_EMAIL;
-test.skip(!process.env.REAL_TEST || !KEY || !LEARNER || !OWNER, "real backend test disabled");
-// A new magic link invalidates the previous one for the same email, so never run copies of this test in parallel.
-test.describe.configure({ mode: "serial" });
+const KEY = process.env.SB_SERVICE_KEY, OWNER = process.env.OWNER_EMAIL;
+test.skip(!process.env.REAL_TEST || !KEY || !OWNER, "real backend test disabled");
+test.describe.configure({ mode: "serial" }); // a new magic link invalidates the previous one
 
+const admin = { apikey: KEY, authorization: "Bearer " + KEY };
+let ownerId = null;
 async function magicLink(email) {
-  const res = await fetch(`${BASE}/auth/v1/admin/generate_link`, {
-    method: "POST", headers: { apikey: KEY, authorization: "Bearer " + KEY, "content-type": "application/json" },
-    body: JSON.stringify({ type: "magiclink", email }),
-  });
-  const json = await res.json();
-  if (!json.hashed_token && !json.properties?.hashed_token) throw new Error("no link: " + JSON.stringify(json).slice(0, 200));
+  const json = await (await fetch(`${BASE}/auth/v1/admin/generate_link`, { method: "POST", headers: { ...admin, "content-type": "application/json" }, body: JSON.stringify({ type: "magiclink", email }) })).json();
+  ownerId = json.id || json.user?.id || ownerId;
   return `https://example.invalid/verify?token=${json.hashed_token || json.properties.hashed_token}&type=magiclink`;
 }
-async function login(page, email) {
+async function wipeOwner() {
+  if (!ownerId) {
+    const users = await (await fetch(`${BASE}/auth/v1/admin/users?per_page=50`, { headers: admin })).json();
+    ownerId = users.users.find((u) => u.email === OWNER)?.id;
+  }
+  if (!ownerId) throw new Error("owner not found");
+  for (const t of ["progress_days", "cards", "session_results", "sessions", "dialogs", "stops", "api_usage"]) {
+    const r = await fetch(`${BASE}/rest/v1/${t}?user_id=eq.${ownerId}`, { method: "DELETE", headers: admin });
+    if (!r.ok) throw new Error(`wipe ${t}: ${r.status}`);
+  }
+}
+test.beforeAll(wipeOwner);
+test.afterAll(wipeOwner);
+
+test("real backend: owner plays session 1, it is saved; Claire's migrated state reads correctly", async ({ page }) => {
+  test.setTimeout(240_000);
+  const errors = [];
+  page.on("pageerror", (e) => errors.push(e.message));
+  await page.addInitScript(() => { const F = class { start() { setTimeout(() => { this.onresult?.({ results: [[{ transcript: window.__said || "" }]] }); this.onend?.(); }, 30); } stop() {} }; window.SpeechRecognition = F; window.webkitSpeechRecognition = F; });
+  await page.route("**/espanol-lima.claude-messages.workers.dev/**", (r) => {
+    const body = JSON.parse(r.request().postData() || "{}");
+    const out = r.request().url().endsWith("/dialog") ? { text: "¡Qué bien! ¿Y de dónde eres?" } : { goal_met: true, goal_note: "Goed.", score: 4, praise: "Goed gedaan.", errors: [] };
+    r.fulfill({ status: 200, contentType: "application/json", headers: { "access-control-allow-origin": "*" }, body: JSON.stringify(out) });
+  });
+
   await page.goto("/index.html");
   await expect(page.locator("#loginForm")).toBeVisible();
   await page.evaluate(() => { document.getElementById("pasteForm").hidden = false; });
-  await page.locator("#paste").fill(await magicLink(email));
+  await page.locator("#paste").fill(await magicLink(OWNER));
   await page.locator("#pasteBtn").click();
-  await expect(page.locator("#homeName")).toBeVisible({ timeout: 15000 });
-}
-async function wipe() {
-  // Delete through the REST API with the service key (bypasses RLS) so the app starts from zero.
-  for (const t of ["progress_days", "cards", "stops", "sessions", "dialogs", "api_usage"]) {
-    await fetch(`${BASE}/rest/v1/${t}?user_id=not.is.null`, { method: "DELETE", headers: { apikey: KEY, authorization: "Bearer " + KEY } });
+  await expect(page.locator("#homeName")).toHaveText("Augusto", { timeout: 15000 });
+  await expect(page.locator("#ticketDay")).toHaveText("INSTAPKAART · SESSIE 1");
+
+  // Play the whole session. The real store has no test hook, so answers are read from the content file.
+  const content = await (await page.request.get("/content/semana-1.json")).json();
+  const s1 = content.sessions[0];
+  const esByNl = Object.fromEntries(s1.items.map((i) => [i.nl, i.es]));
+  const answersEs = new Set(s1.items.map((i) => i.es));
+  await page.locator("#board").click();
+  for (let i = 0; i < 150; i++) {
+    const btn = page.locator("#checkBtn");
+    if (await page.locator(".finish").count()) break;
+    if (await page.locator("#chatInput").isVisible().catch(() => false)) {
+      await page.locator("#chatInput").fill("Me llamo Claire, soy de Holanda y vivo en Róterdam");
+      await page.locator("#sendBtn").click();
+      await expect(page.locator("#chat .msg.them")).toHaveCount(2);
+      await btn.click(); await expect(page.locator("#feedback")).toBeVisible(); await btn.click();
+      continue;
+    }
+    if (await page.locator("#recBtn").isVisible().catch(() => false)) {
+      const said = (await page.locator("#lbody .prompt").textContent()).trim();
+      await page.evaluate((s) => (window.__said = s), said);
+      await page.locator("#recBtn").click(); await expect(page.locator("#verdict")).toBeVisible(); await btn.click();
+      continue;
+    }
+    if (await page.locator("#lbody .opt").count()) await page.locator("#lbody .opt").first().click();
+    else if (await page.locator("#lbody .bank .tok").count()) await page.locator("#lbody .bank .tok").first().click();
+    else if (await page.locator("#ans").count()) { const p = (await page.locator("#lbody .prompt").count()) ? (await page.locator("#lbody .prompt").textContent()).trim() : ""; await page.locator("#ans").fill(esByNl[p] || [...answersEs][0]); }
+    if (await btn.isDisabled()) continue;
+    await btn.click();
+    if (await page.locator("#verdict").isVisible()) await btn.click();
   }
-  await fetch(`${BASE}/rest/v1/notes?id=eq.1`, { method: "DELETE", headers: { apikey: KEY, authorization: "Bearer " + KEY } });
-}
+  await expect(page.locator(".finish")).toContainText("SESSIE 1 KLAAR");
+  await expect(page.locator("#checkBtn")).toHaveText("Terug naar paspoort", { timeout: 15000 });
+  await page.locator("#checkBtn").click();
 
-test.beforeAll(wipe);
-test.afterAll(wipe);
+  // Saved in Supabase: survives a reload
+  await page.reload();
+  await expect(page.locator("#ticketDay")).toHaveText("RUSTDAG");
+  await expect(page.locator("#homeStats")).toContainText("1 sessie op tijd");
 
-test("real backend: lesson by Claire shows up live in Augusto's panel", async ({ browser }) => {
-  const errors = [];
-  const watch = (p, who) => { p.on("pageerror", (e) => errors.push(who + ": " + e.message)); p.on("console", (m) => m.type() === "error" && errors.push(who + ": " + m.text())); };
-  const opts = test.info().project.use;
-  const cc = await browser.newContext(opts), ac = await browser.newContext(opts);
-  await cc.route("https://wa.me/**", (r) => r.fulfill({ body: "ok" }));
-  const claire = await cc.newPage(); watch(claire, "claire");
-  const aug = await ac.newPage(); watch(aug, "augusto");
-
-  await login(claire, LEARNER);
-  await expect(claire.locator("#homeName")).toHaveText("Claire");
-  await expect(claire.locator("#homeStats")).toHaveText("0 dagen op rij · 0 XP");
-  await expect(claire.locator("#ticketDay")).toHaveText("INSTAPKAART · DAG 1");
-
-  await login(aug, OWNER);
-  await expect(aug.locator("#homeName")).toHaveText("Augusto");
-  await aug.locator('#nav [data-tab="panel"]').click();
-  await expect(aug.locator("#pSessions")).toContainText("Todavía nada");
-
-  // Claire: full lesson
-  await claire.locator("#board").click();
-  for (let i = 0; i < 12; i++) {
-    const body = claire.locator("#lbody");
-    if (await body.locator(".opt").count()) await body.locator(".opt").first().click();
-    else if (await body.locator(".bank .tok").count()) await body.locator(".bank .tok").first().click();
-    else await body.locator("#ans").fill("hola");
-    await claire.locator("#checkBtn").click();
-    await claire.locator("#checkBtn").click();
-  }
-  await expect(claire.locator("#finish")).toBeVisible();
-  await claire.locator("#checkBtn").click();
-  await expect(claire.locator('[data-task="lesson"]')).toHaveClass(/done/);
-
-  // Saved: survives a reload
-  await claire.reload();
-  await expect(claire.locator('[data-task="lesson"]')).toHaveClass(/done/);
-  await expect(claire.locator("#homeStats")).toContainText("1 dag op rij");
-
-  // Augusto's panel updates via Realtime, no reload
-  await expect(aug.locator("#pSessions")).toContainText("Lección · Begroeten", { timeout: 15000 });
-  await expect(aug.locator("#pToday .on")).toContainText("Lección");
-  await claire.locator('[data-task="phrase"]').click();
-  await expect(aug.locator("#pSessions")).toContainText("Frase por WhatsApp", { timeout: 15000 });
-
-  // Note reaches Claire live; Claire cannot write a note (RLS)
-  await aug.locator("#noteInput").fill("Prueba");
-  await aug.locator("#noteSave").click();
-  await expect(aug.locator("#noteStatus")).toHaveText("Guardada.");
-  await expect(claire.locator("#augNote")).toContainText("Prueba", { timeout: 15000 });
-
-  // Ver como Claire
-  await aug.locator("#viewAs").click();
-  await expect(aug.locator("#homeName")).toHaveText("Claire");
-  await expect(aug.locator('[data-task="lesson"]')).toHaveClass(/done/);
-
+  // Claire's migrated progress, read-only
+  await page.locator('#nav [data-tab="panel"]').click();
+  await expect(page.locator("#pSessionsTable tbody tr")).toHaveCount(1);
+  await page.locator("#viewAs").click();
+  await expect(page.locator("#homeName")).toHaveText("Claire");
+  await expect(page.locator("#homeStats")).toHaveText("1 sessie op tijd · 1435 XP");
+  await expect(page.locator(".banner")).toContainText("solo lectura");
   expect(errors).toEqual([]);
-  await cc.close(); await ac.close();
 });
