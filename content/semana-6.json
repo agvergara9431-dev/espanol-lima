@@ -2,22 +2,202 @@
   "week": 6,
   "title": "Familie en Lima-slang",
   "title_es": "Familia y jerga limeña",
+  "title_en": "Family and Lima slang",
   "stamp": "Familie",
+  "scenarios": {
+    "silvia": {
+      "icon": "phone", "title": "Feestje met Silvia", "title_en": "Party with Silvia", "who": "nicht Silvia", "who_en": "cousin Silvia",
+      "desc": "Op een feestje vraagt Silvia naar je familie in Nederland. Zij praat veel Limeense slang.", "desc_en": "At a party Silvia asks about your family in the Netherlands. She uses a lot of Lima slang.",
+      "persona": "Silvia, la prima de Augusto, joven, alegre y muy limeña. Habla de tú y usa mucha jerga peruana de forma natural (chévere, bacán, causa, pata, ya pe, al toque), en frases cortas.",
+      "opener": "¡Claire! ¡Qué bacán verte, causa! Oye, cuéntame de tu familia, ¿ya?"
+    },
+    "diego": {
+      "icon": "book", "title": "Oom Diego is nieuwsgierig", "title_en": "Uncle Diego is curious", "who": "oom Diego", "who_en": "uncle Diego",
+      "desc": "Oom Diego wil alles weten over je promotieonderzoek en jullie plannen in Lima.", "desc_en": "Uncle Diego wants to know all about your PhD and your plans in Lima.",
+      "persona": "el tío Diego, un señor mayor, formal, bromista y muy curioso. Trata a Claire de usted y le hace preguntas una por una.",
+      "opener": "Claire, me contó Augusto que usted está haciendo un doctorado. ¡Qué interesante! ¿Qué está investigando?"
+    },
+    "cena": {
+      "icon": "plate", "title": "Etentje bij Rosario", "title_en": "Dinner at Rosario's", "who": "Rosario", "who_en": "Rosario",
+      "desc": "Familiediner bij Rosario thuis: causa, ají de gallina en picarones als toetje.", "desc_en": "Family dinner at Rosario's house: causa, ají de gallina and picarones for dessert.",
+      "persona": "Rosario, la mamá de Augusto, la anfitriona de una cena familiar en su casa. Es cariñosa, le dice 'hijita' a Claire y le insiste con cariño para que coma más.",
+      "opener": "¡Siéntate, hijita! Hoy hice causa y ají de gallina. ¿Ya comiste algo hoy o vienes con hambre?"
+    }
+  },
   "sessions": [
     {
-      "n": 19,
-      "title": "De familie en Lima-slang",
-      "title_es": "La familia y la jerga"
+      "n": 19, "title": "De familie en Lima-slang", "title_es": "La familia y la jerga", "title_en": "Family and Lima slang",
+      "items": [
+        { "id": "w6-01", "es": "Mi familia es pequeña", "en": "My family is small", "nl": "Mijn familie is klein", "ex": { "es": "Mi familia es pequeña: mis papás, mi hermana y yo.", "nl": "Mijn familie is klein: mijn ouders, mijn zus en ik.", "en": "My family is small: my parents, my sister and me." } },
+        { "id": "w6-02", "es": "Mis papás viven en Holanda", "en": "My parents live in the Netherlands", "nl": "Mijn ouders wonen in Nederland", "ex": { "es": "Mis papás viven en Holanda, cerca de Róterdam.", "nl": "Mijn ouders wonen in Nederland, vlak bij Rotterdam.", "en": "My parents live in the Netherlands, near Rotterdam." } },
+        { "id": "w6-03", "es": "Augusto y su mamá", "en": "Augusto and his mom", "nl": "Augusto en zijn moeder", "ex": { "es": "Augusto y su mamá cocinan juntos.", "nl": "Augusto en zijn moeder koken samen.", "en": "Augusto and his mom cook together." } },
+        { "id": "w6-04", "es": "Nuestra casa en Róterdam", "en": "Our house in Rotterdam", "nl": "Ons huis in Rotterdam", "ex": { "es": "Nuestra casa en Róterdam es pequeña pero bonita.", "nl": "Ons huis in Rotterdam is klein maar mooi.", "en": "Our house in Rotterdam is small but nice." } },
+        { "id": "w6-05", "es": "¡Qué chévere!", "en": "How cool!", "nl": "Wat gaaf!", "ex": { "es": "¿Vamos a la playa? ¡Qué chévere!", "nl": "Gaan we naar het strand? Wat gaaf!", "en": "We're going to the beach? How cool!" } },
+        { "id": "w6-06", "es": "¡Bacán!", "en": "Great! / Awesome!", "nl": "Te gek!", "ex": { "es": "¿Ya tienes los pasajes? ¡Bacán!", "nl": "Heb je de tickets al? Te gek!", "en": "You've got the tickets already? Awesome!" } },
+        { "id": "w6-07", "es": "Oye, causa", "en": "Hey, mate", "nl": "Hé, maat", "ex": { "es": "Oye, causa, ¿vamos por un café?", "nl": "Hé, maat, gaan we een koffie drinken?", "en": "Hey mate, shall we go for a coffee?" } },
+        { "id": "w6-08", "es": "Es mi pata", "en": "He's my buddy", "nl": "Hij is mijn maatje", "ex": { "es": "Te presento a Lucho, es mi pata del colegio.", "nl": "Dit is Lucho, hij is mijn maatje van school.", "en": "This is Lucho, he's my buddy from school." } },
+        { "id": "w6-09", "es": "Ya, pe", "en": "OK then / Sure", "nl": "Oké dan", "ex": { "es": "¿Nos vemos a las ocho? Ya, pe.", "nl": "Zien we elkaar om acht uur? Oké dan.", "en": "See you at eight? OK then." } },
+        { "id": "w6-10", "es": "Al toque", "en": "Right away", "nl": "Meteen", "ex": { "es": "Espérame, vengo al toque.", "nl": "Wacht op me, ik kom meteen.", "en": "Wait for me, I'll be right there." } },
+        { "id": "w6-11", "es": "Un cafecito", "en": "A little coffee", "nl": "Een kopje koffie", "ex": { "es": "¿Te provoca un cafecito?", "nl": "Heb je zin in een kopje koffie?", "en": "Do you fancy a little coffee?" } },
+        { "id": "w6-12", "es": "Ahorita vengo", "en": "I'll be back in a bit", "nl": "Ik kom zo", "ex": { "es": "Voy a la tienda, ahorita vengo.", "nl": "Ik ga even naar de winkel, ik kom zo.", "en": "I'm going to the shop, I'll be back in a bit." } }
+      ],
+      "grammar": {
+        "id": "g19", "title": "Mijn, jouw, zijn, ons; en verkleinwoorden", "title_es": "posesivos + diminutivos y jerga",
+        "explain": [
+          "Bezittelijke woorden: mi/mis (mijn), tu/tus (jouw), su/sus (zijn, haar, uw, hun), nuestro/nuestra/nuestros/nuestras (ons). Ze passen zich aan het ding aan, niet aan de bezitter: mis papás, nuestra casa.",
+          "Peruanen maken alles graag klein en lief met -ito/-ita: café → cafecito, ahora → ahorita, poco → poquito. Ahorita betekent in Peru 'zo meteen' (en soms 'ooit').",
+          "Limeense slang: chévere en bacán (gaaf), causa en pata (maat, vriend), ya (oké), pe (= pues, voor nadruk: ya pe), al toque (meteen)."
+        ],
+        "compare": "Nederlands: mijn ouders, ons huis. Spaans: mis papás, nuestra casa. Pas op met su: dat kan zijn, haar, uw én hun betekenen; de context maakt het duidelijk. En waar het Nederlands '-tje' zegt (kopje), zegt het Spaans '-ito' (cafecito).",
+        "examples": [ { "es": "Mis papás viven en Holanda.", "nl": "Mijn ouders wonen in Nederland." }, { "es": "Augusto y su mamá.", "nl": "Augusto en zijn moeder." }, { "es": "Oye, causa, ¿un cafecito?", "nl": "Hé maat, een kopje koffie?" } ],
+        "exercises": [
+          { "type": "fill", "q": "Maak de zin af", "prompt": "___ papás viven en Holanda.", "opts": ["Mis", "Mi", "Sus"], "answer": "Mis", "why": "Mijn + meervoud (papás): mis." },
+          { "type": "fill", "q": "Maak de zin af", "prompt": "Augusto y ___ mamá.", "opts": ["su", "sus", "mi"], "answer": "su", "why": "Zijn + enkelvoud (mamá): su." },
+          { "type": "fill", "q": "Maak de zin af (ons)", "prompt": "___ casa está en Róterdam.", "opts": ["Nuestra", "Nuestro", "Nuestras"], "answer": "Nuestra", "why": "Casa is vrouwelijk enkelvoud: nuestra." },
+          { "type": "mc", "say": "prompt", "q": "Wat betekent dit?", "prompt": "¡Qué chévere!", "opts": ["Wat gaaf!", "Wat duur!", "Wat vervelend!"], "answer": "Wat gaaf!", "why": "Chévere = gaaf, leuk." },
+          { "type": "type", "q": "Schrijf het in het Spaans (Peruaans)", "prompt": "meteen", "answer": "al toque", "alt": ["Al toque"], "why": "Al toque = meteen, in Lima-slang." }
+        ],
+        "en": {
+          "title": "My, your, his, our; and diminutives",
+          "explain": [
+            "Possessives: mi/mis (my), tu/tus (your), su/sus (his, her, your formal, their), nuestro/nuestra/nuestros/nuestras (our). They agree with the thing owned, not the owner: mis papás, nuestra casa.",
+            "Peruvians love making things small and sweet with -ito/-ita: café → cafecito, ahora → ahorita, poco → poquito. In Peru ahorita means 'in a bit' (and sometimes 'some day').",
+            "Lima slang: chévere and bacán (cool), causa and pata (mate, buddy), ya (OK), pe (= pues, for emphasis: ya pe), al toque (right away)."
+          ],
+          "compare": "English: my parents, our house. Spanish: mis papás, nuestra casa, with an -s or -a to agree with the thing. Careful with su: it can mean his, her, your (formal) and their; context makes it clear. And where English adds 'little' (a little coffee), Spanish adds -ito (un cafecito).",
+          "examples": [ { "es": "Mis papás viven en Holanda.", "en": "My parents live in the Netherlands." }, { "es": "Augusto y su mamá.", "en": "Augusto and his mom." }, { "es": "Oye, causa, ¿un cafecito?", "en": "Hey mate, a little coffee?" } ],
+          "exercises": [
+            { "type": "fill", "q": "Complete the sentence", "prompt": "___ papás viven en Holanda.", "opts": ["Mis", "Mi", "Sus"], "answer": "Mis", "why": "My + plural (papás): mis." },
+            { "type": "fill", "q": "Complete the sentence", "prompt": "Augusto y ___ mamá.", "opts": ["su", "sus", "mi"], "answer": "su", "why": "His + singular (mamá): su." },
+            { "type": "fill", "q": "Complete the sentence (our)", "prompt": "___ casa está en Róterdam.", "opts": ["Nuestra", "Nuestro", "Nuestras"], "answer": "Nuestra", "why": "Casa is feminine singular: nuestra." },
+            { "type": "mc", "say": "prompt", "q": "What does this mean?", "prompt": "¡Qué chévere!", "opts": ["How cool!", "How expensive!", "How annoying!"], "answer": "How cool!", "why": "Chévere = cool, nice." },
+            { "type": "type", "q": "Write it in Spanish (Peruvian)", "prompt": "right away", "answer": "al toque", "alt": ["Al toque"], "why": "Al toque = right away, in Lima slang." }
+          ]
+        }
+      },
+      "mission": {
+        "scenario": "silvia",
+        "goal": "Stel 4 familieleden van jou voor aan Silvia en gebruik 3 Limeense slangwoorden goed.",
+        "goal_en": "Introduce 4 of your family members to Silvia and use 3 Lima slang words correctly.",
+        "check": "Claire presenta al menos a 4 personas de su familia usando posesivos (mi hermana, mis papás, mi mamá...) y usa bien al menos 3 palabras de jerga peruana (chévere, bacán, causa, pata, ya, pe, al toque, ahorita).",
+        "setup": "Pregúntale por su familia en Holanda, una persona a la vez. Usa jerga de forma natural ('¡qué bacán!', 'ya, pe') para que Claire la imite, y celébralo cuando ella la use."
+      }
     },
     {
-      "n": 20,
-      "title": "Je promotie en je plannen",
-      "title_es": "Tu doctorado y tus planes"
+      "n": 20, "title": "Je promotie en je plannen", "title_es": "Tu doctorado y tus planes", "title_en": "Your PhD and your plans",
+      "items": [
+        { "id": "w6-13", "es": "Estoy haciendo un doctorado", "en": "I'm doing a PhD", "nl": "Ik doe een promotieonderzoek", "ex": { "es": "Estoy haciendo un doctorado en la universidad.", "nl": "Ik doe een promotieonderzoek aan de universiteit.", "en": "I'm doing a PhD at the university." } },
+        { "id": "w6-14", "es": "Estoy investigando…", "en": "I'm researching…", "nl": "Ik doe onderzoek naar…", "ex": { "es": "Estoy investigando cómo… (y lo explicas con tus palabras).", "nl": "Ik doe onderzoek naar hoe… (en je legt het uit in je eigen woorden).", "en": "I'm researching how… (and you explain it in your own words)." } },
+        { "id": "w6-15", "es": "Estoy escribiendo mi tesis", "en": "I'm writing my thesis", "nl": "Ik schrijf mijn proefschrift", "ex": { "es": "Este año estoy escribiendo mi tesis.", "nl": "Dit jaar schrijf ik mijn proefschrift.", "en": "This year I'm writing my thesis." } },
+        { "id": "w6-16", "es": "Trabajo en la universidad", "en": "I work at the university", "nl": "Ik werk op de universiteit", "ex": { "es": "Trabajo en la universidad de lunes a viernes.", "nl": "Ik werk van maandag tot vrijdag op de universiteit.", "en": "I work at the university from Monday to Friday." } },
+        { "id": "w6-17", "es": "Ahora estoy aprendiendo español", "en": "Now I'm learning Spanish", "nl": "Nu leer ik Spaans", "ex": { "es": "Ahora estoy aprendiendo español para hablar con la familia.", "nl": "Nu leer ik Spaans om met de familie te praten.", "en": "Now I'm learning Spanish to talk with the family." } },
+        { "id": "w6-18", "es": "¿Qué estás haciendo?", "en": "What are you doing?", "nl": "Waar ben je mee bezig?", "ex": { "es": "Amor, ¿qué estás haciendo? ¿Vienes a comer?", "nl": "Schat, waar ben je mee bezig? Kom je eten?", "en": "Love, what are you doing? Are you coming to eat?" } },
+        { "id": "w6-19", "es": "Vamos a ir a la playa", "en": "We're going to go to the beach", "nl": "We gaan naar het strand", "ex": { "es": "Si hace sol, vamos a ir a la playa.", "nl": "Als de zon schijnt, gaan we naar het strand.", "en": "If it's sunny, we're going to go to the beach." } },
+        { "id": "w6-20", "es": "El sábado voy a visitar Barranco", "en": "On Saturday I'm going to visit Barranco", "nl": "Zaterdag ga ik Barranco bezoeken", "ex": { "es": "El sábado voy a visitar Barranco con Silvia.", "nl": "Zaterdag ga ik met Silvia Barranco bezoeken.", "en": "On Saturday I'm going to visit Barranco with Silvia." } },
+        { "id": "w6-21", "es": "¿Qué van a hacer el fin de semana?", "en": "What are you going to do at the weekend?", "nl": "Wat gaan jullie dit weekend doen?", "ex": { "es": "Chicos, ¿qué van a hacer el fin de semana?", "nl": "Jongens, wat gaan jullie dit weekend doen?", "en": "Guys, what are you going to do at the weekend?" } },
+        { "id": "w6-22", "es": "Vamos a comer con la familia", "en": "We're going to eat with the family", "nl": "We gaan met de familie eten", "ex": { "es": "El domingo vamos a comer con la familia de Augusto.", "nl": "Zondag gaan we met de familie van Augusto eten.", "en": "On Sunday we're going to eat with Augusto's family." } },
+        { "id": "w6-23", "es": "Voy a descansar", "en": "I'm going to rest", "nl": "Ik ga uitrusten", "ex": { "es": "Hoy no salgo, voy a descansar.", "nl": "Vandaag ga ik niet weg, ik ga uitrusten.", "en": "I'm not going out today, I'm going to rest." } },
+        { "id": "w6-24", "es": "Vamos a conocer el Centro de Lima", "en": "We're going to see the centre of Lima", "nl": "We gaan het centrum van Lima bekijken", "ex": { "es": "El lunes vamos a conocer el Centro de Lima.", "nl": "Maandag gaan we het centrum van Lima bekijken.", "en": "On Monday we're going to see the centre of Lima." } }
+      ],
+      "grammar": {
+        "id": "g20", "title": "Ermee bezig zijn, en iets gaan doen", "title_es": "estar + gerundio (el doctorado) + ir a + infinitivo",
+        "explain": [
+          "Wat je nu of deze tijd aan het doen bent, zeg je met estar + gerundio: estoy investigando, estoy escribiendo mi tesis. Het gerundio maak je zo: -ar wordt -ando (investigar → investigando), -er en -ir worden -iendo (hacer → haciendo, escribir → escribiendo).",
+          "Plannen zeg je met ir a + werkwoord: voy a visitar Barranco, vamos a ir a la playa. Ir: voy, vas, va, vamos, van.",
+          "Met deze twee kun je over je promotie en je plannen praten zonder moeilijke tijden."
+        ],
+        "compare": "Nederlands: 'ik ben mijn proefschrift aan het schrijven' wordt estoy escribiendo mi tesis. En 'gaan + werkwoord' werkt precies zoals in het Nederlands: ik ga Barranco bezoeken = voy a visitar Barranco (met een 'a' ertussen).",
+        "examples": [ { "es": "Estoy investigando…", "nl": "Ik doe onderzoek naar…" }, { "es": "Estoy escribiendo mi tesis.", "nl": "Ik ben mijn proefschrift aan het schrijven." }, { "es": "El sábado voy a visitar Barranco.", "nl": "Zaterdag ga ik Barranco bezoeken." } ],
+        "exercises": [
+          { "type": "fill", "q": "Maak de zin af", "prompt": "Estoy ___ mi tesis.", "opts": ["escribiendo", "escribando", "escribir"], "answer": "escribiendo", "why": "Escribir is een -ir werkwoord: escribiendo." },
+          { "type": "fill", "q": "Maak de zin af", "prompt": "¿Qué estás ___?", "opts": ["haciendo", "hacer", "hacando"], "answer": "haciendo", "why": "Hacer → haciendo." },
+          { "type": "fill", "q": "Maak de zin af (ik)", "prompt": "El sábado ___ a visitar Barranco.", "opts": ["voy", "vamos", "va"], "answer": "voy", "why": "Ik = voy a + werkwoord." },
+          { "type": "mc", "q": "Hoe zeg je dit?", "prompt": "We gaan naar het strand.", "opts": ["Vamos a ir a la playa.", "Vamos ir a la playa.", "Vamos a la playa ir."], "answer": "Vamos a ir a la playa.", "why": "Ir a + werkwoord: vamos a ir." },
+          { "type": "type", "q": "Schrijf het in het Spaans", "prompt": "Ik ben nu Spaans aan het leren.", "answer": "Ahora estoy aprendiendo español", "alt": ["Estoy aprendiendo español", "Ahora estoy aprendiendo español."], "why": "Aprender → aprendiendo." }
+        ],
+        "en": {
+          "title": "Being in the middle of something, and going to do something",
+          "explain": [
+            "What you're doing now or these days goes with estar + gerund: estoy investigando, estoy escribiendo mi tesis. You make the gerund like this: -ar becomes -ando (investigar → investigando), -er and -ir become -iendo (hacer → haciendo, escribir → escribiendo).",
+            "Plans go with ir a + verb: voy a visitar Barranco, vamos a ir a la playa. Ir: voy, vas, va, vamos, van.",
+            "With these two you can talk about your PhD and your plans without any difficult tenses."
+          ],
+          "compare": "Almost word for word like English: 'I'm writing my thesis' = estoy escribiendo mi tesis (-ando/-iendo = -ing). And 'going to' works the same: I'm going to visit Barranco = voy a visitar Barranco. Just don't forget the little 'a'.",
+          "examples": [ { "es": "Estoy investigando…", "en": "I'm researching…" }, { "es": "Estoy escribiendo mi tesis.", "en": "I'm writing my thesis." }, { "es": "El sábado voy a visitar Barranco.", "en": "On Saturday I'm going to visit Barranco." } ],
+          "exercises": [
+            { "type": "fill", "q": "Complete the sentence", "prompt": "Estoy ___ mi tesis.", "opts": ["escribiendo", "escribando", "escribir"], "answer": "escribiendo", "why": "Escribir is an -ir verb: escribiendo." },
+            { "type": "fill", "q": "Complete the sentence", "prompt": "¿Qué estás ___?", "opts": ["haciendo", "hacer", "hacando"], "answer": "haciendo", "why": "Hacer → haciendo." },
+            { "type": "fill", "q": "Complete the sentence (I)", "prompt": "El sábado ___ a visitar Barranco.", "opts": ["voy", "vamos", "va"], "answer": "voy", "why": "I = voy a + verb." },
+            { "type": "mc", "q": "How do you say this?", "prompt": "We're going to go to the beach.", "opts": ["Vamos a ir a la playa.", "Vamos ir a la playa.", "Vamos a la playa ir."], "answer": "Vamos a ir a la playa.", "why": "Ir a + verb: vamos a ir." },
+            { "type": "type", "q": "Write it in Spanish", "prompt": "I'm learning Spanish now.", "answer": "Ahora estoy aprendiendo español", "alt": ["Estoy aprendiendo español", "Ahora estoy aprendiendo español."], "why": "Aprender → aprendiendo." }
+          ]
+        }
+      },
+      "mission": {
+        "scenario": "diego",
+        "goal": "Leg oom Diego in 3 zinnen uit wat je onderzoekt en maak een weekendplan met 3 activiteiten.",
+        "goal_en": "Explain to uncle Diego in 3 sentences what you're researching, and make a weekend plan with 3 activities.",
+        "check": "Claire explica su doctorado en al menos 3 frases (usando estar + gerundio, por ejemplo 'estoy investigando', 'estoy escribiendo') y cuenta un plan de fin de semana con al menos 3 actividades usando 'ir a' + infinitivo.",
+        "setup": "Tienes curiosidad por el doctorado de Claire: pregúntale qué investiga, en qué universidad y cuánto le falta, una cosa por turno. No inventes el tema de su investigación: deja que ella lo cuente. Después pregúntale qué van a hacer el fin de semana en Lima."
+      }
     },
     {
-      "n": 21,
-      "title": "Etentje met de familie",
-      "title_es": "Cena familiar"
+      "n": 21, "title": "Etentje met de familie", "title_es": "Cena familiar", "title_en": "Family dinner",
+      "items": [
+        { "id": "w6-25", "es": "Me encanta el ají de gallina", "en": "I love ají de gallina", "nl": "Ik ben dol op ají de gallina", "ex": { "es": "Rosario, me encanta el ají de gallina.", "nl": "Rosario, ik ben dol op ají de gallina.", "en": "Rosario, I love ají de gallina." } },
+        { "id": "w6-26", "es": "Me encantan los picarones", "en": "I love picarones", "nl": "Ik ben dol op picarones", "ex": { "es": "De postre, ¡me encantan los picarones!", "nl": "Als toetje: ik ben dol op picarones!", "en": "For dessert: I love picarones!" } },
+        { "id": "w6-27", "es": "¡Está buenazo!", "en": "It's delicious!", "nl": "Het is superlekker!", "ex": { "es": "¡Este ají de gallina está buenazo!", "nl": "Deze ají de gallina is superlekker!", "en": "This ají de gallina is delicious!" } },
+        { "id": "w6-28", "es": "Felicitaciones a la cocinera", "en": "Compliments to the cook", "nl": "Complimenten aan de kok", "ex": { "es": "¡Todo riquísimo! Felicitaciones a la cocinera.", "nl": "Alles was heerlijk! Complimenten aan de kok.", "en": "Everything was delicious! Compliments to the cook." } },
+        { "id": "w6-29", "es": "Sí, un poquito más, por favor", "en": "Yes, a little more, please", "nl": "Ja, nog een klein beetje, graag", "ex": { "es": "¿Más causa? Sí, un poquito más, por favor.", "nl": "Nog wat causa? Ja, nog een klein beetje, graag.", "en": "More causa? Yes, a little more, please." } },
+        { "id": "w6-30", "es": "Ya no puedo más", "en": "I can't eat any more", "nl": "Ik kan niet meer", "ex": { "es": "Gracias, estaba riquísimo, pero ya no puedo más.", "nl": "Dank je, het was heerlijk, maar ik kan niet meer.", "en": "Thank you, it was delicious, but I can't eat any more." } },
+        { "id": "w6-31", "es": "¡Salud!", "en": "Cheers!", "nl": "Proost!", "ex": { "es": "¡Por la familia! ¡Salud!", "nl": "Op de familie! Proost!", "en": "To the family! Cheers!" } },
+        { "id": "w6-32", "es": "Ayer comí anticuchos", "en": "Yesterday I ate anticuchos", "nl": "Gisteren heb ik anticuchos gegeten", "ex": { "es": "Ayer comí anticuchos en la calle con Augusto.", "nl": "Gisteren heb ik met Augusto op straat anticuchos gegeten.", "en": "Yesterday I ate anticuchos in the street with Augusto." } },
+        { "id": "w6-33", "es": "Anoche salimos a Barranco", "en": "Last night we went out in Barranco", "nl": "Gisteravond zijn we in Barranco uitgegaan", "ex": { "es": "Anoche salimos a Barranco con Silvia.", "nl": "Gisteravond zijn we met Silvia in Barranco uitgegaan.", "en": "Last night we went out in Barranco with Silvia." } },
+        { "id": "w6-34", "es": "Bebí una chicha morada", "en": "I drank a chicha morada", "nl": "Ik heb een chicha morada gedronken", "ex": { "es": "En el almuerzo bebí una chicha morada bien helada.", "nl": "Bij de lunch heb ik een ijskoude chicha morada gedronken.", "en": "At lunch I drank an ice-cold chicha morada." } },
+        { "id": "w6-35", "es": "¿Ya comiste?", "en": "Have you eaten yet?", "nl": "Heb je al gegeten?", "ex": { "es": "Hijita, ¿ya comiste? Te sirvo algo.", "nl": "Meisje, heb je al gegeten? Ik schep wat voor je op.", "en": "Sweetie, have you eaten yet? I'll serve you something." } },
+        { "id": "w6-36", "es": "Gracias por invitarme", "en": "Thank you for inviting me", "nl": "Bedankt voor de uitnodiging", "ex": { "es": "Gracias por invitarme, Rosario. Todo estuvo delicioso.", "nl": "Bedankt voor de uitnodiging, Rosario. Alles was heerlijk.", "en": "Thank you for inviting me, Rosario. Everything was delicious." } }
+      ],
+      "grammar": {
+        "id": "g21", "title": "Verleden tijd van -er en -ir, en encantar", "title_es": "pretérito -er/-ir + encantar",
+        "explain": [
+          "Werkwoorden op -er en -ir hebben in de verleden tijd dezelfde uitgangen: comí, comiste, comió, comimos, comieron. Salir: salí, saliste, salió, salimos, salieron. Beber: bebí, bebiste, bebió…",
+          "Net als bij -ar telt het accent: como (ik eet) en comió (hij at) zijn heel verschillend.",
+          "Encantar is een sterke 'gustar': me encanta el ají de gallina (ik ben er dol op), me encantan los picarones. Ook hier past het werkwoord zich aan aan het ding."
+        ],
+        "compare": "Nederlands: 'ik heb anticuchos gegeten', 'we zijn uitgegaan'. Spaans: één woord, comí, salimos. En 'ik ben dol op' werkt zoals gustar: het eten is het onderwerp, dus me encantan los picarones (meervoud).",
+        "examples": [ { "es": "Ayer comí anticuchos.", "nl": "Gisteren heb ik anticuchos gegeten." }, { "es": "Anoche salimos a Barranco.", "nl": "Gisteravond zijn we in Barranco uitgegaan." }, { "es": "Me encantan los picarones.", "nl": "Ik ben dol op picarones." } ],
+        "exercises": [
+          { "type": "fill", "q": "Maak de zin af (ik)", "prompt": "Ayer ___ anticuchos.", "opts": ["comí", "como", "comió"], "answer": "comí", "why": "Ik, verleden tijd: comí." },
+          { "type": "fill", "q": "Maak de zin af (wij)", "prompt": "Anoche ___ a Barranco.", "opts": ["salimos", "salemos", "salieron"], "answer": "salimos", "why": "Wij, verleden tijd van salir: salimos." },
+          { "type": "fill", "q": "Maak de zin af", "prompt": "Me ___ los picarones.", "opts": ["encantan", "encanta", "encanto"], "answer": "encantan", "why": "Picarones is meervoud: encantan." },
+          { "type": "mc", "q": "Hoe zeg je dit?", "prompt": "Heb je al gegeten?", "opts": ["¿Ya comiste?", "¿Ya comes?", "¿Ya comí?"], "answer": "¿Ya comiste?", "why": "Jij, verleden tijd: comiste." },
+          { "type": "type", "q": "Schrijf het in het Spaans", "prompt": "Ik ben dol op ají de gallina.", "answer": "Me encanta el ají de gallina", "alt": ["Me encanta ají de gallina"], "why": "Eén gerecht: me encanta." }
+        ],
+        "en": {
+          "title": "Past tense of -er and -ir, and encantar",
+          "explain": [
+            "Verbs in -er and -ir share the same past-tense endings: comí, comiste, comió, comimos, comieron. Salir: salí, saliste, salió, salimos, salieron. Beber: bebí, bebiste, bebió…",
+            "As with -ar, the accent matters: como (I eat) and comió (he ate) are very different.",
+            "Encantar is a strong 'gustar': me encanta el ají de gallina (I love it), me encantan los picarones. Again the verb agrees with the thing."
+          ],
+          "compare": "English simple past: I ate = comí, we went out = salimos, and the ending shows who did it. 'I love' works like gustar: the food is the subject, so me encantan los picarones (plural), literally 'picarones delight me'.",
+          "examples": [ { "es": "Ayer comí anticuchos.", "en": "Yesterday I ate anticuchos." }, { "es": "Anoche salimos a Barranco.", "en": "Last night we went out in Barranco." }, { "es": "Me encantan los picarones.", "en": "I love picarones." } ],
+          "exercises": [
+            { "type": "fill", "q": "Complete the sentence (I)", "prompt": "Ayer ___ anticuchos.", "opts": ["comí", "como", "comió"], "answer": "comí", "why": "I, past tense: comí." },
+            { "type": "fill", "q": "Complete the sentence (we)", "prompt": "Anoche ___ a Barranco.", "opts": ["salimos", "salemos", "salieron"], "answer": "salimos", "why": "We, past tense of salir: salimos." },
+            { "type": "fill", "q": "Complete the sentence", "prompt": "Me ___ los picarones.", "opts": ["encantan", "encanta", "encanto"], "answer": "encantan", "why": "Picarones is plural: encantan." },
+            { "type": "mc", "q": "How do you say this?", "prompt": "Have you eaten yet?", "opts": ["¿Ya comiste?", "¿Ya comes?", "¿Ya comí?"], "answer": "¿Ya comiste?", "why": "You, past tense: comiste." },
+            { "type": "type", "q": "Write it in Spanish", "prompt": "I love ají de gallina.", "answer": "Me encanta el ají de gallina", "alt": ["Me encanta ají de gallina"], "why": "One dish: me encanta." }
+          ]
+        }
+      },
+      "mission": {
+        "scenario": "cena",
+        "goal": "Prijs twee gerechten, vertel wat je gisteren hebt gegeten, zeg ja tegen een tweede portie en proost.",
+        "goal_en": "Praise two dishes, say what you ate yesterday, accept a second helping and make a toast.",
+        "check": "Claire elogia al menos 2 platos (me encanta, está buenazo, qué rico...), cuenta qué comió ayer usando un verbo -er o -ir en pretérito (comí, bebí, salí...), acepta que le sirvan más y brinda (¡salud!).",
+        "setup": "Hay causa limeña, ají de gallina y de postre picarones. Pregúntale qué comió ayer. Ofrécele más comida con insistencia cariñosa ('¿un poquito más, hijita?') y propón un brindis al final si ella no lo hace."
+      }
     }
   ]
 }
