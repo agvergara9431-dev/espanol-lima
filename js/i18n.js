@@ -59,6 +59,7 @@ const STR = {
     "set.pushOn": "Meldingen staan aan op dit toestel.", "set.pushOff": "Meldingen uitzetten", "set.pushDenied": "Meldingen zijn geblokkeerd. Zet ze aan in de instellingen van je telefoon of browser.", "set.pushBtn": "Meldingen aanzetten",
     "set.pushNoPerm": "Zonder toestemming geen meldingen. Berichtjes staan wel in de chat.", "set.pushFail": "Meldingen aanzetten lukte niet.",
     "set.window": "De eindtijd moet na de begintijd liggen.", "set.saved": "Opgeslagen.", "set.saveFail": "Opslaan lukte niet.",
+    "set.voice": "Stem", "set.voiceSub": "De Spaanse stem van de hele app. Kies er een en druk op Probeer.", "set.voiceAuto": "Automatisch (vrouwenstem){name}", "set.voiceTry": "Probeer", "set.voiceNone": "Dit apparaat heeft geen Spaanse stem.", "set.voiceSample": "¡Hola! Soy Lucía, de Lima. ¿Cómo estás?",
     "set.lang": "Taal", "set.langSub": "De taal van de app, de vertalingen en de uitleg.",
     // login & password
     "login.app": "Español para Lima", "login.title": "Welkom terug", "login.intro": "Log in met je e-mailadres en wachtwoord. Je blijft daarna ingelogd.", "login.email": "E-mail", "login.password": "Wachtwoord",
@@ -138,6 +139,7 @@ const STR = {
     "set.pushOn": "Notifications are on for this device.", "set.pushOff": "Turn notifications off", "set.pushDenied": "Notifications are blocked. Turn them on in your phone or browser settings.", "set.pushBtn": "Turn on notifications",
     "set.pushNoPerm": "No permission, no notifications. Messages still appear in the chat.", "set.pushFail": "Turning on notifications didn't work.",
     "set.window": "The end time must be after the start time.", "set.saved": "Saved.", "set.saveFail": "Saving didn't work.",
+    "set.voice": "Voice", "set.voiceSub": "The Spanish voice for the whole app. Pick one and press Try.", "set.voiceAuto": "Automatic (female voice){name}", "set.voiceTry": "Try", "set.voiceNone": "This device has no Spanish voice.", "set.voiceSample": "¡Hola! Soy Lucía, de Lima. ¿Cómo estás?",
     "set.lang": "Language", "set.langSub": "The language of the app, the translations and the explanations.",
     "login.app": "Español para Lima", "login.title": "Welcome back", "login.intro": "Log in with your email and password. You'll stay logged in.", "login.email": "Email", "login.password": "Password",
     "login.show": "Show password", "login.hide": "Hide password", "login.btn": "Log in", "login.wait": "One moment...", "login.forgot": "Forgot your password? Ask Augusto for a new one.",

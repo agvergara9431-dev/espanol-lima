@@ -3,7 +3,7 @@
 import { CONFIG } from "./config.js";
 import { icon } from "./icons.js";
 import { t, getLang } from "./i18n.js";
-import { $, esc, S, speak, hasEs, status, isOwner } from "./core.js";
+import { $, esc, S, speak, hasEs, status, isOwner, esVoices, isFemale, setVoice, voiceName, voicesReady } from "./core.js";
 import { passwordForm } from "./login.js";
 
 export const luciaActions = { scenarios() {}, badge() {}, setLang() {} };
@@ -102,10 +102,15 @@ async function openSettings() {
   const pushState = !("Notification" in window) || !("serviceWorker" in navigator) || !("PushManager" in window) ? "unsupported" : Notification.permission;
   const pw = passwordForm();
   const lang = getLang();
+  await voicesReady();
+  const prefs = S.readonly ? null : await S.store.prefs().catch(() => null);
+  const voices = esVoices(), chosen = prefs?.voice && voices.some((v) => v.name === prefs.voice) ? prefs.voice : "";
+  const voiceOpts = `<option value="">${esc(t("set.voiceAuto", { name: !chosen && voiceName() ? ": " + voiceName() : "" }))}</option>` + voices.map((v) => `<option value="${esc(v.name)}" ${v.name === chosen ? "selected" : ""}>${esc(v.name)} · ${esc(v.lang)}${isFemale(v) ? " ♀" : ""}</option>`).join("");
   $("week").hidden = false;
   $("week").innerHTML = `<div class="sheet-head"><button class="icon-btn" id="setBack" aria-label="${esc(t("btn.back"))}">${icon("back")}</button><div><span class="mono muted">Lucía</span><h2 class="display">${esc(t("lucia.settings"))}</h2></div></div>
     <div class="settings">
       ${S.readonly ? "" : `<div class="set-row"><b>${esc(t("set.lang"))}</b><div class="seg" id="setLang"><button type="button" data-lang="nl" aria-pressed="${lang === "nl"}">Nederlands</button><button type="button" data-lang="en" aria-pressed="${lang === "en"}">English</button></div><small>${esc(t("set.langSub"))}</small></div>`}
+      ${S.readonly ? "" : `<div class="set-row"><b>${esc(t("set.voice"))}</b>${voices.length ? `<div class="row"><select id="setVoice">${voiceOpts}</select><button type="button" class="btn ghost" id="voiceTry">${icon("speaker", 18)} ${esc(t("set.voiceTry"))}</button></div><small>${esc(t("set.voiceSub"))}</small>` : `<small>${esc(t("set.voiceNone"))}</small>`}</div>`}
       <label class="switch-row"><span><b>${esc(t("set.messages"))}</b><small>${esc(t("set.messagesSub"))}</small></span><input type="checkbox" id="setEnabled" ${st.enabled ? "checked" : ""}></label>
       <div class="set-row"><b>${esc(t("set.between"))}</b><div class="row"><select id="setStart">${hours(st.window_start, 6, 22)}</select><span>${esc(t("set.and"))}</span><select id="setEnd">${hours(st.window_end, 7, 24)}</select></div><small>${esc(t("set.tz"))}</small></div>
       <div class="set-row"><b>${esc(t("set.perDay"))}</b><div class="seg" id="setPerDay">${[0, 1, 2, 3, 4].map((n) => `<button type="button" data-n="${n}" aria-pressed="${n === st.per_day}">${n}</button>`).join("")}</div><small>${esc(t("set.perDaySub"))}</small></div>
@@ -118,6 +123,12 @@ async function openSettings() {
       ${S.readonly ? "" : pw.html}</div>`;
   if (!S.readonly) pw.bind();
   $("setLang")?.querySelectorAll("button").forEach((b) => (b.onclick = async () => { await luciaActions.setLang(b.dataset.lang); openSettings(); }));
+  // Voice: applied at once to the whole app and saved per user (a name missing on another device falls back to auto).
+  $("setVoice")?.addEventListener("change", async (ev) => {
+    setVoice(ev.target.value); speak(t("set.voiceSample"));
+    try { await S.store.savePrefs({ lang: getLang(), voice: ev.target.value || null }); $("setStatus").textContent = t("set.saved"); } catch { $("setStatus").textContent = t("set.saveFail"); }
+  });
+  $("voiceTry")?.addEventListener("click", () => speak(t("set.voiceSample")));
   let perDay = st.per_day;
   $("setPerDay").querySelectorAll("button").forEach((b) => (b.onclick = () => { perDay = +b.dataset.n; $("setPerDay").querySelectorAll("button").forEach((x) => x.setAttribute("aria-pressed", x === b)); }));
   $("setBack").onclick = closeSettings;

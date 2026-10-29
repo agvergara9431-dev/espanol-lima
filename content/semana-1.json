@@ -1099,7 +1099,8 @@
               "Een kind van vijf"
             ],
             "answer": "De taxichauffeur",
-            "why": "Onbekenden en mensen die je bedienen spreek je aan met usted."
+            "why": "Onbekenden en mensen die je bedienen spreek je aan met usted.",
+            "say": "none"
           },
           {
             "type": "type",
@@ -1181,7 +1182,8 @@
                 "A five-year-old child"
               ],
               "answer": "The taxi driver",
-              "why": "Strangers and people serving you get usted."
+              "why": "Strangers and people serving you get usted.",
+              "say": "none"
             },
             {
               "type": "type",

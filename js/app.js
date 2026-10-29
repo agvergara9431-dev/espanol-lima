@@ -2,7 +2,7 @@
 import { createStore } from "./store.js";
 import { icon } from "./icons.js";
 import { t, tr, trEx, L, setLang } from "./i18n.js";
-import { $, esc, S, isOwner, schedule, loadContent, loadUser, voicesReady, pickVoice, hasEs, speak, status, updateToday, save, allSaved } from "./core.js";
+import { $, esc, S, isOwner, schedule, loadContent, loadUser, voicesReady, setVoice, hasEs, speak, status, updateToday, save, allSaved } from "./core.js";
 import { buildSession, buildReview, buildExtra, start, savedRun, setOnClose, showStamp } from "./session.js";
 import { renderHome, renderPassport, actions } from "./home.js";
 import { renderPanel, panelActions } from "./panel.js";
@@ -167,7 +167,7 @@ async function boot() {
     await loadUser(S.store.me.id);
     $("login").hidden = true; $("app").hidden = false;
     S.store.onNote((n) => { S.note = n; if (S.tab === "home" && !S.run) renderHome(); });
-    pickVoice();
+    setVoice(prefs?.voice);
     await startLucia();
     show(new URLSearchParams(location.search).get("tab") === "lucia" ? "lucia" : "home");
   } catch (e) {

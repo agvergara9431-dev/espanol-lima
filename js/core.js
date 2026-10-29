@@ -28,13 +28,28 @@ export const dateEs = (s) => parse(s).toLocaleDateString("es-PE", { weekday: "sh
 export const ls = { get(k) { try { return localStorage.getItem(k); } catch { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch {} }, del(k) { try { localStorage.removeItem(k); } catch {} } };
 export const BOX_DAYS = [0, 1, 3, 7, 14];
 
-// ---------- speech: always Spanish; no Spanish voice means no listening exercises ----------
-let esVoice = null;
+// ---------- speech: always Spanish, always a female voice; no Spanish voice means no listening exercises ----------
+// Female Spanish voices by name (iOS/macOS, Android/Chrome, Windows/Edge), Latin American first. If none of them
+// is installed, any Spanish voice that is not a known male one; only as a last resort a male voice.
+const FEMALE = ["paulina", "angelica", "soledad", "francisca", "esperanza", "ximena", "google espanol de estados unidos", "dalia", "sabina",
+  "monica", "marisol", "google espanol", "helena", "laura", "elvira", "lucia", "paloma", "flo", "sandy", "shelley", "grandma"];
+const MALE = ["jorge", "juan", "diego", "carlos", "pablo", "raul", "alvaro", "eddy", "reed", "rocko", "grandpa", "enrique", "miguel", "jordi", "andres", "gerardo"];
+const plain = (s) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+const named = (v, n) => new RegExp("(^|[^a-z])" + n + "([^a-z]|$)").test(plain(v.name));
+let esVoice = null, wanted = null; // wanted: the voice name saved in the user's settings (per device it may be missing)
+export const esVoices = () => ("speechSynthesis" in window ? speechSynthesis.getVoices().filter((v) => /^es([-_]|$)/i.test(v.lang)) : []);
+export const isFemale = (v) => FEMALE.some((n) => named(v, n));
+export function autoVoice(vs = esVoices()) {
+  for (const n of FEMALE) { const v = vs.find((x) => named(x, n)); if (v) return v; }
+  return vs.find((v) => !MALE.some((n) => named(v, n))) || vs[0] || null;
+}
 export const pickVoice = () => {
   if (!("speechSynthesis" in window)) return;
-  const vs = speechSynthesis.getVoices();
-  esVoice = vs.find((v) => /^es[-_](PE|419|MX|US|CO)/i.test(v.lang)) || vs.find((v) => /^es/i.test(v.lang)) || null;
+  const vs = esVoices();
+  esVoice = (wanted && vs.find((v) => v.name === wanted)) || autoVoice(vs);
 };
+export const setVoice = (name) => { wanted = name || null; pickVoice(); };
+export const voiceName = () => esVoice?.name || "";
 export function voicesReady() {
   if (!("speechSynthesis" in window)) return Promise.resolve();
   pickVoice();
@@ -44,6 +59,7 @@ export function voicesReady() {
     speechSynthesis.addEventListener("voiceschanged", () => { pickVoice(); if (esVoice) { clearTimeout(t); r(); } });
   });
 }
+if ("speechSynthesis" in window) speechSynthesis.addEventListener?.("voiceschanged", () => pickVoice());
 export const hasEs = () => !!esVoice;
 export function speak(text) {
   if (!esVoice) return;

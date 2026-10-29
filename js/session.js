@@ -1,6 +1,7 @@
 // The full session (review, new phrases, grammar, active practice, mission, closing quiz, weekly test),
 // plus the optional review and "Extra oefenen". One runner plays a list of steps; progress is kept in
 // localStorage so she can continue later, but a session only counts once it is finished.
+import { completeExercise } from "./extra-check.js";
 import { icon, starIcon } from "./icons.js";
 import { t, tr, trEx, L, grammarIn, getLang } from "./i18n.js";
 import {
@@ -33,7 +34,9 @@ function itemEx(item, kind, section, pool) {
 function grammarEx(g0, ex, section) {
   const g = grammarIn(g0);
   const base = { section, grammarId: g.id, qText: ex.q, why: ex.why };
-  if (ex.type === "mc") return { ...base, k: "mc", prompt: ex.prompt, opts: shuffle(ex.opts), answer: ex.answer };
+  // say: which side is Spanish, for the audio button. Usually the answer; "prompt" for "what does this mean?",
+  // "none" when neither side is Spanish.
+  if (ex.type === "mc") return { ...base, k: "mc", prompt: ex.prompt, ...(ex.say === "prompt" ? { lang: "es" } : {}), ...(ex.say === "none" ? { sayAfter: "" } : {}), opts: shuffle(ex.opts), answer: ex.answer };
   if (ex.type === "fill") return { ...base, k: "mc", prompt: ex.prompt, blank: true, lang: "es", opts: shuffle(ex.opts), answer: ex.answer };
   if (ex.type === "order") return { ...base, k: "order", prompt: ex.prompt, tokens: shuffle(ex.answer.split(" ")), answer: ex.answer };
   return { ...base, k: "type", prompt: ex.prompt, answer: ex.answer, alt: ex.alt || [] };
@@ -88,12 +91,15 @@ export async function buildExtra(n) {
   const pool = itemsUpTo(n);
   const weak = pool.filter((it) => S.cards[it.id] && (S.cards[it.id].ko > 0 && S.cards[it.id].box <= 1));
   const words = (weak.length >= 3 ? weak : shuffle(pool)).slice(0, 10).map((it) => ({ es: it.es, nl: tr(it) }));
-  const { exercises } = await S.store.ai("/extra", { words, lang: getLang() });
+  // The Worker already drops incomplete exercises; the app checks again and asks once more if too few are left.
+  let exercises = (await S.store.ai("/extra", { words, lang: getLang() })).exercises.filter(completeExercise);
+  if (exercises.length < 4) exercises = exercises.concat((await S.store.ai("/extra", { words, lang: getLang() })).exercises.filter(completeExercise));
+  if (!exercises.length) throw Object.assign(new Error("no complete exercises"), { code: "ai_failed" });
   const byEs = Object.fromEntries(pool.map((it) => [norm(it.es), it]));
-  const steps = exercises.map((ex) => {
+  const steps = exercises.slice(0, 10).map((ex) => {
     const it = byEs[norm(ex.word || "")];
     const e = ex.type === "type" ? { k: "type", prompt: ex.prompt, answer: ex.answer, alt: ex.alt || [] }
-      : { k: "mc", prompt: ex.prompt, blank: ex.type === "fill", opts: shuffle(ex.opts.includes(ex.answer) ? ex.opts : [ex.answer, ...ex.opts].slice(0, 4)), answer: ex.answer };
+      : { k: "mc", prompt: ex.prompt, blank: ex.type === "fill", lang: "es", opts: shuffle(ex.opts), answer: ex.answer };
     return { t: "ex", ex: { ...e, section: "extra", qText: ex.q, why: ex.why, itemId: it?.id, es: it?.es } };
   });
   return { kind: "extra", n, steps: [...steps, { t: "finish" }] };
@@ -173,7 +179,10 @@ function renderEx(e) {
   const opts = () => `<div class="opts">${e.opts.map((o, i) => `<button class="opt" data-o="${i}" ${e.blank || /[áéíóúñ¿¡]/i.test(o) ? 'lang="es"' : ""}>${esc(o)}</button>`).join("")}</div>`;
   const input = `<input class="ans" id="ans" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" lang="es" placeholder="${esc(t("ex.placeholder"))}">`;
   const pr = prompt ? `<div class="prompt display" ${e.lang === "es" ? 'lang="es"' : ""}>${e.blank ? esc(prompt).replace("___", '<span class="blank"></span>') : esc(prompt)}</div>` : "";
-  if (e.k === "mc") h += pr + (e.say ? sayBtn(e.say) : "") + opts();
+  // Audio wherever there is Spanish to hear: the Spanish prompt before answering (not a sentence with a gap,
+  // that would give the answer away), and the whole Spanish sentence in the verdict after answering.
+  const sayPrompt = e.say || (e.lang === "es" && !e.blank && prompt ? prompt : "");
+  if (e.k === "mc") h += pr + (sayPrompt ? sayBtn(sayPrompt) : "") + opts();
   if (e.k === "order") h += `${pr}<div class="built" id="built" lang="es"></div><div class="bank" lang="es">${e.tokens.map((tk, i) => `<button class="tok" data-t="${i}">${esc(tk)}</button>`).join("")}</div>`;
   if (e.k === "type") h += pr + input;
   if (e.k === "listen") h += `${sayBtn(e.say, t("ex.listenAgain"))}${input}`;
@@ -214,7 +223,8 @@ function answered(ok, given, heard) {
   $("lfoot").className = "lfoot " + (ok ? "good" : "bad"); $("verdict").hidden = false;
   const meaning = item ? tr(item) : "";
   const fix = e.k === "mc" && e.lang === "es" && !e.blank ? esc(e.answer) : `<span lang="es">${esc(e.answer)}</span>${meaning && e.k !== "mc" ? " · " + esc(meaning) : ""}`;
-  $("verdict").innerHTML = (ok ? esc(t("ex.good")) : `${esc(t("ex.almost"))}<small>${fix}</small>`) + (e.why ? `<small class="why">${esc(e.why)}</small>` : "") + (heard ? `<small>${esc(t("ex.heard", { text: heard }))}</small>` : "");
+  const spanish = e.sayAfter ?? (e.blank ? e.prompt.replace("___", e.answer) : e.k === "mc" && e.lang === "es" ? (e.promptItem ? S.items[e.promptItem].es : e.prompt) : e.answer);
+  $("verdict").innerHTML = (ok ? esc(t("ex.good")) : `${esc(t("ex.almost"))}<small>${fix}</small>`) + (e.why ? `<small class="why">${esc(e.why)}</small>` : "") + (heard ? `<small>${esc(t("ex.heard", { text: heard }))}</small>` : "") + (spanish ? sayBtn(spanish) : "");
   $("lbody").querySelectorAll(".opt").forEach((o) => { const v = e.opts[o.dataset.o]; if (v === e.answer) o.classList.add("right"); else if (o.classList.contains("sel")) o.classList.add("wrong"); });
   if (!ok && e.es) speak(e.es);
   const btn = $("checkBtn"); btn.disabled = false; btn.textContent = t("btn.next"); btn.onclick = next;
