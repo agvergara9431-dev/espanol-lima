@@ -3,21 +3,176 @@
   "title": "Restaurant en Peruaans eten",
   "title_es": "Restaurante y comida peruana",
   "stamp": "Restaurant",
+  "scenarios": {
+    "cevicheria": {
+      "icon": "plate",
+      "title": "Cevichería in Miraflores",
+      "who": "de ober",
+      "desc": "Je luncht in een cevichería in Miraflores. De ober spreekt geen Engels.",
+      "persona": "un mozo de una cevichería en Miraflores, rápido y simpático, que no habla inglés. Conoce bien la carta: ceviche, leche de tigre, causa limeña, chicharrón de pescado, chicha morada e Inca Kola.",
+      "opener": "¡Buenas tardes! Bienvenida a la cevichería. ¿Ya sabe qué va a pedir?"
+    },
+    "cocina": {
+      "icon": "heart",
+      "title": "In de keuken met Rosario",
+      "who": "Rosario",
+      "desc": "Rosario, de moeder van Augusto, kookt ají de gallina en wil weten wat jij kookt.",
+      "persona": "Rosario, la mamá de Augusto, una señora limeña cariñosa de unos 60 años y gran cocinera. Le dice 'hijita' a Claire. Habla despacio, con frases simples, y le encanta hablar de comida.",
+      "opener": "¡Hijita, pasa a la cocina! Estoy preparando ají de gallina. ¿Tú cocinas en Holanda?"
+    },
+    "criollo": {
+      "icon": "plate",
+      "title": "Criollo restaurant in Barranco",
+      "who": "de ober",
+      "desc": "Je eet in een restaurant met Peruaanse huiskeuken in Barranco.",
+      "persona": "un mozo amable de un restaurante criollo en Barranco, que no habla inglés. Ofrece lomo saltado, ají de gallina, seco de res y arroz con pollo.",
+      "opener": "Buenas noches, bienvenida. ¿Qué le provoca hoy?"
+    }
+  },
   "sessions": [
     {
       "n": 5,
       "title": "Peruaanse gerechten en bestellen",
-      "title_es": "Platos peruanos y pedir"
+      "title_es": "Platos peruanos y pedir",
+      "items": [
+        { "id": "w2-01", "es": "Me gusta el ceviche", "en": "I like ceviche", "nl": "Ik vind ceviche lekker", "ex": { "es": "Me gusta el ceviche con camote.", "nl": "Ik vind ceviche met zoete aardappel lekker." } },
+        { "id": "w2-02", "es": "Me gustan los anticuchos", "en": "I like anticuchos", "nl": "Ik vind anticuchos lekker", "ex": { "es": "Me gustan los anticuchos de la esquina.", "nl": "Ik vind de anticuchos van op de hoek lekker." } },
+        { "id": "w2-03", "es": "No me gusta el picante", "en": "I don't like spicy food", "nl": "Ik houd niet van pittig", "ex": { "es": "Perdón, no me gusta el picante.", "nl": "Sorry, ik houd niet van pittig." } },
+        { "id": "w2-04", "es": "¿Qué me recomienda?", "en": "What do you recommend? (formal)", "nl": "Wat raadt u me aan?", "ex": { "es": "Es mi primera vez aquí. ¿Qué me recomienda?", "nl": "Ik ben hier voor het eerst. Wat raadt u me aan?" } },
+        { "id": "w2-05", "es": "Quisiera un ceviche, por favor", "en": "I'd like a ceviche, please", "nl": "Ik wil graag een ceviche, alstublieft", "ex": { "es": "Quisiera un ceviche, por favor, no muy picante.", "nl": "Ik wil graag een ceviche, alstublieft, niet te pittig." } },
+        { "id": "w2-06", "es": "De entrada, una causa limeña", "en": "As a starter, a causa limeña", "nl": "Als voorgerecht een causa limeña", "ex": { "es": "De entrada, una causa limeña para compartir.", "nl": "Als voorgerecht een causa limeña om te delen." } },
+        { "id": "w2-07", "es": "De fondo, un lomo saltado", "en": "As a main course, a lomo saltado", "nl": "Als hoofdgerecht een lomo saltado", "ex": { "es": "Y de fondo, un lomo saltado, por favor.", "nl": "En als hoofdgerecht een lomo saltado, alstublieft." } },
+        { "id": "w2-08", "es": "Para tomar, una chicha morada", "en": "To drink, a chicha morada", "nl": "Om te drinken een chicha morada", "ex": { "es": "Para tomar, una chicha morada bien helada.", "nl": "Om te drinken een ijskoude chicha morada." } },
+        { "id": "w2-09", "es": "¿Qué es el ají de gallina?", "en": "What is ají de gallina?", "nl": "Wat is ají de gallina?", "ex": { "es": "Disculpe, ¿qué es el ají de gallina?", "nl": "Pardon, wat is ají de gallina?" } },
+        { "id": "w2-10", "es": "¿Es muy picante?", "en": "Is it very spicy?", "nl": "Is het erg pittig?", "ex": { "es": "¿El rocoto relleno es muy picante?", "nl": "Is de gevulde rocoto erg pittig?" } },
+        { "id": "w2-11", "es": "¿Tiene menú del día?", "en": "Do you have a set lunch menu?", "nl": "Heeft u een dagmenu?", "ex": { "es": "Buenas tardes, ¿tiene menú del día?", "nl": "Goedemiddag, heeft u een dagmenu?" } },
+        { "id": "w2-12", "es": "La comida peruana es riquísima", "en": "Peruvian food is delicious", "nl": "Peruaans eten is heerlijk", "ex": { "es": "¡La comida peruana es riquísima, de verdad!", "nl": "Peruaans eten is echt heerlijk!" } }
+      ],
+      "grammar": {
+        "id": "g05",
+        "title": "Gustar: wat je lekker vindt, en beleefd bestellen",
+        "title_es": "gustar + quisiera",
+        "explain": [
+          "'Me gusta' betekent letterlijk 'het bevalt me'. Het ding dat je lekker vindt is het onderwerp. Eén ding: me gusta el ceviche. Meer dingen: me gustan los anticuchos.",
+          "Je zegt dus nooit 'yo gusto'. Niet lekker: no me gusta. 'No' staat vooraan, vóór 'me'.",
+          "Bestellen doe je beleefd met 'quisiera' (ik zou graag willen). 'Quiero' (ik wil) is niet fout, maar klinkt tegen een ober wat kortaf."
+        ],
+        "compare": "Denk aan het Nederlandse 'dat bevalt me' en 'die bevallen me': het werkwoord past zich aan aan het ding, niet aan jou. Zo werkt gustar: me gusta (één ding), me gustan (meer dingen). En 'quisiera' is als 'ik zou graag…' in plaats van 'ik wil'.",
+        "examples": [
+          { "es": "Me gusta el ceviche.", "nl": "Ik vind ceviche lekker." },
+          { "es": "Me gustan los anticuchos.", "nl": "Ik vind anticuchos lekker." },
+          { "es": "No me gusta el picante. Quisiera un ceviche sin ají.", "nl": "Ik houd niet van pittig. Ik wil graag een ceviche zonder chili." }
+        ],
+        "exercises": [
+          { "type": "fill", "q": "Maak de zin af", "prompt": "Me ___ los anticuchos.", "opts": ["gustan", "gusta", "gusto"], "answer": "gustan", "why": "Anticuchos is meervoud, dus gustan." },
+          { "type": "fill", "q": "Maak de zin af", "prompt": "Me ___ el ceviche.", "opts": ["gusta", "gustan", "gusto"], "answer": "gusta", "why": "Eén ding (el ceviche), dus gusta." },
+          { "type": "mc", "q": "Hoe zeg je dit?", "prompt": "Ik houd niet van pittig.", "opts": ["No me gusta el picante.", "No gusto el picante.", "Me no gusta el picante."], "answer": "No me gusta el picante.", "why": "'No' komt vóór 'me'." },
+          { "type": "mc", "q": "Bestel beleefd", "prompt": "Ik wil graag een chicha morada.", "opts": ["Quisiera una chicha morada.", "Gusto una chicha morada.", "Me gusta una chicha morada."], "answer": "Quisiera una chicha morada.", "why": "Quisiera = ik zou graag willen, beleefd bestellen." },
+          { "type": "type", "q": "Schrijf het in het Spaans", "prompt": "Ik vind ceviche lekker.", "answer": "Me gusta el ceviche", "alt": ["Me gusta ceviche"], "why": "Eén ding: me gusta." }
+        ]
+      },
+      "mission": {
+        "scenario": "cevicheria",
+        "goal": "Bestel een voorgerecht, een hoofdgerecht en een drankje, en zeg één gerecht dat je niet lekker vindt.",
+        "check": "Claire pide una entrada, un plato de fondo y una bebida, y dice que una comida o plato no le gusta (con 'no me gusta' o 'no me gustan').",
+        "setup": "Recomiéndale con entusiasmo algo bien picante, como un ceviche con mucho ají o un rocoto relleno, para que tenga ocasión de decir que no le gusta."
+      }
     },
     {
       "n": 6,
       "title": "Wat ik kook en wat ik eet",
-      "title_es": "Lo que cocino y lo que como"
+      "title_es": "Lo que cocino y lo que como",
+      "items": [
+        { "id": "w2-13", "es": "Cocino pasta casi todos los días", "en": "I cook pasta almost every day", "nl": "Ik kook bijna elke dag pasta", "ex": { "es": "En Róterdam cocino pasta casi todos los días.", "nl": "In Rotterdam kook ik bijna elke dag pasta." } },
+        { "id": "w2-14", "es": "En casa cocinamos juntos", "en": "At home we cook together", "nl": "Thuis koken we samen", "ex": { "es": "Los domingos, en casa cocinamos juntos.", "nl": "Op zondag koken we thuis samen." } },
+        { "id": "w2-15", "es": "Augusto prepara arroz con pollo", "en": "Augusto makes arroz con pollo", "nl": "Augusto maakt arroz con pollo", "ex": { "es": "Los viernes Augusto prepara arroz con pollo.", "nl": "Op vrijdag maakt Augusto arroz con pollo." } },
+        { "id": "w2-16", "es": "¿Tú cocinas?", "en": "Do you cook?", "nl": "Kook jij?", "ex": { "es": "Silvia, ¿tú cocinas?", "nl": "Silvia, kook jij?" } },
+        { "id": "w2-17", "es": "Compro verduras en el mercado", "en": "I buy vegetables at the market", "nl": "Ik koop groente op de markt", "ex": { "es": "Los sábados compro verduras en el mercado.", "nl": "Op zaterdag koop ik groente op de markt." } },
+        { "id": "w2-18", "es": "Desayuno pan con queso", "en": "I have bread with cheese for breakfast", "nl": "Ik ontbijt met brood met kaas", "ex": { "es": "En Holanda desayuno pan con queso.", "nl": "In Nederland ontbijt ik met brood met kaas." } },
+        { "id": "w2-19", "es": "Almorzamos a la una", "en": "We have lunch at one", "nl": "We lunchen om één uur", "ex": { "es": "En Lima almorzamos a la una o a las dos.", "nl": "In Lima lunchen we om één of twee uur." } },
+        { "id": "w2-20", "es": "Cenamos tarde", "en": "We have dinner late", "nl": "We eten 's avonds laat", "ex": { "es": "Aquí cenamos tarde, a las nueve.", "nl": "Hier eten we 's avonds laat, om negen uur." } },
+        { "id": "w2-21", "es": "Tomo café sin azúcar", "en": "I drink coffee without sugar", "nl": "Ik drink koffie zonder suiker", "ex": { "es": "Gracias, tomo café sin azúcar.", "nl": "Dank je, ik drink koffie zonder suiker." } },
+        { "id": "w2-22", "es": "Las papas peruanas son deliciosas", "en": "Peruvian potatoes are delicious", "nl": "Peruaanse aardappelen zijn heerlijk", "ex": { "es": "Hay muchas papas en el Perú y las papas peruanas son deliciosas.", "nl": "Er zijn veel soorten aardappelen in Peru en Peruaanse aardappelen zijn heerlijk." } },
+        { "id": "w2-23", "es": "Dos panes y tres empanadas", "en": "Two bread rolls and three empanadas", "nl": "Twee broodjes en drie empanadas", "ex": { "es": "Buenos días, dos panes y tres empanadas, por favor.", "nl": "Goedemorgen, twee broodjes en drie empanadas, alstublieft." } },
+        { "id": "w2-24", "es": "Me gusta probar platos nuevos", "en": "I like trying new dishes", "nl": "Ik probeer graag nieuwe gerechten", "ex": { "es": "En Lima me gusta probar platos nuevos.", "nl": "In Lima probeer ik graag nieuwe gerechten." } }
+      ],
+      "grammar": {
+        "id": "g06",
+        "title": "Werkwoorden op -ar, en meervoud",
+        "title_es": "presente -ar + plurales",
+        "explain": [
+          "Veel Spaanse werkwoorden eindigen op -ar: cocinar (koken), preparar (maken), comprar (kopen), tomar (drinken). Je haalt -ar weg en plakt er een uitgang aan: cocino (ik), cocinas (jij), cocina (hij, zij, u), cocinamos (wij), cocinan (zij, jullie).",
+          "In Peru zeg je voor 'jullie' altijd ustedes, met dezelfde vorm als 'zij': ustedes cocinan.",
+          "Meervoud: na een klinker komt -s (papa → papas), na een medeklinker -es (pan → panes). Bijvoeglijke naamwoorden doen mee: las papas peruanas, los platos ricos."
+        ],
+        "compare": "In het Nederlands verandert het werkwoord weinig: ik kook, jij kookt, wij koken. In het Spaans hoor je aan de uitgang wie het doet: cocino, cocinas, cocinamos. Daarom kan 'yo' weg. En waar het Nederlands 'Peruaanse' alleen een -e geeft, krijgt het Spaans -a en -s: peruana, peruanas.",
+        "examples": [
+          { "es": "Cocino pasta. ¿Tú qué cocinas?", "nl": "Ik kook pasta. Wat kook jij?" },
+          { "es": "En casa cocinamos juntos.", "nl": "Thuis koken we samen." },
+          { "es": "Un pan, dos panes. Una papa peruana, dos papas peruanas.", "nl": "Eén broodje, twee broodjes. Eén Peruaanse aardappel, twee Peruaanse aardappelen." }
+        ],
+        "exercises": [
+          { "type": "fill", "q": "Maak de zin af", "prompt": "Nosotros ___ juntos.", "opts": ["cocinamos", "cocinan", "cocino"], "answer": "cocinamos", "why": "Nosotros (wij) krijgt -amos." },
+          { "type": "fill", "q": "Maak de zin af", "prompt": "Augusto ___ arroz con pollo.", "opts": ["prepara", "preparo", "preparas"], "answer": "prepara", "why": "Augusto = hij, dus -a." },
+          { "type": "mc", "q": "Hoe zeg je dit?", "prompt": "twee broodjes", "opts": ["dos panes", "dos pans", "dos panos"], "answer": "dos panes", "why": "Pan eindigt op een medeklinker: panes." },
+          { "type": "mc", "q": "Hoe zeg je dit?", "prompt": "de Peruaanse aardappelen", "opts": ["las papas peruanas", "las papas peruana", "la papas peruanas"], "answer": "las papas peruanas", "why": "Lidwoord, zelfstandig naamwoord en bijvoeglijk naamwoord krijgen allemaal meervoud." },
+          { "type": "type", "q": "Schrijf het in het Spaans", "prompt": "Ik koop groente op de markt.", "answer": "Compro verduras en el mercado", "alt": ["Yo compro verduras en el mercado"], "why": "Comprar → compro (ik)." }
+        ]
+      },
+      "mission": {
+        "scenario": "cocina",
+        "goal": "Vertel Rosario wat je in Rotterdam kookt en eet, met minstens 3 verschillende werkwoorden op -ar (cocinar, preparar, comprar, desayunar…).",
+        "check": "Claire usa al menos 3 verbos distintos terminados en -ar, conjugados en presente (por ejemplo cocino, preparo, compro, desayuno, almorzamos, cenamos, tomo), para contar qué cocina o come en Róterdam.",
+        "setup": "Pregúntale qué cocina en Holanda, qué desayuna, dónde compra la comida y quién cocina en su casa, una cosa por turno."
+      }
     },
     {
       "n": 7,
       "title": "Pittig, klagen en de rekening",
-      "title_es": "Ají, quejas y la cuenta"
+      "title_es": "Ají, quejas y la cuenta",
+      "items": [
+        { "id": "w2-25", "es": "Sin ají, por favor", "en": "Without chili, please", "nl": "Zonder chilipeper, alstublieft", "ex": { "es": "Un lomo saltado sin ají, por favor.", "nl": "Een lomo saltado zonder chilipeper, alstublieft." } },
+        { "id": "w2-26", "es": "La sopa está fría", "en": "The soup is cold", "nl": "De soep is koud", "ex": { "es": "Disculpe, la sopa está fría.", "nl": "Pardon, de soep is koud." } },
+        { "id": "w2-27", "es": "¡Está riquísimo!", "en": "It's delicious! (as you taste it)", "nl": "Het is heerlijk!", "ex": { "es": "Mmm, el ají de gallina está riquísimo.", "nl": "Mmm, de ají de gallina is heerlijk." } },
+        { "id": "w2-28", "es": "El ceviche es un plato típico", "en": "Ceviche is a typical dish", "nl": "Ceviche is een typisch gerecht", "ex": { "es": "El ceviche es un plato típico del Perú.", "nl": "Ceviche is een typisch Peruaans gerecht." } },
+        { "id": "w2-29", "es": "Esto no es lo que pedí", "en": "This isn't what I ordered", "nl": "Dit is niet wat ik heb besteld", "ex": { "es": "Disculpe, esto no es lo que pedí.", "nl": "Pardon, dit is niet wat ik heb besteld." } },
+        { "id": "w2-30", "es": "¿Me trae la cuenta, por favor?", "en": "Can you bring me the bill, please?", "nl": "Kunt u me de rekening brengen?", "ex": { "es": "Gracias, todo muy rico. ¿Me trae la cuenta, por favor?", "nl": "Dank u, alles was heerlijk. Kunt u me de rekening brengen?" } },
+        { "id": "w2-31", "es": "Cien, doscientos, quinientos", "en": "One hundred, two hundred, five hundred", "nl": "Honderd, tweehonderd, vijfhonderd", "ex": { "es": "El hotel cuesta quinientos soles.", "nl": "Het hotel kost vijfhonderd sol." } },
+        { "id": "w2-32", "es": "Son ciento veinte soles", "en": "That's one hundred and twenty soles", "nl": "Dat is honderdtwintig sol", "ex": { "es": "En total son ciento veinte soles.", "nl": "In totaal is het honderdtwintig sol." } },
+        { "id": "w2-33", "es": "¿Está incluido el servicio?", "en": "Is service included?", "nl": "Is de bediening inbegrepen?", "ex": { "es": "Perdón, ¿está incluido el servicio?", "nl": "Sorry, is de bediening inbegrepen?" } },
+        { "id": "w2-34", "es": "Le dejo diez por ciento de propina", "en": "I'll leave you a ten percent tip", "nl": "Ik geef u tien procent fooi", "ex": { "es": "Muchas gracias, le dejo diez por ciento de propina.", "nl": "Heel erg bedankt, ik geef u tien procent fooi." } },
+        { "id": "w2-35", "es": "Mil soles", "en": "One thousand soles", "nl": "Duizend sol", "ex": { "es": "El pasaje cuesta casi mil soles.", "nl": "Het ticket kost bijna duizend sol." } },
+        { "id": "w2-36", "es": "El sencillo, por favor", "en": "The change (coins), please", "nl": "Het wisselgeld, alstublieft", "ex": { "es": "¿Me da el sencillo, por favor?", "nl": "Mag ik het wisselgeld, alstublieft?" } }
+      ],
+      "grammar": {
+        "id": "g07",
+        "title": "Ser of estar bij eten, en getallen tot 1000",
+        "title_es": "ser y estar con comida + números 100–1000",
+        "explain": [
+          "Allebei betekenen 'zijn'. Met ser zeg je wat iets is: el ceviche es un plato típico. Met estar zeg je hoe het nu is of hoe het smaakt: la sopa está fría, ¡está riquísimo!",
+          "Proef je iets en vind je het lekker? Dan zeg je '¡Está rico!' of '¡Está riquísimo!'. Wil je klagen dat iets koud is: 'Está frío'.",
+          "Honderd is cien, maar met iets erachter wordt het ciento: ciento veinte (120). Daarna: doscientos (200), trescientos (300), quinientos (500, let op!), setecientos (700), novecientos (900), mil (1000)."
+        ],
+        "compare": "Het Nederlands heeft één woord: de soep is koud, ceviche is typisch. Het Spaans kiest: wat iets ís (ser) of hoe het nú is (estar). En net als bij 'honderdtwintig' plak je de getallen aan elkaar, maar dan andersom en los: ciento veinte. Peruanen zeggen soms 'lucas' voor sol: diez lucas = tien sol.",
+        "examples": [
+          { "es": "El ceviche es un plato típico.", "nl": "Ceviche is een typisch gerecht." },
+          { "es": "El ceviche está riquísimo.", "nl": "De ceviche is heerlijk (nu, deze)." },
+          { "es": "Son ciento veinte soles.", "nl": "Dat is honderdtwintig sol." }
+        ],
+        "exercises": [
+          { "type": "fill", "q": "Klagen bij de ober", "prompt": "La sopa ___ fría.", "opts": ["está", "es", "son"], "answer": "está", "why": "Hoe het nu is: estar." },
+          { "type": "fill", "q": "Maak de zin af", "prompt": "El ceviche ___ un plato típico del Perú.", "opts": ["es", "está", "estoy"], "answer": "es", "why": "Wat iets is: ser." },
+          { "type": "mc", "q": "Hoe zeg je dit?", "prompt": "120 sol", "opts": ["ciento veinte soles", "cien veinte soles", "ciento y veinte soles"], "answer": "ciento veinte soles", "why": "Cien wordt ciento als er iets achter komt, zonder 'y'." },
+          { "type": "mc", "q": "Welk getal is dit?", "prompt": "500", "opts": ["quinientos", "cincocientos", "cinco cientos"], "answer": "quinientos", "why": "500 is onregelmatig: quinientos." },
+          { "type": "type", "q": "Schrijf het in het Spaans", "prompt": "Kunt u me de rekening brengen?", "answer": "¿Me trae la cuenta, por favor?", "alt": ["¿Me trae la cuenta?", "La cuenta, por favor"], "why": "Beleefd vragen met 'me trae'." }
+        ]
+      },
+      "mission": {
+        "scenario": "criollo",
+        "goal": "Bestel een gerecht zonder chilipeper, zeg dat het koud is aangekomen, vraag de rekening en geef 10% fooi.",
+        "check": "Claire pide un plato sin ají, avisa que llegó frío (por ejemplo 'está frío'), pide la cuenta y deja propina del diez por ciento (dice 'diez por ciento' o el monto correcto, doce soles).",
+        "setup": "Cuando ella pida, trae el plato. Si no se queja sola, pregunta '¿Todo bien con su plato?'. Cuando pida la cuenta, di que son ciento veinte soles."
+      }
     }
   ]
 }

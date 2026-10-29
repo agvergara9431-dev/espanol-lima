@@ -188,6 +188,20 @@ test("weekly test below 70% is retried, and a quiz below 60% is flagged in the p
   await expect(aug.locator("#pSessionsTable tr.low")).toHaveCount(1);
 });
 
+test("week 2: session 7 ends with the week 2 test and the Restaurant stamp", async ({ page }) => {
+  const results = [1, 2, 3, 4, 5, 6].map((n) => ({ n, week: n <= 4 ? 1 : 2, done_on: dayAgo(14 - 2 * n), on_time: true }));
+  results[3].detail = { tests: [{ week: 1, ok: 9, total: 10, passed: true }] };
+  await seed(page, { results });
+  await expect(page.locator("#ticketDay")).toHaveText("INSTAPKAART · SESSIE 7");
+  await expect(page.locator(".steps")).toContainText("Weektoets week 2");
+  await page.locator("#board").click();
+  await playSession(page);
+  await expect(page.locator(".test-result.ok")).toContainText('Stempel "Restaurant"');
+  await page.locator("#checkBtn").click();
+  await page.locator("#stampOk").click();
+  await expect(page.locator('#route [data-week="2"] .stamp-mini.done')).toBeVisible();
+});
+
 test("a half-done session resumes where she left it", async ({ page }) => {
   await seed(page, { results: [{ n: 1, done_on: dayAgo(2), on_time: true }] });
   await page.locator("#board").click();
