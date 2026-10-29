@@ -2,27 +2,266 @@
   "week": 5,
   "title": "Apotheek, gezondheid en noodgevallen",
   "title_es": "Farmacia, salud y emergencias",
+  "title_en": "Pharmacy, health and emergencies",
   "stamp": "Apotheek",
+  "scenarios": {
+    "botica": {
+      "icon": "heart", "title": "Apotheek in Miraflores", "title_en": "Pharmacy in Miraflores", "who": "de apotheker", "who_en": "the pharmacist",
+      "desc": "Je voelt je niet lekker en gaat naar een apotheek (botica) in Miraflores.", "desc_en": "You don't feel well and go to a pharmacy (botica) in Miraflores.",
+      "persona": "la farmacéutica de una botica en Miraflores, tranquila y clara, que no habla inglés. Explica despacio cómo tomar cada medicina.",
+      "opener": "Buenas tardes, ¿en qué la puedo ayudar?"
+    },
+    "doctora": {
+      "icon": "heart", "title": "Bij de dokter", "title_en": "At the doctor's", "who": "de dokter", "who_en": "the doctor",
+      "desc": "Je bent bij een dokter in een kliniek in Miraflores en vertelt wat er gisteren gebeurde.", "desc_en": "You're at a doctor's in a clinic in Miraflores and explain what happened yesterday.",
+      "persona": "una doctora amable de una clínica en Miraflores, que no habla inglés. Hace preguntas simples y una por una, y da consejos fáciles de entender.",
+      "opener": "Buenos días, siéntese, por favor. Cuénteme, ¿qué le pasó?"
+    },
+    "rosario": {
+      "icon": "heart", "title": "Kletsen met Rosario", "title_en": "Chatting with Rosario", "who": "Rosario", "who_en": "Rosario",
+      "desc": "Rosario, de moeder van Augusto, wil weten hoe jouw dag eruitziet en hoe het weer in Nederland is.", "desc_en": "Rosario, Augusto's mother, wants to know what your day looks like and what the weather is like in the Netherlands.",
+      "persona": "Rosario, la mamá de Augusto, una señora limeña cariñosa de unos 60 años. Le dice 'hijita' a Claire, habla despacio y le preocupa que se cuide del sol de Lima.",
+      "opener": "¡Hijita! ¿Cómo estás? Aquí en Lima ya hace un calor... ¿Y allá en Holanda?"
+    },
+    "sereno": {
+      "icon": "phone", "title": "Hulp op straat", "title_en": "Help in the street", "who": "de bewaker", "who_en": "the security guard",
+      "desc": "Je bent je mobiel kwijt in Miraflores en vraagt een sereno (gemeentebewaker) om hulp.", "desc_en": "You've lost your phone in Miraflores and ask a sereno (municipal guard) for help.",
+      "persona": "un sereno (guardia municipal) de Miraflores, calmado y amable, que no habla inglés. Hace preguntas claras para ayudar y nunca se apura.",
+      "opener": "Buenas, señorita. ¿Todo bien? La veo preocupada."
+    }
+  },
   "sessions": [
     {
-      "n": 15,
-      "title": "Het lichaam en de apotheek",
-      "title_es": "El cuerpo y la farmacia"
+      "n": 15, "title": "Het lichaam en de apotheek", "title_es": "El cuerpo y la farmacia", "title_en": "The body and the pharmacy",
+      "items": [
+        { "id": "w5-01", "es": "Me duele la cabeza", "en": "I have a headache", "nl": "Ik heb hoofdpijn", "ex": { "es": "Por el sol me duele la cabeza.", "nl": "Door de zon heb ik hoofdpijn.", "en": "Because of the sun I have a headache." } },
+        { "id": "w5-02", "es": "Me duele la garganta", "en": "I have a sore throat", "nl": "Ik heb keelpijn", "ex": { "es": "Desde ayer me duele la garganta.", "nl": "Sinds gisteren heb ik keelpijn.", "en": "I've had a sore throat since yesterday." } },
+        { "id": "w5-03", "es": "Me duelen los pies", "en": "My feet hurt", "nl": "Mijn voeten doen pijn", "ex": { "es": "Caminamos todo el día y me duelen los pies.", "nl": "We hebben de hele dag gelopen en mijn voeten doen pijn.", "en": "We walked all day and my feet hurt." } },
+        { "id": "w5-04", "es": "Me duele el estómago", "en": "I have a stomach ache", "nl": "Ik heb buikpijn", "ex": { "es": "Comí mucho y me duele el estómago.", "nl": "Ik heb veel gegeten en ik heb buikpijn.", "en": "I ate a lot and I have a stomach ache." } },
+        { "id": "w5-05", "es": "¿Tiene algo para el dolor de cabeza?", "en": "Do you have something for a headache?", "nl": "Heeft u iets tegen hoofdpijn?", "ex": { "es": "Buenas tardes, ¿tiene algo para el dolor de cabeza?", "nl": "Goedemiddag, heeft u iets tegen hoofdpijn?", "en": "Good afternoon, do you have something for a headache?" } },
+        { "id": "w5-06", "es": "Tengo que tomar una pastilla", "en": "I have to take a pill", "nl": "Ik moet een pil nemen", "ex": { "es": "Tengo que tomar una pastilla después de almorzar.", "nl": "Ik moet na de lunch een pil nemen.", "en": "I have to take a pill after lunch." } },
+        { "id": "w5-07", "es": "¿Cada cuántas horas?", "en": "Every how many hours?", "nl": "Om de hoeveel uur?", "ex": { "es": "¿Y cada cuántas horas tengo que tomarla?", "nl": "En om de hoeveel uur moet ik hem nemen?", "en": "And how often do I have to take it?" } },
+        { "id": "w5-08", "es": "Cada ocho horas", "en": "Every eight hours", "nl": "Om de acht uur", "ex": { "es": "Una pastilla cada ocho horas, por tres días.", "nl": "Eén pil om de acht uur, drie dagen lang.", "en": "One pill every eight hours, for three days." } },
+        { "id": "w5-09", "es": "Después de comer", "en": "After eating", "nl": "Na het eten", "ex": { "es": "Tómela siempre después de comer.", "nl": "Neem hem altijd na het eten.", "en": "Always take it after eating." } },
+        { "id": "w5-10", "es": "¿Necesito receta?", "en": "Do I need a prescription?", "nl": "Heb ik een recept nodig?", "ex": { "es": "¿Para esta medicina necesito receta?", "nl": "Heb ik voor dit medicijn een recept nodig?", "en": "Do I need a prescription for this medicine?" } },
+        { "id": "w5-11", "es": "Tengo tos", "en": "I have a cough", "nl": "Ik moet hoesten", "ex": { "es": "Tengo tos y un poco de fiebre.", "nl": "Ik moet hoesten en heb een beetje koorts.", "en": "I have a cough and a bit of a fever." } },
+        { "id": "w5-12", "es": "Soy alérgica a la penicilina", "en": "I'm allergic to penicillin", "nl": "Ik ben allergisch voor penicilline", "ex": { "es": "Doctora, soy alérgica a la penicilina.", "nl": "Dokter, ik ben allergisch voor penicilline.", "en": "Doctor, I'm allergic to penicillin." } }
+      ],
+      "grammar": {
+        "id": "g15", "title": "Me duele en tener que", "title_es": "me duele / me duelen + tener que",
+        "explain": [
+          "Pijn zeg je zoals 'me gusta': me duele la cabeza (mijn hoofd doet pijn, letterlijk 'het hoofd doet mij pijn'). Bij meer dingen: me duelen los pies.",
+          "Je zegt 'la cabeza', niet 'mi cabeza': met 'me' is al duidelijk dat het jouw hoofd is.",
+          "Moeten is tener que + werkwoord: tengo que tomar una pastilla, tienes que descansar."
+        ],
+        "compare": "Nederlands: ik heb hoofdpijn, mijn voeten doen pijn. Spaans: me duele la cabeza, me duelen los pies, net als gustar: het werkwoord past zich aan aan wat pijn doet. En 'ik moet' is niet één werkwoord maar 'ik heb te': tengo que.",
+        "examples": [ { "es": "Me duele la cabeza.", "nl": "Ik heb hoofdpijn." }, { "es": "Me duelen los pies.", "nl": "Mijn voeten doen pijn." }, { "es": "Tengo que tomar una pastilla.", "nl": "Ik moet een pil nemen." } ],
+        "exercises": [
+          { "type": "fill", "q": "Maak de zin af", "prompt": "Me ___ la cabeza.", "opts": ["duele", "duelen", "dolor"], "answer": "duele", "why": "Eén ding doet pijn (la cabeza): duele." },
+          { "type": "fill", "q": "Maak de zin af", "prompt": "Me ___ los pies.", "opts": ["duelen", "duele", "duelo"], "answer": "duelen", "why": "Meerdere dingen (los pies): duelen." },
+          { "type": "mc", "q": "Hoe zeg je dit?", "prompt": "Ik moet een pil nemen.", "opts": ["Tengo que tomar una pastilla.", "Tengo tomar una pastilla.", "Tengo de tomar una pastilla."], "answer": "Tengo que tomar una pastilla.", "why": "Moeten = tener que + werkwoord." },
+          { "type": "mc", "q": "Hoe zeg je dit?", "prompt": "Ik heb keelpijn.", "opts": ["Me duele la garganta.", "Me duele mi garganta.", "Mi garganta me duelo."], "answer": "Me duele la garganta.", "why": "Met 'me' zeg je 'la garganta', niet 'mi'." },
+          { "type": "type", "q": "Schrijf het in het Spaans", "prompt": "Om de acht uur.", "answer": "Cada ocho horas", "alt": ["Cada 8 horas"], "why": "Om de … uur = cada … horas." }
+        ],
+        "en": {
+          "title": "Me duele and tener que",
+          "explain": [
+            "Pain works like 'me gusta': me duele la cabeza (my head hurts, literally 'the head hurts me'). For several things: me duelen los pies.",
+            "You say 'la cabeza', not 'mi cabeza': with 'me' it's already clear it's your head.",
+            "Having to do something is tener que + verb: tengo que tomar una pastilla, tienes que descansar."
+          ],
+          "compare": "English: my head hurts, my feet hurt. Spanish: me duele la cabeza, me duelen los pies, just like gustar: the verb follows the thing that hurts. And 'I have to' translates almost word for word: tengo que (I have that).",
+          "examples": [ { "es": "Me duele la cabeza.", "en": "I have a headache." }, { "es": "Me duelen los pies.", "en": "My feet hurt." }, { "es": "Tengo que tomar una pastilla.", "en": "I have to take a pill." } ],
+          "exercises": [
+            { "type": "fill", "q": "Complete the sentence", "prompt": "Me ___ la cabeza.", "opts": ["duele", "duelen", "dolor"], "answer": "duele", "why": "One thing hurts (la cabeza): duele." },
+            { "type": "fill", "q": "Complete the sentence", "prompt": "Me ___ los pies.", "opts": ["duelen", "duele", "duelo"], "answer": "duelen", "why": "Several things (los pies): duelen." },
+            { "type": "mc", "q": "How do you say this?", "prompt": "I have to take a pill.", "opts": ["Tengo que tomar una pastilla.", "Tengo tomar una pastilla.", "Tengo de tomar una pastilla."], "answer": "Tengo que tomar una pastilla.", "why": "Have to = tener que + verb." },
+            { "type": "mc", "q": "How do you say this?", "prompt": "I have a sore throat.", "opts": ["Me duele la garganta.", "Me duele mi garganta.", "Mi garganta me duelo."], "answer": "Me duele la garganta.", "why": "With 'me' you say 'la garganta', not 'mi'." },
+            { "type": "type", "q": "Write it in Spanish", "prompt": "Every eight hours.", "answer": "Cada ocho horas", "alt": ["Cada 8 horas"], "why": "Every … hours = cada … horas." }
+          ]
+        }
+      },
+      "mission": {
+        "scenario": "botica",
+        "goal": "Leg uit dat je hoofdpijn en keelpijn hebt, en vraag om de hoeveel uur je de pil moet nemen.",
+        "goal_en": "Explain that you have a headache and a sore throat, and ask how often you have to take the pill.",
+        "check": "Claire explica que le duele la cabeza y la garganta (con me duele o me duelen) y pregunta o entiende cada cuántas horas tomar la pastilla.",
+        "setup": "Recomiendas paracetamol de quinientos miligramos cada ocho horas, después de comer, y unas pastillas para la garganta. No hace falta receta. Si ella no pregunta cada cuántas horas, díselo y pídele que lo repita."
+      }
     },
     {
-      "n": 16,
-      "title": "Sinds wanneer doet het pijn?",
-      "title_es": "Desde cuándo me duele"
+      "n": 16, "title": "Sinds wanneer doet het pijn?", "title_es": "Desde cuándo me duele", "title_en": "Since when does it hurt?",
+      "items": [
+        { "id": "w5-13", "es": "Ayer me empezó a doler", "en": "It started hurting yesterday", "nl": "Gisteren begon het pijn te doen", "ex": { "es": "Ayer me empezó a doler la cabeza.", "nl": "Gisteren begon mijn hoofd pijn te doen.", "en": "Yesterday my head started hurting." } },
+        { "id": "w5-14", "es": "Tomé una pastilla", "en": "I took a pill", "nl": "Ik heb een pil genomen", "ex": { "es": "Anoche tomé una pastilla, pero sigo mal.", "nl": "Gisteravond heb ik een pil genomen, maar ik voel me nog steeds slecht.", "en": "Last night I took a pill, but I still feel bad." } },
+        { "id": "w5-15", "es": "Anoche descansé poco", "en": "I rested very little last night", "nl": "Ik heb vannacht weinig gerust", "ex": { "es": "Hacía calor y anoche descansé poco.", "nl": "Het was warm en ik heb vannacht weinig gerust.", "en": "It was hot and I rested very little last night." } },
+        { "id": "w5-16", "es": "Caminé mucho bajo el sol", "en": "I walked a lot in the sun", "nl": "Ik heb veel in de zon gelopen", "ex": { "es": "Ayer caminé mucho bajo el sol por el malecón.", "nl": "Gisteren heb ik veel in de zon over de boulevard gelopen.", "en": "Yesterday I walked a lot in the sun along the seafront." } },
+        { "id": "w5-17", "es": "Ayer almorcé ceviche", "en": "Yesterday I had ceviche for lunch", "nl": "Gisteren heb ik ceviche geluncht", "ex": { "es": "Ayer almorcé ceviche en un puesto de la playa.", "nl": "Gisteren heb ik ceviche geluncht bij een kraampje op het strand.", "en": "Yesterday I had ceviche for lunch at a stall on the beach." } },
+        { "id": "w5-18", "es": "Tomé mucha agua", "en": "I drank a lot of water", "nl": "Ik heb veel water gedronken", "ex": { "es": "Tomé mucha agua, pero igual me duele.", "nl": "Ik heb veel water gedronken, maar het doet nog steeds pijn.", "en": "I drank a lot of water, but it still hurts." } },
+        { "id": "w5-19", "es": "¿Qué le pasó?", "en": "What happened to you? (formal)", "nl": "Wat is er met u gebeurd?", "ex": { "es": "Siéntese. ¿Qué le pasó?", "nl": "Gaat u zitten. Wat is er met u gebeurd?", "en": "Have a seat. What happened to you?" } },
+        { "id": "w5-20", "es": "Me mareé en el bus", "en": "I got dizzy on the bus", "nl": "Ik werd duizelig in de bus", "ex": { "es": "Hacía mucho calor y me mareé en el bus.", "nl": "Het was erg warm en ik werd duizelig in de bus.", "en": "It was very hot and I got dizzy on the bus." } },
+        { "id": "w5-21", "es": "Llamé a Augusto", "en": "I called Augusto", "nl": "Ik heb Augusto gebeld", "ex": { "es": "Me sentí mal y llamé a Augusto.", "nl": "Ik voelde me slecht en heb Augusto gebeld.", "en": "I felt bad and called Augusto." } },
+        { "id": "w5-22", "es": "Desde el lunes", "en": "Since Monday", "nl": "Sinds maandag", "ex": { "es": "Tengo tos desde el lunes.", "nl": "Ik hoest sinds maandag.", "en": "I've had a cough since Monday." } },
+        { "id": "w5-23", "es": "Hace dos días", "en": "Two days ago", "nl": "Twee dagen geleden", "ex": { "es": "Me empezó a doler hace dos días.", "nl": "Het begon twee dagen geleden pijn te doen.", "en": "It started hurting two days ago." } },
+        { "id": "w5-24", "es": "Tengo fiebre", "en": "I have a fever", "nl": "Ik heb koorts", "ex": { "es": "Creo que tengo fiebre, estoy muy caliente.", "nl": "Ik denk dat ik koorts heb, ik ben erg warm.", "en": "I think I have a fever, I'm very hot." } }
+      ],
+      "grammar": {
+        "id": "g16", "title": "Verleden tijd van werkwoorden op -ar", "title_es": "pretérito -ar (contexto médico)",
+        "explain": [
+          "Wat er gisteren gebeurde, vertel je met de verleden tijd (pretérito). Werkwoorden op -ar: tomé, tomaste, tomó, tomamos, tomaron.",
+          "Let op het accent! Tomo = ik neem (nu), tomó = hij/zij nam. Llamo = ik bel, llamó = hij belde.",
+          "Handig erbij: hace dos días (twee dagen geleden), ayer (gisteren), anoche (gisteravond), desde el lunes (sinds maandag). Bij almorzar wordt de z een c: almorcé."
+        ],
+        "compare": "Nederlands zegt meestal 'ik heb een pil genomen' (voltooid). Spaans gebruikt voor iets afgeronds van gisteren één woord: tomé. 'Twee dagen geleden' is hace dos días, met 'hace' vooraan.",
+        "examples": [ { "es": "Ayer tomé una pastilla.", "nl": "Gisteren heb ik een pil genomen." }, { "es": "¿Qué le pasó?", "nl": "Wat is er met u gebeurd?" }, { "es": "Me empezó a doler hace dos días.", "nl": "Het begon twee dagen geleden pijn te doen." } ],
+        "exercises": [
+          { "type": "fill", "q": "Maak de zin af (ik)", "prompt": "Ayer ___ una pastilla.", "opts": ["tomé", "tomo", "tomó"], "answer": "tomé", "why": "Ik, verleden tijd: tomé." },
+          { "type": "fill", "q": "Maak de zin af", "prompt": "¿Qué le ___?", "opts": ["pasó", "paso", "pasé"], "answer": "pasó", "why": "Wat is er (met u) gebeurd: pasó." },
+          { "type": "fill", "q": "Maak de zin af", "prompt": "Augusto me ___ por teléfono.", "opts": ["llamó", "llamé", "llamo"], "answer": "llamó", "why": "Augusto = hij, verleden tijd: llamó." },
+          { "type": "mc", "q": "Hoe zeg je dit?", "prompt": "twee dagen geleden", "opts": ["hace dos días", "dos días hace", "hace dos días antes"], "answer": "hace dos días", "why": "Geleden = hace, vooraan." },
+          { "type": "type", "q": "Schrijf het in het Spaans", "prompt": "Ik heb veel water gedronken.", "answer": "Tomé mucha agua", "alt": ["Yo tomé mucha agua", "Tomé bastante agua"], "why": "Tomar → tomé (ik, verleden tijd)." }
+        ],
+        "en": {
+          "title": "Past tense of -ar verbs",
+          "explain": [
+            "What happened yesterday is told in the past tense (pretérito). Verbs in -ar: tomé, tomaste, tomó, tomamos, tomaron.",
+            "Watch the accent! Tomo = I take (now), tomó = he/she took. Llamo = I call, llamó = he called.",
+            "Useful with it: hace dos días (two days ago), ayer (yesterday), anoche (last night), desde el lunes (since Monday). With almorzar the z becomes a c: almorcé."
+          ],
+          "compare": "Like the English simple past: I took = tomé, he called = llamó. The difference is that Spanish shows the person in the ending (tomé, tomó, tomaron), and a single accent changes the meaning: tomo (I take) vs tomó (he took). 'Two days ago' puts the word first: hace dos días.",
+          "examples": [ { "es": "Ayer tomé una pastilla.", "en": "Yesterday I took a pill." }, { "es": "¿Qué le pasó?", "en": "What happened to you?" }, { "es": "Me empezó a doler hace dos días.", "en": "It started hurting two days ago." } ],
+          "exercises": [
+            { "type": "fill", "q": "Complete the sentence (I)", "prompt": "Ayer ___ una pastilla.", "opts": ["tomé", "tomo", "tomó"], "answer": "tomé", "why": "I, past tense: tomé." },
+            { "type": "fill", "q": "Complete the sentence", "prompt": "¿Qué le ___?", "opts": ["pasó", "paso", "pasé"], "answer": "pasó", "why": "What happened (to you): pasó." },
+            { "type": "fill", "q": "Complete the sentence", "prompt": "Augusto me ___ por teléfono.", "opts": ["llamó", "llamé", "llamo"], "answer": "llamó", "why": "Augusto = he, past tense: llamó." },
+            { "type": "mc", "q": "How do you say this?", "prompt": "two days ago", "opts": ["hace dos días", "dos días hace", "hace dos días antes"], "answer": "hace dos días", "why": "Ago = hace, at the front." },
+            { "type": "type", "q": "Write it in Spanish", "prompt": "I drank a lot of water.", "answer": "Tomé mucha agua", "alt": ["Yo tomé mucha agua", "Tomé bastante agua"], "why": "Tomar → tomé (I, past tense)." }
+          ]
+        }
+      },
+      "mission": {
+        "scenario": "doctora",
+        "goal": "Vertel de dokter wat er gisteren gebeurde en wat je hebt genomen, met minstens 3 werkwoorden op -ar in de verleden tijd.",
+        "goal_en": "Tell the doctor what happened yesterday and what you took, using at least 3 -ar verbs in the past tense.",
+        "check": "Claire cuenta qué le pasó usando al menos 3 verbos -ar distintos en pretérito (por ejemplo tomé, caminé, almorcé, empezó, llamé, descansé) y dice qué medicina tomó.",
+        "setup": "Pregunta, una cosa por turno, desde cuándo se siente mal, qué hizo ayer, qué comió y qué tomó. Al final explica que es algo leve (un poco de insolación) y aconseja tomar agua, descansar y ponerse bloqueador."
+      }
     },
     {
-      "n": 17,
-      "title": "Zon en je dag",
-      "title_es": "Sol y rutina"
+      "n": 17, "title": "Zon en je dag", "title_es": "Sol y rutina", "title_en": "Sun and your day",
+      "items": [
+        { "id": "w5-25", "es": "Hace mucho calor", "en": "It's very hot", "nl": "Het is erg warm", "ex": { "es": "En diciembre hace mucho calor en Lima.", "nl": "In december is het erg warm in Lima.", "en": "In December it's very hot in Lima." } },
+        { "id": "w5-26", "es": "Hace sol", "en": "It's sunny", "nl": "De zon schijnt", "ex": { "es": "Hoy hace sol, ¡vamos a la playa!", "nl": "Vandaag schijnt de zon, laten we naar het strand gaan!", "en": "It's sunny today, let's go to the beach!" } },
+        { "id": "w5-27", "es": "En invierno hay garúa", "en": "In winter there's drizzle (garúa)", "nl": "In de winter is er motregen (garúa)", "ex": { "es": "En invierno hay garúa y el cielo está gris.", "nl": "In de winter is er motregen en is de lucht grijs.", "en": "In winter there's drizzle and the sky is grey." } },
+        { "id": "w5-28", "es": "En diciembre es verano en Lima", "en": "In December it's summer in Lima", "nl": "In december is het zomer in Lima", "ex": { "es": "¡Qué raro! En diciembre es verano en Lima.", "nl": "Wat raar! In december is het zomer in Lima.", "en": "How strange! In December it's summer in Lima." } },
+        { "id": "w5-29", "es": "Estoy quemada por el sol", "en": "I'm sunburnt", "nl": "Ik ben verbrand door de zon", "ex": { "es": "Ay, estoy quemada por el sol.", "nl": "Oei, ik ben verbrand door de zon.", "en": "Ouch, I'm sunburnt." } },
+        { "id": "w5-30", "es": "Me pongo bloqueador", "en": "I put on sunscreen", "nl": "Ik smeer zonnebrand", "ex": { "es": "Antes de salir siempre me pongo bloqueador.", "nl": "Voordat ik naar buiten ga, smeer ik altijd zonnebrand.", "en": "Before going out I always put on sunscreen." } },
+        { "id": "w5-31", "es": "Me levanto a las siete", "en": "I get up at seven", "nl": "Ik sta om zeven uur op", "ex": { "es": "Entre semana me levanto a las siete.", "nl": "Doordeweeks sta ik om zeven uur op.", "en": "On weekdays I get up at seven." } },
+        { "id": "w5-32", "es": "Me ducho por la mañana", "en": "I shower in the morning", "nl": "Ik douche 's ochtends", "ex": { "es": "Siempre me ducho por la mañana.", "nl": "Ik douche altijd 's ochtends.", "en": "I always shower in the morning." } },
+        { "id": "w5-33", "es": "Me acuesto tarde", "en": "I go to bed late", "nl": "Ik ga laat naar bed", "ex": { "es": "Los viernes me acuesto tarde.", "nl": "Op vrijdag ga ik laat naar bed.", "en": "On Fridays I go to bed late." } },
+        { "id": "w5-34", "es": "En Róterdam llueve mucho", "en": "It rains a lot in Rotterdam", "nl": "In Rotterdam regent het veel", "ex": { "es": "En Róterdam llueve mucho y hace frío.", "nl": "In Rotterdam regent het veel en is het koud.", "en": "It rains a lot in Rotterdam and it's cold." } },
+        { "id": "w5-35", "es": "Hace más calor que en Holanda", "en": "It's hotter than in the Netherlands", "nl": "Het is warmer dan in Nederland", "ex": { "es": "En Lima hace más calor que en Holanda.", "nl": "In Lima is het warmer dan in Nederland.", "en": "In Lima it's hotter than in the Netherlands." } },
+        { "id": "w5-36", "es": "Estoy cansada por el calor", "en": "I'm tired from the heat", "nl": "Ik ben moe van de hitte", "ex": { "es": "Estoy cansada por el calor, mejor descanso un rato.", "nl": "Ik ben moe van de hitte, ik rust beter even.", "en": "I'm tired from the heat, I'd better rest for a while." } }
+      ],
+      "grammar": {
+        "id": "g17", "title": "Het weer, hoe je je voelt, en je dag", "title_es": "estar + estado, el clima y verbos reflexivos",
+        "explain": [
+          "Het weer zeg je meestal met hacer: hace calor, hace frío, hace sol. Met hay: hay garúa (motregen, typisch voor de Limeense winter), hay neblina. Regenen is één woord: llueve.",
+          "Hoe je je voelt blijft estar: estoy quemada, estoy cansada por el calor.",
+          "Veel dagelijkse werkwoorden zijn wederkerend: levantarse (opstaan), ducharse (douchen), acostarse (naar bed gaan), ponerse (aandoen, opsmeren). Het woordje verandert mee: me levanto, te levantas, se levanta, nos levantamos, se levantan."
+        ],
+        "compare": "Nederlands heeft ook 'zich': ik was me, hij scheert zich. Spaans doet dat bij veel meer werkwoorden: me levanto (letterlijk 'ik til me op'), me ducho. En het weer 'maakt' iets: hace calor = het is warm. In december is het in Lima zomer; garúa hoor je vooral in de winter (juni tot september).",
+        "examples": [ { "es": "Hace mucho calor.", "nl": "Het is erg warm." }, { "es": "Me levanto a las siete y me ducho.", "nl": "Ik sta om zeven uur op en douche." }, { "es": "En invierno hay garúa.", "nl": "In de winter is er motregen." } ],
+        "exercises": [
+          { "type": "fill", "q": "Maak de zin af", "prompt": "___ mucho calor.", "opts": ["Hace", "Está", "Es"], "answer": "Hace", "why": "Het weer: hace calor." },
+          { "type": "fill", "q": "Maak de zin af", "prompt": "Yo ___ levanto a las siete.", "opts": ["me", "se", "te"], "answer": "me", "why": "Ik = me levanto." },
+          { "type": "fill", "q": "Maak de zin af", "prompt": "Augusto ___ acuesta tarde.", "opts": ["se", "me", "te"], "answer": "se", "why": "Hij = se acuesta." },
+          { "type": "mc", "q": "Hoe zeg je dit?", "prompt": "In december is het zomer in Lima.", "opts": ["En diciembre es verano en Lima.", "En diciembre está verano en Lima.", "En diciembre hace verano en Lima."], "answer": "En diciembre es verano en Lima.", "why": "Het seizoen is: es verano." },
+          { "type": "type", "q": "Schrijf het in het Spaans", "prompt": "Ik smeer zonnebrand.", "answer": "Me pongo bloqueador", "alt": ["Me pongo protector solar", "Me pongo bloqueador solar"], "why": "Ponerse = opsmeren, aantrekken; bloqueador = zonnebrand in Peru." }
+        ],
+        "en": {
+          "title": "The weather, how you feel, and your day",
+          "explain": [
+            "The weather usually goes with hacer: hace calor, hace frío, hace sol. With hay: hay garúa (drizzle, typical of the Lima winter), hay neblina. Raining is one word: llueve.",
+            "How you feel stays with estar: estoy quemada, estoy cansada por el calor.",
+            "Many everyday verbs are reflexive: levantarse (to get up), ducharse (to shower), acostarse (to go to bed), ponerse (to put on). The little word changes with the person: me levanto, te levantas, se levanta, nos levantamos, se levantan."
+          ],
+          "compare": "English says 'I get up, I shower' without any 'myself'. Spanish adds it: me levanto (literally 'I raise myself'), me ducho. And where English says 'it is hot', Spanish says the weather 'makes' heat: hace calor. In December it's summer in Lima; garúa is mostly a winter thing (June to September).",
+          "examples": [ { "es": "Hace mucho calor.", "en": "It's very hot." }, { "es": "Me levanto a las siete y me ducho.", "en": "I get up at seven and shower." }, { "es": "En invierno hay garúa.", "en": "In winter there's drizzle." } ],
+          "exercises": [
+            { "type": "fill", "q": "Complete the sentence", "prompt": "___ mucho calor.", "opts": ["Hace", "Está", "Es"], "answer": "Hace", "why": "Weather: hace calor." },
+            { "type": "fill", "q": "Complete the sentence", "prompt": "Yo ___ levanto a las siete.", "opts": ["me", "se", "te"], "answer": "me", "why": "I = me levanto." },
+            { "type": "fill", "q": "Complete the sentence", "prompt": "Augusto ___ acuesta tarde.", "opts": ["se", "me", "te"], "answer": "se", "why": "He = se acuesta." },
+            { "type": "mc", "q": "How do you say this?", "prompt": "In December it's summer in Lima.", "opts": ["En diciembre es verano en Lima.", "En diciembre está verano en Lima.", "En diciembre hace verano en Lima."], "answer": "En diciembre es verano en Lima.", "why": "The season is: es verano." },
+            { "type": "type", "q": "Write it in Spanish", "prompt": "I put on sunscreen.", "answer": "Me pongo bloqueador", "alt": ["Me pongo protector solar", "Me pongo bloqueador solar"], "why": "Ponerse = to put on; bloqueador = sunscreen in Peru." }
+          ]
+        }
+      },
+      "mission": {
+        "scenario": "rosario",
+        "goal": "Vertel Rosario over je dag met minstens 3 wederkerende werkwoorden (me levanto, me ducho…) en vergelijk het weer in Rotterdam en Lima.",
+        "goal_en": "Tell Rosario about your day using at least 3 reflexive verbs (me levanto, me ducho…) and compare the weather in Rotterdam and Lima.",
+        "check": "Claire usa al menos 3 verbos reflexivos distintos para contar su rutina (me levanto, me ducho, me acuesto, me pongo...) y compara el clima de Róterdam y Lima (por ejemplo 'hace más calor que', 'llueve mucho', 'hace frío').",
+        "setup": "Estás en tu casa en Lima y es verano, con mucho sol. Pregúntale a qué hora se levanta, qué hace en su día y cómo es el clima en Holanda, una cosa por turno. Recuérdale con cariño ponerse bloqueador cuando venga."
+      }
     },
     {
-      "n": 18,
-      "title": "Noodgevallen",
-      "title_es": "Emergencias"
+      "n": 18, "title": "Noodgevallen", "title_es": "Emergencias", "title_en": "Emergencies",
+      "items": [
+        { "id": "w5-37", "es": "¡Ayúdeme, por favor!", "en": "Help me, please!", "nl": "Help me, alstublieft!", "ex": { "es": "¡Señor, ayúdeme, por favor!", "nl": "Meneer, help me, alstublieft!", "en": "Sir, help me, please!" } },
+        { "id": "w5-38", "es": "Perdí mi celular", "en": "I lost my phone", "nl": "Ik ben mijn mobiel kwijt", "ex": { "es": "Perdí mi celular en el parque.", "nl": "Ik ben mijn mobiel kwijtgeraakt in het park.", "en": "I lost my phone in the park." } },
+        { "id": "w5-39", "es": "Me robaron la cartera", "en": "My wallet was stolen", "nl": "Mijn portemonnee is gestolen", "ex": { "es": "Disculpe, me robaron la cartera en el bus.", "nl": "Pardon, mijn portemonnee is in de bus gestolen.", "en": "Excuse me, my wallet was stolen on the bus." } },
+        { "id": "w5-40", "es": "Llame a la policía", "en": "Call the police", "nl": "Bel de politie", "ex": { "es": "Por favor, llame a la policía.", "nl": "Bel alstublieft de politie.", "en": "Please call the police." } },
+        { "id": "w5-41", "es": "¿Dónde está la comisaría?", "en": "Where is the police station?", "nl": "Waar is het politiebureau?", "ex": { "es": "Perdón, ¿dónde está la comisaría más cercana?", "nl": "Sorry, waar is het dichtstbijzijnde politiebureau?", "en": "Sorry, where is the nearest police station?" } },
+        { "id": "w5-42", "es": "Fue en el parque Kennedy", "en": "It was in Kennedy Park", "nl": "Het was in het Kennedypark", "ex": { "es": "Fue en el parque Kennedy, cerca de la iglesia.", "nl": "Het was in het Kennedypark, vlak bij de kerk.", "en": "It was in Kennedy Park, near the church." } },
+        { "id": "w5-43", "es": "Hace una hora", "en": "An hour ago", "nl": "Een uur geleden", "ex": { "es": "Lo perdí hace una hora, más o menos.", "nl": "Ik ben hem ongeveer een uur geleden kwijtgeraakt.", "en": "I lost it about an hour ago." } },
+        { "id": "w5-44", "es": "Necesito un médico", "en": "I need a doctor", "nl": "Ik heb een dokter nodig", "ex": { "es": "Mi amiga se cayó, necesito un médico.", "nl": "Mijn vriendin is gevallen, ik heb een dokter nodig.", "en": "My friend fell, I need a doctor." } },
+        { "id": "w5-45", "es": "Es una emergencia", "en": "It's an emergency", "nl": "Het is een noodgeval", "ex": { "es": "Por favor, rápido, es una emergencia.", "nl": "Alstublieft, snel, het is een noodgeval.", "en": "Please, quickly, it's an emergency." } },
+        { "id": "w5-46", "es": "Llame a este número", "en": "Call this number", "nl": "Bel dit nummer", "ex": { "es": "Si lo encuentra, llame a este número, por favor.", "nl": "Als u hem vindt, bel dan dit nummer, alstublieft.", "en": "If you find it, please call this number." } },
+        { "id": "w5-47", "es": "Hable más despacio, por favor", "en": "Please speak more slowly", "nl": "Praat langzamer, alstublieft", "ex": { "es": "No entiendo bien. Hable más despacio, por favor.", "nl": "Ik versta het niet goed. Praat langzamer, alstublieft.", "en": "I don't understand well. Please speak more slowly." } },
+        { "id": "w5-48", "es": "Mi celular es negro", "en": "My phone is black", "nl": "Mijn mobiel is zwart", "ex": { "es": "Mi celular es negro y tiene una funda azul.", "nl": "Mijn mobiel is zwart en heeft een blauw hoesje.", "en": "My phone is black and has a blue case." } }
+      ],
+      "grammar": {
+        "id": "g18", "title": "Om hulp vragen: de usted-gebiedende wijs", "title_es": "imperativo de usted para pedir ayuda",
+        "explain": [
+          "Om iemand beleefd iets te laten doen, gebruik je de usted-vorm van de gebiedende wijs. Werkwoorden op -ar krijgen een -e: ayudar → ayude, llamar → llame, hablar → hable.",
+          "Werkwoorden op -er en -ir krijgen een -a: escribir → escriba, repetir → repita.",
+          "Een 'me' of 'lo' plak je eraan vast, met een accent: ayúdeme (help me), llámeme (bel me). In Peru bel je de politie op 105."
+        ],
+        "compare": "Nederlands: help me, bel de politie (kort en direct). Spaans heeft een beleefde vorm voor onbekenden: ayúdeme, llame a la policía. Het lijkt op de usted-aanwijzingen van week 3 (siga, voltee, pare), maar nu zeg jij ze.",
+        "examples": [ { "es": "¡Ayúdeme, por favor!", "nl": "Help me, alstublieft!" }, { "es": "Llame a la policía.", "nl": "Bel de politie." }, { "es": "Hable más despacio, por favor.", "nl": "Praat langzamer, alstublieft." } ],
+        "exercises": [
+          { "type": "fill", "q": "Maak de zin af", "prompt": "¡___ a la policía!", "opts": ["Llame", "Llama", "Llamo"], "answer": "Llame", "why": "Usted-gebiedende wijs van llamar: llame." },
+          { "type": "mc", "q": "Hoe zeg je dit?", "prompt": "Help me, alstublieft!", "opts": ["¡Ayúdeme, por favor!", "¡Ayudo me, por favor!", "¡Ayuda me, por favor!"], "answer": "¡Ayúdeme, por favor!", "why": "Ayude + me, vast aan elkaar: ayúdeme." },
+          { "type": "fill", "q": "Maak de zin af", "prompt": "___ más despacio, por favor.", "opts": ["Hable", "Habla", "Hablo"], "answer": "Hable", "why": "Usted-vorm van hablar: hable." },
+          { "type": "mc", "q": "Hoe zeg je dit?", "prompt": "Ik ben mijn mobiel kwijt.", "opts": ["Perdí mi celular.", "Pierdo mi celular ayer.", "Perdé mi celular."], "answer": "Perdí mi celular.", "why": "Afgerond, in het verleden: perdí." },
+          { "type": "type", "q": "Schrijf het in het Spaans", "prompt": "Het is een noodgeval.", "answer": "Es una emergencia", "alt": ["¡Es una emergencia!"], "why": "Wat iets is: ser, dus es." }
+        ],
+        "en": {
+          "title": "Asking for help: the usted command",
+          "explain": [
+            "To ask someone politely to do something, use the usted form of the command. Verbs in -ar get an -e: ayudar → ayude, llamar → llame, hablar → hable.",
+            "Verbs in -er and -ir get an -a: escribir → escriba, repetir → repita.",
+            "A 'me' or 'lo' is attached to the end, with an accent: ayúdeme (help me), llámeme (call me). In Peru the police number is 105."
+          ],
+          "compare": "English: help me, call the police (short and direct, 'please' adds politeness). Spanish has a polite verb form for strangers: ayúdeme, llame a la policía. It's the same form as the directions from week 3 (siga, voltee, pare), but now you're the one saying them.",
+          "examples": [ { "es": "¡Ayúdeme, por favor!", "en": "Help me, please!" }, { "es": "Llame a la policía.", "en": "Call the police." }, { "es": "Hable más despacio, por favor.", "en": "Please speak more slowly." } ],
+          "exercises": [
+            { "type": "fill", "q": "Complete the sentence", "prompt": "¡___ a la policía!", "opts": ["Llame", "Llama", "Llamo"], "answer": "Llame", "why": "Usted command of llamar: llame." },
+            { "type": "mc", "q": "How do you say this?", "prompt": "Help me, please!", "opts": ["¡Ayúdeme, por favor!", "¡Ayudo me, por favor!", "¡Ayuda me, por favor!"], "answer": "¡Ayúdeme, por favor!", "why": "Ayude + me, joined: ayúdeme." },
+            { "type": "fill", "q": "Complete the sentence", "prompt": "___ más despacio, por favor.", "opts": ["Hable", "Habla", "Hablo"], "answer": "Hable", "why": "Usted form of hablar: hable." },
+            { "type": "mc", "q": "How do you say this?", "prompt": "I lost my phone.", "opts": ["Perdí mi celular.", "Pierdo mi celular ayer.", "Perdé mi celular."], "answer": "Perdí mi celular.", "why": "Finished, in the past: perdí." },
+            { "type": "type", "q": "Write it in Spanish", "prompt": "It's an emergency.", "answer": "Es una emergencia", "alt": ["¡Es una emergencia!"], "why": "What something is: ser, so es." }
+          ]
+        }
+      },
+      "mission": {
+        "scenario": "sereno",
+        "goal": "Je bent je mobiel kwijt: vraag om hulp en vertel waar en wanneer het gebeurde.",
+        "goal_en": "You've lost your phone: ask for help and say where and when it happened.",
+        "check": "Claire pide ayuda (ayúdeme, por favor o similar), dice qué perdió y cuenta dónde y cuándo pasó (por ejemplo 'fue en el parque Kennedy, hace una hora').",
+        "setup": "Pregunta, una cosa por turno, qué pasó, dónde, más o menos a qué hora y cómo es el celular. Al final dile que vaya a la comisaría a hacer la denuncia y que el número de la policía es el ciento cinco."
+      }
     }
   ]
 }
