@@ -255,12 +255,12 @@
       "items": [
         {
           "id": "w2-13",
-          "es": "Cocino pasta casi todos los días",
-          "en": "I cook pasta almost every day",
-          "nl": "Ik kook bijna elke dag pasta",
+          "es": "Cocino poke bowls muy seguido",
+          "en": "I make poke bowls very often",
+          "nl": "Ik maak heel vaak pokebowls",
           "ex": {
-            "es": "En Róterdam cocino pasta casi todos los días.",
-            "nl": "In Rotterdam kook ik bijna elke dag pasta."
+            "es": "En Róterdam cocino poke bowls muy seguido.",
+            "nl": "In Rotterdam maak ik heel vaak pokebowls."
           }
         },
         {
@@ -275,12 +275,12 @@
         },
         {
           "id": "w2-15",
-          "es": "Augusto prepara arroz con pollo",
-          "en": "Augusto makes arroz con pollo",
-          "nl": "Augusto maakt arroz con pollo",
+          "es": "Augusto prepara pollo con arroz",
+          "en": "Augusto makes chicken with rice",
+          "nl": "Augusto maakt kip met rijst",
           "ex": {
-            "es": "Los viernes Augusto prepara arroz con pollo.",
-            "nl": "Op vrijdag maakt Augusto arroz con pollo."
+            "es": "En casa, Augusto prepara pollo con arroz.",
+            "nl": "Thuis maakt Augusto kip met rijst."
           }
         },
         {
@@ -386,8 +386,8 @@
         "compare": "In het Nederlands verandert het werkwoord weinig: ik kook, jij kookt, wij koken. In het Spaans hoor je aan de uitgang wie het doet: cocino, cocinas, cocinamos. Daarom kan 'yo' weg. En waar het Nederlands 'Peruaanse' alleen een -e geeft, krijgt het Spaans -a en -s: peruana, peruanas.",
         "examples": [
           {
-            "es": "Cocino pasta. ¿Tú qué cocinas?",
-            "nl": "Ik kook pasta. Wat kook jij?"
+            "es": "Cocino poke bowls. ¿Tú qué cocinas?",
+            "nl": "Ik maak pokebowls. Wat kook jij?"
           },
           {
             "es": "En casa cocinamos juntos.",
@@ -414,7 +414,7 @@
           {
             "type": "fill",
             "q": "Maak de zin af",
-            "prompt": "Augusto ___ arroz con pollo.",
+            "prompt": "Augusto ___ pollo con arroz.",
             "opts": [
               "prepara",
               "preparo",
