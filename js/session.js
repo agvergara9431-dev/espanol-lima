@@ -195,7 +195,9 @@ function renderBuilt() {
 function check() {
   const R = S.run, e = R.steps[R.i].ex;
   const given = e.k === "order" ? R.built.map((x) => x.w).join(" ") : e.k === "type" || e.k === "listen" ? $("ans").value : R.sel;
-  const ok = e.k === "type" || e.k === "listen" ? closeEnough(given, [e.answer, ...(e.alt || [])]) : norm(given) === norm(e.answer);
+  // Typed answers forgive accents and small typos; picked options must be exact, because some differ only by an
+  // accent (tomo / tomó). Word order compares the words, ignoring punctuation.
+  const ok = e.k === "type" || e.k === "listen" ? closeEnough(given, [e.answer, ...(e.alt || [])]) : e.k === "mc" ? given === e.answer : norm(given) === norm(e.answer);
   answered(ok, given);
 }
 // Shared by all exercise kinds: record the result, update the card, show the verdict.
@@ -213,7 +215,7 @@ function answered(ok, given, heard) {
   const meaning = item ? tr(item) : "";
   const fix = e.k === "mc" && e.lang === "es" && !e.blank ? esc(e.answer) : `<span lang="es">${esc(e.answer)}</span>${meaning && e.k !== "mc" ? " · " + esc(meaning) : ""}`;
   $("verdict").innerHTML = (ok ? esc(t("ex.good")) : `${esc(t("ex.almost"))}<small>${fix}</small>`) + (e.why ? `<small class="why">${esc(e.why)}</small>` : "") + (heard ? `<small>${esc(t("ex.heard", { text: heard }))}</small>` : "");
-  $("lbody").querySelectorAll(".opt").forEach((o) => { const v = e.opts[o.dataset.o]; if (norm(v) === norm(e.answer)) o.classList.add("right"); else if (o.classList.contains("sel")) o.classList.add("wrong"); });
+  $("lbody").querySelectorAll(".opt").forEach((o) => { const v = e.opts[o.dataset.o]; if (v === e.answer) o.classList.add("right"); else if (o.classList.contains("sel")) o.classList.add("wrong"); });
   if (!ok && e.es) speak(e.es);
   const btn = $("checkBtn"); btn.disabled = false; btn.textContent = t("btn.next"); btn.onclick = next;
   persist(1);

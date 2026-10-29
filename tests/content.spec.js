@@ -34,7 +34,7 @@ for (const w of weeks) {
         expect(["mc", "fill", "type", "order"]).toContain(ex.type);
         if (ex.type === "mc" || ex.type === "fill") expect(ex.opts, `${g.id}: ${ex.prompt}`).toContain(ex.answer);
         if (ex.type === "fill") expect(ex.prompt).toContain("___");
-        if (ex.opts) expect(new Set(ex.opts.map(norm)).size, `${g.id} duplicate options`).toBe(ex.opts.length);
+        if (ex.opts) expect(new Set(ex.opts.map((o) => o.toLowerCase().trim())).size, `${g.id} duplicate options`).toBe(ex.opts.length); // accents count: tomo and tomó are different options
       }
       expect(w.scenarios[s.mission.scenario], `mission scenario ${s.mission.scenario}`).toBeTruthy();
       expect(s.mission.goal && s.mission.check).toBeTruthy();

@@ -42,8 +42,8 @@ for (const [name, engine] of [["webkit", webkit], ["chromium", chromium]]) {
       const btn = page.locator("#checkBtn");
       if (s.t !== "ex") { await btn.click(); continue; }
       const b = page.locator("#lbody");
-      if (s.k === "mc") await b.locator(".opt", { hasText: s.answer }).first().click();
-      else if (s.k === "order") for (const w of s.answer.split(" ")) await b.locator(".bank .tok:not(.used)", { hasText: w }).first().click();
+      if (s.k === "mc") await b.locator(".opt", { hasText: new RegExp("^" + s.answer.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "$") }).first().click();
+      else if (s.k === "order") for (const w of s.answer.split(" ")) await b.locator(".bank .tok:not(.used)", { hasText: new RegExp("^" + w.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "$") }).first().click();
       else if (s.k === "speak") { await page.locator("#recBtn").click(); await expect(page.locator("#verdict")).toBeVisible(); await measure("ex-speak-verdict"); await btn.click(); continue; }
       else await b.locator("#ans").fill(s.answer);
       await btn.click();

@@ -51,7 +51,7 @@ async function playStep(page, wrong = []) {
   const body = page.locator("#lbody");
   if (step.ex.k === "mc") {
     const pick = bad ? step.ex.opts.find((o) => o !== step.ex.answer) : step.ex.answer;
-    await body.locator(".opt", { hasText: pick }).first().click();
+    await body.locator(".opt", { hasText: new RegExp("^" + pick.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "$") }).first().click();
   } else if (step.ex.k === "order") {
     if (bad) await body.locator(".bank .tok").first().click();
     else for (const w of step.ex.answer.split(" ")) await body.locator(".bank .tok:not(.used)", { hasText: new RegExp("^" + w.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "$") }).first().click();
