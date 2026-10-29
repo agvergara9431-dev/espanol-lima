@@ -3,26 +3,232 @@
   "title": "Taxi, de weg vragen en geld",
   "title_es": "Taxi, direcciones y dinero",
   "stamp": "Taxi en geld",
+  "scenarios": {
+    "taxista": {
+      "icon": "taxi",
+      "title": "Taxi naar Barranco",
+      "who": "de taxichauffeur",
+      "desc": "Je staat in Miraflores en wilt met de taxi naar Barranco. In Lima spreek je de prijs af vóór je instapt.",
+      "persona": "un taxista limeño de unos 55 años, simpático pero negociante, que no habla inglés. Para su taxi en la avenida Larco, en Miraflores. Le encanta conversar y quejarse del tráfico.",
+      "opener": "¡Buenas tardes, señorita! ¿A dónde va?"
+    },
+    "taxinuevo": {
+      "icon": "taxi",
+      "title": "Een nieuwe taxichauffeur",
+      "who": "de taxichauffeur",
+      "desc": "Je zit in een taxi in Miraflores. De chauffeur is nieuw en kent de buurt niet goed.",
+      "persona": "un taxista joven y amable que recién empieza a trabajar en Miraflores y no conoce bien la zona. No habla inglés. Sigue al pie de la letra lo que le dicen y pregunta mucho.",
+      "opener": "Buenas, señorita. Disculpe, soy nuevo por acá. ¿A dónde la llevo?"
+    },
+    "combi": {
+      "icon": "taxi",
+      "title": "Bus op de Avenida Arequipa",
+      "who": "de cobrador en Augusto",
+      "desc": "Je neemt een bus naar Barranco. De cobrador (conducteur) roept de haltes. Daarna appt Augusto je.",
+      "persona": "dos personajes: primero el cobrador de un bus en la avenida Arequipa, rápido, ruidoso y amable, que grita las paradas ('¡Barranco, Chorrillos, sube, sube!'); y después Augusto, el enamorado de Claire, que le escribe por WhatsApp para quedar. Empieza cada intervención con 'Cobrador:' o 'Augusto:'.",
+      "opener": "Cobrador: ¡Arequipa, Barranco, Chorrillos! ¡Sube, sube, hay sitio!"
+    },
+    "cambio": {
+      "icon": "basket",
+      "title": "Wisselkantoor in Miraflores",
+      "who": "de medewerker",
+      "desc": "Je wisselt euro's in een wisselkantoor (casa de cambio) in Miraflores.",
+      "persona": "el cajero de una casa de cambio en Miraflores, serio pero amable, que no habla inglés. Habla claro de números y siempre cuenta el dinero en voz alta.",
+      "opener": "Buenos días, bienvenida. ¿Qué moneda va a cambiar?"
+    }
+  },
   "sessions": [
     {
       "n": 8,
       "title": "Een taxi nemen",
-      "title_es": "Tomar un taxi"
+      "title_es": "Tomar un taxi",
+      "items": [
+        { "id": "w3-01", "es": "¿Cuánto me cobra a Barranco?", "en": "How much do you charge to Barranco?", "nl": "Hoeveel rekent u tot Barranco?", "ex": { "es": "Buenas, señor. ¿Cuánto me cobra a Barranco?", "nl": "Goedemiddag, meneer. Hoeveel rekent u tot Barranco?" } },
+        { "id": "w3-02", "es": "Voy a Barranco", "en": "I'm going to Barranco", "nl": "Ik ga naar Barranco", "ex": { "es": "Voy a Barranco a ver el mar.", "nl": "Ik ga naar Barranco om de zee te zien." } },
+        { "id": "w3-03", "es": "Es muy caro", "en": "It's very expensive", "nl": "Dat is erg duur", "ex": { "es": "¿Veinticinco soles? Es muy caro.", "nl": "Vijfentwintig sol? Dat is erg duur." } },
+        { "id": "w3-04", "es": "¿Me lo deja en quince?", "en": "Will you do it for fifteen?", "nl": "Doet u het voor vijftien?", "ex": { "es": "Es cerquita. ¿Me lo deja en quince?", "nl": "Het is vlakbij. Doet u het voor vijftien?" } },
+        { "id": "w3-05", "es": "Estoy en Miraflores", "en": "I'm in Miraflores", "nl": "Ik ben in Miraflores", "ex": { "es": "Amor, estoy en Miraflores, en el parque Kennedy.", "nl": "Schat, ik ben in Miraflores, in het Kennedypark." } },
+        { "id": "w3-06", "es": "Al parque Kennedy, por favor", "en": "To Kennedy Park, please", "nl": "Naar het Kennedypark, alstublieft", "ex": { "es": "Buenas noches. Al parque Kennedy, por favor.", "nl": "Goedenavond. Naar het Kennedypark, alstublieft." } },
+        { "id": "w3-07", "es": "Le pago en efectivo", "en": "I'll pay you in cash", "nl": "Ik betaal u contant", "ex": { "es": "No tengo tarjeta aquí, le pago en efectivo.", "nl": "Ik heb mijn kaart hier niet, ik betaal u contant." } },
+        { "id": "w3-08", "es": "¿Está lejos?", "en": "Is it far?", "nl": "Is het ver?", "ex": { "es": "¿El malecón está lejos de aquí?", "nl": "Is de boulevard ver van hier?" } },
+        { "id": "w3-09", "es": "De Miraflores a Barranco", "en": "From Miraflores to Barranco", "nl": "Van Miraflores naar Barranco", "ex": { "es": "De Miraflores a Barranco son diez minutos.", "nl": "Van Miraflores naar Barranco is tien minuten." } },
+        { "id": "w3-10", "es": "Ya, vamos", "en": "OK, let's go", "nl": "Oké, we gaan", "ex": { "es": "¿Quince soles? Ya, vamos.", "nl": "Vijftien sol? Oké, we gaan." } },
+        { "id": "w3-11", "es": "Mejor pido un taxi por aplicación", "en": "I'd rather order a taxi through an app", "nl": "Ik bestel liever een taxi via een app", "ex": { "es": "Es muy caro, mejor pido un taxi por aplicación.", "nl": "Het is te duur, ik bestel liever een taxi via een app." } },
+        { "id": "w3-12", "es": "Del aeropuerto a la casa de Rosario", "en": "From the airport to Rosario's house", "nl": "Van het vliegveld naar het huis van Rosario", "ex": { "es": "¿Cuánto cuesta del aeropuerto a la casa de Rosario?", "nl": "Hoeveel kost het van het vliegveld naar het huis van Rosario?" } }
+      ],
+      "grammar": {
+        "id": "g08",
+        "title": "Ir a, en en de: naar, in en van",
+        "title_es": "ir a + lugar; a, en, de",
+        "explain": [
+          "Waar je naartoe gaat zeg je met ir a: voy a Barranco (ik ga naar Barranco). Ir is onregelmatig: voy, vas, va, vamos, van.",
+          "Waar je bent zeg je met en: estoy en Miraflores. Waar je vandaan komt of vertrekt met de: soy de Holanda, de Miraflores a Barranco.",
+          "A + el wordt al, de + el wordt del: voy al parque, vengo del aeropuerto. Met la blijft het los: voy a la playa."
+        ],
+        "compare": "Nederlands: naar, in, van. Spaans: a (naar), en (in, op), de (van, uit). Pas op: 'ik ben in Lima' is estoy en Lima, maar 'ik ga naar Lima' is voy a Lima. Nooit 'voy en Lima'. En net zoals 'naar het park' wordt het één woordje: al parque.",
+        "examples": [
+          { "es": "Voy a Barranco.", "nl": "Ik ga naar Barranco." },
+          { "es": "Estoy en Miraflores.", "nl": "Ik ben in Miraflores." },
+          { "es": "Del aeropuerto al parque Kennedy.", "nl": "Van het vliegveld naar het Kennedypark." }
+        ],
+        "exercises": [
+          { "type": "fill", "q": "Maak de zin af", "prompt": "Voy ___ Barranco.", "opts": ["a", "en", "de"], "answer": "a", "why": "Naar een plek: a." },
+          { "type": "fill", "q": "Maak de zin af", "prompt": "Estoy ___ Miraflores.", "opts": ["en", "a", "de"], "answer": "en", "why": "Waar je bent: en." },
+          { "type": "fill", "q": "Maak de zin af", "prompt": "Vamos ___ parque Kennedy.", "opts": ["al", "a el", "en el"], "answer": "al", "why": "A + el wordt al." },
+          { "type": "mc", "q": "Hoe zeg je dit?", "prompt": "Wij gaan naar Barranco.", "opts": ["Vamos a Barranco.", "Vamos en Barranco.", "Voy a Barranco."], "answer": "Vamos a Barranco.", "why": "Wij = vamos, naar = a." },
+          { "type": "type", "q": "Schrijf het in het Spaans", "prompt": "Ik ga naar het park.", "answer": "Voy al parque", "alt": ["Yo voy al parque"], "why": "A + el parque = al parque." }
+        ]
+      },
+      "mission": {
+        "scenario": "taxista",
+        "goal": "Neem een taxi van Miraflores naar Barranco en spreek vooraf een prijs af van maximaal 15 sol.",
+        "check": "Claire pregunta el precio antes de subir, dice que es caro o regatea, y acuerda un precio de quince soles o menos para ir de Miraflores a Barranco.",
+        "setup": "Pides veinticinco soles al principio. Si ella regatea, bajas a veinte y luego aceptas quince. Nunca aceptes menos de doce. Si no regatea, súbela al taxi con el precio de veinticinco."
+      }
     },
     {
       "n": 9,
       "title": "Waar is er…, en hoe kom ik er?",
-      "title_es": "Dónde hay… y cómo llego"
+      "title_es": "Dónde hay… y cómo llego",
+      "items": [
+        { "id": "w3-13", "es": "¿Hay un cajero por aquí?", "en": "Is there an ATM around here?", "nl": "Is er hier ergens een geldautomaat?", "ex": { "es": "Disculpe, ¿hay un cajero por aquí?", "nl": "Pardon, is er hier ergens een geldautomaat?" } },
+        { "id": "w3-14", "es": "¿Dónde está el banco?", "en": "Where is the bank?", "nl": "Waar is de bank?", "ex": { "es": "Perdón, señora, ¿dónde está el banco?", "nl": "Sorry, mevrouw, waar is de bank?" } },
+        { "id": "w3-15", "es": "Hay una farmacia en la esquina", "en": "There's a pharmacy on the corner", "nl": "Er is een apotheek op de hoek", "ex": { "es": "Sí, hay una farmacia en la esquina.", "nl": "Ja, er is een apotheek op de hoek." } },
+        { "id": "w3-16", "es": "Siga derecho", "en": "Go straight on", "nl": "Ga rechtdoor", "ex": { "es": "Siga derecho dos cuadras.", "nl": "Ga twee straten rechtdoor." } },
+        { "id": "w3-17", "es": "Voltee a la derecha", "en": "Turn right", "nl": "Sla rechtsaf", "ex": { "es": "En el semáforo, voltee a la derecha.", "nl": "Sla bij het stoplicht rechtsaf." } },
+        { "id": "w3-18", "es": "Voltee a la izquierda", "en": "Turn left", "nl": "Sla linksaf", "ex": { "es": "Después del parque, voltee a la izquierda.", "nl": "Sla na het park linksaf." } },
+        { "id": "w3-19", "es": "A dos cuadras", "en": "Two blocks away", "nl": "Twee straten verderop", "ex": { "es": "El supermercado está a dos cuadras.", "nl": "De supermarkt is twee straten verderop." } },
+        { "id": "w3-20", "es": "Al costado del supermercado", "en": "Next to the supermarket", "nl": "Naast de supermarkt", "ex": { "es": "El cajero está al costado del supermercado.", "nl": "De geldautomaat staat naast de supermarkt." } },
+        { "id": "w3-21", "es": "Enfrente del parque", "en": "Opposite the park", "nl": "Tegenover het park", "ex": { "es": "La iglesia está enfrente del parque.", "nl": "De kerk staat tegenover het park." } },
+        { "id": "w3-22", "es": "Pare en la esquina, por favor", "en": "Stop at the corner, please", "nl": "Stop op de hoek, alstublieft", "ex": { "es": "Ya llegamos. Pare en la esquina, por favor.", "nl": "We zijn er. Stop op de hoek, alstublieft." } },
+        { "id": "w3-23", "es": "Es aquí, gracias", "en": "It's here, thanks", "nl": "Het is hier, dank u", "ex": { "es": "¡Es aquí, gracias! ¿Cuánto es?", "nl": "Het is hier, dank u! Hoeveel is het?" } },
+        { "id": "w3-24", "es": "¿Me puede indicar cómo llegar?", "en": "Can you tell me how to get there?", "nl": "Kunt u me de weg wijzen?", "ex": { "es": "Disculpe, ¿me puede indicar cómo llegar al malecón?", "nl": "Pardon, kunt u me de weg naar de boulevard wijzen?" } }
+      ],
+      "grammar": {
+        "id": "g09",
+        "title": "Hay of está, en aanwijzingen begrijpen",
+        "title_es": "hay vs está + imperativo de usted (reconocer)",
+        "explain": [
+          "Hay betekent 'er is' of 'er zijn': je vraagt óf iets bestaat. ¿Hay un cajero por aquí? Hay twee banken: hay dos bancos. Hay verandert nooit.",
+          "Está zeg je bij iets bepaalds waarvan je de plek wilt weten: ¿dónde está el banco? El cajero está en la esquina. Bij meerdere: están.",
+          "Als iemand je de weg wijst, hoor je bevelen in de usted-vorm: siga (ga door), voltee (sla af), pare (stop), cruce (steek over). Je kunt ze zelf ook tegen de taxichauffeur zeggen."
+        ],
+        "compare": "Nederlands: 'er is een geldautomaat' (onbepaald) en 'de geldautomaat is op de hoek' (bepaald). Spaans precies zo: hay un cajero, el cajero está en la esquina. Met 'un/una' hoort meestal hay, met 'el/la' hoort está. 'Voltear' is Peruaans; in Spanje zeggen ze 'girar'.",
+        "examples": [
+          { "es": "¿Hay un cajero por aquí?", "nl": "Is er hier een geldautomaat?" },
+          { "es": "El cajero está a dos cuadras.", "nl": "De geldautomaat is twee straten verderop." },
+          { "es": "Siga derecho y voltee a la izquierda.", "nl": "Ga rechtdoor en sla linksaf." }
+        ],
+        "exercises": [
+          { "type": "fill", "q": "Maak de zin af", "prompt": "¿___ un cajero por aquí?", "opts": ["Hay", "Está", "Es"], "answer": "Hay", "why": "Of iets bestaat (un cajero): hay." },
+          { "type": "fill", "q": "Maak de zin af", "prompt": "El banco ___ a dos cuadras.", "opts": ["está", "hay", "es"], "answer": "está", "why": "De plek van iets bepaalds (el banco): está." },
+          { "type": "mc", "q": "Hoe zeg je dit?", "prompt": "Sla rechtsaf.", "opts": ["Voltee a la derecha.", "Voltee a la izquierda.", "Siga derecho."], "answer": "Voltee a la derecha.", "why": "Derecha = rechts, izquierda = links." },
+          { "type": "mc", "q": "Hoe zeg je dit?", "prompt": "Er zijn twee apotheken.", "opts": ["Hay dos farmacias.", "Están dos farmacias.", "Hayn dos farmacias."], "answer": "Hay dos farmacias.", "why": "Hay blijft hay, ook bij meervoud." },
+          { "type": "type", "q": "Schrijf het in het Spaans", "prompt": "Waar is de bank?", "answer": "¿Dónde está el banco?", "alt": ["Dónde está el banco"], "why": "Een bepaalde plek: está." }
+        ]
+      },
+      "mission": {
+        "scenario": "taxinuevo",
+        "goal": "Vraag de chauffeur of er een geldautomaat in de buurt is en loods hem daarna naar de deur: rechtdoor, links of rechts, en 'pare aquí'.",
+        "check": "Claire pregunta si hay un cajero cerca (usando 'hay'), luego da al menos dos indicaciones de dirección (siga derecho, voltee a la derecha o a la izquierda) y le pide parar (pare aquí, pare en la esquina o similar).",
+        "setup": "No conoces la zona. Hay un cajero a dos cuadras, al costado de un supermercado, pero solo lo dices si ella pregunta con 'hay'. Después sigues sus indicaciones y preguntas '¿por dónde, señorita?' hasta que te diga que pares."
+      }
     },
     {
       "n": 10,
       "title": "Bus, busje en tijden",
-      "title_es": "Bus, combi y horas"
+      "title_es": "Bus, combi y horas",
+      "items": [
+        { "id": "w3-25", "es": "¿Este bus va a Barranco?", "en": "Does this bus go to Barranco?", "nl": "Gaat deze bus naar Barranco?", "ex": { "es": "Disculpe, ¿este bus va a Barranco?", "nl": "Pardon, gaat deze bus naar Barranco?" } },
+        { "id": "w3-26", "es": "¿Dónde bajo?", "en": "Where do I get off?", "nl": "Waar moet ik uitstappen?", "ex": { "es": "Voy al parque municipal. ¿Dónde bajo?", "nl": "Ik ga naar het gemeentepark. Waar moet ik uitstappen?" } },
+        { "id": "w3-27", "es": "Bajo en la próxima", "en": "I get off at the next stop", "nl": "Ik stap bij de volgende uit", "ex": { "es": "¡Señor, bajo en la próxima, por favor!", "nl": "Meneer, ik stap bij de volgende uit, alstublieft!" } },
+        { "id": "w3-28", "es": "¿Cuánto es el pasaje?", "en": "How much is the fare?", "nl": "Hoeveel kost de rit?", "ex": { "es": "¿Cuánto es el pasaje hasta Barranco?", "nl": "Hoeveel kost de rit tot Barranco?" } },
+        { "id": "w3-29", "es": "Subo aquí", "en": "I get on here", "nl": "Ik stap hier in", "ex": { "es": "Todos los días subo aquí, en la avenida Arequipa.", "nl": "Elke dag stap ik hier in, op de Avenida Arequipa." } },
+        { "id": "w3-30", "es": "¿Qué hora es?", "en": "What time is it?", "nl": "Hoe laat is het?", "ex": { "es": "Perdón, ¿qué hora es?", "nl": "Sorry, hoe laat is het?" } },
+        { "id": "w3-31", "es": "Es la una", "en": "It's one o'clock", "nl": "Het is één uur", "ex": { "es": "Es la una, vamos a almorzar.", "nl": "Het is één uur, laten we gaan lunchen." } },
+        { "id": "w3-32", "es": "Son las tres y media", "en": "It's half past three", "nl": "Het is half vier", "ex": { "es": "Ya son las tres y media, ¡qué tarde!", "nl": "Het is al half vier, wat laat!" } },
+        { "id": "w3-33", "es": "Nos vemos a las siete", "en": "See you at seven", "nl": "We zien elkaar om zeven uur", "ex": { "es": "Nos vemos a las siete en el puente de los suspiros.", "nl": "We zien elkaar om zeven uur bij de Puente de los Suspiros." } },
+        { "id": "w3-34", "es": "Vivimos cerca del malecón", "en": "We live near the seafront", "nl": "We wonen vlak bij de boulevard", "ex": { "es": "En Lima vivimos cerca del malecón.", "nl": "In Lima wonen we vlak bij de boulevard." } },
+        { "id": "w3-35", "es": "Como en casa de Rosario", "en": "I eat at Rosario's house", "nl": "Ik eet bij Rosario thuis", "ex": { "es": "Hoy como en casa de Rosario.", "nl": "Vandaag eet ik bij Rosario thuis." } },
+        { "id": "w3-36", "es": "¿A qué hora sales?", "en": "What time do you leave?", "nl": "Hoe laat ga je weg?", "ex": { "es": "Amor, ¿a qué hora sales del trabajo?", "nl": "Schat, hoe laat ga je weg van je werk?" } }
+      ],
+      "grammar": {
+        "id": "g10",
+        "title": "Werkwoorden op -er en -ir, en hoe laat het is",
+        "title_es": "presente -er/-ir + la hora",
+        "explain": [
+          "Werkwoorden op -er en -ir gaan bijna hetzelfde. Comer (eten): como, comes, come, comemos, comen. Vivir (wonen): vivo, vives, vive, vivimos, viven. Alleen 'wij' verschilt: comemos, vivimos.",
+          "Let op: bajar (uitstappen) is een -ar werkwoord (bajo, bajas, baja), subir (instappen) een -ir werkwoord (subo, subes, sube).",
+          "Hoe laat? Es la una (één uur, enkelvoud). Vanaf twee: son las dos, son las tres. Halve en kwartieren: y media, y cuarto, menos cuarto. Om zeven uur: a las siete."
+        ],
+        "compare": "Pas op met 'half'! In het Nederlands is 'half vier' = 3:30. In het Spaans tel je vanaf het hele uur: son las tres y media (drie en een half). Dus half vier = las tres y media, niet las cuatro.",
+        "examples": [
+          { "es": "Como en casa de Rosario.", "nl": "Ik eet bij Rosario thuis." },
+          { "es": "Vivimos cerca del malecón.", "nl": "We wonen vlak bij de boulevard." },
+          { "es": "Son las tres y media. Nos vemos a las siete.", "nl": "Het is half vier. We zien elkaar om zeven uur." }
+        ],
+        "exercises": [
+          { "type": "fill", "q": "Maak de zin af", "prompt": "Nosotros ___ cerca del malecón.", "opts": ["vivimos", "vivemos", "viven"], "answer": "vivimos", "why": "Vivir is een -ir werkwoord: vivimos." },
+          { "type": "fill", "q": "Maak de zin af", "prompt": "¿Tú ___ en casa hoy?", "opts": ["comes", "come", "comemos"], "answer": "comes", "why": "Tú + comer = comes." },
+          { "type": "mc", "q": "Hoe zeg je dit?", "prompt": "Het is half vier.", "opts": ["Son las tres y media.", "Son las cuatro y media.", "Es la media cuatro."], "answer": "Son las tres y media.", "why": "Half vier = 3:30 = las tres y media." },
+          { "type": "fill", "q": "Maak de zin af", "prompt": "___ la una.", "opts": ["Es", "Son", "Están"], "answer": "Es", "why": "Eén uur is enkelvoud: es la una." },
+          { "type": "type", "q": "Schrijf het in het Spaans", "prompt": "We zien elkaar om zeven uur.", "answer": "Nos vemos a las siete", "alt": ["Nos vemos a las 7"], "why": "Om zeven uur = a las siete." }
+        ]
+      },
+      "mission": {
+        "scenario": "combi",
+        "goal": "Vraag de cobrador of de bus naar Barranco gaat en waar je moet uitstappen. Spreek daarna met Augusto een vaste tijd af.",
+        "check": "Claire pregunta si el bus va a Barranco y dónde tiene que bajar, y después acuerda con Augusto una hora concreta para encontrarse (por ejemplo 'a las siete').",
+        "setup": "Como cobrador: sí va a Barranco, el pasaje cuesta dos soles y ella baja en el parque municipal, en unos veinte minutos. Cuando ella ya sepa dónde bajar, cambia a Augusto, que le escribe por WhatsApp: '¿A qué hora nos vemos?'."
+      }
     },
     {
       "n": 11,
       "title": "Geld",
-      "title_es": "Dinero"
+      "title_es": "Dinero",
+      "items": [
+        { "id": "w3-37", "es": "¿Puedo pagar con tarjeta?", "en": "Can I pay by card?", "nl": "Kan ik met de kaart betalen?", "ex": { "es": "Disculpe, ¿puedo pagar con tarjeta?", "nl": "Pardon, kan ik met de kaart betalen?" } },
+        { "id": "w3-38", "es": "¿A cómo está el euro?", "en": "What's the euro exchange rate?", "nl": "Wat is de koers van de euro?", "ex": { "es": "Buenos días, ¿a cómo está el euro hoy?", "nl": "Goedemorgen, wat is de koers van de euro vandaag?" } },
+        { "id": "w3-39", "es": "Quiero cambiar cien euros", "en": "I want to change a hundred euros", "nl": "Ik wil honderd euro wisselen", "ex": { "es": "Quiero cambiar cien euros a soles.", "nl": "Ik wil honderd euro wisselen naar sol." } },
+        { "id": "w3-40", "es": "¿Me puede dar billetes de veinte?", "en": "Can you give me twenty-sol notes?", "nl": "Kunt u me briefjes van twintig geven?", "ex": { "es": "¿Me puede dar billetes de veinte, por favor?", "nl": "Kunt u me briefjes van twintig geven, alstublieft?" } },
+        { "id": "w3-41", "es": "Solo efectivo", "en": "Cash only", "nl": "Alleen contant", "ex": { "es": "Lo siento, aquí solo efectivo.", "nl": "Sorry, hier alleen contant." } },
+        { "id": "w3-42", "es": "El cajero no funciona", "en": "The ATM isn't working", "nl": "De geldautomaat werkt niet", "ex": { "es": "Disculpe, el cajero no funciona.", "nl": "Pardon, de geldautomaat werkt niet." } },
+        { "id": "w3-43", "es": "¿Me lo puede escribir?", "en": "Can you write it down for me?", "nl": "Kunt u het voor me opschrijven?", "ex": { "es": "No entiendo el número. ¿Me lo puede escribir?", "nl": "Ik versta het getal niet. Kunt u het voor me opschrijven?" } },
+        { "id": "w3-44", "es": "Está a cuatro soles con diez", "en": "It's at four soles ten", "nl": "Hij staat op vier sol tien", "ex": { "es": "Hoy el euro está a cuatro soles con diez.", "nl": "Vandaag staat de euro op vier sol tien." } },
+        { "id": "w3-45", "es": "¿Dónde puedo cambiar dinero?", "en": "Where can I change money?", "nl": "Waar kan ik geld wisselen?", "ex": { "es": "Perdón, ¿dónde puedo cambiar dinero por aquí?", "nl": "Sorry, waar kan ik hier geld wisselen?" } },
+        { "id": "w3-46", "es": "No puedo sacar plata", "en": "I can't withdraw money", "nl": "Ik kan geen geld opnemen", "ex": { "es": "Amor, no puedo sacar plata del cajero.", "nl": "Schat, ik kan geen geld uit de automaat halen." } },
+        { "id": "w3-47", "es": "¿Cobran comisión?", "en": "Do you charge a commission?", "nl": "Rekenen jullie commissie?", "ex": { "es": "¿Cobran comisión por cambiar euros?", "nl": "Rekenen jullie commissie voor het wisselen van euro's?" } },
+        { "id": "w3-48", "es": "Una moneda de cinco soles", "en": "A five-sol coin", "nl": "Een munt van vijf sol", "ex": { "es": "Para el bus necesito una moneda de cinco soles.", "nl": "Voor de bus heb ik een munt van vijf sol nodig." } }
+      ],
+      "grammar": {
+        "id": "g11",
+        "title": "Poder: kunnen, en dan meteen het werkwoord",
+        "title_es": "poder + infinitivo",
+        "explain": [
+          "Poder betekent kunnen of mogen. De o wordt ue, behalve bij 'wij': puedo, puedes, puede, podemos, pueden.",
+          "Na poder komt meteen het hele werkwoord (de infinitief): ¿puedo pagar con tarjeta? No puedo sacar plata. Er komt niets tussen.",
+          "In Peru zeg je vaak 'plata' voor geld (dinero). Sacar plata = geld opnemen."
+        ],
+        "compare": "Nederlands zet het tweede werkwoord achteraan: 'Kan ik met de kaart betalen?'. Spaans zet het er meteen achter: ¿Puedo pagar con tarjeta? (Kan ik betalen met kaart?). En net als 'kunt u' is het beleefd: ¿me puede ayudar?",
+        "examples": [
+          { "es": "¿Puedo pagar con tarjeta?", "nl": "Kan ik met de kaart betalen?" },
+          { "es": "No puedo sacar plata.", "nl": "Ik kan geen geld opnemen." },
+          { "es": "¿Dónde podemos cambiar dinero?", "nl": "Waar kunnen we geld wisselen?" }
+        ],
+        "exercises": [
+          { "type": "fill", "q": "Maak de zin af (ik)", "prompt": "¿___ pagar con tarjeta?", "opts": ["Puedo", "Puede", "Podo"], "answer": "Puedo", "why": "Ik = puedo (o wordt ue)." },
+          { "type": "fill", "q": "Maak de zin af", "prompt": "¿Usted me ___ dar billetes de veinte?", "opts": ["puede", "puedes", "podemos"], "answer": "puede", "why": "Usted = puede." },
+          { "type": "mc", "q": "Hoe zeg je dit?", "prompt": "Kan ik hier geld wisselen?", "opts": ["¿Puedo cambiar dinero aquí?", "¿Puedo cambio dinero aquí?", "¿Puedo a cambiar dinero aquí?"], "answer": "¿Puedo cambiar dinero aquí?", "why": "Na poder komt de infinitief: cambiar." },
+          { "type": "mc", "q": "Hoe zeg je dit?", "prompt": "Wij kunnen geen geld opnemen.", "opts": ["No podemos sacar plata.", "No puedemos sacar plata.", "No podemos sacamos plata."], "answer": "No podemos sacar plata.", "why": "Wij = podemos, zonder ue." },
+          { "type": "type", "q": "Schrijf het in het Spaans", "prompt": "Waar kan ik geld wisselen?", "answer": "¿Dónde puedo cambiar dinero?", "alt": ["¿Dónde puedo cambiar plata?", "Dónde puedo cambiar dinero"], "why": "Poder + infinitief: puedo cambiar." }
+        ]
+      },
+      "mission": {
+        "scenario": "cambio",
+        "goal": "Wissel 100 euro, herhaal de koers die de medewerker noemt en vraag of je met de kaart kunt betalen.",
+        "check": "Claire dice que quiere cambiar cien euros, repite correctamente el tipo de cambio que le dice el cajero (cuatro soles con diez, o 4.10) y pregunta si puede pagar con tarjeta (usando 'puedo').",
+        "setup": "El euro está a cuatro soles con diez. Por cien euros le das cuatrocientos diez soles y los cuentas en voz alta. Para el cambio solo aceptas efectivo, pero si pregunta por la tarjeta, dile que en la tienda de al lado sí aceptan."
+      }
     }
   ]
 }
