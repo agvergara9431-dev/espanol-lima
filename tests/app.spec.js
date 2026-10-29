@@ -29,7 +29,7 @@ async function seed(page, { results = [], cards = [], days = [] } = {}) {
     }));
   }, { results, cards, days, LEARNER });
   await page.reload();
-  await expect(page.locator("#homeName")).toBeVisible();
+  await expect(page.locator("#routeMap")).toBeVisible();
 }
 
 // Plays one step. wrong: answer exercises of these sections incorrectly.
@@ -90,13 +90,15 @@ test("full session 2: all steps, then rest day and Augusto's panel", async ({ pa
     cards: Array.from({ length: 30 }, (_, i) => ({ item_id: "w1-" + pad(i + 1), es: "x", due: i < 2 ? dayAgo(0) : dayAgo(-3), ko: i < 2 ? 2 : 0, box: i < 2 ? 0 : 2 })),
     days: [{ day: dayAgo(2), xp: 1435, minutes: 21.3, lessons: 7 }],
   });
-  await expect(page.locator("#ticketDay")).toHaveText("INSTAPKAART · SESSIE 2");
-  await expect(page.locator("#homeStats")).toHaveText("1 sessie op tijd · 1435 XP");
-  await expect(page.locator("#route .dot")).toHaveCount(24);
-  await expect(page.locator("#route .stamp-mini")).toHaveCount(7);
+  await expect(page.locator("#todaySub")).toContainText("Sessie 2 van 24");
+  await expect(page.locator("#streakN")).toHaveText("1");
+  await expect(page.locator("#xpN")).toHaveText("1435 XP");
+  await expect(page.locator("#routeMap .r-node")).toHaveCount(24);
+  await expect(page.locator("#curNode")).toBeInViewport();
+  await expect(page.locator("#routeMap .r-stamp")).toHaveCount(7);
   await page.screenshot({ path: shots + "1-home-session.png", fullPage: true });
 
-  await page.locator("#board").click();
+  await page.locator("#startBtn").click();
   // Review comes first, and the missed cards are in it.
   const first = await page.evaluate(() => window.__step());
   expect(first.section).toBe("review");
@@ -119,10 +121,10 @@ test("full session 2: all steps, then rest day and Augusto's panel", async ({ pa
   await page.locator("#checkBtn").click();
 
   // Rest day now: nothing asked, next session in 2 days, optional review offered.
-  await expect(page.locator("#ticketDay")).toHaveText("RUSTDAG");
+  await expect(page.locator("#todayTitle")).toHaveText("Rustdag");
   await expect(page.locator("#nextSession")).toBeVisible();
-  await expect(page.locator("#board")).toHaveCount(0);
-  await expect(page.locator("#homeStats")).toContainText("2 sessies op tijd");
+  await expect(page.locator("#startBtn")).toBeDisabled();
+  await expect(page.locator("#streakN")).toHaveText("2");
   await page.screenshot({ path: shots + "5-rest.png", fullPage: true });
 
   // Augusto's panel
@@ -140,46 +142,46 @@ test("full session 2: all steps, then rest day and Augusto's panel", async ({ pa
 
 test("no second new session on the same day; optional review works", async ({ page }) => {
   await seed(page, { results: [{ n: 1, done_on: dayAgo(0), on_time: true }], cards: [{ item_id: "w1-05", es: "Me llamo Claire", due: dayAgo(0) }] });
-  await expect(page.locator("#ticketDay")).toHaveText("RUSTDAG");
-  await expect(page.locator("#board")).toHaveCount(0);
+  await expect(page.locator("#todayTitle")).toHaveText("Rustdag");
+  await expect(page.locator("#startBtn")).toBeDisabled();
   await page.locator("#reviewBtn").click();
   for (let i = 0; i < 30; i++) if ((await playStep(page)) === "finish") break;
   await expect(page.locator(".finish")).toContainText("XP");
   await page.locator("#checkBtn").click();
-  await expect(page.locator("#ticketDay")).toHaveText("RUSTDAG");
+  await expect(page.locator("#todayTitle")).toHaveText("Rustdag");
 });
 
 test("late session: allowed the day after, plan shifts and the streak restarts", async ({ page }) => {
   await seed(page, { results: [{ n: 1, done_on: dayAgo(3), on_time: true }] });
   await expect(page.locator("#late")).toBeVisible();
-  await page.locator("#board").click();
+  await page.locator("#startBtn").click();
   await playSession(page);
   await page.locator("#checkBtn").click();
-  await expect(page.locator("#homeStats")).toContainText("0 sessies op tijd");
-  await expect(page.locator("#ticketDay")).toHaveText("RUSTDAG");
+  await expect(page.locator("#streakN")).toHaveText("0");
+  await expect(page.locator("#todayTitle")).toHaveText("Rustdag");
 });
 
 test("weekly test passed gives the stamp", async ({ page }) => {
   await seed(page, { results: [1, 2, 3].map((n) => ({ n, done_on: dayAgo(8 - 2 * n), on_time: true })) });
-  await expect(page.locator("#ticketDay")).toHaveText("INSTAPKAART · SESSIE 4");
-  await expect(page.locator(".steps")).toContainText("Weektoets week 1");
-  await page.locator("#board").click();
+  await expect(page.locator("#todaySub")).toContainText("Sessie 4 van 24");
+  await expect(page.locator("#todaySub")).toContainText("met weektoets");
+  await page.locator("#startBtn").click();
   await playSession(page);
   await expect(page.locator(".test-result.ok")).toContainText('Stempel "¡Hola!"');
   await page.locator("#checkBtn").click();
   await expect(page.locator(".big-stamp")).toBeVisible();
   await page.screenshot({ path: shots + "7-stamp.png" });
   await page.locator("#stampOk").click();
-  await expect(page.locator('#route [data-week="1"] .stamp-mini.done')).toBeVisible();
+  await expect(page.locator('#routeMap [data-stamp="1"].earned')).toBeVisible();
 });
 
 test("weekly test below 70% is retried, and a quiz below 60% is flagged in the panel", async ({ page, context }) => {
   await seed(page, { results: [1, 2, 3].map((n) => ({ n, done_on: dayAgo(8 - 2 * n), on_time: true })) });
-  await page.locator("#board").click();
+  await page.locator("#startBtn").click();
   await playSession(page, ["quiz", "test"]);
   await expect(page.locator(".test-result.no")).toContainText("volgende sessie opnieuw");
   await page.locator("#checkBtn").click();
-  await expect(page.locator('#route [data-week="1"] .stamp-mini.done')).toHaveCount(0);
+  await expect(page.locator('#routeMap [data-stamp="1"].earned')).toHaveCount(0);
   const aug = await context.newPage();
   await aug.goto("/index.html?mock=owner");
   await aug.locator('#nav [data-tab="panel"]').click();
@@ -192,27 +194,29 @@ test("week 2: session 7 ends with the week 2 test and the Restaurant stamp", asy
   const results = [1, 2, 3, 4, 5, 6].map((n) => ({ n, week: n <= 4 ? 1 : 2, done_on: dayAgo(14 - 2 * n), on_time: true }));
   results[3].detail = { tests: [{ week: 1, ok: 9, total: 10, passed: true }] };
   await seed(page, { results });
-  await expect(page.locator("#ticketDay")).toHaveText("INSTAPKAART · SESSIE 7");
-  await expect(page.locator(".steps")).toContainText("Weektoets week 2");
-  await page.locator("#board").click();
+  await expect(page.locator("#todaySub")).toContainText("Sessie 7 van 24");
+  await expect(page.locator("#todaySub")).toContainText("met weektoets");
+  await page.locator("#startBtn").click();
   await playSession(page);
   await expect(page.locator(".test-result.ok")).toContainText('Stempel "Restaurant"');
   await page.locator("#checkBtn").click();
   await page.locator("#stampOk").click();
-  await expect(page.locator('#route [data-week="2"] .stamp-mini.done')).toBeVisible();
+  await expect(page.locator('#routeMap [data-stamp="2"].earned')).toBeVisible();
+  await page.locator('#nav [data-tab="passport"]').click();
+  await expect(page.locator("#stampCount")).toHaveText("2 van 7 stempels");
 });
 
 test("a half-done session resumes where she left it", async ({ page }) => {
   await seed(page, { results: [{ n: 1, done_on: dayAgo(2), on_time: true }] });
-  await page.locator("#board").click();
+  await page.locator("#startBtn").click();
   for (let i = 0; i < 6; i++) await playStep(page);
   const at = await page.evaluate(() => window.__step());
   await page.locator("#quitBtn").click();
   await expect(page.locator("#verdict")).toContainText("telt pas als je hem afmaakt");
   await page.locator("#quitBtn").click();
-  await expect(page.locator("#board")).toHaveText("VERDER");
+  await expect(page.locator("#startBtn")).toHaveText("VERDER");
   await page.reload();
-  await page.locator("#board").click();
+  await page.locator("#startBtn").click();
   const again = await page.evaluate(() => window.__step());
   expect(again).toEqual(at);
 });

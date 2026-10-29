@@ -5,7 +5,7 @@ import {
   $, esc, S, isOwner, schedule, itemsUpTo, loadContent, loadUser, voicesReady, pickVoice, hasEs, speak, status, updateToday, save, allSaved, weekPassed,
 } from "./core.js";
 import { buildSession, buildReview, buildExtra, start, savedRun, setOnClose, showStamp } from "./session.js";
-import { renderHome, actions } from "./home.js";
+import { renderHome, renderPassport, actions } from "./home.js";
 import { renderPanel, panelActions } from "./panel.js";
 import { renderLogin } from "./login.js";
 
@@ -13,15 +13,16 @@ const MAX_MSG = 300;
 
 // ---------- navigation ----------
 function tabs() {
-  const list = [["home", "passport", "Paspoort"], ["chat", "chat", "Gesprek"], ["words", "words", "Woorden"]];
+  const list = [["home", "route", "Route"], ["passport", "passport", "Paspoort"], ["chat", "chat", "Gesprek"], ["words", "words", "Woorden"]];
   if (isOwner() && !S.readonly) list.push(["panel", "panel", "Panel"]);
   $("nav").innerHTML = list.map(([k, ic, label]) => `<button role="tab" data-tab="${k}" aria-selected="${S.tab === k}">${icon(ic)}${label}</button>`).join("");
 }
 function show(tab) {
   S.tab = tab;
-  for (const k of ["home", "chat", "words", "panel"]) $("tab-" + k).hidden = k !== tab;
+  for (const k of ["home", "passport", "chat", "words", "panel"]) $("tab-" + k).hidden = k !== tab;
   tabs();
   if (tab === "home") renderHome();
+  if (tab === "passport") renderPassport();
   if (tab === "chat") renderChatTab();
   if (tab === "words") renderWords();
   if (tab === "panel") renderPanel();
@@ -46,6 +47,7 @@ actions.extra = async () => {
   try { const run = await buildExtra(doneUpTo()); status(""); start(run); }
   catch (e) { status(e.code === "limit" ? "Je hebt het maximum voor vandaag bereikt. Morgen kan het weer." : "Extra oefeningen lukten nu niet. Probeer het zo nog eens."); }
 };
+actions.passport = () => show("passport");
 actions.backToOwner = async () => { S.readonly = false; await loadUser(S.store.me.id); show("panel"); };
 panelActions.viewAs = async () => {
   if (!S.store.learnerId) { status("Claire todavía no ha entrado nunca."); return; }

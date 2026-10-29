@@ -50,15 +50,15 @@ test("real backend: owner plays session 1, it is saved; Claire's migrated state 
   await page.evaluate(() => { document.getElementById("pasteForm").hidden = false; });
   await page.locator("#paste").fill(await magicLink(OWNER));
   await page.locator("#pasteBtn").click();
-  await expect(page.locator("#homeName")).toHaveText("Augusto", { timeout: 15000 });
-  await expect(page.locator("#ticketDay")).toHaveText("INSTAPKAART · SESSIE 1");
+  await expect(page.locator('#nav [data-tab="panel"]')).toBeVisible({ timeout: 15000 });
+  await expect(page.locator("#todaySub")).toContainText("Sessie 1 van 24");
 
   // Play the whole session. The real store has no test hook, so answers are read from the content file.
   const content = await (await page.request.get("/content/semana-1.json")).json();
   const s1 = content.sessions[0];
   const esByNl = Object.fromEntries(s1.items.map((i) => [i.nl, i.es]));
   const answersEs = new Set(s1.items.map((i) => i.es));
-  await page.locator("#board").click();
+  await page.locator("#startBtn").click();
   for (let i = 0; i < 150; i++) {
     const btn = page.locator("#checkBtn");
     if (await page.locator(".finish").count()) break;
@@ -88,15 +88,16 @@ test("real backend: owner plays session 1, it is saved; Claire's migrated state 
 
   // Saved in Supabase: survives a reload
   await page.reload();
-  await expect(page.locator("#ticketDay")).toHaveText("RUSTDAG");
-  await expect(page.locator("#homeStats")).toContainText("1 sessie op tijd");
+  await expect(page.locator("#todayTitle")).toHaveText("Rustdag");
+  await expect(page.locator("#streakN")).toHaveText("1");
 
   // Claire's migrated progress, read-only
   await page.locator('#nav [data-tab="panel"]').click();
   await expect(page.locator("#pSessionsTable tbody tr")).toHaveCount(1);
   await page.locator("#viewAs").click();
-  await expect(page.locator("#homeName")).toHaveText("Claire");
-  await expect(page.locator("#homeStats")).toHaveText("1 sessie op tijd · 1435 XP");
+  await expect(page.locator(".banner")).toBeVisible();
+  await expect(page.locator("#streakN")).toHaveText("1");
+  await expect(page.locator("#xpN")).toHaveText("1435 XP");
   await expect(page.locator(".banner")).toContainText("solo lectura");
   expect(errors).toEqual([]);
 });
