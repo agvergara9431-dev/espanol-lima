@@ -97,7 +97,7 @@ export default {
           model: MODEL,
           max_tokens: 1500,
           thinking: { type: "disabled" },
-          system: "Eres un profesor de español paciente. Claire es holandesa y estudia español nivel A1-A2 para un viaje a Lima. Evalúa SOLO las líneas de Claire. score de 1 a 5. praise: una frase corta en neerlandés sobre lo que hizo bien. errors: máximo 5; said = lo que escribió, better = versión correcta en español peruano natural, why = explicación corta en neerlandés. Si no hay errores, lista vacía. No marques como error la falta de tildes o signos de apertura." + goal,
+          system: "Eres un profesor de español paciente. Claire es holandesa y estudia español nivel A1-A2 para un viaje a Lima. Evalúa SOLO las líneas de Claire. score de 1 a 5. praise: una frase corta en neerlandés sobre lo que hizo bien. errors: máximo 5; said = lo que escribió, better = versión correcta en español peruano natural, why = explicación corta en neerlandés. Si no hay errores, lista vacía. Corrige SOLO errores reales de gramática o vocabulario, o algo que un peruano no diría. No corrijas tildes, comas, puntuación ni signos de apertura. No cambies expresiones que ya son correctas en el Perú (por ejemplo 'disculpe' es correcto; no lo cambies por 'perdone'). No incluyas frases correctas en errors." + goal,
           messages: [{ role: "user", content: transcript }],
           output_config: { format: zodOutputFormat(mission ? MissionFeedback : Feedback) },
         });
@@ -131,15 +131,11 @@ function dialogRules(s, mission) {
 
 async function loadWeek(env, ctx, week) {
   if (!Number.isInteger(week) || week < 1 || week > 7) return null;
-  const url = `${env.CONTENT_BASE}/content/semana-${week}.json`;
-  const cache = caches.default;
-  let res = await cache.match(url);
-  if (!res) {
-    res = await fetch(url);
-    if (!res.ok) return null;
-    const copy = new Response(res.clone().body, { headers: { "content-type": "application/json", "cache-control": "max-age=600" } });
-    ctx.waitUntil(cache.put(url, copy));
-  }
+  // The query changes every 5 minutes, so a new week published on GitHub Pages is picked up within 5 minutes
+  // no matter what the CDNs in between have cached.
+  const url = `${env.CONTENT_BASE}/content/semana-${week}.json?v=${Math.floor(Date.now() / 300000)}`;
+  const res = await fetch(url, { cf: { cacheTtl: 300, cacheEverything: true } });
+  if (!res.ok) return null;
   return res.json();
 }
 // A session's mission (week + session number) or a free scenario (week + key).
