@@ -8,21 +8,24 @@ import { buildSession, buildReview, buildExtra, start, savedRun, setOnClose, sho
 import { renderHome, renderPassport, actions } from "./home.js";
 import { renderPanel, panelActions } from "./panel.js";
 import { renderLogin } from "./login.js";
+import { renderLucia, startLucia, unread, luciaActions } from "./lucia.js";
 
 const MAX_MSG = 300;
 
 // ---------- navigation ----------
 function tabs() {
-  const list = [["home", "route", "Route"], ["passport", "passport", "Paspoort"], ["chat", "chat", "Gesprek"], ["words", "words", "Woorden"]];
+  const list = [["home", "route", "Route"], ["passport", "passport", "Paspoort"], ["lucia", "chat", "Lucía"], ["words", "words", "Woorden"]];
   if (isOwner() && !S.readonly) list.push(["panel", "panel", "Panel"]);
-  $("nav").innerHTML = list.map(([k, ic, label]) => `<button role="tab" data-tab="${k}" aria-selected="${S.tab === k}">${icon(ic)}${label}</button>`).join("");
+  const n = unread();
+  $("nav").innerHTML = list.map(([k, ic, label]) => `<button role="tab" data-tab="${k}" aria-selected="${S.tab === k || (k === "lucia" && S.tab === "chat")}">${icon(ic)}${label}${k === "lucia" && n ? `<span class="badge" id="luciaBadge" aria-label="${n} nieuw">${n}</span>` : ""}</button>`).join("");
 }
 function show(tab) {
   S.tab = tab;
-  for (const k of ["home", "passport", "chat", "words", "panel"]) $("tab-" + k).hidden = k !== tab;
+  for (const k of ["home", "passport", "lucia", "chat", "words", "panel"]) $("tab-" + k).hidden = k !== tab;
   tabs();
   if (tab === "home") renderHome();
   if (tab === "passport") renderPassport();
+  if (tab === "lucia") renderLucia();
   if (tab === "chat") renderChatTab();
   if (tab === "words") renderWords();
   if (tab === "panel") renderPanel();
@@ -48,6 +51,8 @@ actions.extra = async () => {
   catch (e) { status(e.code === "limit" ? "Je hebt het maximum voor vandaag bereikt. Morgen kan het weer." : "Extra oefeningen lukten nu niet. Probeer het zo nog eens."); }
 };
 actions.passport = () => show("passport");
+luciaActions.scenarios = () => show("chat");
+luciaActions.badge = () => tabs();
 actions.backToOwner = async () => { S.readonly = false; await loadUser(S.store.me.id); show("panel"); };
 panelActions.viewAs = async () => {
   if (!S.store.learnerId) { status("Claire todavía no ha entrado nunca."); return; }
@@ -83,10 +88,11 @@ function renderChatTab() {
   const wk = S.sessions[Math.min(schedule().next, 24)]?.week || 1;
   const list = Object.values(S.scen).filter((s) => s.week <= wk);
   $("tab-chat").innerHTML = `<div class="page">
-    <h2 class="display">Gesprek</h2>
+    <div class="sheet-head"><button class="icon-btn" id="scenBack" aria-label="Terug naar Lucía">${icon("back")}</button><div><span class="mono muted">Lucía</span><h2 class="display">Oefen een situatie</h2></div></div>
     <p class="muted">Vrij oefenen, zonder opdracht. Schrijf in het Spaans, ook met fouten. Aan het eind krijg je correcties.</p>
     <div class="scen">${list.map((s) => `<button data-sc="${s.key}"><span class="sc-ico">${icon(s.icon)}</span><b>${esc(s.title)}</b><small>${esc(s.desc)}</small></button>`).join("")}</div></div>`;
   $("tab-chat").querySelectorAll("[data-sc]").forEach((b) => (b.onclick = () => startDialog(b.dataset.sc)));
+  $("scenBack").onclick = () => show("lucia");
 }
 async function startDialog(key) {
   const sc = S.scen[key]; if (!sc) return;
@@ -148,7 +154,8 @@ async function boot() {
     $("login").hidden = true; $("app").hidden = false;
     S.store.onNote((n) => { S.note = n; if (S.tab === "home" && !S.run) renderHome(); });
     pickVoice();
-    show("home");
+    await startLucia();
+    show(new URLSearchParams(location.search).get("tab") === "lucia" ? "lucia" : "home");
   } catch (e) {
     console.error(e);
     $("login").hidden = false; $("login").innerHTML = '<div class="login-card"><h1 class="display">Er ging iets mis</h1><p>Controleer je internetverbinding en probeer het opnieuw.</p><button class="btn" onclick="location.reload()">Opnieuw</button></div>';

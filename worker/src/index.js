@@ -4,6 +4,7 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { z } from "zod";
 import { zodOutputFormat } from "@anthropic-ai/sdk/helpers/zod";
+import { handleChat, runCron } from "./lucia.js";
 
 const MODEL = "claude-haiku-5-5";
 const MAX_TURNS = 40;
@@ -20,6 +21,10 @@ const Extra = z.object({
 });
 
 export default {
+  // Cron Trigger (every 15 minutes): Lucía's proactive messages. The only place that uses the service role key.
+  async scheduled(event, env, ctx) {
+    ctx.waitUntil(runCron(env));
+  },
   async fetch(req, env, ctx) {
     const origin = req.headers.get("origin") || "";
     const allowed = (env.ALLOWED_ORIGINS || "").split(",").map((s) => s.trim()).filter(Boolean);
@@ -31,7 +36,7 @@ export default {
     if (!cors) return new Response("forbidden", { status: 403 });
     if (req.method === "OPTIONS") return new Response(null, { status: 204, headers: cors });
     const path = new URL(req.url).pathname;
-    if (req.method !== "POST" || !["/dialog", "/feedback", "/extra"].includes(path)) return reply(404, { error: "not_found" });
+    if (req.method !== "POST" || !["/dialog", "/feedback", "/extra", "/chat"].includes(path)) return reply(404, { error: "not_found" });
 
     // 1. Who is calling?
     const token = (req.headers.get("authorization") || "").replace(/^Bearer\s+/i, "");
@@ -46,7 +51,9 @@ export default {
     let body;
     try { body = await req.json(); } catch { return reply(400, { error: "bad_request" }); }
     let ctxData = null;
-    if (path === "/extra") {
+    if (path === "/chat") {
+      if (typeof body.text !== "string" || !body.text.trim() || body.text.length > 400) return reply(400, { error: "bad_request" });
+    } else if (path === "/extra") {
       const words = Array.isArray(body.words) ? body.words : [];
       const ok = words.length >= 1 && words.length <= 15 && words.every((w) => w && typeof w.es === "string" && typeof w.nl === "string" && w.es.length <= 80 && w.nl.length <= 80);
       if (!ok) return reply(400, { error: "bad_request" });
@@ -75,6 +82,11 @@ export default {
     // 4. Claude
     const client = new Anthropic({ apiKey: env.ANTHROPIC_API_KEY, maxRetries: 2 });
     try {
+      if (path === "/chat") {
+        // Runs with Claire's own token: every read and write goes through RLS.
+        const out = await handleChat(env, token, user.id, body);
+        return reply(out.status, out.body);
+      }
       if (path === "/dialog") {
         const msg = await client.messages.create({
           model: MODEL,
