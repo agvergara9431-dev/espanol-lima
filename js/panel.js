@@ -1,6 +1,7 @@
 // Augusto's panel (Spanish): live progress, sessions with quiz/mission/test results, grammar accuracy,
 // real minutes per day, and sessions flagged when the closing quiz is below 60%.
 import { icon } from "./icons.js";
+import { passwordForm } from "./login.js";
 import {
   $, esc, S, todayStr, addDays, parse, fmtEs, dateEs, byKey, schedule, streak, totalXp, totalMin, TOTAL,
 } from "./core.js";
@@ -12,6 +13,7 @@ export async function renderPanel() {
   const el = $("tab-panel");
   if (!el.dataset.built) {
     el.dataset.built = "1";
+    const pw = passwordForm("es");
     el.innerHTML = `<div class="page" lang="es">
       <div class="sec-head"><h2 class="display">Panel de Augusto</h2><span class="live mono"><i></i>EN VIVO</span></div>
       <p class="muted">Se actualiza solo cuando Claire practica.</p>
@@ -36,7 +38,10 @@ export async function renderPanel() {
       <h3 class="mono">PALABRAS FLOJAS</h3><div class="chips" id="pWeak"></div>
       <h3 class="mono">PALABRAS DOMINADAS</h3><div class="chips" id="pStrong"></div>
       <h3 class="mono">DIÁLOGOS DE LAS MISIONES</h3><div id="pDialogs"></div>
+      <h3 class="mono">MI CUENTA</h3>
+      ${pw.html}
       <button class="link small" id="logout">${icon("logout", 16)} Cerrar sesión</button></div>`;
+    pw.bind();
     $("viewAs").onclick = () => panelActions.viewAs();
     $("noteInput").value = S.note?.text || "";
     $("noteSave").onclick = async () => {

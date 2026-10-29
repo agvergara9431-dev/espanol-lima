@@ -3,6 +3,7 @@
 import { CONFIG } from "./config.js";
 import { icon } from "./icons.js";
 import { $, esc, S, speak, hasEs, status } from "./core.js";
+import { passwordForm } from "./login.js";
 
 export const luciaActions = { scenarios() {}, badge() {} };
 let messages = [], unsub = null;
@@ -77,6 +78,7 @@ async function send() {
 async function openSettings() {
   const st = { enabled: true, window_start: 9, window_end: 21, per_day: 2, ...((await S.store.settings().catch(() => null)) || {}) };
   const hours = (sel, from, to) => Array.from({ length: to - from + 1 }, (_, i) => from + i).map((h) => `<option value="${h}" ${h === sel ? "selected" : ""}>${String(h).padStart(2, "0")}:00</option>`).join("");
+  const pw = passwordForm("nl");
   const pushState = !("Notification" in window) || !("serviceWorker" in navigator) || !("PushManager" in window) ? "unsupported" : Notification.permission;
   $("week").hidden = false;
   $("week").innerHTML = `<div class="sheet-head"><button class="icon-btn" id="setBack" aria-label="Terug">${icon("back")}</button><div><span class="mono muted">Lucía</span><h2 class="display">Instellingen</h2></div></div>
@@ -89,7 +91,9 @@ async function openSettings() {
           : pushState === "granted" && st.push_subscription ? `<p class="small ok-text" id="pushOn">${icon("check", 16)} Meldingen staan aan op dit toestel.</p><button class="link small" id="pushOff">Meldingen uitzetten</button>`
           : pushState === "denied" ? '<p class="small">Meldingen zijn geblokkeerd. Zet ze aan in de instellingen van je telefoon of browser.</p>'
           : `<button class="btn wide" id="pushBtn">${icon("bell", 18)} Meldingen aanzetten</button>`}</div>
-      <button class="btn wide" id="setSave">Opslaan</button><p class="status" id="setStatus"></p></div>`;
+      <button class="btn wide" id="setSave">Opslaan</button><p class="status" id="setStatus"></p>
+      ${pw.html}</div>`;
+  pw.bind();
   let perDay = st.per_day;
   $("setPerDay").querySelectorAll("button").forEach((b) => (b.onclick = () => { perDay = +b.dataset.n; $("setPerDay").querySelectorAll("button").forEach((x) => x.setAttribute("aria-pressed", x === b)); }));
   $("setBack").onclick = closeSettings;

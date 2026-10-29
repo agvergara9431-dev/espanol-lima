@@ -34,24 +34,15 @@ async function supabaseStore() {
       s.role = info.role; s.learnerId = info.learner_id;
       return true;
     },
-    async signIn(email) {
-      const redirect = location.origin + location.pathname;
-      const { error } = await sb.auth.signInWithOtp({ email, options: { emailRedirectTo: redirect, shouldCreateUser: false } });
+    // Email + password. Signups stay closed in Supabase, so only the two existing accounts can sign in.
+    // The session is kept in localStorage with a refresh token, so the installed app stays signed in.
+    async signIn(email, password) {
+      const { error } = await sb.auth.signInWithPassword({ email, password });
       if (error) throw error;
     },
-    // Accepts the pasted mail link (token hash) or, with a custom mail template, the numeric code.
-    async verify(email, input) {
-      const text = input.trim();
-      const code = text.replace(/\s/g, "");
-      let res;
-      if (/^\d{6,10}$/.test(code)) res = await sb.auth.verifyOtp({ email, token: code, type: "email" });
-      else {
-        const url = new URL(text);
-        const tokenHash = url.searchParams.get("token") || url.searchParams.get("token_hash");
-        if (!tokenHash) throw Object.assign(new Error("no token"), { code: "bad_link" });
-        res = await sb.auth.verifyOtp({ token_hash: tokenHash, type: url.searchParams.get("type") || "magiclink" });
-      }
-      if (res.error) throw res.error;
+    async changePassword(password) {
+      const { error } = await sb.auth.updateUser({ password });
+      if (error) throw error;
     },
     async signOut() { await sb.auth.signOut(); },
     async load(uid) {
@@ -136,7 +127,7 @@ function mockStore(who) {
     mode: "mock",
     me: { id: ids[role], email: role + "@mock.local" }, role, learnerId: ids.learner,
     async init() { return true; },
-    async signIn() {}, async verify() {}, async signOut() {},
+    async signIn() {}, async changePassword() {}, async signOut() {},
     async load(uid) {
       const d = db();
       return { days: clone(d.progress_days.filter((r) => r.user_id === uid)), cards: clone(d.cards.filter((r) => r.user_id === uid)), results: clone(d.session_results.filter((r) => r.user_id === uid)), note: clone(d.notes) };

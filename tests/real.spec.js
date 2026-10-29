@@ -45,11 +45,11 @@ test("real backend: owner plays session 1, it is saved; Claire's migrated state 
     r.fulfill({ status: 200, contentType: "application/json", headers: { "access-control-allow-origin": "*" }, body: JSON.stringify(out) });
   });
 
+  // Sign in without a password: an admin-generated link is exchanged for a session, which is put where supabase-js keeps it.
+  const hash = new URL(await magicLink(OWNER)).searchParams.get("token");
+  const session = await (await fetch(`${BASE}/auth/v1/verify`, { method: "POST", headers: { apikey: process.env.SB_ANON || KEY, "content-type": "application/json" }, body: JSON.stringify({ type: "magiclink", token_hash: hash }) })).json();
+  await page.addInitScript(([k, v]) => localStorage.setItem(k, v), [`sb-${REF}-auth-token`, JSON.stringify(session)]);
   await page.goto("/index.html");
-  await expect(page.locator("#loginForm")).toBeVisible();
-  await page.evaluate(() => { document.getElementById("pasteForm").hidden = false; });
-  await page.locator("#paste").fill(await magicLink(OWNER));
-  await page.locator("#pasteBtn").click();
   await expect(page.locator('#nav [data-tab="panel"]')).toBeVisible({ timeout: 15000 });
   await expect(page.locator("#todaySub")).toContainText("Sessie 1 van 24");
 

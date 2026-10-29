@@ -415,3 +415,12 @@ details .chat { margin: 10px 0; }
 .seg button { flex: 1; min-height: 44px; border-radius: 12px; border: 1.5px solid var(--line); background: var(--paper); font-weight: 800; cursor: pointer; }
 .seg button[aria-pressed="true"] { background: var(--wine); color: var(--btn-fg); border-color: var(--wine); }
 .ok-text { color: var(--ok); display: flex; gap: 6px; align-items: center; font-weight: 700; }
+
+/* Password login and change-password form */
+.login-card form { gap: 6px; }
+.login-card label { margin-top: 6px; }
+.pw-row { display: flex; gap: 6px; align-items: center; }
+.pw-row input { flex: 1; }
+#password, .pw-form input { width: 100%; font: 600 17px var(--body); padding: 14px; border: 1.5px solid var(--line); border-radius: 14px; background: var(--card); color: var(--ink); }
+.pw-form { display: flex; flex-direction: column; gap: 8px; }
+.pw-form input { background: var(--paper); }
