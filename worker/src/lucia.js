@@ -72,11 +72,18 @@ async function context(env, results, cards, today) {
   const due = (cards || []).filter((c) => c.due <= today).sort((a, b) => a.box - b.box || b.ko - a.ko).map((c) => c.es).slice(0, 3);
   return { next, rest, pending: !rest && next <= 24, grammar, sessionTitle, weak, due };
 }
-function system(lucia, ctx, memory) {
-  return [lucia.persona, "Sobre Claire: " + lucia.about_claire, "Reglas:\n- " + lucia.rules.join("\n- "),
-    `Contexto de hoy: va por la sesión ${Math.min(ctx.next, 24)} de 24 (${ctx.sessionTitle || "inicio"}); gramática actual: ${ctx.grammar || "ser y presentarse"}. Palabras flojas: ${ctx.weak.join(", ") || "ninguna todavía"}.`,
-    memory ? "Lo que Claire te ha contado antes (resumen): " + memory : "Todavía no sabes mucho de Claire más allá de lo de arriba.",
-    "Temas posibles: " + lucia.topics.join("; ") + "."].join("\n\n");
+// Lucía talks to whoever owns the account: Claire (learner) or Augusto (owner), by name.
+const who = (lucia, role) => ({ role: role === "owner" ? "owner" : "learner", name: lucia.names?.[role === "owner" ? "owner" : "learner"] || "Claire" });
+const fill = (text, w) => String(text).split("{name}").join(w.name);
+function system(lucia, ctx, memory, w) {
+  return [lucia.persona, lucia.about?.[w.role] || "", "Reglas:\n- " + lucia.rules.map((r) => fill(r, w)).join("\n- "),
+    w.role === "learner" ? `Contexto de hoy: va por la sesión ${Math.min(ctx.next, 24)} de 24 (${ctx.sessionTitle || "inicio"}); gramática actual: ${ctx.grammar || "ser y presentarse"}. Palabras flojas: ${ctx.weak.join(", ") || "ninguna todavía"}.` : "",
+    memory ? `Lo que ${w.name} te ha contado antes (resumen): ${memory}` : `Todavía no sabes mucho de ${w.name} más allá de lo de arriba.`,
+    "Temas posibles: " + lucia.topics.join("; ") + "."].filter(Boolean).join("\n\n");
+}
+async function roleFor(env, db) {
+  const res = await fetch(`${env.SUPABASE_URL}/rest/v1/rpc/my_access`, { method: "POST", headers: { ...db, "content-type": "application/json" }, body: "{}" });
+  return res.ok ? (await res.json())?.role : null;
 }
 
 // ---------- /chat (user token) ----------
@@ -92,13 +99,14 @@ export async function handleChat(env, token, userId, body) {
     rest(env, db, `cards?select=es,box,ok,ko,due&user_id=eq.${userId}`),
   ]);
   const ctx = await context(env, results, cards, day);
+  const w = who(lucia, await roleFor(env, db));
   const memory = memRows?.[0];
   const history = (recent || []).reverse().map((m) => ({ role: m.role === "claire" ? "user" : "assistant", content: m.text }));
   while (history.length && history[0].role !== "user") history.shift(); // the API needs a user turn first
   const client = new Anthropic({ apiKey: env.ANTHROPIC_API_KEY, maxRetries: 2 });
   const msg = await client.messages.parse({
     model: MODEL, max_tokens: 700, thinking: { type: "disabled" },
-    system: system(lucia, ctx, memory?.summary) + "\n\nDevuelve: reply (tu mensaje), corrections (0 a 2), topic (tema en 2-4 palabras en español) y errors (0 a 3 etiquetas cortas en español del tipo de error, por ejemplo 'ser/estar', 'género', 'conjugación').",
+    system: system(lucia, ctx, memory?.summary, w) + "\n\nDevuelve: reply (tu mensaje), corrections (0 a 2), topic (tema en 2-4 palabras en español) y errors (0 a 3 etiquetas cortas en español del tipo de error, por ejemplo 'ser/estar', 'género', 'conjugación').",
     messages: [...history, { role: "user", content: text }],
     output_config: { format: zodOutputFormat(Reply) },
   });
@@ -118,8 +126,8 @@ export async function handleChat(env, token, userId, body) {
   const count = (memory?.claire_msgs || 0) + 1;
   let summary = memory?.summary || "";
   if (count % 8 === 0) {
-    const convo = [...history, { role: "user", content: text }, { role: "assistant", content: out.reply }].map((m) => (m.role === "user" ? "Claire: " : "Lucía: ") + m.content).join("\n");
-    const sm = await client.messages.create({ model: MODEL, max_tokens: 400, thinking: { type: "disabled" }, system: "Resume en español, en máximo 6 frases cortas, los datos personales y temas que Claire contó (gustos, planes, su doctorado, su día), para que su tutora los retome otro día. Conserva lo importante del resumen anterior. Solo hechos que Claire dijo.", messages: [{ role: "user", content: `Resumen anterior: ${summary || "(vacío)"}\n\nConversación reciente:\n${convo}` }] });
+    const convo = [...history, { role: "user", content: text }, { role: "assistant", content: out.reply }].map((m) => (m.role === "user" ? w.name + ": " : "Lucía: ") + m.content).join("\n");
+    const sm = await client.messages.create({ model: MODEL, max_tokens: 400, thinking: { type: "disabled" }, system: `Resume en español, en máximo 6 frases cortas, los datos personales y temas que ${w.name} contó (gustos, planes, trabajo o estudios, su día), para que su tutora los retome otro día. Conserva lo importante del resumen anterior. Solo hechos que ${w.name} dijo.`, messages: [{ role: "user", content: `Resumen anterior: ${summary || "(vacío)"}\n\nConversación reciente:\n${convo}` }] });
     summary = sm.content.filter((b) => b.type === "text").map((b) => b.text).join("").trim().slice(0, 1500) || summary;
   }
   await rest(env, db, "chat_memory?on_conflict=user_id", { method: "POST", prefer: "resolution=merge-duplicates", body: { user_id: userId, summary, claire_msgs: count, updated_at: new Date().toISOString() } });
@@ -147,18 +155,19 @@ function plan(settings, ctx, now) {
   }
   return slots.sort((a, b) => a.at - b.at);
 }
-async function compose(env, lucia, ctx, memory, recent, kind) {
-  if (kind === "reminder_m") return pick(lucia.reminders.morning);
-  if (kind === "reminder_e") return pick(lucia.reminders.evening);
-  const style = kind === "review" ? `${lucia.review_style} Palabras para repasar: ${ctx.due.join("; ") || ctx.weak.join("; ") || "saludos básicos"}.` : lucia.proactive_style;
+async function compose(env, lucia, ctx, memory, recent, kind, w) {
+  if (kind === "reminder_m") return fill(pick(lucia.reminders.morning), w);
+  if (kind === "reminder_e") return fill(pick(lucia.reminders.evening), w);
+  const style = fill(kind === "review" ? `${lucia.review_style} Palabras para repasar: ${ctx.due.join("; ") || ctx.weak.join("; ") || "saludos básicos"}.` : lucia.proactive_style, w);
   const client = new Anthropic({ apiKey: env.ANTHROPIC_API_KEY, maxRetries: 2 });
-  const last = (recent || []).slice(0, 6).reverse().map((m) => (m.role === "claire" ? "Claire: " : "Lucía: ") + m.text).join("\n");
-  const msg = await client.messages.create({ model: MODEL, max_tokens: 250, thinking: { type: "disabled" }, system: system(lucia, ctx, memory), messages: [{ role: "user", content: `Escribe ahora un mensaje tuyo para Claire, por iniciativa propia. ${style}\n\nÚltimos mensajes del chat:\n${last || "(ninguno)"}` }] });
+  // The DB role 'claire' just means "the account owner's message".
+  const last = (recent || []).slice(0, 6).reverse().map((m) => (m.role === "claire" ? w.name + ": " : "Lucía: ") + m.text).join("\n");
+  const msg = await client.messages.create({ model: MODEL, max_tokens: 250, thinking: { type: "disabled" }, system: system(lucia, ctx, memory, w), messages: [{ role: "user", content: `Escribe ahora un mensaje tuyo para ${w.name}, por iniciativa propia. ${style}\n\nÚltimos mensajes del chat:\n${last || "(ninguno)"}` }] });
   return msg.content.filter((b) => b.type === "text").map((b) => b.text).join("").trim().slice(0, 600);
 }
-async function deliver(env, sdb, lucia, s, ctx, kind) {
+async function deliver(env, sdb, lucia, s, ctx, kind, w) {
   const [mem, recent] = await Promise.all([sdb.read(`chat_memory?select=summary&user_id=eq.${s.user_id}`), sdb.read(`chat_messages?select=role,text&user_id=eq.${s.user_id}&order=ts.desc&limit=6`)]);
-  const text = await compose(env, lucia, ctx, mem?.[0]?.summary, recent, kind);
+  const text = await compose(env, lucia, ctx, mem?.[0]?.summary, recent, kind, w);
   if (!text) return;
   const dbKind = kind.startsWith("reminder") ? "reminder" : kind;
   await sdb.write("chat_messages", "", { method: "POST", body: { user_id: s.user_id, role: "lucia", kind: dbKind, text } });
@@ -187,11 +196,12 @@ export async function runCron(env) {
     try {
       const [results, cards] = await Promise.all([sdb.read(`session_results?select=n,done_on&user_id=eq.${s.user_id}`), sdb.read(`cards?select=es,box,ok,ko,due&user_id=eq.${s.user_id}`)]);
       const ctx = await context(env, results, cards, day);
+      const role = roleOf[await sdb.email(s.user_id)], w = who(lucia, role);
       if (s.test_requested) {
         await sdb.write("lucia_settings", `?user_id=eq.${s.user_id}`, { method: "PATCH", body: { test_requested: false } });
-        await deliver(env, sdb, lucia, s, ctx, "test");
+        await deliver(env, sdb, lucia, s, ctx, "test", w);
       }
-      if (roleOf[await sdb.email(s.user_id)] !== "learner" || !s.enabled) continue; // scheduled messages only for Claire
+      if (role !== "learner" || !s.enabled) continue; // scheduled messages only for Claire
       let row = (await sdb.read(`lucia_schedule?select=plan&user_id=eq.${s.user_id}&day=eq.${day}`))?.[0];
       if (!row) { row = { plan: plan(s, ctx, minutes) }; await sdb.write("lucia_schedule", "", { method: "POST", body: { user_id: s.user_id, day, plan: row.plan } }); }
       let changed = false;
@@ -200,7 +210,7 @@ export async function runCron(env) {
         slot.sent = true; changed = true;
         if (minutes - slot.at > 120) continue; // too late (Worker was down): skip rather than spam
         if (slot.kind.startsWith("reminder") && !ctx.pending) continue; // session already done
-        await deliver(env, sdb, lucia, s, ctx, slot.kind);
+        await deliver(env, sdb, lucia, s, ctx, slot.kind, w);
       }
       if (changed) await sdb.write("lucia_schedule", `?user_id=eq.${s.user_id}&day=eq.${day}`, { method: "PATCH", body: { plan: row.plan } });
     } catch (e) { console.error("cron user failed", s.user_id, e.message); }

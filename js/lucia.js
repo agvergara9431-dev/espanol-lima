@@ -2,7 +2,7 @@
 // (on/off, time window, messages per day, notifications) and the "Oefen een situatie" button for free scenarios.
 import { CONFIG } from "./config.js";
 import { icon } from "./icons.js";
-import { $, esc, S, speak, hasEs, status } from "./core.js";
+import { $, esc, S, speak, hasEs, status, isOwner } from "./core.js";
 import { passwordForm } from "./login.js";
 
 export const luciaActions = { scenarios() {}, badge() {} };
@@ -48,7 +48,8 @@ export function renderLucia() {
 }
 function renderMessages(pending) {
   const el = $("lchat"); if (!el) return;
-  el.innerHTML = (messages.length ? "" : `<div class="msg them"><span class="who mono">Lucía</span><span lang="es">¡Hola, Claire! Soy Lucía, de Lima. Escríbeme lo que quieras en español, aunque sea con errores. ¿Cómo estás hoy?</span></div>`)
+  const name = isOwner() ? CONFIG.NAMES.owner : CONFIG.NAMES.learner;
+  el.innerHTML = (messages.length ? "" : `<div class="msg them"><span class="who mono">Lucía</span><span lang="es">¡Hola, ${esc(name)}! Soy Lucía, de Lima. Escríbeme lo que quieras en español, aunque sea con errores. ¿Cómo estás hoy?</span></div>`)
     + messages.map((m) => m.role === "claire"
       ? `<div class="msg me"><span class="who mono">Jij</span><span lang="es">${esc(m.text)}</span></div>${(m.corrections || []).map((c) => `<div class="fix"><span class="mono">Correctie</span><b lang="es">${esc(c.better)}</b><small>${esc(c.why)}</small></div>`).join("")}`
       : `<div class="msg them ${m.kind !== "chat" ? "proactive" : ""}"><span class="who mono">Lucía${m.kind === "reminder" ? " · herinnering" : m.kind === "review" ? " · even herhalen" : ""}</span><span lang="es">${esc(m.text)}</span>${hasEs() ? `<button class="speak" data-say="${esc(m.text)}">${icon("speaker", 16)}</button>` : ""}</div>`).join("")
