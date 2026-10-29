@@ -2,22 +2,202 @@
   "week": 4,
   "title": "Markt, winkels en afdingen",
   "title_es": "Mercado, tiendas y regateo",
+  "title_en": "Markets, shops and bargaining",
   "stamp": "Markt",
+  "scenarios": {
+    "casera": {
+      "icon": "basket", "title": "Fruitkraam in Surquillo", "title_en": "Fruit stall in Surquillo", "who": "de marktvrouw", "who_en": "the market vendor",
+      "desc": "Je koopt fruit op de markt van Surquillo. De marktvrouw noemt je 'caserita'.", "desc_en": "You buy fruit at the Surquillo market. The vendor calls you 'caserita'.",
+      "persona": "una casera (vendedora) de fruta del mercado de Surquillo, cariñosa y conversadora, que no habla inglés. Le dice 'caserita' y 'mamita' a Claire y le encanta que prueben su fruta.",
+      "opener": "¡Caserita, pase, pase! ¿Qué le provoca hoy? Tengo mango bien dulcecito."
+    },
+    "alpaca": {
+      "icon": "basket", "title": "Mercado Indio in Miraflores", "title_en": "Mercado Indio in Miraflores", "who": "de verkoper", "who_en": "the seller",
+      "desc": "Je zoekt een trui van alpaca op de Mercado Indio. Afdingen hoort erbij.", "desc_en": "You're looking for an alpaca sweater at the Mercado Indio. Bargaining is part of it.",
+      "persona": "un vendedor de ropa de alpaca del Mercado Indio de Miraflores, amable y negociante, que no habla inglés. Siempre dice que su alpaca es 'la mejor de todo el mercado'.",
+      "opener": "¡Buenas, señorita! Pase, mire nomás. ¿Qué está buscando?"
+    },
+    "artesania": {
+      "icon": "heart", "title": "Ambachtswinkel in Barranco", "title_en": "Craft shop in Barranco", "who": "de verkoopster", "who_en": "the shop assistant",
+      "desc": "Je zoekt cadeaus voor je familie in een winkel met Peruaans handwerk in Barranco.", "desc_en": "You look for gifts for your family in a shop with Peruvian crafts in Barranco.",
+      "persona": "la vendedora de una tienda de artesanía en Barranco, simpática y paciente, que no habla inglés. Le gusta contar de dónde viene cada producto.",
+      "opener": "¡Hola, bienvenida! ¿Busca algo en especial o solo está mirando?"
+    }
+  },
   "sessions": [
     {
-      "n": 12,
-      "title": "Fruit en hoeveelheden",
-      "title_es": "Frutas y cantidades"
+      "n": 12, "title": "Fruit en hoeveelheden", "title_es": "Frutas y cantidades", "title_en": "Fruit and quantities",
+      "items": [
+        { "id": "w4-01", "es": "Este mango está muy dulce", "en": "This mango is very sweet", "nl": "Deze mango is heel zoet", "ex": { "es": "Pruebe, caserita: este mango está muy dulce.", "nl": "Proef maar: deze mango is heel zoet.", "en": "Have a taste: this mango is very sweet." } },
+        { "id": "w4-02", "es": "Esa piña de ahí", "en": "That pineapple there", "nl": "Die ananas daar", "ex": { "es": "Quiero esa piña de ahí, la grande.", "nl": "Ik wil die ananas daar, de grote.", "en": "I want that pineapple there, the big one." } },
+        { "id": "w4-03", "es": "Aquellas paltas", "en": "Those avocados over there", "nl": "Die avocado's daarginds", "ex": { "es": "¿Aquellas paltas están maduras?", "nl": "Zijn die avocado's daarginds rijp?", "en": "Are those avocados over there ripe?" } },
+        { "id": "w4-04", "es": "Un kilo de mango, por favor", "en": "A kilo of mango, please", "nl": "Een kilo mango, alstublieft", "ex": { "es": "Buenos días, un kilo de mango, por favor.", "nl": "Goedemorgen, een kilo mango, alstublieft.", "en": "Good morning, a kilo of mango, please." } },
+        { "id": "w4-05", "es": "Medio kilo de lúcuma", "en": "Half a kilo of lúcuma", "nl": "Een halve kilo lucuma", "ex": { "es": "Y medio kilo de lúcuma para el postre.", "nl": "En een halve kilo lucuma voor het toetje.", "en": "And half a kilo of lúcuma for dessert." } },
+        { "id": "w4-06", "es": "¿Cuál está más dulce?", "en": "Which one is sweeter?", "nl": "Welke is zoeter?", "ex": { "es": "Hay dos tipos de mango. ¿Cuál está más dulce?", "nl": "Er zijn twee soorten mango. Welke is zoeter?", "en": "There are two kinds of mango. Which one is sweeter?" } },
+        { "id": "w4-07", "es": "¿A cómo está el kilo?", "en": "How much is a kilo?", "nl": "Hoeveel kost de kilo?", "ex": { "es": "Caserita, ¿a cómo está el kilo de fresa?", "nl": "Hoeveel kost de kilo aardbeien?", "en": "How much is a kilo of strawberries?" } },
+        { "id": "w4-08", "es": "Tengo mucha hambre", "en": "I'm very hungry", "nl": "Ik heb erge honger", "ex": { "es": "Vamos a almorzar, tengo mucha hambre.", "nl": "Laten we gaan lunchen, ik heb erge honger.", "en": "Let's go and have lunch, I'm very hungry." } },
+        { "id": "w4-09", "es": "Hay muchas frutas", "en": "There's lots of fruit", "nl": "Er is veel fruit", "ex": { "es": "En el mercado hay muchas frutas que no conozco.", "nl": "Op de markt is veel fruit dat ik niet ken.", "en": "At the market there's lots of fruit I don't know." } },
+        { "id": "w4-10", "es": "Está muy maduro", "en": "It's very ripe", "nl": "Hij is erg rijp", "ex": { "es": "Este plátano está muy maduro, mejor otro.", "nl": "Deze banaan is erg rijp, liever een andere.", "en": "This banana is very ripe, better another one." } },
+        { "id": "w4-11", "es": "¿Me da una bolsita?", "en": "Can I have a little bag?", "nl": "Mag ik een tasje?", "ex": { "es": "Gracias, caserita. ¿Me da una bolsita?", "nl": "Dank u. Mag ik een tasje?", "en": "Thank you. Can I have a little bag?" } },
+        { "id": "w4-12", "es": "Nada más, gracias", "en": "Nothing else, thanks", "nl": "Verder niets, dank u", "ex": { "es": "¿Algo más? No, nada más, gracias.", "nl": "Nog iets? Nee, verder niets, dank u.", "en": "Anything else? No, nothing else, thanks." } }
+      ],
+      "grammar": {
+        "id": "g12", "title": "Deze, die en die daar; muy en mucho", "title_es": "demostrativos + muy / mucho",
+        "explain": [
+          "Spaans heeft drie 'aanwijzers': este (deze, vlak bij mij), ese (die, bij jou of een stukje verder) en aquel (die daar, ver weg). Ze passen zich aan: este mango, esta piña, estos mangos, estas piñas.",
+          "Muy betekent heel of erg en staat vóór een bijvoeglijk naamwoord: muy dulce, muy maduro. Het verandert nooit.",
+          "Mucho betekent veel en past zich aan het zelfstandig naamwoord aan: mucho calor, mucha hambre, muchos mangos, muchas frutas. Na een werkwoord: me gusta mucho."
+        ],
+        "compare": "Het Nederlands heeft twee: deze en die. Het Spaans heeft er drie: este (hier), ese (daar), aquel (daarginds). En waar 'veel' in het Nederlands gelijk blijft, verandert mucho mee: muchas frutas. 'Heel zoet' is muy dulce, nooit 'mucho dulce'.",
+        "examples": [ { "es": "Este mango está muy dulce.", "nl": "Deze mango is heel zoet." }, { "es": "Esa piña de ahí.", "nl": "Die ananas daar." }, { "es": "Hay muchas frutas.", "nl": "Er is veel fruit." } ],
+        "exercises": [
+          { "type": "fill", "q": "Maak de zin af (vlak bij jou)", "prompt": "___ mango está muy dulce.", "opts": ["Este", "Esta", "Estos"], "answer": "Este", "why": "Mango is mannelijk en enkelvoud: este." },
+          { "type": "fill", "q": "Maak de zin af", "prompt": "Quiero ___ piña de ahí.", "opts": ["esa", "ese", "esos"], "answer": "esa", "why": "Piña is vrouwelijk: esa." },
+          { "type": "fill", "q": "Maak de zin af", "prompt": "Está ___ maduro.", "opts": ["muy", "mucho", "mucha"], "answer": "muy", "why": "Vóór een bijvoeglijk naamwoord: muy." },
+          { "type": "mc", "q": "Hoe zeg je dit?", "prompt": "Er is veel fruit.", "opts": ["Hay muchas frutas.", "Hay muy frutas.", "Hay mucho frutas."], "answer": "Hay muchas frutas.", "why": "Mucho past zich aan: frutas is vrouwelijk meervoud, dus muchas." },
+          { "type": "type", "q": "Schrijf het in het Spaans", "prompt": "Een kilo mango, alstublieft.", "answer": "Un kilo de mango, por favor", "alt": ["Un kilo de mango por favor", "Un kilo de mangos, por favor"], "why": "Un kilo de + het product." }
+        ],
+        "en": {
+          "title": "This, that and that over there; muy and mucho",
+          "explain": [
+            "Spanish has three pointing words: este (this, right here), ese (that, near you or a bit further) and aquel (that over there, far away). They agree: este mango, esta piña, estos mangos, estas piñas.",
+            "Muy means very and goes before an adjective: muy dulce, muy maduro. It never changes.",
+            "Mucho means much, many or a lot, and agrees with the noun: mucho calor, mucha hambre, muchos mangos, muchas frutas. After a verb: me gusta mucho."
+          ],
+          "compare": "English has this and that; Spanish adds a third for things far away: este (here), ese (there), aquel (over there). And while English switches between 'much' and 'many', Spanish mucho simply agrees: mucho calor, muchas frutas. 'Very sweet' is muy dulce, never 'mucho dulce'.",
+          "examples": [ { "es": "Este mango está muy dulce.", "en": "This mango is very sweet." }, { "es": "Esa piña de ahí.", "en": "That pineapple there." }, { "es": "Hay muchas frutas.", "en": "There's lots of fruit." } ],
+          "exercises": [
+            { "type": "fill", "q": "Complete the sentence (right next to you)", "prompt": "___ mango está muy dulce.", "opts": ["Este", "Esta", "Estos"], "answer": "Este", "why": "Mango is masculine and singular: este." },
+            { "type": "fill", "q": "Complete the sentence", "prompt": "Quiero ___ piña de ahí.", "opts": ["esa", "ese", "esos"], "answer": "esa", "why": "Piña is feminine: esa." },
+            { "type": "fill", "q": "Complete the sentence", "prompt": "Está ___ maduro.", "opts": ["muy", "mucho", "mucha"], "answer": "muy", "why": "Before an adjective: muy." },
+            { "type": "mc", "q": "How do you say this?", "prompt": "There's lots of fruit.", "opts": ["Hay muchas frutas.", "Hay muy frutas.", "Hay mucho frutas."], "answer": "Hay muchas frutas.", "why": "Mucho agrees: frutas is feminine plural, so muchas." },
+            { "type": "type", "q": "Write it in Spanish", "prompt": "A kilo of mango, please.", "answer": "Un kilo de mango, por favor", "alt": ["Un kilo de mango por favor", "Un kilo de mangos, por favor"], "why": "Un kilo de + the product." }
+          ]
+        }
+      },
+      "mission": {
+        "scenario": "casera",
+        "goal": "Koop een kilo mango en een halve kilo lucuma, en vraag welke mango het zoetst is.",
+        "goal_en": "Buy a kilo of mango and half a kilo of lúcuma, and ask which mango is the sweetest.",
+        "check": "Claire pide un kilo de mango y medio kilo de lúcuma, y pregunta cuál está más dulce (o usa este, ese o aquel para elegir).",
+        "setup": "Tienes dos tipos de mango: unos 'bien dulcecitos' a seis soles el kilo y otros a cuatro. La lúcuma está a ocho soles el kilo. Si ella no pregunta cuál es más dulce, ofrécele probar."
+      }
     },
     {
-      "n": 13,
-      "title": "Afdingen en kleding",
-      "title_es": "Regatear y ropa"
+      "n": 13, "title": "Afdingen en kleding", "title_es": "Regatear y ropa", "title_en": "Bargaining and clothes",
+      "items": [
+        { "id": "w4-13", "es": "Busco una chompa de alpaca", "en": "I'm looking for an alpaca sweater", "nl": "Ik zoek een trui van alpaca", "ex": { "es": "Buenas tardes, busco una chompa de alpaca.", "nl": "Goedemiddag, ik zoek een trui van alpaca.", "en": "Good afternoon, I'm looking for an alpaca sweater." } },
+        { "id": "w4-14", "es": "¿Tiene en talla M?", "en": "Do you have it in size M?", "nl": "Heeft u hem in maat M?", "ex": { "es": "Me gusta esta. ¿Tiene en talla M?", "nl": "Deze vind ik mooi. Heeft u hem in maat M?", "en": "I like this one. Do you have it in size M?" } },
+        { "id": "w4-15", "es": "¿Tiene en azul?", "en": "Do you have it in blue?", "nl": "Heeft u hem in het blauw?", "ex": { "es": "Es bonita, pero ¿tiene en azul?", "nl": "Hij is mooi, maar heeft u hem in het blauw?", "en": "It's nice, but do you have it in blue?" } },
+        { "id": "w4-16", "es": "La roja es más bonita", "en": "The red one is prettier", "nl": "De rode is mooier", "ex": { "es": "La roja es más bonita que la gris.", "nl": "De rode is mooier dan de grijze.", "en": "The red one is prettier than the grey one." } },
+        { "id": "w4-17", "es": "Esta es más barata que esa", "en": "This one is cheaper than that one", "nl": "Deze is goedkoper dan die", "ex": { "es": "Mira, esta es más barata que esa.", "nl": "Kijk, deze is goedkoper dan die.", "en": "Look, this one is cheaper than that one." } },
+        { "id": "w4-18", "es": "Es demasiado cara", "en": "It's too expensive", "nl": "Hij is te duur", "ex": { "es": "¿Noventa soles? Es demasiado cara.", "nl": "Negentig sol? Hij is te duur.", "en": "Ninety soles? It's too expensive." } },
+        { "id": "w4-19", "es": "¿Me hace un descuento?", "en": "Can you give me a discount?", "nl": "Geeft u me korting?", "ex": { "es": "Si llevo dos, ¿me hace un descuento?", "nl": "Als ik er twee neem, geeft u me korting?", "en": "If I take two, will you give me a discount?" } },
+        { "id": "w4-20", "es": "¿Cuánto es lo menos?", "en": "What's your lowest price?", "nl": "Wat is uw laagste prijs?", "ex": { "es": "Ya, pero ¿cuánto es lo menos?", "nl": "Oké, maar wat is uw laagste prijs?", "en": "OK, but what's your lowest price?" } },
+        { "id": "w4-21", "es": "Me la llevo", "en": "I'll take it", "nl": "Ik neem hem", "ex": { "es": "¿Sesenta? ¡Ya, me la llevo!", "nl": "Zestig? Oké, ik neem hem!", "en": "Sixty? OK, I'll take it!" } },
+        { "id": "w4-22", "es": "¿Me la puedo probar?", "en": "Can I try it on?", "nl": "Mag ik hem passen?", "ex": { "es": "Disculpe, ¿me la puedo probar?", "nl": "Pardon, mag ik hem passen?", "en": "Excuse me, can I try it on?" } },
+        { "id": "w4-23", "es": "Una bufanda gris", "en": "A grey scarf", "nl": "Een grijze sjaal", "ex": { "es": "Para Augusto, una bufanda gris.", "nl": "Voor Augusto een grijze sjaal.", "en": "For Augusto, a grey scarf." } },
+        { "id": "w4-24", "es": "Unos guantes negros", "en": "Some black gloves", "nl": "Zwarte handschoenen", "ex": { "es": "En Holanda necesito unos guantes negros.", "nl": "In Nederland heb ik zwarte handschoenen nodig.", "en": "In the Netherlands I need some black gloves." } }
+      ],
+      "grammar": {
+        "id": "g13", "title": "Vergelijken en kleuren", "title_es": "comparativos + adjetivos de color",
+        "explain": [
+          "Vergelijken doe je met más … que (meer … dan) en menos … que (minder … dan): esta es más barata que esa, la roja es menos cara. Goed en slecht hebben een eigen vorm: mejor (beter), peor (slechter).",
+          "Kleuren zijn bijvoeglijke naamwoorden en staan meestal ná het zelfstandig naamwoord: una chompa roja, unos guantes negros.",
+          "Ze passen zich aan: rojo/roja/rojos/rojas. Kleuren op -e of een medeklinker veranderen niet voor man/vrouw: verde, azul, gris. In het meervoud: azules, grises."
+        ],
+        "compare": "Nederlands: goedkoper (dan), mooier (dan). Spaans zegt letterlijk 'meer goedkoop dan': más barata que. En de kleur komt erachter: een rode trui = una chompa roja (een trui rode).",
+        "examples": [ { "es": "Esta es más barata que esa.", "nl": "Deze is goedkoper dan die." }, { "es": "Una chompa roja, unos guantes negros.", "nl": "Een rode trui, zwarte handschoenen." }, { "es": "La de alpaca es mejor.", "nl": "Die van alpaca is beter." } ],
+        "exercises": [
+          { "type": "fill", "q": "Maak de zin af", "prompt": "Esta chompa es ___ barata que esa.", "opts": ["más", "muy", "mucho"], "answer": "más", "why": "Vergelijken: más … que." },
+          { "type": "mc", "q": "Hoe zeg je dit?", "prompt": "een rode trui", "opts": ["una chompa roja", "una roja chompa", "una chompa rojo"], "answer": "una chompa roja", "why": "Kleur erachter en vrouwelijk: roja." },
+          { "type": "fill", "q": "Maak de zin af", "prompt": "Unos guantes ___.", "opts": ["negros", "negro", "negras"], "answer": "negros", "why": "Guantes is mannelijk meervoud: negros." },
+          { "type": "mc", "q": "Hoe zeg je dit?", "prompt": "Deze is beter.", "opts": ["Esta es mejor.", "Esta es más mejor.", "Esta es mejor que."], "answer": "Esta es mejor.", "why": "Beter = mejor, zonder más." },
+          { "type": "type", "q": "Schrijf het in het Spaans (de trui)", "prompt": "Hij is te duur.", "answer": "Es demasiado cara", "alt": ["Es muy cara", "Está demasiado cara", "Está muy cara"], "why": "Te duur = demasiado cara (chompa is vrouwelijk)." }
+        ],
+        "en": {
+          "title": "Comparing and colours",
+          "explain": [
+            "You compare with más … que (more … than) and menos … que (less … than): esta es más barata que esa, la roja es menos cara. Good and bad have their own forms: mejor (better), peor (worse).",
+            "Colours are adjectives and usually come after the noun: una chompa roja, unos guantes negros.",
+            "They agree: rojo/roja/rojos/rojas. Colours ending in -e or a consonant don't change for masculine/feminine: verde, azul, gris. In the plural: azules, grises."
+          ],
+          "compare": "English often adds -er: cheaper (than), prettier (than). Spanish always says 'more cheap than': más barata que. And the colour comes after the noun: a red sweater = una chompa roja (a sweater red).",
+          "examples": [ { "es": "Esta es más barata que esa.", "en": "This one is cheaper than that one." }, { "es": "Una chompa roja, unos guantes negros.", "en": "A red sweater, some black gloves." }, { "es": "La de alpaca es mejor.", "en": "The alpaca one is better." } ],
+          "exercises": [
+            { "type": "fill", "q": "Complete the sentence", "prompt": "Esta chompa es ___ barata que esa.", "opts": ["más", "muy", "mucho"], "answer": "más", "why": "Comparing: más … que." },
+            { "type": "mc", "q": "How do you say this?", "prompt": "a red sweater", "opts": ["una chompa roja", "una roja chompa", "una chompa rojo"], "answer": "una chompa roja", "why": "Colour after the noun, and feminine: roja." },
+            { "type": "fill", "q": "Complete the sentence", "prompt": "Unos guantes ___.", "opts": ["negros", "negro", "negras"], "answer": "negros", "why": "Guantes is masculine plural: negros." },
+            { "type": "mc", "q": "How do you say this?", "prompt": "This one is better.", "opts": ["Esta es mejor.", "Esta es más mejor.", "Esta es mejor que."], "answer": "Esta es mejor.", "why": "Better = mejor, without más." },
+            { "type": "type", "q": "Write it in Spanish (the sweater)", "prompt": "It's too expensive.", "answer": "Es demasiado cara", "alt": ["Es muy cara", "Está demasiado cara", "Está muy cara"], "why": "Too expensive = demasiado cara (chompa is feminine)." }
+          ]
+        }
+      },
+      "mission": {
+        "scenario": "alpaca",
+        "goal": "Koop een alpacatrui in jouw maat en kleur voor maximaal 60 sol.",
+        "goal_en": "Buy an alpaca sweater in your size and colour for at most 60 soles.",
+        "check": "Claire dice su talla y un color, regatea o pide descuento, y acuerda un precio de sesenta soles o menos por la chompa.",
+        "setup": "La chompa cuesta noventa soles al principio. Si ella regatea, bajas a setenta y luego aceptas sesenta. Tienes tallas S, M y L, en rojo, azul, gris y beige. Si ella no dice talla o color, pregúntale."
+      }
     },
     {
-      "n": 14,
-      "title": "Kiezen en cadeaus",
-      "title_es": "Elegir y regalos"
+      "n": 14, "title": "Kiezen en cadeaus", "title_es": "Elegir y regalos", "title_en": "Choosing and gifts",
+      "items": [
+        { "id": "w4-25", "es": "Prefiero la azul", "en": "I prefer the blue one", "nl": "Ik heb liever de blauwe", "ex": { "es": "Las dos son bonitas, pero prefiero la azul.", "nl": "Ze zijn allebei mooi, maar ik heb liever de blauwe.", "en": "They're both nice, but I prefer the blue one." } },
+        { "id": "w4-26", "es": "¿Cuál prefieres?", "en": "Which one do you prefer?", "nl": "Welke heb je liever?", "ex": { "es": "Amor, ¿cuál prefieres: la llama o el chocolate?", "nl": "Schat, wat heb je liever: de lama of de chocolade?", "en": "Love, which do you prefer: the llama or the chocolate?" } },
+        { "id": "w4-27", "es": "Quiero comprar un regalo", "en": "I want to buy a present", "nl": "Ik wil een cadeau kopen", "ex": { "es": "Hola, quiero comprar un regalo para mi familia.", "nl": "Hallo, ik wil een cadeau kopen voor mijn familie.", "en": "Hi, I want to buy a present for my family." } },
+        { "id": "w4-28", "es": "Es para mi hermana Merle", "en": "It's for my sister Merle", "nl": "Het is voor mijn zus Merle", "ex": { "es": "Este llavero es para mi hermana Merle.", "nl": "Deze sleutelhanger is voor mijn zus Merle.", "en": "This keyring is for my sister Merle." } },
+        { "id": "w4-29", "es": "Le compro un llavero", "en": "I'll buy her a keyring", "nl": "Ik koop een sleutelhanger voor haar", "ex": { "es": "A Merle le compro un llavero de llama.", "nl": "Voor Merle koop ik een lama-sleutelhanger.", "en": "I'll buy Merle a llama keyring." } },
+        { "id": "w4-30", "es": "Les traigo chocolates", "en": "I'm bringing them chocolates", "nl": "Ik neem chocolade voor ze mee", "ex": { "es": "A mis papás les traigo chocolates de cacao peruano.", "nl": "Voor mijn ouders neem ik chocolade van Peruaanse cacao mee.", "en": "I'm bringing my parents chocolates made from Peruvian cacao." } },
+        { "id": "w4-31", "es": "¿Me lo envuelve para regalo?", "en": "Could you gift-wrap it?", "nl": "Kunt u het als cadeau inpakken?", "ex": { "es": "Gracias. ¿Me lo envuelve para regalo, por favor?", "nl": "Dank u. Kunt u het als cadeau inpakken, alstublieft?", "en": "Thank you. Could you gift-wrap it, please?" } },
+        { "id": "w4-32", "es": "A mi mamá le gusta el café", "en": "My mom likes coffee", "nl": "Mijn moeder houdt van koffie", "ex": { "es": "A mi mamá le gusta el café, le llevo uno de Chanchamayo.", "nl": "Mijn moeder houdt van koffie, ik neem er een uit Chanchamayo voor haar mee.", "en": "My mom likes coffee, I'll take her one from Chanchamayo." } },
+        { "id": "w4-33", "es": "Algo típico del Perú", "en": "Something typically Peruvian", "nl": "Iets typisch Peruaans", "ex": { "es": "Busco algo típico del Perú, no muy caro.", "nl": "Ik zoek iets typisch Peruaans, niet te duur.", "en": "I'm looking for something typically Peruvian, not too expensive." } },
+        { "id": "w4-34", "es": "En total, ¿cuánto sería?", "en": "How much would it be in total?", "nl": "Hoeveel wordt het in totaal?", "ex": { "es": "El llavero y los chocolates. En total, ¿cuánto sería?", "nl": "De sleutelhanger en de chocolade. Hoeveel wordt het in totaal?", "en": "The keyring and the chocolates. How much would it be in total?" } },
+        { "id": "w4-35", "es": "Lo elijo porque es bonito", "en": "I'm choosing it because it's pretty", "nl": "Ik kies het omdat het mooi is", "ex": { "es": "Lo elijo porque es bonito y no pesa mucho.", "nl": "Ik kies het omdat het mooi is en niet veel weegt.", "en": "I'm choosing it because it's pretty and doesn't weigh much." } },
+        { "id": "w4-36", "es": "Este me gusta más", "en": "I like this one more", "nl": "Deze vind ik leuker", "ex": { "es": "Los dos son lindos, pero este me gusta más.", "nl": "Ze zijn allebei leuk, maar deze vind ik leuker.", "en": "They're both lovely, but I like this one more." } }
+      ],
+      "grammar": {
+        "id": "g14", "title": "Preferir en 'le' en 'les'", "title_es": "preferir (e→ie) + le / les",
+        "explain": [
+          "Preferir (liever hebben) verandert e in ie, behalve bij 'wij': prefiero, prefieres, prefiere, preferimos, prefieren. Querer werkt net zo: quiero, quieres, quiere, queremos, quieren.",
+          "Le betekent 'aan hem, aan haar, aan u' of 'voor hem/haar'. Les is het meervoud: 'aan hen, voor hen'. Ze staan vóór het werkwoord: le compro un llavero, les traigo chocolates.",
+          "Spaans zegt het vaak dubbel, om duidelijk te maken voor wie: a Merle le compro un llavero, a mis papás les traigo chocolates."
+        ],
+        "compare": "Nederlands: 'Ik koop haar een sleutelhanger' of 'ik koop een sleutelhanger voor haar'. Spaans zet 'haar' (le) vóór het werkwoord: le compro un llavero. En 'ik heb liever' is gewoon één werkwoord: prefiero.",
+        "examples": [ { "es": "Prefiero la azul.", "nl": "Ik heb liever de blauwe." }, { "es": "A Merle le compro un llavero.", "nl": "Voor Merle koop ik een sleutelhanger." }, { "es": "A mis papás les traigo chocolates.", "nl": "Voor mijn ouders neem ik chocolade mee." } ],
+        "exercises": [
+          { "type": "fill", "q": "Maak de zin af", "prompt": "Yo ___ la azul.", "opts": ["prefiero", "prefero", "prefieres"], "answer": "prefiero", "why": "Ik = prefiero (e wordt ie)." },
+          { "type": "fill", "q": "Maak de zin af", "prompt": "¿Tú qué ___?", "opts": ["prefieres", "prefiere", "preferes"], "answer": "prefieres", "why": "Tú = prefieres." },
+          { "type": "fill", "q": "Maak de zin af", "prompt": "A mi hermana ___ compro un llavero.", "opts": ["le", "les", "la"], "answer": "le", "why": "Voor één persoon: le." },
+          { "type": "fill", "q": "Maak de zin af", "prompt": "A mis papás ___ traigo chocolates.", "opts": ["les", "le", "los"], "answer": "les", "why": "Voor meerdere personen: les." },
+          { "type": "type", "q": "Schrijf het in het Spaans", "prompt": "Het is voor mijn zus.", "answer": "Es para mi hermana", "alt": ["Es para mi hermana Merle"], "why": "Voor iemand = para." }
+        ],
+        "en": {
+          "title": "Preferir, and 'le' and 'les'",
+          "explain": [
+            "Preferir (to prefer) changes e to ie, except for 'we': prefiero, prefieres, prefiere, preferimos, prefieren. Querer works the same: quiero, quieres, quiere, queremos, quieren.",
+            "Le means 'to him, to her, to you' or 'for him/her'. Les is the plural: 'to them, for them'. They go before the verb: le compro un llavero, les traigo chocolates.",
+            "Spanish often says it twice, to make clear who it's for: a Merle le compro un llavero, a mis papás les traigo chocolates."
+          ],
+          "compare": "English: 'I'll buy her a keyring'. Spanish puts 'her' (le) before the verb: le compro un llavero. And it likes to repeat the person too: a Merle le compro… (to Merle I'll buy her…), which sounds odd in English but is completely normal in Spanish.",
+          "examples": [ { "es": "Prefiero la azul.", "en": "I prefer the blue one." }, { "es": "A Merle le compro un llavero.", "en": "I'll buy Merle a keyring." }, { "es": "A mis papás les traigo chocolates.", "en": "I'm bringing my parents chocolates." } ],
+          "exercises": [
+            { "type": "fill", "q": "Complete the sentence", "prompt": "Yo ___ la azul.", "opts": ["prefiero", "prefero", "prefieres"], "answer": "prefiero", "why": "I = prefiero (e becomes ie)." },
+            { "type": "fill", "q": "Complete the sentence", "prompt": "¿Tú qué ___?", "opts": ["prefieres", "prefiere", "preferes"], "answer": "prefieres", "why": "Tú = prefieres." },
+            { "type": "fill", "q": "Complete the sentence", "prompt": "A mi hermana ___ compro un llavero.", "opts": ["le", "les", "la"], "answer": "le", "why": "For one person: le." },
+            { "type": "fill", "q": "Complete the sentence", "prompt": "A mis papás ___ traigo chocolates.", "opts": ["les", "le", "los"], "answer": "les", "why": "For several people: les." },
+            { "type": "type", "q": "Write it in Spanish", "prompt": "It's for my sister.", "answer": "Es para mi hermana", "alt": ["Es para mi hermana Merle"], "why": "For someone = para." }
+          ]
+        }
+      },
+      "mission": {
+        "scenario": "artesania",
+        "goal": "Koop cadeaus voor twee familieleden voor maximaal 100 sol in totaal, en zeg waarom je ze kiest.",
+        "goal_en": "Buy presents for two family members for at most 100 soles in total, and say why you choose them.",
+        "check": "Claire elige regalos para dos personas de su familia (usa le/les o 'es para…'), explica por qué los elige (porque…) y el total no pasa de cien soles.",
+        "setup": "Vendes llaveros de llama (quince soles), chocolates de cacao peruano (veinticinco soles), una chalina de alpaca (cincuenta y cinco soles) y cerámica de Chulucanas (cuarenta y cinco soles). Si ella pregunta, ayúdala a sumar el total."
+      }
     }
   ]
 }

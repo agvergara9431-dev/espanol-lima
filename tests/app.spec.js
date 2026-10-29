@@ -219,6 +219,19 @@ test("week 3: session 11 ends with the week 3 test and the 'Taxi en geld' stamp"
   await expect(page.locator(".test-result.ok")).toContainText('Stempel "Taxi en geld"');
 });
 
+test("week 4: session 14 ends with the week 4 test and the 'Markt' stamp", async ({ page }) => {
+  const week = (n) => (n <= 4 ? 1 : n <= 7 ? 2 : n <= 11 ? 3 : 4);
+  const results = Array.from({ length: 13 }, (_, i) => ({ n: i + 1, week: week(i + 1), done_on: dayAgo(28 - 2 * (i + 1)), on_time: true }));
+  results[3].detail = { tests: [{ week: 1, ok: 9, total: 10, passed: true }] };
+  results[6].detail = { tests: [{ week: 2, ok: 8, total: 10, passed: true }] };
+  results[10].detail = { tests: [{ week: 3, ok: 8, total: 10, passed: true }] };
+  await seed(page, { results });
+  await expect(page.locator("#todaySub")).toContainText("Sessie 14 van 24");
+  await page.locator("#startBtn").click();
+  await playSession(page);
+  await expect(page.locator(".test-result.ok")).toContainText('Stempel "Markt"');
+});
+
 test("a half-done session resumes where she left it", async ({ page }) => {
   await seed(page, { results: [{ n: 1, done_on: dayAgo(2), on_time: true }] });
   await page.locator("#startBtn").click();
