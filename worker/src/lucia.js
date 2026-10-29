@@ -24,7 +24,9 @@ async function rest(env, headers, path, { method = "GET", body, prefer } = {}) {
 }
 // Service-role access, restricted: writes only to Lucía's tables.
 function serviceDb(env) {
-  const key = (env.SUPABASE_SERVICE_KEY || "").trim(); // the secret was piped in from PowerShell, which appends a newline
+  // Keep only visible ASCII: a JWT never contains anything else, and a secret piped through a shell can pick up
+  // a newline or encoding bytes that make the header invalid.
+  const key = (env.SUPABASE_SERVICE_KEY || "").replace(/[^\x21-\x7e]/g, "");
   const headers = { apikey: key, authorization: "Bearer " + key };
   return {
     read: (path) => rest(env, headers, path),
@@ -35,6 +37,10 @@ function serviceDb(env) {
     async email(userId) {
       const r = await fetch(`${env.SUPABASE_URL}/auth/v1/admin/users/${userId}`, { headers });
       return r.ok ? (await r.json()).email?.toLowerCase() : null;
+    },
+    async userId(email) {
+      const r = await fetch(`${env.SUPABASE_URL}/auth/v1/admin/users?per_page=50`, { headers });
+      return r.ok ? ((await r.json()).users || []).find((u) => u.email?.toLowerCase() === email)?.id || null : null;
     },
   };
 }
@@ -164,8 +170,17 @@ async function deliver(env, sdb, lucia, s, ctx, kind) {
 }
 export async function runCron(env) {
   const sdb = serviceDb(env), { day, minutes } = nlNow();
-  const [lucia, settings, roles] = await Promise.all([loadJson(env, "lucia.json"), sdb.read("lucia_settings?select=*"), sdb.read("allowed_users?select=email,role")]);
+  let [lucia, settings, roles] = await Promise.all([loadJson(env, "lucia.json"), sdb.read("lucia_settings?select=*"), sdb.read("allowed_users?select=email,role")]);
   const roleOf = Object.fromEntries((roles || []).map((r) => [r.email, r.role]));
+  // Claire gets the defaults (on, 9:00-21:00, 2 a day) even before she opens Lucía's settings.
+  for (const email of (roles || []).filter((r) => r.role === "learner").map((r) => r.email)) {
+    const id = await sdb.userId(email);
+    if (id && !(settings || []).some((s) => s.user_id === id)) {
+      const row = { user_id: id, enabled: true, window_start: 9, window_end: 21, per_day: 2, push_subscription: null, test_requested: false };
+      await sdb.write("lucia_settings", "?on_conflict=user_id", { method: "POST", prefer: "resolution=ignore-duplicates", body: row });
+      settings = [...(settings || []), row];
+    }
+  }
   for (const s of settings || []) {
     try {
       const [results, cards] = await Promise.all([sdb.read(`session_results?select=n,done_on&user_id=eq.${s.user_id}`), sdb.read(`cards?select=es,box,ok,ko,due&user_id=eq.${s.user_id}`)]);

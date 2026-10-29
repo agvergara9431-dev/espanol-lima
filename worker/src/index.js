@@ -23,7 +23,7 @@ const Extra = z.object({
 export default {
   // Cron Trigger (every 15 minutes): Lucía's proactive messages. The only place that uses the service role key.
   async scheduled(event, env, ctx) {
-    ctx.waitUntil(runCron(env));
+    ctx.waitUntil(runCron(env).catch((e) => console.error("cron failed:", e.stack || e.message)));
   },
   async fetch(req, env, ctx) {
     const origin = req.headers.get("origin") || "";
