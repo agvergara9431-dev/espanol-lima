@@ -128,8 +128,10 @@ export async function handleChat(env, token, userId, body) {
 
 // ---------- cron (service role) ----------
 const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
-function plan(settings, ctx) {
-  const start = settings.window_start * 60, end = settings.window_end * 60, slots = [];
+function plan(settings, ctx, now) {
+  // A plan made mid-day only uses times that are still ahead.
+  const start = Math.max(settings.window_start * 60, now + 5), end = settings.window_end * 60, slots = [];
+  if (start >= end - 15) return ctx.pending && now < 19 * 60 ? [{ at: 19 * 60, kind: "reminder_e", sent: false }] : [];
   const randomTimes = (n, avoid) => {
     const out = [];
     for (let tries = 0; out.length < n && tries < 200; tries++) {
@@ -140,7 +142,7 @@ function plan(settings, ctx) {
   };
   if (ctx.rest) { if (settings.per_day > 0) randomTimes(1, []).forEach((at) => slots.push({ at, kind: "review", sent: false })); }
   else {
-    if (ctx.pending) slots.push({ at: 9 * 60, kind: "reminder_m", sent: false }, { at: 19 * 60, kind: "reminder_e", sent: false });
+    if (ctx.pending) for (const at of [9 * 60, 19 * 60]) if (at >= now) slots.push({ at, kind: at < 720 ? "reminder_m" : "reminder_e", sent: false });
     randomTimes(settings.per_day, ctx.pending ? [540, 1140] : []).forEach((at) => slots.push({ at, kind: "proactive", sent: false }));
   }
   return slots.sort((a, b) => a.at - b.at);
@@ -191,7 +193,7 @@ export async function runCron(env) {
       }
       if (roleOf[await sdb.email(s.user_id)] !== "learner" || !s.enabled) continue; // scheduled messages only for Claire
       let row = (await sdb.read(`lucia_schedule?select=plan&user_id=eq.${s.user_id}&day=eq.${day}`))?.[0];
-      if (!row) { row = { plan: plan(s, ctx) }; await sdb.write("lucia_schedule", "", { method: "POST", body: { user_id: s.user_id, day, plan: row.plan } }); }
+      if (!row) { row = { plan: plan(s, ctx, minutes) }; await sdb.write("lucia_schedule", "", { method: "POST", body: { user_id: s.user_id, day, plan: row.plan } }); }
       let changed = false;
       for (const slot of row.plan) {
         if (slot.sent || slot.at > minutes) continue;
