@@ -176,6 +176,9 @@ export function t(key, vars = {}) {
 const DAYS = { nl: ["zondag", "maandag", "dinsdag", "woensdag", "donderdag", "vrijdag", "zaterdag"], en: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"] };
 const MONTHS = { nl: ["januari", "februari", "maart", "april", "mei", "juni", "juli", "augustus", "september", "oktober", "november", "december"], en: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"] };
 export function dayLabel(s) { const [y, m, d] = s.slice(0, 10).split("-").map(Number); const dt = new Date(y, m - 1, d); return lang === "en" ? `${DAYS.en[dt.getDay()]} ${d} ${MONTHS.en[m - 1]}` : `${DAYS.nl[dt.getDay()]} ${d} ${MONTHS.nl[m - 1]}`; }
+// Stamp dates like "29·OCT" (English) or "29·OKT" (Dutch), from the day the stamp was actually earned.
+const MON = { nl: ["JAN", "FEB", "MRT", "APR", "MEI", "JUN", "JUL", "AUG", "SEP", "OKT", "NOV", "DEC"], en: ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"] };
+export const stampLabel = (s) => { const [, m, d] = s.slice(0, 10).split("-").map(Number); return String(d).padStart(2, "0") + "·" + MON[lang][m - 1]; };
 export const shortDate = (s) => { const [y, m, d] = s.slice(0, 10).split("-").map(Number); return new Date(y, m - 1, d).toLocaleDateString(lang === "en" ? "en-GB" : "nl-NL", { weekday: "short", day: "numeric", month: "short" }); };
 export const dateTime = (ts) => new Date(ts).toLocaleString(lang === "en" ? "en-GB" : "nl-NL", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" });
 

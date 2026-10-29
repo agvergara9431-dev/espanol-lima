@@ -1,7 +1,7 @@
 // Shared helpers, state, content and the session calendar.
 // Rule from a past bug: never mutate rows that came from the store; copy, change, then save the copy.
 import { CONFIG } from "./config.js";
-import { t } from "./i18n.js";
+import { t, stampLabel } from "./i18n.js";
 
 // ---------- helpers ----------
 export const $ = (id) => document.getElementById(id);
@@ -22,7 +22,7 @@ const DAYS_NL = ["zondag", "maandag", "dinsdag", "woensdag", "donderdag", "vrijd
 const MONTHS_NL = ["januari", "februari", "maart", "april", "mei", "juni", "juli", "augustus", "september", "oktober", "november", "december"];
 export const MONTHS = ["JAN", "FEB", "MRT", "APR", "MEI", "JUN", "JUL", "AUG", "SEP", "OKT", "NOV", "DEC"];
 export const dayLabelNl = (s) => { const d = parse(s); return DAYS_NL[d.getDay()] + " " + d.getDate() + " " + MONTHS_NL[d.getMonth()]; };
-export const stampDate = (s) => { const d = parse(s.slice(0, 10)); return pad(d.getDate()) + "·" + MONTHS[d.getMonth()]; };
+export const stampDate = (s) => stampLabel(s);
 export const fmtEs = (ts) => new Date(ts).toLocaleString("es-PE", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" });
 export const dateEs = (s) => parse(s).toLocaleDateString("es-PE", { weekday: "short", day: "numeric", month: "short" });
 export const ls = { get(k) { try { return localStorage.getItem(k); } catch { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch {} }, del(k) { try { localStorage.removeItem(k); } catch {} } };

@@ -40,7 +40,13 @@ export function renderHome() {
   $("extraBtn")?.addEventListener("click", () => actions.extra());
   $("routeMap").querySelectorAll("[data-week]").forEach((b) => (b.onclick = () => openWeek(+b.dataset.week)));
   $("routeMap").querySelectorAll("[data-stamp]").forEach((b) => (b.onclick = () => actions.passport()));
-  requestAnimationFrame(() => $("curNode")?.scrollIntoView({ block: "center" }));
+  // Scroll so the current stop is in view and the stop before it sits fully below the sticky card, never under it.
+  requestAnimationFrame(() => {
+    const cur = $("curNode"), top = document.querySelector(".home-top");
+    if (!cur || !top) return;
+    const curY = cur.getBoundingClientRect().top + scrollY;
+    scrollTo({ top: Math.max(0, curY - top.offsetHeight - ROW - 24) });
+  });
 }
 
 function todayCard(sch) {

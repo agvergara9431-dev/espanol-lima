@@ -436,3 +436,7 @@ details .chat { margin: 10px 0; }
 #lesson .prompt, #lesson .opt, #lesson .example p, #lesson .grammar p, #lesson .msg, #lesson .tok { overflow-wrap: anywhere; }
 #lesson .speak { max-width: 100%; }
 .sheet { overflow-x: hidden; }
+/* Route: labels sit on a background so the dotted line passes behind the text, never through it */
+.r-label { background: var(--paper); padding: 2px 8px; border-radius: 8px; position: relative; z-index: 1; }
+.r-dot, .r-stamp .seal { position: relative; z-index: 1; }
+.r-path { z-index: 0; }
