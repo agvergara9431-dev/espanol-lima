@@ -18,6 +18,9 @@ async function magicLink(email) {
   return `https://example.invalid/verify?token=${json.hashed_token || json.properties.hashed_token}&type=magiclink`;
 }
 async function wipeOwner() {
+  // Guard: only ever delete rows of an account whose role is 'owner'. Claire's account is 'learner'.
+  const roles = await (await fetch(`${BASE}/rest/v1/allowed_users?select=role&email=eq.${encodeURIComponent(OWNER.toLowerCase())}`, { headers: admin })).json();
+  if (!Array.isArray(roles) || roles.length !== 1 || roles[0].role !== "owner") throw new Error("refusing to wipe: OWNER_EMAIL is not the owner account");
   if (!ownerId) {
     const users = await (await fetch(`${BASE}/auth/v1/admin/users?per_page=50`, { headers: admin })).json();
     ownerId = users.users.find((u) => u.email === OWNER)?.id;
