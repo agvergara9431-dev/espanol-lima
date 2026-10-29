@@ -11,15 +11,21 @@ let messages = [], unsub = null;
 const isIOS = () => /iPhone|iPad|iPod/.test(navigator.userAgent);
 const installed = () => matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
 
+// Oldest first, newest at the bottom: server time (ts), and the id breaks ties so a reply saved in the same
+// instant as the message it answers comes after it. Messages not saved yet ("tmp…") always go last.
+const tsOf = (m) => (String(m.id).startsWith("tmp") ? Infinity : Date.parse(m.ts) || 0);
+const byTime = (a, b) => tsOf(a) - tsOf(b) || (Number(a.id) || 0) - (Number(b.id) || 0);
+const sorted = (list) => [...list].sort(byTime);
+
 export const unread = () => messages.filter((m) => m.role === "lucia" && !m.read_at).length;
 
 // Loads the chat and keeps listening for new messages (also when another tab is open, for the badge).
 export async function startLucia() {
-  try { messages = await S.store.chatList(); } catch { messages = []; }
+  try { messages = sorted(await S.store.chatList()); } catch { messages = []; }
   unsub?.();
   unsub = S.store.onChat((m) => {
     if (messages.some((x) => x.id === m.id)) return;
-    messages.push(m);
+    messages = sorted([...messages, m]);
     if (S.tab === "lucia") { renderMessages(); markRead(); } else luciaActions.badge();
   });
   luciaActions.badge();
@@ -31,19 +37,33 @@ async function markRead() {
   try { await S.store.chatMarkRead(); } catch {}
 }
 
+// The Lucía screen is fixed between the top (with the iPhone's safe area) and the tab bar, like WhatsApp:
+// header on top, messages scroll in the middle, the input box stays just above the tabs (or the keyboard).
+function fit() {
+  const page = document.querySelector("#tab-lucia .lucia"); if (!page) return;
+  const vv = window.visualViewport, h = vv ? vv.height : innerHeight;
+  const keyboard = innerHeight - h > 120, tabs = $("nav")?.offsetHeight || 0;
+  page.style.top = (vv ? vv.offsetTop : 0) + "px";
+  page.style.height = h - (keyboard ? 0 : tabs) + "px";
+  toBottom();
+}
+const toBottom = () => { const el = $("lchat"); if (el) el.scrollTop = el.scrollHeight; };
+if (!window.__luciaFit) { window.__luciaFit = true; addEventListener("resize", fit); window.visualViewport?.addEventListener("resize", fit); window.visualViewport?.addEventListener("scroll", fit); }
+
 export function renderLucia() {
   $("tab-lucia").innerHTML = `<div class="page chat-page lucia">
     <div class="sec-head"><div class="lucia-head"><span class="avatar">L</span><div><h2 class="display">Lucía</h2><span class="muted small">${esc(t("lucia.sub"))}</span></div></div>
-      <button class="icon-btn" id="luciaSettings" aria-label="${esc(t("lucia.settings"))}">${icon("gear", 22)}</button></div>
+      <div class="head-actions"><button class="chip-btn" id="practiceBtn">${icon("chat", 16)} ${esc(t("lucia.practice"))}</button>
+      <button class="icon-btn" id="luciaSettings" aria-label="${esc(t("lucia.settings"))}">${icon("gear", 22)}</button></div></div>
     <p class="privacy small" id="privacy">${icon("eye", 16)} ${esc(t("lucia.privacy"))}</p>
     <div class="chat lchat" id="lchat" aria-live="polite"></div>
     <form class="chat-form" id="lform"><input class="chatin" id="linput" maxlength="400" placeholder="${esc(t("chat.placeholder"))}" autocomplete="off" lang="es"><button class="btn" id="lsend" aria-label="${esc(t("btn.send"))}">${icon("send", 20)}</button></form>
-    <p class="status" id="lstatus"></p>
-    <button class="btn ghost wide" id="practiceBtn">${icon("chat", 18)} ${esc(t("lucia.practice"))}</button></div>`;
+    <p class="status" id="lstatus"></p></div>`;
   $("lform").onsubmit = (e) => { e.preventDefault(); send(); };
   $("luciaSettings").onclick = openSettings;
   $("practiceBtn").onclick = () => luciaActions.scenarios();
   renderMessages();
+  fit();
   markRead();
 }
 function renderMessages(pending) {
@@ -54,19 +74,19 @@ function renderMessages(pending) {
       ? `<div class="msg me"><span class="who mono">${esc(t("chat.you"))}</span><span lang="es">${esc(m.text)}</span></div>${(m.corrections || []).map((c) => `<div class="fix"><span class="mono">${esc(t("lucia.correction"))}</span><b lang="es">${esc(c.better)}</b><small>${esc(c.why)}</small></div>`).join("")}`
       : `<div class="msg them ${m.kind !== "chat" ? "proactive" : ""}"><span class="who mono">Lucía${m.kind === "reminder" ? esc(t("lucia.reminder")) : m.kind === "review" ? esc(t("lucia.review")) : ""}</span><span lang="es">${esc(m.text)}</span>${hasEs() ? `<button class="speak" data-say="${esc(m.text)}">${icon("speaker", 16)}</button>` : ""}</div>`).join("")
     + (pending ? '<div class="msg them typing"><span></span><span></span><span></span></div>' : "");
-  el.lastElementChild?.scrollIntoView({ block: "nearest" });
+  toBottom();
 }
 async function send() {
   const inp = $("linput"), text = inp.value.trim().slice(0, 400);
   if (!text || send.busy) return;
   send.busy = true; inp.value = ""; $("lsend").disabled = true; $("lstatus").textContent = "";
-  const local = { id: "tmp" + Date.now(), role: "claire", text, corrections: [], kind: "chat", read_at: new Date().toISOString() };
+  const local = { id: "tmp" + Date.now(), ts: new Date().toISOString(), role: "claire", text, corrections: [], kind: "chat", read_at: new Date().toISOString() };
   messages.push(local); renderMessages(true);
   try {
     const out = await S.store.ai("/chat", { text });
     messages = messages.filter((m) => m !== local);
     const fresh = await S.store.chatList().catch(() => null);
-    if (fresh) messages = fresh; else messages.push({ ...local, corrections: out.corrections }, { id: "tmpL" + Date.now(), role: "lucia", kind: "chat", text: out.reply, read_at: new Date().toISOString() });
+    if (fresh) messages = sorted(fresh); else messages.push({ ...local, corrections: out.corrections }, { id: "tmpL" + Date.now(), role: "lucia", kind: "chat", text: out.reply, read_at: new Date().toISOString() });
     renderMessages(); speak(out.reply);
   } catch (e) {
     messages = messages.filter((m) => m !== local); inp.value = text; renderMessages();

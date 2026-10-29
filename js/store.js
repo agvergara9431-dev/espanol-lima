@@ -80,7 +80,7 @@ async function supabaseStore() {
       return () => sb.removeChannel(ch);
     },
     // ---- Lucía (the chat is readable only by its owner; RLS) ----
-    async chatList() { return must(await sb.from("chat_messages").select("*").eq("user_id", s.me.id).order("ts", { ascending: false }).limit(60)).reverse(); },
+    async chatList() { return must(await sb.from("chat_messages").select("*").eq("user_id", s.me.id).order("ts", { ascending: false }).order("id", { ascending: false }).limit(60)).reverse(); },
     async chatMarkRead() { must(await sb.from("chat_messages").update({ read_at: new Date().toISOString() }).eq("user_id", s.me.id).eq("role", "lucia").is("read_at", null)); },
     onChat(cb) {
       const ch = sb.channel("chat-" + s.me.id).on("postgres_changes", { event: "INSERT", schema: "public", table: "chat_messages", filter: "user_id=eq." + s.me.id }, (p) => cb(clone(p.new))).subscribe();
@@ -150,7 +150,7 @@ function mockStore(who) {
     },
     subscribe(uid, onChange) { listeners.add(onChange); return () => listeners.delete(onChange); },
     onNote(cb) { const f = () => cb(clone(db().notes)); listeners.add(f); return () => listeners.delete(f); },
-    async chatList() { return clone(db().chat_messages.filter((m) => m.user_id === s.me.id).sort((a, b) => (a.ts < b.ts ? -1 : 1))); },
+    async chatList() { return clone(db().chat_messages.filter((m) => m.user_id === s.me.id).sort((a, b) => (a.ts < b.ts ? -1 : a.ts > b.ts ? 1 : a.id - b.id))); },
     async chatMarkRead() { const d = db(); d.chat_messages.forEach((m) => { if (m.user_id === s.me.id && m.role === "lucia" && !m.read_at) m.read_at = new Date().toISOString(); }); write(d); },
     onChat(cb) { let seen = new Set(db().chat_messages.map((m) => m.id)); const f = () => { for (const m of db().chat_messages) if (!seen.has(m.id) && m.user_id === s.me.id) { seen.add(m.id); cb(clone(m)); } }; listeners.add(f); return () => listeners.delete(f); },
     async settings() { return clone(db().lucia_settings.find((r) => r.user_id === s.me.id) || null); },

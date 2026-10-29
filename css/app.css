@@ -50,7 +50,7 @@ p { margin: 0 0 10px; }
 :focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
 
 #app { max-width: 560px; margin: 0 auto; padding-bottom: calc(84px + env(safe-area-inset-bottom, 0px)); }
-.page { padding: 18px max(16px, env(safe-area-inset-right, 0px)) 24px max(16px, env(safe-area-inset-left, 0px)); display: flex; flex-direction: column; gap: 14px; }
+.page { padding: calc(18px + env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) 24px max(16px, env(safe-area-inset-left, 0px)); display: flex; flex-direction: column; gap: 14px; }
 .page > h3.mono { margin-bottom: -4px; }
 
 /* Passport header */
@@ -255,7 +255,7 @@ details .chat { margin: 10px 0; }
 .chip.strong { border-color: var(--ok); background: var(--ok-soft); }
 
 /* Login */
-#login { min-height: 100vh; min-height: 100dvh; display: flex; align-items: center; justify-content: center; padding: 24px 16px; background: var(--navy); }
+#login { min-height: 100vh; min-height: 100dvh; display: flex; align-items: center; justify-content: center; padding: calc(24px + env(safe-area-inset-top, 0px)) 16px calc(24px + env(safe-area-inset-bottom, 0px)); background: var(--navy); }
 .login-card { width: 100%; max-width: 400px; background: var(--paper); border-radius: 18px; padding: 26px 22px; display: flex; flex-direction: column; gap: 12px; }
 .login-card h1 { font-size: 30px; }
 .login-card form { display: flex; flex-direction: column; gap: 8px; }
@@ -399,6 +399,14 @@ details .chat { margin: 10px 0; }
 .privacy { display: flex; gap: 6px; align-items: flex-start; color: var(--muted); background: var(--card); border-radius: 12px; padding: 8px 10px; margin: 0; }
 .privacy svg { flex: none; margin-top: 2px; }
 .lchat { min-height: 120px; }
+/* Lucía: fixed screen (top and height set in lucia.js), messages scroll, input box on the bottom above the tabs. */
+.page.lucia { position: fixed; left: 0; right: 0; top: 0; height: calc(100dvh - 84px - env(safe-area-inset-bottom, 0px)); z-index: 5; max-width: 560px; margin: 0 auto; padding-bottom: 8px; gap: 10px; overflow: hidden; background: var(--paper); }
+.page.lucia > * { flex: none; }
+.page.lucia .lchat { flex: 1 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; padding: 2px 2px 6px; }
+.page.lucia .status:empty { display: none; }
+.page.lucia .sec-head { align-items: center; margin-top: 0; }
+.head-actions { display: flex; align-items: center; gap: 2px; flex: none; }
+.chip-btn { display: inline-flex; align-items: center; gap: 5px; background: var(--card); border: 1.5px solid var(--line); border-radius: 999px; padding: 7px 11px; font: 700 13px var(--body); color: var(--link); cursor: pointer; white-space: nowrap; min-height: 36px; }
 .msg.proactive { border-color: var(--gold); }
 .msg .speak { padding: 4px 8px; min-height: 30px; }
 .fix { align-self: flex-end; max-width: 88%; background: var(--warn-soft); border-radius: 12px; padding: 8px 12px; display: flex; flex-direction: column; gap: 2px; font-size: 14px; margin-top: -4px; }

@@ -98,3 +98,37 @@ test("panel shows the daily Lucía summary but never the chat text", async ({ pa
   await aug.locator("#luciaTest").click();
   await expect(aug.locator("#luciaTestStatus")).toContainText("15 minutes");
 });
+
+test("chat order: oldest first, same-second messages ordered by id, input fixed above the tabs", async ({ page }) => {
+  await open(page);
+  // Two messages saved in the same second (same ts); stored in reverse order to prove the app sorts them.
+  await page.evaluate((LEARNER) => {
+    const d = JSON.parse(localStorage.getItem("mockdb-v1"));
+    const ts = "2026-10-29T10:00:00.000Z", old = "2026-10-29T09:00:00.000Z";
+    const m = (id, role, text, at) => ({ id, user_id: LEARNER, ts: at, role, kind: "chat", text, corrections: [], read_at: at });
+    d.chat_messages = [m(12, "lucia", "¡Qué chévere, Claire! ¿Y tu hermana?", ts), m(11, "claire", "Mi familia es pequeña", ts), m(10, "lucia", "Hola, ¿cómo estás?", old)];
+    for (let i = 0; i < 8; i++) d.chat_messages.push(m(i + 1, i % 2 ? "lucia" : "claire", "Mensaje viejo " + (i + 1), "2026-10-28T1" + i + ":00:00.000Z"));
+    localStorage.setItem("mockdb-v1", JSON.stringify(d));
+  }, LEARNER);
+  await page.reload();
+  await page.locator('#nav [data-tab="lucia"]').click();
+  const texts = await page.locator("#lchat .msg span[lang=es]").allTextContents();
+  expect(texts.slice(-3)).toEqual(["Hola, ¿cómo estás?", "Mi familia es pequeña", "¡Qué chévere, Claire! ¿Y tu hermana?"]);
+  expect(texts[0]).toBe("Mensaje viejo 1");
+  // Scrolled to the newest message.
+  const chat = page.locator("#lchat");
+  await expect.poll(() => chat.evaluate((el) => el.scrollHeight - el.clientHeight - el.scrollTop)).toBeLessThan(2);
+  // Input box sits right above the tab bar; the practice button is up in the header.
+  const form = await page.locator("#lform").boundingBox(), nav = await page.locator("#nav").boundingBox();
+  expect(Math.abs(nav.y - (form.y + form.height))).toBeLessThan(20);
+  expect((await page.locator("#practiceBtn").boundingBox()).y).toBeLessThan(form.y);
+  await page.screenshot({ path: "test-results/screens/lucia-order.png" });
+  // A new message arriving live is appended at the bottom and scrolled into view.
+  await page.locator("#linput").fill("Hola Lucía, yo soy de Holanda");
+  await page.locator("#lsend").click();
+  await expect(page.locator("#lchat .msg.them").last()).toContainText("doctorado");
+  const after = await page.locator("#lchat .msg span[lang=es]").allTextContents();
+  expect(after.slice(-2)).toEqual(["Hola Lucía, yo soy de Holanda", "¡Qué bacán! ¿Y qué estás investigando en tu doctorado?"]);
+  await expect.poll(() => chat.evaluate((el) => el.scrollHeight - el.clientHeight - el.scrollTop)).toBeLessThan(2);
+  await page.screenshot({ path: "test-results/screens/lucia-after-send.png" });
+});

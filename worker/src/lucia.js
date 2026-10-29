@@ -99,7 +99,7 @@ export async function handleChat(env, token, userId, body) {
   const db = userDb(env, token), { day } = nlNow();
   const [lucia, recent, memRows, results, cards, prefs] = await Promise.all([
     loadJson(env, "lucia.json"),
-    rest(env, db, `chat_messages?select=role,text&user_id=eq.${userId}&order=ts.desc&limit=12`),
+    rest(env, db, `chat_messages?select=role,text&user_id=eq.${userId}&order=ts.desc,id.desc&limit=12`),
     rest(env, db, `chat_memory?select=summary,claire_msgs&user_id=eq.${userId}`),
     rest(env, db, `session_results?select=n,done_on&user_id=eq.${userId}`),
     rest(env, db, `cards?select=es,box,ok,ko,due&user_id=eq.${userId}`),
@@ -173,7 +173,7 @@ async function compose(env, lucia, ctx, memory, recent, kind, w) {
   return msg.content.filter((b) => b.type === "text").map((b) => b.text).join("").trim().slice(0, 600);
 }
 async function deliver(env, sdb, lucia, s, ctx, kind, w) {
-  const [mem, recent] = await Promise.all([sdb.read(`chat_memory?select=summary&user_id=eq.${s.user_id}`), sdb.read(`chat_messages?select=role,text&user_id=eq.${s.user_id}&order=ts.desc&limit=6`)]);
+  const [mem, recent] = await Promise.all([sdb.read(`chat_memory?select=summary&user_id=eq.${s.user_id}`), sdb.read(`chat_messages?select=role,text&user_id=eq.${s.user_id}&order=ts.desc,id.desc&limit=6`)]);
   const text = await compose(env, lucia, ctx, mem?.[0]?.summary, recent, kind, w);
   if (!text) return;
   const dbKind = kind.startsWith("reminder") ? "reminder" : kind;
