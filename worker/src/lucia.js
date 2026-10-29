@@ -99,7 +99,7 @@ export async function handleChat(env, token, userId, body) {
   const out = msg.parsed_output;
   const saved = await rest(env, db, "chat_messages", { method: "POST", prefer: "return=representation", body: [
     { user_id: userId, role: "claire", kind: "chat", text, corrections: out.corrections, read_at: new Date().toISOString() },
-    { user_id: userId, role: "lucia", kind: "chat", text: out.reply.slice(0, 2000), read_at: new Date().toISOString() },
+    { user_id: userId, role: "lucia", kind: "chat", text: out.reply.slice(0, 2000), corrections: [], read_at: new Date().toISOString() },
   ] });
   // Daily summary for Augusto's panel: counts, topics and error tags only.
   const prev = (await rest(env, db, `chat_daily?select=messages,topics,errors&user_id=eq.${userId}&day=eq.${day}`))?.[0];

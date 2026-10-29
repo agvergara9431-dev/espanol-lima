@@ -84,8 +84,14 @@ export default {
     try {
       if (path === "/chat") {
         // Runs with Claire's own token: every read and write goes through RLS.
-        const out = await handleChat(env, token, user.id, body);
-        return reply(out.status, out.body);
+        try {
+          const out = await handleChat(env, token, user.id, body);
+          return reply(out.status, out.body);
+        } catch (err) {
+          if (err instanceof Anthropic.APIError) throw err;
+          console.error("chat failed", err.message);
+          return reply(500, { error: "chat_failed" });
+        }
       }
       if (path === "/dialog") {
         const msg = await client.messages.create({
