@@ -365,9 +365,9 @@
           "en": "I make poke bowls very often",
           "nl": "Ik maak heel vaak pokebowls",
           "ex": {
-            "es": "En Róterdam cocino poke bowls muy seguido.",
-            "nl": "In Rotterdam maak ik heel vaak pokebowls.",
-            "en": "In Rotterdam I make poke bowls very often."
+            "es": "En Delft cocino poke bowls muy seguido.",
+            "nl": "In Delft maak ik heel vaak pokebowls.",
+            "en": "In Delft I make poke bowls very often."
           }
         },
         {
@@ -662,10 +662,10 @@
       },
       "mission": {
         "scenario": "cocina",
-        "goal": "Vertel Rosario wat je in Rotterdam kookt en eet, met minstens 3 verschillende werkwoorden op -ar (cocinar, preparar, comprar, desayunar…).",
-        "check": "Claire usa al menos 3 verbos distintos terminados en -ar, conjugados en presente (por ejemplo cocino, preparo, compro, desayuno, almorzamos, cenamos, tomo), para contar qué cocina o come en Róterdam.",
+        "goal": "Vertel Rosario wat je thuis in Delft kookt en eet, met minstens 3 verschillende werkwoorden op -ar (cocinar, preparar, comprar, desayunar…).",
+        "check": "Claire usa al menos 3 verbos distintos terminados en -ar, conjugados en presente (por ejemplo cocino, preparo, compro, desayuno, almorzamos, cenamos, tomo), para contar qué cocina o come en su casa en Delft.",
         "setup": "Pregúntale qué cocina en Holanda, qué desayuna, dónde compra la comida y quién cocina en su casa, una cosa por turno.",
-        "goal_en": "Tell Rosario what you cook and eat in Rotterdam, using at least 3 different -ar verbs (cocinar, preparar, comprar, desayunar…)."
+        "goal_en": "Tell Rosario what you cook and eat at home in Delft, using at least 3 different -ar verbs (cocinar, preparar, comprar, desayunar…)."
       },
       "title_en": "What I cook and what I eat"
     },

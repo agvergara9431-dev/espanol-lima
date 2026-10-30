@@ -63,7 +63,7 @@ test("real backend: owner plays session 1, it is saved; Claire's migrated state 
     const btn = page.locator("#checkBtn");
     if (await page.locator(".finish").count()) break;
     if (await page.locator("#chatInput").isVisible().catch(() => false)) {
-      await page.locator("#chatInput").fill("Me llamo Claire, soy de Holanda y vivo en Róterdam");
+      await page.locator("#chatInput").fill("Me llamo Claire, soy de Holanda y vivo en Delft");
       await page.locator("#sendBtn").click();
       await expect(page.locator("#chat .msg.them")).toHaveCount(2);
       await btn.click(); await expect(page.locator("#feedback")).toBeVisible(); await btn.click();

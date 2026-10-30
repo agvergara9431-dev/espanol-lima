@@ -134,13 +134,13 @@
         },
         {
           "id": "w1-07",
-          "es": "Vivo en Róterdam",
-          "en": "I live in Rotterdam",
-          "nl": "Ik woon in Rotterdam",
+          "es": "Vivo en Delft",
+          "en": "I live in Delft",
+          "nl": "Ik woon in Delft",
           "ex": {
-            "es": "Vivo en Róterdam con Augusto.",
-            "nl": "Ik woon in Rotterdam met Augusto.",
-            "en": "I live in Rotterdam with Augusto."
+            "es": "Vivo en Delft, cerca de Róterdam.",
+            "nl": "Ik woon in Delft, vlak bij Rotterdam.",
+            "en": "I live in Delft, near Rotterdam."
           }
         },
         {
@@ -472,12 +472,12 @@
           {
             "type": "type",
             "q": "Schrijf het in het Spaans",
-            "prompt": "Ik woon in Rotterdam.",
-            "answer": "Vivo en Róterdam",
+            "prompt": "Ik woon in Delft.",
+            "answer": "Vivo en Delft",
             "alt": [
-              "Vivo en Rotterdam",
-              "Yo vivo en Róterdam",
-              "Yo vivo en Rotterdam"
+              "Vivo en Delft.",
+              "Yo vivo en Delft",
+              "Yo vivo en Delft."
             ],
             "why": "Vivo = ik woon."
           }
@@ -555,12 +555,12 @@
             {
               "type": "type",
               "q": "Write it in Spanish",
-              "prompt": "I live in Rotterdam.",
-              "answer": "Vivo en Róterdam",
+              "prompt": "I live in Delft.",
+              "answer": "Vivo en Delft",
               "alt": [
-                "Vivo en Rotterdam",
-                "Yo vivo en Róterdam",
-                "Yo vivo en Rotterdam"
+                "Vivo en Delft.",
+                "Yo vivo en Delft",
+                "Yo vivo en Delft."
               ],
               "why": "Vivo = I live."
             }
@@ -1296,9 +1296,9 @@
           "en": "I'm twenty-five years old",
           "nl": "Ik ben vijfentwintig",
           "ex": {
-            "es": "Tengo veinticinco años y vivo en Róterdam.",
-            "nl": "Ik ben vijfentwintig en ik woon in Rotterdam.",
-            "en": "I'm twenty-five and I live in Rotterdam."
+            "es": "Tengo veinticinco años y vivo en Delft.",
+            "nl": "Ik ben vijfentwintig en ik woon in Delft.",
+            "en": "I'm twenty-five and I live in Delft."
           }
         },
         {

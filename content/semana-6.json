@@ -28,14 +28,14 @@
     {
       "n": 19, "title": "De familie en Lima-slang", "title_es": "La familia y la jerga", "title_en": "Family and Lima slang",
       "items": [
-        { "id": "w6-01", "es": "Mi familia es pequeña", "en": "My family is small", "nl": "Mijn familie is klein", "ex": { "es": "Mi familia es pequeña: mis papás, mi hermana y yo.", "nl": "Mijn familie is klein: mijn ouders, mijn zus en ik.", "en": "My family is small: my parents, my sister and me." } },
-        { "id": "w6-02", "es": "Mis papás viven en Holanda", "en": "My parents live in the Netherlands", "nl": "Mijn ouders wonen in Nederland", "ex": { "es": "Mis papás viven en Holanda, cerca de Róterdam.", "nl": "Mijn ouders wonen in Nederland, vlak bij Rotterdam.", "en": "My parents live in the Netherlands, near Rotterdam." } },
+        { "id": "w6-01", "es": "Mi familia es pequeña", "en": "My family is small", "nl": "Mijn familie is klein", "ex": { "es": "Mi familia es pequeña: mis papás, Marcel y Hery, mi hermana Merle y yo.", "nl": "Mijn familie is klein: mijn ouders, Marcel en Hery, mijn zus Merle en ik.", "en": "My family is small: my parents, Marcel and Hery, my sister Merle and me." } },
+        { "id": "w6-02", "es": "Mis papás viven en Berkel", "en": "My parents live in Berkel", "nl": "Mijn ouders wonen in Berkel", "ex": { "es": "Mis papás viven en Berkel, cerca de Róterdam.", "nl": "Mijn ouders wonen in Berkel, vlak bij Rotterdam.", "en": "My parents live in Berkel, near Rotterdam." } },
         { "id": "w6-03", "es": "Augusto y su mamá", "en": "Augusto and his mom", "nl": "Augusto en zijn moeder", "ex": { "es": "Augusto y su mamá cocinan juntos.", "nl": "Augusto en zijn moeder koken samen.", "en": "Augusto and his mom cook together." } },
-        { "id": "w6-04", "es": "Nuestra casa en Róterdam", "en": "Our house in Rotterdam", "nl": "Ons huis in Rotterdam", "ex": { "es": "Nuestra casa en Róterdam es pequeña pero bonita.", "nl": "Ons huis in Rotterdam is klein maar mooi.", "en": "Our house in Rotterdam is small but nice." } },
+        { "id": "w6-04", "es": "Vivo en Delft", "en": "I live in Delft", "nl": "Ik woon in Delft", "ex": { "es": "Vivo en Delft y Augusto vive en Róterdam.", "nl": "Ik woon in Delft en Augusto woont in Rotterdam.", "en": "I live in Delft and Augusto lives in Rotterdam." } },
         { "id": "w6-05", "es": "¡Qué chévere!", "en": "How cool!", "nl": "Wat gaaf!", "ex": { "es": "¿Vamos a la playa? ¡Qué chévere!", "nl": "Gaan we naar het strand? Wat gaaf!", "en": "We're going to the beach? How cool!" } },
         { "id": "w6-06", "es": "¡Bacán!", "en": "Great! / Awesome!", "nl": "Te gek!", "ex": { "es": "¿Ya tienes los pasajes? ¡Bacán!", "nl": "Heb je de tickets al? Te gek!", "en": "You've got the tickets already? Awesome!" } },
         { "id": "w6-07", "es": "Oye, causa", "en": "Hey, mate", "nl": "Hé, maat", "ex": { "es": "Oye, causa, ¿vamos por un café?", "nl": "Hé, maat, gaan we een koffie drinken?", "en": "Hey mate, shall we go for a coffee?" } },
-        { "id": "w6-08", "es": "Es mi pata", "en": "He's my buddy", "nl": "Hij is mijn maatje", "ex": { "es": "Te presento a Lucho, es mi pata del colegio.", "nl": "Dit is Lucho, hij is mijn maatje van school.", "en": "This is Lucho, he's my buddy from school." } },
+        { "id": "w6-08", "es": "Es mi pata", "en": "He's my buddy", "nl": "Hij is mijn maatje", "ex": { "es": "Augusto es mi enamorado y también es mi pata.", "nl": "Augusto is mijn vriend en ook mijn maatje.", "en": "Augusto is my boyfriend and also my buddy." } },
         { "id": "w6-09", "es": "Ya, pe", "en": "OK then / Sure", "nl": "Oké dan", "ex": { "es": "¿Nos vemos a las ocho? Ya, pe.", "nl": "Zien we elkaar om acht uur? Oké dan.", "en": "See you at eight? OK then." } },
         { "id": "w6-10", "es": "Al toque", "en": "Right away", "nl": "Meteen", "ex": { "es": "Espérame, vengo al toque.", "nl": "Wacht op me, ik kom meteen.", "en": "Wait for me, I'll be right there." } },
         { "id": "w6-11", "es": "Un cafecito", "en": "A little coffee", "nl": "Een kopje koffie", "ex": { "es": "¿Te provoca un cafecito?", "nl": "Heb je zin in een kopje koffie?", "en": "Do you fancy a little coffee?" } },
@@ -49,11 +49,11 @@
           "Limeense slang: chévere en bacán (gaaf), causa en pata (maat, vriend), ya (oké), pe (= pues, voor nadruk: ya pe), al toque (meteen)."
         ],
         "compare": "Nederlands: mijn ouders, ons huis. Spaans: mis papás, nuestra casa. Pas op met su: dat kan zijn, haar, uw én hun betekenen; de context maakt het duidelijk. En waar het Nederlands '-tje' zegt (kopje), zegt het Spaans '-ito' (cafecito).",
-        "examples": [ { "es": "Mis papás viven en Holanda.", "nl": "Mijn ouders wonen in Nederland." }, { "es": "Augusto y su mamá.", "nl": "Augusto en zijn moeder." }, { "es": "Oye, causa, ¿un cafecito?", "nl": "Hé maat, een kopje koffie?" } ],
+        "examples": [ { "es": "Mis papás viven en Berkel.", "nl": "Mijn ouders wonen in Berkel." }, { "es": "Augusto y su mamá.", "nl": "Augusto en zijn moeder." }, { "es": "Oye, causa, ¿un cafecito?", "nl": "Hé maat, een kopje koffie?" } ],
         "exercises": [
-          { "type": "fill", "q": "Maak de zin af", "prompt": "___ papás viven en Holanda.", "opts": ["Mis", "Mi", "Sus"], "answer": "Mis", "why": "Mijn + meervoud (papás): mis." },
+          { "type": "fill", "q": "Maak de zin af", "prompt": "___ papás viven en Berkel.", "opts": ["Mis", "Mi", "Sus"], "answer": "Mis", "why": "Mijn + meervoud (papás): mis." },
           { "type": "fill", "q": "Maak de zin af", "prompt": "Augusto y ___ mamá.", "opts": ["su", "sus", "mi"], "answer": "su", "why": "Zijn + enkelvoud (mamá): su." },
-          { "type": "fill", "q": "Maak de zin af (ons)", "prompt": "___ casa está en Róterdam.", "opts": ["Nuestra", "Nuestro", "Nuestras"], "answer": "Nuestra", "why": "Casa is vrouwelijk enkelvoud: nuestra." },
+          { "type": "fill", "q": "Maak de zin af (Merle en ik: onze)", "prompt": "___ papás se llaman Marcel y Hery.", "opts": ["Nuestros", "Nuestro", "Nuestras"], "answer": "Nuestros", "why": "Papás is mannelijk meervoud: nuestros." },
           { "type": "mc", "say": "prompt", "q": "Wat betekent dit?", "prompt": "¡Qué chévere!", "opts": ["Wat gaaf!", "Wat duur!", "Wat vervelend!"], "answer": "Wat gaaf!", "why": "Chévere = gaaf, leuk." },
           { "type": "type", "q": "Schrijf het in het Spaans (Peruaans)", "prompt": "meteen", "answer": "al toque", "alt": ["Al toque"], "why": "Al toque = meteen, in Lima-slang." }
         ],
@@ -65,11 +65,11 @@
             "Lima slang: chévere and bacán (cool), causa and pata (mate, buddy), ya (OK), pe (= pues, for emphasis: ya pe), al toque (right away)."
           ],
           "compare": "English: my parents, our house. Spanish: mis papás, nuestra casa, with an -s or -a to agree with the thing. Careful with su: it can mean his, her, your (formal) and their; context makes it clear. And where English adds 'little' (a little coffee), Spanish adds -ito (un cafecito).",
-          "examples": [ { "es": "Mis papás viven en Holanda.", "en": "My parents live in the Netherlands." }, { "es": "Augusto y su mamá.", "en": "Augusto and his mom." }, { "es": "Oye, causa, ¿un cafecito?", "en": "Hey mate, a little coffee?" } ],
+          "examples": [ { "es": "Mis papás viven en Berkel.", "en": "My parents live in Berkel." }, { "es": "Augusto y su mamá.", "en": "Augusto and his mom." }, { "es": "Oye, causa, ¿un cafecito?", "en": "Hey mate, a little coffee?" } ],
           "exercises": [
-            { "type": "fill", "q": "Complete the sentence", "prompt": "___ papás viven en Holanda.", "opts": ["Mis", "Mi", "Sus"], "answer": "Mis", "why": "My + plural (papás): mis." },
+            { "type": "fill", "q": "Complete the sentence", "prompt": "___ papás viven en Berkel.", "opts": ["Mis", "Mi", "Sus"], "answer": "Mis", "why": "My + plural (papás): mis." },
             { "type": "fill", "q": "Complete the sentence", "prompt": "Augusto y ___ mamá.", "opts": ["su", "sus", "mi"], "answer": "su", "why": "His + singular (mamá): su." },
-            { "type": "fill", "q": "Complete the sentence (our)", "prompt": "___ casa está en Róterdam.", "opts": ["Nuestra", "Nuestro", "Nuestras"], "answer": "Nuestra", "why": "Casa is feminine singular: nuestra." },
+            { "type": "fill", "q": "Complete the sentence (Merle and I: our)", "prompt": "___ papás se llaman Marcel y Hery.", "opts": ["Nuestros", "Nuestro", "Nuestras"], "answer": "Nuestros", "why": "Papás is masculine plural: nuestros." },
             { "type": "mc", "say": "prompt", "q": "What does this mean?", "prompt": "¡Qué chévere!", "opts": ["How cool!", "How expensive!", "How annoying!"], "answer": "How cool!", "why": "Chévere = cool, nice." },
             { "type": "type", "q": "Write it in Spanish (Peruvian)", "prompt": "right away", "answer": "al toque", "alt": ["Al toque"], "why": "Al toque = right away, in Lima slang." }
           ]
@@ -77,10 +77,10 @@
       },
       "mission": {
         "scenario": "silvia",
-        "goal": "Stel 4 familieleden van jou voor aan Silvia en gebruik 3 Limeense slangwoorden goed.",
-        "goal_en": "Introduce 4 of your family members to Silvia and use 3 Lima slang words correctly.",
-        "check": "Claire presenta al menos a 4 personas de su familia usando posesivos (mi hermana, mis papás, mi mamá...) y usa bien al menos 3 palabras de jerga peruana (chévere, bacán, causa, pata, ya, pe, al toque, ahorita).",
-        "setup": "Pregúntale por su familia en Holanda, una persona a la vez. Usa jerga de forma natural ('¡qué bacán!', 'ya, pe') para que Claire la imite, y celébralo cuando ella la use."
+        "goal": "Stel je ouders en je zus voor aan Silvia, vertel waar jullie wonen en gebruik 3 Limeense slangwoorden goed.",
+        "goal_en": "Introduce your parents and your sister to Silvia, say where you all live and use 3 Lima slang words correctly.",
+        "check": "Claire presenta a su familia (sus papás y su hermana) usando posesivos (mi hermana, mis papás, mi papá, mi mamá...), dice dónde vive alguien de su familia o ella misma, y usa bien al menos 3 palabras de jerga peruana (chévere, bacán, causa, pata, ya, pe, al toque, ahorita).",
+        "setup": "Pregúntale por su familia en Holanda, una persona a la vez: sus papás, Marcel y Hery, viven en Berkel en Rodenrijs, cerca de Róterdam, y su hermana se llama Merle. Claire vive en Delft. No inventes otros familiares. Usa jerga de forma natural ('¡qué bacán!', 'ya, pe') para que Claire la imite, y celébralo cuando ella la use."
       }
     },
     {
@@ -89,7 +89,7 @@
         { "id": "w6-13", "es": "Estoy haciendo un doctorado", "en": "I'm doing a PhD", "nl": "Ik doe een promotieonderzoek", "ex": { "es": "Estoy haciendo un doctorado en la universidad.", "nl": "Ik doe een promotieonderzoek aan de universiteit.", "en": "I'm doing a PhD at the university." } },
         { "id": "w6-14", "es": "Estoy investigando…", "en": "I'm researching…", "nl": "Ik doe onderzoek naar…", "ex": { "es": "Estoy investigando cómo… (y lo explicas con tus palabras).", "nl": "Ik doe onderzoek naar hoe… (en je legt het uit in je eigen woorden).", "en": "I'm researching how… (and you explain it in your own words)." } },
         { "id": "w6-15", "es": "Estoy escribiendo mi tesis", "en": "I'm writing my thesis", "nl": "Ik schrijf mijn proefschrift", "ex": { "es": "Este año estoy escribiendo mi tesis.", "nl": "Dit jaar schrijf ik mijn proefschrift.", "en": "This year I'm writing my thesis." } },
-        { "id": "w6-16", "es": "Trabajo en la universidad", "en": "I work at the university", "nl": "Ik werk op de universiteit", "ex": { "es": "Trabajo en la universidad de lunes a viernes.", "nl": "Ik werk van maandag tot vrijdag op de universiteit.", "en": "I work at the university from Monday to Friday." } },
+        { "id": "w6-16", "es": "Hago un doctorado en la Universidad Erasmus", "en": "I'm doing a PhD at Erasmus University", "nl": "Ik promoveer aan de Erasmus Universiteit", "ex": { "es": "Hago un doctorado en la Universidad Erasmus, en Róterdam.", "nl": "Ik promoveer aan de Erasmus Universiteit, in Rotterdam.", "en": "I'm doing a PhD at Erasmus University, in Rotterdam." } },
         { "id": "w6-17", "es": "Ahora estoy aprendiendo español", "en": "Now I'm learning Spanish", "nl": "Nu leer ik Spaans", "ex": { "es": "Ahora estoy aprendiendo español para hablar con la familia.", "nl": "Nu leer ik Spaans om met de familie te praten.", "en": "Now I'm learning Spanish to talk with the family." } },
         { "id": "w6-18", "es": "¿Qué estás haciendo?", "en": "What are you doing?", "nl": "Waar ben je mee bezig?", "ex": { "es": "Amor, ¿qué estás haciendo? ¿Vienes a comer?", "nl": "Schat, waar ben je mee bezig? Kom je eten?", "en": "Love, what are you doing? Are you coming to eat?" } },
         { "id": "w6-19", "es": "Vamos a ir a la playa", "en": "We're going to go to the beach", "nl": "We gaan naar het strand", "ex": { "es": "Si hace sol, vamos a ir a la playa.", "nl": "Als de zon schijnt, gaan we naar het strand.", "en": "If it's sunny, we're going to go to the beach." } },
@@ -138,7 +138,7 @@
         "goal": "Leg oom Diego in 3 zinnen uit wat je onderzoekt en maak een weekendplan met 3 activiteiten.",
         "goal_en": "Explain to uncle Diego in 3 sentences what you're researching, and make a weekend plan with 3 activities.",
         "check": "Claire explica su doctorado en al menos 3 frases (usando estar + gerundio, por ejemplo 'estoy investigando', 'estoy escribiendo') y cuenta un plan de fin de semana con al menos 3 actividades usando 'ir a' + infinitivo.",
-        "setup": "Tienes curiosidad por el doctorado de Claire: pregúntale qué investiga, en qué universidad y cuánto le falta, una cosa por turno. No inventes el tema de su investigación: deja que ella lo cuente. Después pregúntale qué van a hacer el fin de semana en Lima."
+        "setup": "Tienes curiosidad por el doctorado de Claire: pregúntale qué investiga, en qué universidad (hace su doctorado en la Universidad Erasmus, en Róterdam) y cuánto le falta, una cosa por turno. No inventes el tema de su investigación: deja que ella lo cuente. Después pregúntale qué van a hacer el fin de semana en Lima."
       }
     },
     {
